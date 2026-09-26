@@ -1,4 +1,5 @@
 import { canBePictureQuiz, QUIZ_TYPES, type Content, type Lesson, type Quiz, type QuizType, type Sentence, type Word } from "@/lib/content/schema";
+import { meaningPrompt } from "@/lib/content/josa";
 import type { DateKey } from "./date";
 import { pick, seededRandom, shuffle, type Rng } from "./rng";
 
@@ -88,7 +89,7 @@ export function generateQuiz(
     case "picture_choice":
       return { type, targetWordId, options: options(), answer: word.text };
     case "meaning_choice":
-      return { type, targetWordId, prompt: `"${word.meaning}"는?`, options: options(), answer: word.text };
+      return { type, targetWordId, prompt: meaningPrompt(word.meaning), options: options(), answer: word.text };
     case "fill_blank":
       return { type, targetWordId, sentence: pick(fillBlankSentences(word, ctx), rng), options: options(), answer: word.text };
     case "listen_choice":
@@ -145,4 +146,19 @@ export function buildReviewQuiz(wordIds: readonly string[], content: Content, da
     quiz.push(generateQuiz(word, type, content.words, seed, ctx));
   }
   return quiz;
+}
+
+/** 보기 셔플 seed = dateKey + 장 id(복습장은 "review") + 문항 번호 */
+export function optionSeed(dateKey: DateKey, sheetId: string, index: number): string {
+  return `${dateKey}${sheetId}${index}`;
+}
+
+/**
+ * 화면에 낼 때 보기 순서를 섞는다. 콘텐츠 JSON 은 정답이 늘 첫 보기이므로 UI 는 반드시 이걸 거친다.
+ * 같은 날 같은 장을 다시 열면 같은 순서. ox 는 그대로.
+ */
+export function shuffleSheetOptions(quiz: readonly Quiz[], dateKey: DateKey, sheetId: string): Quiz[] {
+  return quiz.map((q, i) =>
+    q.type === "ox" ? q : { ...q, options: shuffle(q.options, seededRandom(optionSeed(dateKey, sheetId, i))) as Options },
+  );
 }

@@ -1,6 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { QUIZ_TYPES } from "@/lib/content/schema";
-import { allowedTypes, blankOut, buildReviewQuiz, generateQuiz, pickDistractors, quizSeed } from "./quizgen";
+import { addDays } from "./date";
+import {
+  allowedTypes,
+  blankOut,
+  buildLessonQuiz,
+  buildReviewQuiz,
+  generateQuiz,
+  pickDistractors,
+  quizSeed,
+  shuffleSheetOptions,
+} from "./quizgen";
 import { seededRandom } from "./rng";
 import { content } from "./__fixtures__/state";
 
@@ -96,5 +106,69 @@ describe("buildReviewQuiz", () => {
   it("같은 날이면 같은 문제", () => {
     const ids = ["g-grow", "g-glass", "g-dog"];
     expect(buildReviewQuiz(ids, content, "2026-09-26")).toEqual(buildReviewQuiz(ids, content, "2026-09-26"));
+  });
+});
+
+describe("meaning_choice 조사", () => {
+  it.each([
+    ["gate", '"대문"은?'],
+    ["cold", '"추운"은?'],
+    ["gift", '"선물"은?'],
+    ["give", '"주다"는?'],
+    ["group", '"무리, 모둠"은?'],
+    ["glue", '"풀(접착제)"은?'],
+  ])("%s → %s", (text, prompt) => {
+    const q = generateQuiz(w(text), "meaning_choice", content.words, "s", ctx);
+    expect(q.type === "meaning_choice" && q.prompt).toBe(prompt);
+  });
+});
+
+describe("shuffleSheetOptions (정답 위치)", () => {
+  const choiceAnswerIndexes = (dateKey: string) =>
+    content.lessons.flatMap((l) =>
+      shuffleSheetOptions(l.quiz, dateKey, l.id).flatMap((q) => (q.type === "ox" ? [] : [q.options.indexOf(q.answer)])),
+    );
+
+  it("콘텐츠 JSON 은 정답이 늘 첫 보기다 (그래서 셔플이 필요)", () => {
+    for (const l of content.lessons)
+      for (const q of l.quiz) if (q.type !== "ox") expect(q.options[0]).toBe(q.answer);
+  });
+
+  it("정답 위치가 고정되지 않는다: 하루치 32문항에서 세 자리 모두 나온다", () => {
+    const idx = choiceAnswerIndexes("2026-09-28");
+    expect(idx).toHaveLength(32);
+    expect(new Set(idx)).toEqual(new Set([0, 1, 2]));
+    // 한 자리에 쏠리지 않는다
+    for (const pos of [0, 1, 2]) expect(idx.filter((i) => i === pos).length).toBeLessThan(20);
+  });
+
+  it("같은 문항도 날짜가 바뀌면 정답 위치가 바뀐다", () => {
+    const l1 = content.lessons[0];
+    for (let i = 0; i < 4; i++) {
+      const positions = new Set(
+        Array.from({ length: 14 }, (_, d) => {
+          const q = shuffleSheetOptions(l1.quiz, addDays("2026-09-28", d), l1.id)[i];
+          return q.type === "ox" ? -1 : q.options.indexOf(q.answer);
+        }),
+      );
+      expect(positions.size).toBeGreaterThan(1);
+    }
+  });
+
+  it("같은 날·같은 장이면 같은 순서, 보기 구성과 정답은 그대로", () => {
+    const l = content.lessons[3];
+    const a = shuffleSheetOptions(l.quiz, "2026-09-28", l.id);
+    expect(a).toEqual(shuffleSheetOptions(l.quiz, "2026-09-28", l.id));
+    a.forEach((q, i) => {
+      const orig = l.quiz[i];
+      expect(q.answer).toBe(orig.answer);
+      if (q.type !== "ox" && orig.type !== "ox") expect([...q.options].sort()).toEqual([...orig.options].sort());
+    });
+  });
+
+  it("오답 삽입 문항에도 적용된다", () => {
+    const quiz = shuffleSheetOptions(buildLessonQuiz(content.lessons[1], content, "2026-09-28", "g-grow"), "2026-09-28", "giyeok-02");
+    expect(quiz[4].targetWordId).toBe("g-grow");
+    expect(quiz[4].type !== "ox" && quiz[4].options).toContain("grow");
   });
 });
