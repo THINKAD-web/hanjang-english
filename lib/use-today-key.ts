@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useSyncExternalStore } from "react";
-import { resolveDateKey, type DateKey } from "@/lib/engine/date";
+import { isDateKey, resolveDateKey, type DateKey } from "@/lib/engine/date";
 
 const isDebug = process.env.NEXT_PUBLIC_DEBUG === "true";
 
@@ -20,6 +20,20 @@ export function useTodayKey(): DateKey | null {
     () => resolveDateKey(dateParam, { debug: isDebug }),
     () => null,
   );
+}
+
+/**
+ * 디버그 모드에서 ?date= 를 다른 화면으로 넘길 때 쓴다. 디버그가 아니면 경로 그대로.
+ * 예: withDebugDate("/sheet", "2026-09-28") → "/sheet?date=2026-09-28"
+ */
+export function withDebugDate(path: string, dateParam: string | null): string {
+  if (!isDebug || !dateParam || !isDateKey(dateParam)) return path;
+  return `${path}?date=${dateParam}`;
+}
+
+/** 현재 URL 의 ?date= 값 (디버그 링크 전달용) */
+export function useDateParam(): string | null {
+  return useSearchParams().get("date");
 }
 
 export { isDebug };
