@@ -1,0 +1,93 @@
+{
+  "id": "giyeok-01",
+  "packId": "giyeok",
+  "dayNo": 1,
+  "title": "gr 소리 ①",
+  "soundIntro": {
+    "label": "gr",
+    "lines": [
+      "ㄱ + ㄹ = gr",
+      "혀를 굴리며 '그ㄹ' 하고 이어 읽어요."
+    ]
+  },
+  "wordIds": [
+    "g-grape",
+    "g-green",
+    "g-grass",
+    "g-grow",
+    "g-ground",
+    "g-group",
+    "g-grandma",
+    "g-great"
+  ],
+  "sentences": [
+    {
+      "en": "The grass is green.",
+      "ko": "잔디는 초록색이에요.",
+      "wordIds": [
+        "g-grass",
+        "g-green"
+      ]
+    },
+    {
+      "en": "Grandma grows grapes.",
+      "ko": "할머니는 포도를 키워요.",
+      "wordIds": [
+        "g-grandma",
+        "g-grow",
+        "g-grape"
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "picture_choice",
+      "targetWordId": "g-grass",
+      "options": [
+        "grass",
+        "glass",
+        "class"
+      ],
+      "answer": "grass"
+    },
+    {
+      "type": "meaning_choice",
+      "targetWordId": "g-grow",
+      "prompt": "\"자라다\"는?",
+      "options": [
+        "grow",
+        "group",
+        "great"
+      ],
+      "answer": "grow"
+    },
+    {
+      "type": "fill_blank",
+      "targetWordId": "g-green",
+      "sentence": "The grass is ____.",
+      "options": [
+        "green",
+        "grape",
+        "great"
+      ],
+      "answer": "green"
+    },
+    {
+      "type": "listen_choice",
+      "targetWordId": "g-grape",
+      "options": [
+        "grape",
+        "great",
+        "group"
+      ],
+      "answer": "grape"
+    },
+    {
+      "type": "ox",
+      "targetWordId": "g-grandma",
+      "statement": "grandma = 할머니",
+      "answer": true
+    }
+  ],
+  "reviewed": true
+}

@@ -1,0 +1,407 @@
+[
+  {
+    "id": "g-grape",
+    "text": "grape",
+    "meaning": "포도",
+    "sound": "gr",
+    "emoji": "🍇",
+    "imageable": true
+  },
+  {
+    "id": "g-green",
+    "text": "green",
+    "meaning": "초록색",
+    "sound": "gr",
+    "emoji": "🟢",
+    "imageable": true
+  },
+  {
+    "id": "g-grass",
+    "text": "grass",
+    "meaning": "잔디",
+    "sound": "gr",
+    "emoji": "🌿",
+    "imageable": true
+  },
+  {
+    "id": "g-grow",
+    "text": "grow",
+    "meaning": "자라다",
+    "sound": "gr",
+    "emoji": "🌱",
+    "imageable": true
+  },
+  {
+    "id": "g-ground",
+    "text": "ground",
+    "meaning": "땅",
+    "sound": "gr",
+    "imageable": false
+  },
+  {
+    "id": "g-group",
+    "text": "group",
+    "meaning": "무리, 모둠",
+    "sound": "gr",
+    "emoji": "👥",
+    "imageable": false
+  },
+  {
+    "id": "g-grandma",
+    "text": "grandma",
+    "meaning": "할머니",
+    "sound": "gr",
+    "emoji": "👵",
+    "imageable": true
+  },
+  {
+    "id": "g-great",
+    "text": "great",
+    "meaning": "훌륭한",
+    "sound": "gr",
+    "emoji": "👍",
+    "imageable": false
+  },
+  {
+    "id": "g-go",
+    "text": "go",
+    "meaning": "가다",
+    "sound": "g",
+    "emoji": "🚶",
+    "imageable": false
+  },
+  {
+    "id": "g-get",
+    "text": "get",
+    "meaning": "받다, 얻다",
+    "sound": "g",
+    "imageable": false
+  },
+  {
+    "id": "g-give",
+    "text": "give",
+    "meaning": "주다",
+    "sound": "g",
+    "emoji": "🤲",
+    "imageable": false
+  },
+  {
+    "id": "g-good",
+    "text": "good",
+    "meaning": "좋은",
+    "sound": "g",
+    "emoji": "😊",
+    "imageable": false
+  },
+  {
+    "id": "g-girl",
+    "text": "girl",
+    "meaning": "소녀",
+    "sound": "g",
+    "emoji": "👧",
+    "imageable": true
+  },
+  {
+    "id": "g-gift",
+    "text": "gift",
+    "meaning": "선물",
+    "sound": "g",
+    "emoji": "🎁",
+    "imageable": true
+  },
+  {
+    "id": "g-game",
+    "text": "game",
+    "meaning": "게임",
+    "sound": "g",
+    "emoji": "🎮",
+    "imageable": true
+  },
+  {
+    "id": "g-gold",
+    "text": "gold",
+    "meaning": "금",
+    "sound": "g",
+    "emoji": "🥇",
+    "imageable": true
+  },
+  {
+    "id": "g-garden",
+    "text": "garden",
+    "meaning": "정원",
+    "sound": "g",
+    "emoji": "🌷",
+    "imageable": false
+  },
+  {
+    "id": "g-gate",
+    "text": "gate",
+    "meaning": "대문",
+    "sound": "g",
+    "imageable": false
+  },
+  {
+    "id": "g-goat",
+    "text": "goat",
+    "meaning": "염소",
+    "sound": "g",
+    "emoji": "🐐",
+    "imageable": true
+  },
+  {
+    "id": "g-goose",
+    "text": "goose",
+    "meaning": "거위",
+    "sound": "g",
+    "emoji": "🪿",
+    "imageable": true
+  },
+  {
+    "id": "g-gorilla",
+    "text": "gorilla",
+    "meaning": "고릴라",
+    "sound": "g",
+    "emoji": "🦍",
+    "imageable": true
+  },
+  {
+    "id": "g-guitar",
+    "text": "guitar",
+    "meaning": "기타",
+    "sound": "g",
+    "emoji": "🎸",
+    "imageable": true
+  },
+  {
+    "id": "g-gum",
+    "text": "gum",
+    "meaning": "껌",
+    "sound": "g",
+    "imageable": false
+  },
+  {
+    "id": "g-goal",
+    "text": "goal",
+    "meaning": "골, 목표",
+    "sound": "g",
+    "emoji": "🥅",
+    "imageable": true
+  },
+  {
+    "id": "g-glass",
+    "text": "glass",
+    "meaning": "유리, 유리컵",
+    "sound": "gl",
+    "emoji": "🥛",
+    "imageable": true
+  },
+  {
+    "id": "g-glasses",
+    "text": "glasses",
+    "meaning": "안경",
+    "sound": "gl",
+    "emoji": "👓",
+    "imageable": true
+  },
+  {
+    "id": "g-glad",
+    "text": "glad",
+    "meaning": "기쁜",
+    "sound": "gl",
+    "emoji": "😄",
+    "imageable": false
+  },
+  {
+    "id": "g-glue",
+    "text": "glue",
+    "meaning": "풀(접착제)",
+    "sound": "gl",
+    "imageable": false
+  },
+  {
+    "id": "g-glove",
+    "text": "glove",
+    "meaning": "장갑",
+    "sound": "gl",
+    "emoji": "🧤",
+    "imageable": true
+  },
+  {
+    "id": "g-globe",
+    "text": "globe",
+    "meaning": "지구본",
+    "sound": "gl",
+    "emoji": "🌍",
+    "imageable": true
+  },
+  {
+    "id": "g-glow",
+    "text": "glow",
+    "meaning": "빛나다",
+    "sound": "gl",
+    "emoji": "✨",
+    "imageable": false
+  },
+  {
+    "id": "g-glitter",
+    "text": "glitter",
+    "meaning": "반짝이",
+    "sound": "gl",
+    "imageable": false
+  },
+  {
+    "id": "g-grandpa",
+    "text": "grandpa",
+    "meaning": "할아버지",
+    "sound": "gr",
+    "emoji": "👴",
+    "imageable": true
+  },
+  {
+    "id": "g-gray",
+    "text": "gray",
+    "meaning": "회색",
+    "sound": "gr",
+    "imageable": false
+  },
+  {
+    "id": "g-grab",
+    "text": "grab",
+    "meaning": "움켜잡다",
+    "sound": "gr",
+    "emoji": "✊",
+    "imageable": false
+  },
+  {
+    "id": "g-greet",
+    "text": "greet",
+    "meaning": "인사하다",
+    "sound": "gr",
+    "emoji": "👋",
+    "imageable": false
+  },
+  {
+    "id": "g-grill",
+    "text": "grill",
+    "meaning": "그릴, 석쇠",
+    "sound": "gr",
+    "imageable": false
+  },
+  {
+    "id": "g-grin",
+    "text": "grin",
+    "meaning": "활짝 웃다",
+    "sound": "gr",
+    "emoji": "😁",
+    "imageable": false
+  },
+  {
+    "id": "g-grade",
+    "text": "grade",
+    "meaning": "학년",
+    "sound": "gr",
+    "imageable": false
+  },
+  {
+    "id": "g-grasshopper",
+    "text": "grasshopper",
+    "meaning": "메뚜기",
+    "sound": "gr",
+    "emoji": "🦗",
+    "imageable": true
+  },
+  {
+    "id": "g-bag",
+    "text": "bag",
+    "meaning": "가방",
+    "sound": "-g",
+    "emoji": "👜",
+    "imageable": true
+  },
+  {
+    "id": "g-big",
+    "text": "big",
+    "meaning": "큰",
+    "sound": "-g",
+    "imageable": false
+  },
+  {
+    "id": "g-dog",
+    "text": "dog",
+    "meaning": "개",
+    "sound": "-g",
+    "emoji": "🐶",
+    "imageable": true
+  },
+  {
+    "id": "g-egg",
+    "text": "egg",
+    "meaning": "달걀",
+    "sound": "-g",
+    "emoji": "🥚",
+    "imageable": true
+  },
+  {
+    "id": "g-leg",
+    "text": "leg",
+    "meaning": "다리",
+    "sound": "-g",
+    "emoji": "🦵",
+    "imageable": true
+  },
+  {
+    "id": "g-pig",
+    "text": "pig",
+    "meaning": "돼지",
+    "sound": "-g",
+    "emoji": "🐷",
+    "imageable": true
+  },
+  {
+    "id": "g-frog",
+    "text": "frog",
+    "meaning": "개구리",
+    "sound": "-g",
+    "emoji": "🐸",
+    "imageable": true
+  },
+  {
+    "id": "g-flag",
+    "text": "flag",
+    "meaning": "깃발",
+    "sound": "-g",
+    "emoji": "🚩",
+    "imageable": true
+  },
+  {
+    "id": "g-coat",
+    "text": "coat",
+    "meaning": "코트",
+    "sound": "k",
+    "emoji": "🧥",
+    "imageable": true
+  },
+  {
+    "id": "g-cold",
+    "text": "cold",
+    "meaning": "추운",
+    "sound": "k",
+    "emoji": "🥶",
+    "imageable": true
+  },
+  {
+    "id": "g-class",
+    "text": "class",
+    "meaning": "반, 수업",
+    "sound": "k",
+    "emoji": "🏫",
+    "imageable": false
+  },
+  {
+    "id": "g-back",
+    "text": "back",
+    "meaning": "등, 뒤",
+    "sound": "k",
+    "imageable": false
+  }
+]

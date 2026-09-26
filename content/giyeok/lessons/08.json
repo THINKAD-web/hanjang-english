@@ -1,0 +1,93 @@
+{
+  "id": "giyeok-08",
+  "packId": "giyeok",
+  "dayNo": 8,
+  "title": "ㄱ 마무리장",
+  "soundIntro": {
+    "label": "ㄱ",
+    "lines": [
+      "ㄱ 팩 마무리!",
+      "gr, gl, g, 끝소리 g를 다 모았어요."
+    ]
+  },
+  "wordIds": [
+    "g-grow",
+    "g-glass",
+    "g-gift",
+    "g-goose",
+    "g-glove",
+    "g-frog",
+    "g-gold",
+    "g-grandpa"
+  ],
+  "sentences": [
+    {
+      "en": "Grandpa gives me a gold gift.",
+      "ko": "할아버지가 금색 선물을 주셨어요.",
+      "wordIds": [
+        "g-grandpa",
+        "g-gold",
+        "g-gift"
+      ]
+    },
+    {
+      "en": "The frog and the goose are in the grass.",
+      "ko": "개구리와 거위가 잔디에 있어요.",
+      "wordIds": [
+        "g-frog",
+        "g-goose"
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "picture_choice",
+      "targetWordId": "g-glove",
+      "options": [
+        "glove",
+        "grow",
+        "globe"
+      ],
+      "answer": "glove"
+    },
+    {
+      "type": "meaning_choice",
+      "targetWordId": "g-gift",
+      "prompt": "\"선물\"은?",
+      "options": [
+        "gift",
+        "give",
+        "girl"
+      ],
+      "answer": "gift"
+    },
+    {
+      "type": "fill_blank",
+      "targetWordId": "g-goose",
+      "sentence": "The frog and the ____ are in the grass.",
+      "options": [
+        "goose",
+        "goat",
+        "gold"
+      ],
+      "answer": "goose"
+    },
+    {
+      "type": "listen_choice",
+      "targetWordId": "g-glass",
+      "options": [
+        "glass",
+        "grass",
+        "class"
+      ],
+      "answer": "glass"
+    },
+    {
+      "type": "ox",
+      "targetWordId": "g-frog",
+      "statement": "frog = 개구리",
+      "answer": true
+    }
+  ],
+  "reviewed": true
+}

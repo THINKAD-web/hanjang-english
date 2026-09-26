@@ -18,6 +18,14 @@ npm run build
 
 Node 22 이상 (`.nvmrc`).
 
+## 콘텐츠
+
+- `content/giyeok/` — `pack.json`, `words.json`(단어 뱅크 52개), `lessons/01~08.json`
+- 스키마: `lib/content/schema.ts` (zod), 규칙: `lib/content/check.ts`
+- `npm run content:check` — 규칙 검사 후 검수표 `docs/content-review.md` 생성. CI 에서도 실행하며 검수표가 최신이 아니면 실패한다
+- 검수가 끝난 장은 레슨 JSON 의 `reviewed` 를 `true` 로 바꾸고 `content:check` 를 다시 돌려 검수표를 커밋한다
+- 레슨 파일을 추가하면 `lib/content/load.ts` 에도 import 한다 (누락 시 content:check 가 잡는다)
+
 ## 디버그 날짜
 
 `NEXT_PUBLIC_DEBUG=true` 일 때만 `?date=YYYY-MM-DD` 로 오늘 날짜를 바꿀 수 있다 (예: `/?date=2026-09-28`).
