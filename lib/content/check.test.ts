@@ -24,9 +24,9 @@ describe("실제 ㄱ 팩 콘텐츠", () => {
     expect(c.words.filter((w) => w.sound === "k").map((w) => w.text)).toEqual(["coat", "cold", "class", "back"]);
   });
 
-  it("L1 만 검수 완료", () => {
+  it("L1~L8 모두 검수 완료", () => {
     const c = parseContent(rawGiyeok);
-    expect(c.lessons.filter((l) => l.reviewed).map((l) => l.dayNo)).toEqual([1]);
+    expect(c.lessons.every((l) => l.reviewed)).toBe(true);
   });
 });
 
@@ -51,6 +51,7 @@ describe("규칙 위반을 잡는다", () => {
     ["words.json 에만 있는 단어", (r) => r.words.push({ id: "g-gap", text: "gap", meaning: "틈", sound: "-g", imageable: false }), /단어 수 53 ≠ 레슨이 참조하는 고유 단어 수 52/],
     ["L4 gr/gl 짝 부족", (r) => (r.lessons[3].quiz[1].options = ["glow", "glad", "globe"]), /gr-gl 짝 보기 문항이 2개 이상/],
     ["L7 g/k 짝 부족", (r) => (r.lessons[6].quiz[3].options = ["back", "big", "egg"]), /g-k 짝 보기 문항이 4개 이상/],
+    ["조사 틀림", (r) => (r.lessons[2].quiz[1].prompt = '"대문"는?'), /"대문"은\? 이어야/],
     ["imageable 인데 그림 없음", (r) => delete r.words[0].emoji, /emoji 또는 image/],
   ];
 

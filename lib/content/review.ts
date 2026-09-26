@@ -45,6 +45,7 @@ export function renderReviewMarkdown(content: Content): string {
     "",
     "> `npm run content:check` 가 자동 생성한다. 직접 수정하지 말 것. 콘텐츠는 `content/` 의 JSON 을 고친다.",
     "> 검수가 끝난 장은 JSON 의 `reviewed` 를 `true` 로 바꾼다.",
+    "> 보기 순서는 JSON 그대로 표시한다. 화면에서는 날짜·장·문항 번호 seed 로 섞여서 나온다.",
     "",
     `단어 ${words.length}개 · 레슨 ${lessons.length}장`,
     "",
