@@ -1,0 +1,92 @@
+{
+  "id": "giyeok-07",
+  "packId": "giyeok",
+  "dayNo": 7,
+  "title": "g와 k 구별",
+  "soundIntro": {
+    "label": "g · k",
+    "lines": [
+      "g(ㄱ)와 k(ㅋ)",
+      "g는 목이 울리고, k는 바람이 나와요."
+    ]
+  },
+  "wordIds": [
+    "g-goat",
+    "g-coat",
+    "g-gold",
+    "g-cold",
+    "g-glass",
+    "g-class",
+    "g-bag",
+    "g-back"
+  ],
+  "sentences": [
+    {
+      "en": "The goat has a coat.",
+      "ko": "염소가 코트를 입고 있어요.",
+      "wordIds": [
+        "g-goat",
+        "g-coat"
+      ]
+    },
+    {
+      "en": "It is cold in the class.",
+      "ko": "교실이 추워요.",
+      "wordIds": [
+        "g-cold",
+        "g-class"
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "picture_choice",
+      "targetWordId": "g-coat",
+      "options": [
+        "coat",
+        "goat",
+        "cold"
+      ],
+      "answer": "coat"
+    },
+    {
+      "type": "meaning_choice",
+      "targetWordId": "g-cold",
+      "prompt": "\"추운\"는?",
+      "options": [
+        "cold",
+        "gold",
+        "coat"
+      ],
+      "answer": "cold"
+    },
+    {
+      "type": "fill_blank",
+      "targetWordId": "g-class",
+      "sentence": "It is cold in the ____.",
+      "options": [
+        "class",
+        "glass",
+        "coat"
+      ],
+      "answer": "class"
+    },
+    {
+      "type": "listen_choice",
+      "targetWordId": "g-back",
+      "options": [
+        "back",
+        "bag",
+        "big"
+      ],
+      "answer": "back"
+    },
+    {
+      "type": "ox",
+      "targetWordId": "g-goat",
+      "statement": "goat = 코트",
+      "answer": false
+    }
+  ],
+  "reviewed": false
+}
