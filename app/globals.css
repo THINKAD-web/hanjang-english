@@ -17,3 +17,28 @@ body {
     system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
 }
+
+/* 완료 화면 도장 */
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(2.2) rotate(-25deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.9) rotate(-6deg);
+  }
+  100% {
+    transform: scale(1) rotate(-8deg);
+  }
+}
+
+.stamp-in {
+  animation: stamp-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.2) 0.2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-in {
+    animation: none;
+  }
+}
