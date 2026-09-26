@@ -1,4 +1,4 @@
-import { canBePictureQuiz, QUIZ_TYPES, type Content, type Lesson, type Quiz, type QuizType, type Sentence, type Word } from "@/lib/content/schema";
+import { QUIZ_TYPES, type Content, type Lesson, type Quiz, type QuizType, type Sentence, type Word } from "@/lib/content/schema";
 import { meaningPrompt } from "@/lib/content/josa";
 import type { DateKey } from "./date";
 import { pick, seededRandom, shuffle, type Rng } from "./rng";
@@ -61,10 +61,10 @@ function fillBlankSentences(word: Word, ctx: QuizContext): string[] {
   return out;
 }
 
-/** 이 단어로 낼 수 있는 유형. 그림 불가 단어는 picture_choice 제외, 원형이 든 예문이 없으면 fill_blank 제외. */
+/** 이 단어로 낼 수 있는 유형. imageable: false 단어는 picture_choice 제외, 원형이 든 예문이 없으면 fill_blank 제외. */
 export function allowedTypes(word: Word, ctx: QuizContext): QuizType[] {
   return QUIZ_TYPES.filter((t) => {
-    if (t === "picture_choice") return canBePictureQuiz(word);
+    if (t === "picture_choice") return word.imageable;
     if (t === "fill_blank") return fillBlankSentences(word, ctx).length > 0;
     return true;
   });

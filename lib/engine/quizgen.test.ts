@@ -41,7 +41,7 @@ describe("generateQuiz", () => {
     }
   });
 
-  it("imageable: false 단어와 🪿 는 그림 문항 불가", () => {
+  it("imageable: false 단어는 그림 문항 불가 (ground, goose)", () => {
     expect(allowedTypes(w("ground"), ctx)).not.toContain("picture_choice");
     expect(allowedTypes(w("goose"), ctx)).not.toContain("picture_choice");
     expect(() => generateQuiz(w("ground"), "picture_choice", content.words, "s", ctx)).toThrow();

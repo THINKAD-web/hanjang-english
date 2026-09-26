@@ -5,7 +5,6 @@ import {
   LessonSchema,
   PackSchema,
   QUIZ_TYPES,
-  RISKY_EMOJI,
   WordsFileSchema,
   type ChoiceQuiz,
   type Lesson,
@@ -143,11 +142,8 @@ export function checkContent(raw: RawContent): string[] {
       }
 
       checkChoice(q, target, texts, where, errors);
-      if (q.type === "picture_choice") {
-        if (!target.imageable) errors.push(`${where}: ${target.text} 는 imageable: false 라 그림 문항 불가`);
-        if (target.emoji && RISKY_EMOJI.has(target.emoji) && !target.image)
-          errors.push(`${where}: ${target.emoji} 는 구형 기기 렌더 위험 — 그림 문항 정답으로 쓰지 않는다`);
-      }
+      if (q.type === "picture_choice" && !target.imageable)
+        errors.push(`${where}: ${target.text} 는 imageable: false 라 그림 문항 불가`);
       if (q.type === "meaning_choice" && q.prompt !== meaningPrompt(target.meaning))
         errors.push(`${where}: prompt 는 ${meaningPrompt(target.meaning)} 이어야 한다 (현재 ${q.prompt})`);
       if (q.type === "fill_blank" && q.sentence.split("____").length !== 2)

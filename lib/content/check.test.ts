@@ -45,9 +45,6 @@ describe("규칙 위반을 잡는다", () => {
     }, /imageable: false/],
     ["다른 장 단어가 target", (r) => (r.lessons[0].quiz[1].targetWordId = "g-glow"), /이 장 단어가 아니다/],
     ["ox 정답 불일치", (r) => (r.lessons[0].quiz[4].answer = false), /맞지 않는다/],
-    ["🪿 그림 문항", (r) => {
-      r.lessons[2].quiz[0] = { type: "picture_choice", targetWordId: "g-goose", options: ["goose", "goat", "goal"], answer: "goose" };
-    }, /렌더 위험/],
     ["words.json 에만 있는 단어", (r) => r.words.push({ id: "g-gap", text: "gap", meaning: "틈", sound: "-g", imageable: false }), /단어 수 53 ≠ 레슨이 참조하는 고유 단어 수 52/],
     ["L4 gr/gl 짝 부족", (r) => (r.lessons[3].quiz[1].options = ["glow", "glad", "globe"]), /gr-gl 짝 보기 문항이 2개 이상/],
     ["L7 g/k 짝 부족", (r) => (r.lessons[6].quiz[3].options = ["back", "big", "egg"]), /g-k 짝 보기 문항이 4개 이상/],

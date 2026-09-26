@@ -26,16 +26,6 @@ export const WordSchema = z
   });
 export type Word = z.infer<typeof WordSchema>;
 
-/** 구형 기기에서 렌더되지 않을 수 있는 이모지. 그림 문항 정답으로 쓰지 않는다 (image 가 있으면 허용). */
-export const RISKY_EMOJI: ReadonlySet<string> = new Set(["🪿"]);
-
-/** 그림 문항(picture_choice)의 정답이 될 수 있는 단어인가. */
-export function canBePictureQuiz(w: Word): boolean {
-  if (!w.imageable) return false;
-  if (w.image) return true;
-  return Boolean(w.emoji && !RISKY_EMOJI.has(w.emoji));
-}
-
 export const WordsFileSchema = z.array(WordSchema);
 
 const threeOptions = z.tuple([z.string().min(1), z.string().min(1), z.string().min(1)]);
