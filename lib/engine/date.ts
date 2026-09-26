@@ -60,3 +60,28 @@ export function resolveDateKey(
   if (debug && dateParam && isDateKey(dateParam)) return dateParam;
   return todayKey(now);
 }
+
+/** n 일 뒤(음수면 앞)의 날짜 키. */
+export function addDays(key: DateKey, n: number): DateKey {
+  const d = toUtcDate(key);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+/** 토·일 */
+export function isWeekend(key: DateKey): boolean {
+  return weekdayIndex(key) >= 5;
+}
+
+/** 그 날이 속한 주의 월~일 7개 키. */
+export function weekRange(key: DateKey): DateKey[] {
+  const monday = addDays(key, -weekdayIndex(key));
+  return Array.from({ length: 7 }, (_, i) => addDays(monday, i));
+}
+
+/** 직전 평일 (월요일이면 지난 금요일, 주말이면 그 주 금요일). */
+export function prevWeekday(key: DateKey): DateKey {
+  let d = addDays(key, -1);
+  while (isWeekend(d)) d = addDays(d, -1);
+  return d;
+}

@@ -5,6 +5,7 @@ import {
   LessonSchema,
   PackSchema,
   QUIZ_TYPES,
+  RISKY_EMOJI,
   WordsFileSchema,
   type ChoiceQuiz,
   type Lesson,
@@ -18,9 +19,6 @@ import {
 export const WORDS_PER_LESSON = 8;
 export const SENTENCES_PER_LESSON = 2;
 export const MIN_WORDS_PER_SENTENCE = 2;
-
-/** 구형 기기에서 렌더되지 않을 수 있는 이모지. 정적 그림 퀴즈의 정답으로 쓰지 않는다. */
-export const RISKY_EMOJI = new Set(["🪿"]);
 
 type PairKind = "gr-gl" | "g-k";
 
