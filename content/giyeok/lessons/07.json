@@ -52,7 +52,7 @@
     {
       "type": "meaning_choice",
       "targetWordId": "g-cold",
-      "prompt": "\"추운\"는?",
+      "prompt": "\"추운\"은?",
       "options": [
         "cold",
         "gold",
@@ -88,5 +88,5 @@
       "answer": false
     }
   ],
-  "reviewed": false
+  "reviewed": true
 }

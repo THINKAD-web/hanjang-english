@@ -53,7 +53,7 @@
     {
       "type": "meaning_choice",
       "targetWordId": "g-gift",
-      "prompt": "\"선물\"는?",
+      "prompt": "\"선물\"은?",
       "options": [
         "gift",
         "give",
@@ -89,5 +89,5 @@
       "answer": true
     }
   ],
-  "reviewed": false
+  "reviewed": true
 }

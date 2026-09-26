@@ -52,7 +52,7 @@
     {
       "type": "meaning_choice",
       "targetWordId": "g-gate",
-      "prompt": "\"대문\"는?",
+      "prompt": "\"대문\"은?",
       "options": [
         "gate",
         "game",
@@ -88,5 +88,5 @@
       "answer": true
     }
   ],
-  "reviewed": false
+  "reviewed": true
 }

@@ -63,14 +63,14 @@
     },
     {
       "type": "fill_blank",
-      "targetWordId": "g-grass",
-      "sentence": "The ____ is green.",
+      "targetWordId": "g-green",
+      "sentence": "The grass is ____.",
       "options": [
-        "grass",
+        "green",
         "grape",
-        "ground"
+        "great"
       ],
-      "answer": "grass"
+      "answer": "green"
     },
     {
       "type": "listen_choice",

@@ -68,7 +68,7 @@
     "meaning": "가다",
     "sound": "g",
     "emoji": "🚶",
-    "imageable": true
+    "imageable": false
   },
   {
     "id": "g-get",
@@ -131,7 +131,7 @@
     "meaning": "정원",
     "sound": "g",
     "emoji": "🌷",
-    "imageable": true
+    "imageable": false
   },
   {
     "id": "g-gate",
@@ -231,7 +231,7 @@
     "text": "globe",
     "meaning": "지구본",
     "sound": "gl",
-    "emoji": "🌐",
+    "emoji": "🌍",
     "imageable": true
   },
   {
@@ -278,7 +278,7 @@
     "meaning": "인사하다",
     "sound": "gr",
     "emoji": "👋",
-    "imageable": true
+    "imageable": false
   },
   {
     "id": "g-grill",
@@ -293,7 +293,7 @@
     "meaning": "활짝 웃다",
     "sound": "gr",
     "emoji": "😁",
-    "imageable": true
+    "imageable": false
   },
   {
     "id": "g-grade",

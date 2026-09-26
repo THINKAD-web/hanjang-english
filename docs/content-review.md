@@ -2,19 +2,20 @@
 
 > `npm run content:check` 가 자동 생성한다. 직접 수정하지 말 것. 콘텐츠는 `content/` 의 JSON 을 고친다.
 > 검수가 끝난 장은 JSON 의 `reviewed` 를 `true` 로 바꾼다.
+> 보기 순서는 JSON 그대로 표시한다. 화면에서는 날짜·장·문항 번호 seed 로 섞여서 나온다.
 
 단어 52개 · 레슨 8장
 
 | 장 | 제목 | 소리 | 검수 |
 |---|---|---|---|
 | L1 | gr 소리 ① | gr | ✅ 완료 |
-| L2 | g 소리 기초 | g | ⏳ 대기 |
-| L3 | g 소리: 장소·동물·물건 | g | ⏳ 대기 |
-| L4 | gl 소리 (gr과 비교) | gl | ⏳ 대기 |
-| L5 | gr 소리 ② | gr | ⏳ 대기 |
-| L6 | 끝소리 g | -g | ⏳ 대기 |
-| L7 | g와 k 구별 | g · k | ⏳ 대기 |
-| L8 | ㄱ 마무리장 | ㄱ | ⏳ 대기 |
+| L2 | g 소리 기초 | g | ✅ 완료 |
+| L3 | g 소리: 장소·동물·물건 | g | ✅ 완료 |
+| L4 | gl 소리 (gr과 비교) | gl | ✅ 완료 |
+| L5 | gr 소리 ② | gr | ✅ 완료 |
+| L6 | 끝소리 g | -g | ✅ 완료 |
+| L7 | g와 k 구별 | g · k | ✅ 완료 |
+| L8 | ㄱ 마무리장 | ㄱ | ✅ 완료 |
 
 ## L1 — gr 소리 ① ✅
 
@@ -45,11 +46,11 @@
 |---|---|---|---|---|---|
 | 1 | 그림 보고 고르기 | grass | 🌿 | **grass** / glass / class | grass |
 | 2 | 뜻 보고 고르기 | grow | "자라다"는? | **grow** / group / great | grow |
-| 3 | 빈칸 채우기 | grass | The ____ is green. | **grass** / grape / ground | grass |
+| 3 | 빈칸 채우기 | green | The grass is ____. | **green** / grape / great | green |
 | 4 | 듣고 고르기 | grape | 🔊 grape | **grape** / great / group | grape |
 | 5 | O/X | grandma | grandma = 할머니 | O / X | O |
 
-## L2 — g 소리 기초 ⏳ 검수 대기
+## L2 — g 소리 기초 ✅
 
 **오늘의 소리 (g)**
 
@@ -58,7 +59,7 @@
 
 | # | 단어 | 뜻 | 그림 | 소리 | 그림 문항 |
 |---|---|---|---|---|---|
-| 1 | go | 가다 | 🚶 | g | 가능 |
+| 1 | go | 가다 | 🚶 | g | 불가 |
 | 2 | get | 받다, 얻다 | — | g | 불가 |
 | 3 | give | 주다 | 🤲 | g | 불가 |
 | 4 | good | 좋은 | 😊 | g | 불가 |
@@ -82,7 +83,7 @@
 | 4 | 듣고 고르기 | game | 🔊 game | **game** / gate / goal | game |
 | 5 | O/X | go | go = 주다 | O / X | X |
 
-## L3 — g 소리: 장소·동물·물건 ⏳ 검수 대기
+## L3 — g 소리: 장소·동물·물건 ✅
 
 **오늘의 소리 (g)**
 
@@ -91,7 +92,7 @@
 
 | # | 단어 | 뜻 | 그림 | 소리 | 그림 문항 |
 |---|---|---|---|---|---|
-| 1 | garden | 정원 | 🌷 | g | 가능 |
+| 1 | garden | 정원 | 🌷 | g | 불가 |
 | 2 | gate | 대문 | — | g | 불가 |
 | 3 | goat | 염소 | 🐐 | g | 가능 |
 | 4 | goose | 거위 | 🪿 | g | 가능 |
@@ -110,12 +111,12 @@
 | # | 유형 | 대상 | 문제 | 보기 | 정답 |
 |---|---|---|---|---|---|
 | 1 | 그림 보고 고르기 | goat | 🐐 | **goat** / coat / goal | goat |
-| 2 | 뜻 보고 고르기 | gate | "대문"는? | **gate** / game / goal | gate |
+| 2 | 뜻 보고 고르기 | gate | "대문"은? | **gate** / game / goal | gate |
 | 3 | 빈칸 채우기 | guitar | The gorilla plays the ____. | **guitar** / gate / goat | guitar |
 | 4 | 듣고 고르기 | gorilla | 🔊 gorilla | **gorilla** / guitar / garden | gorilla |
 | 5 | O/X | garden | garden = 정원 | O / X | O |
 
-## L4 — gl 소리 (gr과 비교) ⏳ 검수 대기
+## L4 — gl 소리 (gr과 비교) ✅
 
 **오늘의 소리 (gl)**
 
@@ -129,7 +130,7 @@
 | 3 | glad | 기쁜 | 😄 | gl | 불가 |
 | 4 | glue | 풀(접착제) | — | gl | 불가 |
 | 5 | glove | 장갑 | 🧤 | gl | 가능 |
-| 6 | globe | 지구본 | 🌐 | gl | 가능 |
+| 6 | globe | 지구본 | 🌍 | gl | 가능 |
 | 7 | glow | 빛나다 | ✨ | gl | 불가 |
 | 8 | glitter | 반짝이 | — | gl | 불가 |
 
@@ -148,7 +149,7 @@
 | 4 | 듣고 고르기 | glad | 🔊 glad | **glad** / glue / glow | glad |
 | 5 | O/X | glasses | glasses = 유리컵 | O / X | X |
 
-## L5 — gr 소리 ② ⏳ 검수 대기
+## L5 — gr 소리 ② ✅
 
 **오늘의 소리 (gr)**
 
@@ -160,9 +161,9 @@
 | 1 | grandpa | 할아버지 | 👴 | gr | 가능 |
 | 2 | gray | 회색 | — | gr | 불가 |
 | 3 | grab | 움켜잡다 | ✊ | gr | 불가 |
-| 4 | greet | 인사하다 | 👋 | gr | 가능 |
+| 4 | greet | 인사하다 | 👋 | gr | 불가 |
 | 5 | grill | 그릴, 석쇠 | — | gr | 불가 |
-| 6 | grin | 활짝 웃다 | 😁 | gr | 가능 |
+| 6 | grin | 활짝 웃다 | 😁 | gr | 불가 |
 | 7 | grade | 학년 | — | gr | 불가 |
 | 8 | grasshopper | 메뚜기 | 🦗 | gr | 가능 |
 
@@ -181,7 +182,7 @@
 | 4 | 듣고 고르기 | greet | 🔊 greet | **greet** / great / green | greet |
 | 5 | O/X | grandpa | grandpa = 할아버지 | O / X | O |
 
-## L6 — 끝소리 g ⏳ 검수 대기
+## L6 — 끝소리 g ✅
 
 **오늘의 소리 (-g)**
 
@@ -214,7 +215,7 @@
 | 4 | 듣고 고르기 | pig | 🔊 pig | **pig** / big / bag | pig |
 | 5 | O/X | egg | egg = 다리 | O / X | X |
 
-## L7 — g와 k 구별 ⏳ 검수 대기
+## L7 — g와 k 구별 ✅
 
 **오늘의 소리 (g · k)**
 
@@ -242,12 +243,12 @@
 | # | 유형 | 대상 | 문제 | 보기 | 정답 |
 |---|---|---|---|---|---|
 | 1 | 그림 보고 고르기 | coat | 🧥 | **coat** / goat / cold | coat |
-| 2 | 뜻 보고 고르기 | cold | "추운"는? | **cold** / gold / coat | cold |
+| 2 | 뜻 보고 고르기 | cold | "추운"은? | **cold** / gold / coat | cold |
 | 3 | 빈칸 채우기 | class | It is cold in the ____. | **class** / glass / coat | class |
 | 4 | 듣고 고르기 | back | 🔊 back | **back** / bag / big | back |
 | 5 | O/X | goat | goat = 코트 | O / X | X |
 
-## L8 — ㄱ 마무리장 ⏳ 검수 대기
+## L8 — ㄱ 마무리장 ✅
 
 **오늘의 소리 (ㄱ)**
 
@@ -275,7 +276,7 @@
 | # | 유형 | 대상 | 문제 | 보기 | 정답 |
 |---|---|---|---|---|---|
 | 1 | 그림 보고 고르기 | glove | 🧤 | **glove** / grow / globe | glove |
-| 2 | 뜻 보고 고르기 | gift | "선물"는? | **gift** / give / girl | gift |
+| 2 | 뜻 보고 고르기 | gift | "선물"은? | **gift** / give / girl | gift |
 | 3 | 빈칸 채우기 | goose | The frog and the ____ are in the grass. | **goose** / goat / gold | goose |
 | 4 | 듣고 고르기 | glass | 🔊 glass | **glass** / grass / class | glass |
 | 5 | O/X | frog | frog = 개구리 | O / X | O |

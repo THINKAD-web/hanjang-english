@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { meaningPrompt } from "./josa";
 import type { RawContent } from "./load";
 import {
   LessonSchema,
@@ -149,8 +150,8 @@ export function checkContent(raw: RawContent): string[] {
         if (target.emoji && RISKY_EMOJI.has(target.emoji) && !target.image)
           errors.push(`${where}: ${target.emoji} 는 구형 기기 렌더 위험 — 그림 문항 정답으로 쓰지 않는다`);
       }
-      if (q.type === "meaning_choice" && !q.prompt.includes(target.meaning))
-        errors.push(`${where}: prompt 에 뜻 "${target.meaning}" 이 없다`);
+      if (q.type === "meaning_choice" && q.prompt !== meaningPrompt(target.meaning))
+        errors.push(`${where}: prompt 는 ${meaningPrompt(target.meaning)} 이어야 한다 (현재 ${q.prompt})`);
       if (q.type === "fill_blank" && q.sentence.split("____").length !== 2)
         errors.push(`${where}: sentence 에 ____ 는 정확히 1개`);
     });
