@@ -18,4 +18,7 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run content:check
+      - name: 검수표가 최신인지 확인
+        run: git diff --exit-code docs/content-review.md
       - run: npm run build
