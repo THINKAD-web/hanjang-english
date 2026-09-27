@@ -18,7 +18,7 @@ export type QuizFeedback = { correct: boolean; chosen: string | boolean };
 
 export type SheetState = {
   step: SheetStep;
-  wordCount: number;
+  itemCount: number;
   quizCount: number;
   /** 문항 순서대로의 채점 결과 */
   answers: AnswerRecord[];
@@ -29,11 +29,11 @@ export type SheetAction =
   | { type: "nextCard" }
   | { type: "listenAllDone" }
   | { type: "sentencesDone" }
-  | { type: "answer"; targetWordId: string; correct: boolean; chosen: string | boolean }
+  | { type: "answer"; targetItemId: string; correct: boolean; chosen: string | boolean }
   | { type: "advanceQuiz" };
 
-export function initSheet(wordCount: number, quizCount: number): SheetState {
-  return { step: { kind: "intro" }, wordCount, quizCount, answers: [] };
+export function initSheet(itemCount: number, quizCount: number): SheetState {
+  return { step: { kind: "intro" }, itemCount, quizCount, answers: [] };
 }
 
 export function sheetReducer(state: SheetState, action: SheetAction): SheetState {
@@ -46,7 +46,7 @@ export function sheetReducer(state: SheetState, action: SheetAction): SheetState
       if (step.kind !== "card") return state;
       return {
         ...state,
-        step: step.index + 1 < state.wordCount ? { kind: "card", index: step.index + 1 } : { kind: "listenAll" },
+        step: step.index + 1 < state.itemCount ? { kind: "card", index: step.index + 1 } : { kind: "listenAll" },
       };
 
     case "listenAllDone":
@@ -61,7 +61,7 @@ export function sheetReducer(state: SheetState, action: SheetAction): SheetState
       return {
         ...state,
         step: { ...step, feedback: { correct: action.correct, chosen: action.chosen } },
-        answers: [...state.answers, { targetWordId: action.targetWordId, correct: action.correct }],
+        answers: [...state.answers, { targetItemId: action.targetItemId, correct: action.correct }],
       };
 
     case "advanceQuiz":
@@ -78,8 +78,8 @@ export function sheetScore(state: SheetState): number {
 }
 
 /** 틀린 단어 (중복 제거, 틀린 순서) */
-export function wrongWordIds(state: SheetState): string[] {
+export function wrongItemIds(state: SheetState): string[] {
   const out: string[] = [];
-  for (const a of state.answers) if (!a.correct && !out.includes(a.targetWordId)) out.push(a.targetWordId);
+  for (const a of state.answers) if (!a.correct && !out.includes(a.targetItemId)) out.push(a.targetItemId);
   return out;
 }

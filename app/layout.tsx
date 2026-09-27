@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "한장영어",
-  description: "하루 8분, 영어 한 장",
+  title: { default: "오늘 한장", template: "%s" },
+  description: "하루에 한 장. 오늘 한장의 첫 팩, 한장영어.",
 };
 
 export const viewport: Viewport = {

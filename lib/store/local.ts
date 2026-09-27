@@ -1,6 +1,7 @@
+import { DEFAULT_PACK_ID } from "@/lib/content/load";
 import { createInitialState, StateSchema, type ProgressStore, type State } from "./types";
 
-export const STORAGE_KEY = "hanjang-state-v1";
+export const STORAGE_KEY = "hanjang-state-v2";
 
 type StorageLike = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
@@ -15,6 +16,7 @@ export class LocalProgressStore implements ProgressStore {
   constructor(
     private readonly storage: StorageLike | null = typeof window === "undefined" ? null : safeLocalStorage(),
     private readonly key: string = STORAGE_KEY,
+    private readonly defaultPackId: string = DEFAULT_PACK_ID,
   ) {}
 
   async load(): Promise<State> {
@@ -27,7 +29,7 @@ export class LocalProgressStore implements ProgressStore {
         // 깨진 JSON — 아래에서 초기 상태
       }
     }
-    return (this.memory ??= createInitialState());
+    return (this.memory ??= createInitialState(this.defaultPackId));
   }
 
   async save(state: State): Promise<void> {

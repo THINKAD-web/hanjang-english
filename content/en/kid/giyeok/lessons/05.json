@@ -1,16 +1,16 @@
 {
-  "id": "giyeok-05",
-  "packId": "giyeok",
+  "id": "en-kid-giyeok-05",
+  "packId": "en-kid-giyeok",
   "dayNo": 5,
   "title": "gr 소리 ②",
-  "soundIntro": {
+  "focus": {
     "label": "gr",
     "lines": [
       "gr 한 번 더!",
       "'그ㄹ'을 빠르게 붙여 읽어요."
     ]
   },
-  "wordIds": [
+  "itemIds": [
     "g-grandpa",
     "g-gray",
     "g-grab",
@@ -22,18 +22,18 @@
   ],
   "sentences": [
     {
-      "en": "Grandpa greets me with a grin.",
-      "ko": "할아버지가 활짝 웃으며 인사해요.",
-      "wordIds": [
+      "text": "Grandpa greets me with a grin.",
+      "meaningKo": "할아버지가 활짝 웃으며 인사해요.",
+      "itemIds": [
         "g-grandpa",
         "g-greet",
         "g-grin"
       ]
     },
     {
-      "en": "A gray grasshopper jumps on the grass.",
-      "ko": "회색 메뚜기가 잔디 위에서 뛰어요.",
-      "wordIds": [
+      "text": "A gray grasshopper jumps on the grass.",
+      "meaningKo": "회색 메뚜기가 잔디 위에서 뛰어요.",
+      "itemIds": [
         "g-gray",
         "g-grasshopper"
       ]
@@ -42,51 +42,51 @@
   "quiz": [
     {
       "type": "picture_choice",
-      "targetWordId": "g-grasshopper",
       "options": [
         "grasshopper",
         "grass",
         "grandpa"
       ],
-      "answer": "grasshopper"
+      "answer": "grasshopper",
+      "targetItemId": "g-grasshopper"
     },
     {
       "type": "meaning_choice",
-      "targetWordId": "g-grab",
       "prompt": "\"움켜잡다\"는?",
       "options": [
         "grab",
         "grade",
         "grin"
       ],
-      "answer": "grab"
+      "answer": "grab",
+      "targetItemId": "g-grab"
     },
     {
       "type": "fill_blank",
-      "targetWordId": "g-grin",
       "sentence": "Grandpa greets me with a ____.",
       "options": [
         "grin",
         "grill",
         "green"
       ],
-      "answer": "grin"
+      "answer": "grin",
+      "targetItemId": "g-grin"
     },
     {
       "type": "listen_choice",
-      "targetWordId": "g-greet",
       "options": [
         "greet",
         "great",
         "green"
       ],
-      "answer": "greet"
+      "answer": "greet",
+      "targetItemId": "g-greet"
     },
     {
       "type": "ox",
-      "targetWordId": "g-grandpa",
       "statement": "grandpa = 할아버지",
-      "answer": true
+      "answer": true,
+      "targetItemId": "g-grandpa"
     }
   ],
   "reviewed": true

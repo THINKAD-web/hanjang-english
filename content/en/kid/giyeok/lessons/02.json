@@ -1,16 +1,16 @@
 {
-  "id": "giyeok-02",
-  "packId": "giyeok",
+  "id": "en-kid-giyeok-02",
+  "packId": "en-kid-giyeok",
   "dayNo": 2,
   "title": "g 소리 기초",
-  "soundIntro": {
+  "focus": {
     "label": "g",
     "lines": [
       "ㄱ = g",
       "목에서 부드럽게 '그' 소리가 나요."
     ]
   },
-  "wordIds": [
+  "itemIds": [
     "g-go",
     "g-get",
     "g-give",
@@ -22,18 +22,18 @@
   ],
   "sentences": [
     {
-      "en": "The girl gets a gift.",
-      "ko": "소녀가 선물을 받아요.",
-      "wordIds": [
+      "text": "The girl gets a gift.",
+      "meaningKo": "소녀가 선물을 받아요.",
+      "itemIds": [
         "g-girl",
         "g-get",
         "g-gift"
       ]
     },
     {
-      "en": "Let's go and play a good game.",
-      "ko": "가서 재미있는 게임을 하자.",
-      "wordIds": [
+      "text": "Let's go and play a good game.",
+      "meaningKo": "가서 재미있는 게임을 하자.",
+      "itemIds": [
         "g-go",
         "g-good",
         "g-game"
@@ -43,51 +43,51 @@
   "quiz": [
     {
       "type": "picture_choice",
-      "targetWordId": "g-gift",
       "options": [
         "gift",
         "girl",
         "give"
       ],
-      "answer": "gift"
+      "answer": "gift",
+      "targetItemId": "g-gift"
     },
     {
       "type": "meaning_choice",
-      "targetWordId": "g-give",
       "prompt": "\"주다\"는?",
       "options": [
         "give",
         "get",
         "gift"
       ],
-      "answer": "give"
+      "answer": "give",
+      "targetItemId": "g-give"
     },
     {
       "type": "fill_blank",
-      "targetWordId": "g-girl",
       "sentence": "The ____ gets a gift.",
       "options": [
         "girl",
         "gold",
         "goal"
       ],
-      "answer": "girl"
+      "answer": "girl",
+      "targetItemId": "g-girl"
     },
     {
       "type": "listen_choice",
-      "targetWordId": "g-game",
       "options": [
         "game",
         "gate",
         "goal"
       ],
-      "answer": "game"
+      "answer": "game",
+      "targetItemId": "g-game"
     },
     {
       "type": "ox",
-      "targetWordId": "g-go",
       "statement": "go = 주다",
-      "answer": false
+      "answer": false,
+      "targetItemId": "g-go"
     }
   ],
   "reviewed": true

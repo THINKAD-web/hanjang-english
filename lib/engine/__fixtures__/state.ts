@@ -1,8 +1,9 @@
-import { loadContent } from "@/lib/content/load";
-import { createInitialState, type Attempt, type State } from "@/lib/store/types";
+import { DEFAULT_PACK_ID, loadContent } from "@/lib/content/load";
+import { createInitialState, DEFAULT_PROFILE_ID, type Attempt, type State } from "@/lib/store/types";
 import { applyAttempt } from "../queue";
 
 export const content = loadContent();
+export const packId = content.pack.id;
 
 /** 2026-09-21 이 월요일인 주를 기준으로 쓴다. */
 export const MON = "2026-09-21";
@@ -17,9 +18,9 @@ export const NEXT_MON = "2026-09-28";
 let seq = 0;
 
 type Finish = {
-  /** 틀린 대상 단어 */
+  /** 틀린 대상 아이템 */
   wrong?: string[];
-  /** 추가로 맞힌 대상 단어 (기본: 장의 퀴즈 대상 중 틀리지 않은 것) */
+  /** 추가로 맞힌 대상 아이템 (기본: 장의 퀴즈 대상 중 틀리지 않은 것) */
   right?: string[];
   completed?: boolean;
 };
@@ -35,17 +36,19 @@ function record(state: State, attempt: Attempt): State {
 /** 장 하나를 풀고 상태에 반영한다. */
 export function doLesson(state: State, lessonId: string, dateKey: string, { wrong = [], right, completed = true }: Finish = {}): State {
   const lesson = content.lessons.find((l) => l.id === lessonId)!;
-  const targets = right ?? lesson.quiz.map((q) => q.targetWordId).filter((id) => !wrong.includes(id));
+  const targets = right ?? lesson.quiz.map((q) => q.targetItemId).filter((id) => !wrong.includes(id));
   const answers = [
-    ...targets.map((targetWordId) => ({ targetWordId, correct: true })),
-    ...wrong.map((targetWordId) => ({ targetWordId, correct: false })),
+    ...targets.map((targetItemId) => ({ targetItemId, correct: true })),
+    ...wrong.map((targetItemId) => ({ targetItemId, correct: false })),
   ];
   return record(state, {
     id: `a${++seq}`,
+    profileId: DEFAULT_PROFILE_ID,
+    packId,
     dateKey,
     kind: "lesson",
     lessonId,
-    wordIds: lesson.wordIds,
+    itemIds: lesson.itemIds,
     answers,
     score: answers.filter((a) => a.correct).length,
     startedAt: `${dateKey}T00:00:00.000Z`,
@@ -54,12 +57,14 @@ export function doLesson(state: State, lessonId: string, dateKey: string, { wron
   });
 }
 
-export function doReview(state: State, dateKey: string, answers: { targetWordId: string; correct: boolean }[]): State {
+export function doReview(state: State, dateKey: string, answers: { targetItemId: string; correct: boolean }[]): State {
   return record(state, {
     id: `a${++seq}`,
+    profileId: DEFAULT_PROFILE_ID,
+    packId,
     dateKey,
     kind: "review",
-    wordIds: answers.map((a) => a.targetWordId),
+    itemIds: answers.map((a) => a.targetItemId),
     answers,
     score: answers.filter((a) => a.correct).length,
     startedAt: `${dateKey}T00:00:00.000Z`,
@@ -69,7 +74,7 @@ export function doReview(state: State, dateKey: string, answers: { targetWordId:
 }
 
 export function freshState(): State {
-  return createInitialState();
+  return createInitialState(DEFAULT_PACK_ID);
 }
 
-export const lessonId = (dayNo: number) => `giyeok-${String(dayNo).padStart(2, "0")}`;
+export const lessonId = (dayNo: number) => `${packId}-${String(dayNo).padStart(2, "0")}`;
