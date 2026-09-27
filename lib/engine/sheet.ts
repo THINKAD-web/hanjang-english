@@ -22,6 +22,8 @@ export type SheetState = {
   quizCount: number;
   /** 문항 순서대로의 채점 결과 */
   answers: AnswerRecord[];
+  /** true 면 전체 듣기·예문 단계를 건너뛴다 (복습장: 단어 카드 → 퀴즈만). */
+  skipMiddle: boolean;
 };
 
 export type SheetAction =
@@ -33,7 +35,12 @@ export type SheetAction =
   | { type: "advanceQuiz" };
 
 export function initSheet(itemCount: number, quizCount: number): SheetState {
-  return { step: { kind: "intro" }, itemCount, quizCount, answers: [] };
+  return { step: { kind: "intro" }, itemCount, quizCount, answers: [], skipMiddle: false };
+}
+
+/** 복습장: "오늘의 소리" 없이 단어 카드부터 바로 시작하고, 전체 듣기·예문도 건너뛴다. */
+export function initReviewSheet(itemCount: number, quizCount: number): SheetState {
+  return { step: { kind: "card", index: 0 }, itemCount, quizCount, answers: [], skipMiddle: true };
 }
 
 export function sheetReducer(state: SheetState, action: SheetAction): SheetState {
@@ -44,10 +51,8 @@ export function sheetReducer(state: SheetState, action: SheetAction): SheetState
 
     case "nextCard":
       if (step.kind !== "card") return state;
-      return {
-        ...state,
-        step: step.index + 1 < state.itemCount ? { kind: "card", index: step.index + 1 } : { kind: "listenAll" },
-      };
+      if (step.index + 1 < state.itemCount) return { ...state, step: { kind: "card", index: step.index + 1 } };
+      return { ...state, step: state.skipMiddle ? { kind: "quiz", index: 0, feedback: null } : { kind: "listenAll" } };
 
     case "listenAllDone":
       return step.kind === "listenAll" ? { ...state, step: { kind: "sentences" } } : state;

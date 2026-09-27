@@ -131,6 +131,17 @@ export function recordPackInterest(state: State, input: { dateKey: DateKey; at: 
   };
 }
 
+/** 팩 완료 화면에서 "다음 팩 열어달라고 부모님께 말하기" 클릭 신호. */
+export function recordNextPackRequest(state: State, input: { dateKey: DateKey; at: string; payload: Record<string, unknown> }): State {
+  return {
+    ...state,
+    events: [
+      ...state.events,
+      { profileId: DEFAULT_PROFILE_ID, type: "next_pack_request", dateKey: input.dateKey, at: input.at, payload: input.payload },
+    ],
+  };
+}
+
 export type StampCell = { dateKey: DateKey; label: string; stamped: boolean; isToday: boolean; isFuture: boolean };
 
 const DAY_LABELS = ["월", "화", "수", "목", "금", "토", "일"];
@@ -157,22 +168,20 @@ export function packProgress(state: State, content: Content): { done: number; to
 
 export type HomeCta = { label: string; sub?: string; enabled: boolean };
 
-/**
- * 홈의 큰 버튼 문구. 이 PR 에서는 일반 장만 실행한다.
- * 복습장·하루 한도 화면은 PR4 에서 연결한다.
- */
+/** 홈의 큰 버튼 문구 (기획안 v2 7장, PR4 지시서 6장). */
 export function homeCta(decision: TodayDecision, content: Content): HomeCta {
   switch (decision.kind) {
     case "lesson": {
       const lesson = content.lessons.find((l) => l.id === decision.lessonId);
       return { label: "오늘 한 장 시작", sub: lesson ? `${lesson.dayNo}장 · ${lesson.title}` : undefined, enabled: true };
     }
-    case "doneToday":
-    case "dailyLimit":
-      return { label: "오늘 장 끝! 잘했어요", enabled: false };
     case "review":
-      return { label: "복습장", sub: "곧 열려요", enabled: false };
+      return { label: "오늘은 복습장", enabled: true };
+    case "doneToday":
+      return { label: "오늘 장 끝! 잘했어요", enabled: false };
+    case "dailyLimit":
+      return { label: "내일 또 만나요", enabled: false };
     case "packComplete":
-      return { label: `${content.pack.unitLabel} 완료!`, sub: "다음 단위는 준비 중이에요", enabled: false };
+      return { label: `${content.pack.unitLabel} 팩 완료!`, enabled: true };
   }
 }

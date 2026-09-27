@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   homeCta,
   packProgress,
+  recordNextPackRequest,
   recordPackInterest,
   recordSheetAbort,
   recordSheetComplete,
@@ -98,6 +99,19 @@ describe("recordPackInterest", () => {
   });
 });
 
+describe("recordNextPackRequest", () => {
+  it("자유 payload 로 next_pack_request 이벤트만 남긴다", () => {
+    const s = recordNextPackRequest(freshState(), {
+      dateKey: MON,
+      at: `${MON}T00:00:00.000Z`,
+      payload: { packId, completedUnit: "giyeok" },
+    });
+    expect(s.events).toEqual([
+      { profileId: "child", type: "next_pack_request", dateKey: MON, at: `${MON}T00:00:00.000Z`, payload: { packId, completedUnit: "giyeok" } },
+    ]);
+  });
+});
+
 describe("weekStamps", () => {
   it("월~일 7칸, 완료한 날만 도장, 오늘·미래 표시", () => {
     const s = completeL1(MON);
@@ -122,9 +136,9 @@ describe("packProgress / homeCta", () => {
   it("결정에 따라 버튼 문구가 바뀐다", () => {
     expect(homeCta({ kind: "lesson", lessonId: L1.id }, content)).toEqual({ label: "오늘 한 장 시작", sub: "1장 · gr 소리 ①", enabled: true });
     expect(homeCta({ kind: "doneToday", canDoExtra: false }, content)).toEqual({ label: "오늘 장 끝! 잘했어요", enabled: false });
-    expect(homeCta({ kind: "dailyLimit" }, content)).toEqual({ label: "오늘 장 끝! 잘했어요", enabled: false });
-    expect(homeCta({ kind: "review", itemIds: [] }, content)).toMatchObject({ label: "복습장", enabled: false });
-    expect(homeCta({ kind: "packComplete" }, content).enabled).toBe(false);
+    expect(homeCta({ kind: "dailyLimit" }, content)).toEqual({ label: "내일 또 만나요", enabled: false });
+    expect(homeCta({ kind: "review", itemIds: [] }, content)).toEqual({ label: "오늘은 복습장", enabled: true });
+    expect(homeCta({ kind: "packComplete" }, content)).toEqual({ label: "ㄱ 팩 완료!", enabled: true });
   });
 
   it("주말 첫 사용이면 L1 을 시작할 수 있다", () => {

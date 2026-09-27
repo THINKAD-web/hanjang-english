@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ConsonantRow } from "@/components/consonant-row";
 import { ProgressBar, Screen } from "@/components/ui";
 import { loadContent } from "@/lib/content/load";
+import { activeItems } from "@/lib/engine/queue";
 import { packProgress, recordPackInterest } from "@/lib/engine/progress";
 import { completedLessonIds } from "@/lib/engine/today";
 import { useProgress } from "@/lib/use-progress";
@@ -26,6 +27,7 @@ export function PackDetailScreen({ packId }: { packId: string }) {
 
   const progress = packProgress(state, content);
   const done = new Set(completedLessonIds(state, packId));
+  const wrongCount = activeItems(state.wrongQueue, packId).length;
 
   const onLockedConsonantClick = (consonant: string) => {
     const today = dateKey ?? new Date().toISOString().slice(0, 10);
@@ -40,6 +42,7 @@ export function PackDetailScreen({ packId }: { packId: string }) {
       </header>
 
       <ProgressBar label={`${content.pack.unitLabel} ${progress.done}/${progress.total}장`} ratio={progress.done / progress.total} />
+      {wrongCount > 0 ? <p className="text-base font-semibold text-amber-800">오답 {wrongCount}개 복습 예정</p> : null}
       <ConsonantRow active={content.pack.unitLabel} onLockedClick={onLockedConsonantClick} />
 
       <section aria-label="다시 보기">
