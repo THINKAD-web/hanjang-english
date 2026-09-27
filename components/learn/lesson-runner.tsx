@@ -64,7 +64,14 @@ export function LessonRunner({
     [lesson, content, dateKey, injectedItemId, sheetId],
   );
   const [sheet, dispatch] = useReducer(sheetReducer, undefined, () => initSheet(items.length, quiz.length));
-  const [firstSpeech, setFirstSpeech] = useState<Promise<boolean> | null>(null);
+  // iOS Safari 는 speechSynthesis.speak() 가 탭 핸들러 안에서 "직접" 호출돼야 재생을 허용한다.
+  // useEffect/setTimeout 안에서 부르면 (첫 재생이 아무리 성공했어도) 이후 호출이 막힐 수 있다.
+  // 그래서 다음 화면의 speak() 는 그 화면으로 넘어가게 하는 탭 핸들러 안에서 "미리" 시작해 두고,
+  // 그 결과 Promise 를 다음 화면에 pendingSpeech 로 넘겨서 그걸 기다리게 한다.
+  const [pendingCardSpeech, setPendingCardSpeech] = useState<Promise<boolean> | null>(null);
+  const [pendingListenSpeech, setPendingListenSpeech] = useState<Promise<boolean> | null>(null);
+  const [pendingQuizSpeech, setPendingQuizSpeech] = useState<Promise<boolean> | null>(null);
+  const [pendingRevealSpeech, setPendingRevealSpeech] = useState<Promise<boolean> | null>(null);
 
   // 단계별 소요 시간(ms) — 화면엔 보여주지 않고 완료 시 이벤트로만 남긴다 (기획안 14장 8분 실측)
   const timingsRef = useRef<Record<SheetStep, number>>({ ...ZERO_TIMINGS });
@@ -83,9 +90,51 @@ export function LessonRunner({
 
   const handleStart = () => {
     // iOS Safari: 사용자가 탭한 이 핸들러 안에서 첫 재생을 시작해야 이후 자동 재생이 된다
-    setFirstSpeech(speak(items[0].text, items[0].audio));
+    setPendingCardSpeech(speak(items[0].text, items[0].audio));
     onStart?.();
     dispatch({ type: "start" });
+  };
+
+  /** "다음" 탭 — 다음 카드(또는 전체 듣기 첫 단어)의 speak() 를 이 탭 핸들러 안에서 바로 시작한다. */
+  const handleNextCard = () => {
+    if (step.kind !== "card") return;
+    const nextIndex = step.index + 1;
+    if (nextIndex < items.length) {
+      setPendingCardSpeech(speak(items[nextIndex].text, items[nextIndex].audio));
+    } else if (items[0]) {
+      setPendingListenSpeech(speak(items[0].text, items[0].audio));
+    }
+    dispatch({ type: "nextCard" });
+  };
+
+  /** "퀴즈 풀기" 탭 — 첫 문제가 듣고 고르기면 그 speak() 도 이 탭 핸들러 안에서 미리 시작한다. */
+  const handleSentencesDone = () => {
+    const firstQuiz = quiz[0];
+    if (firstQuiz?.type === "listen_choice") {
+      const target = content.itemsById.get(firstQuiz.targetItemId);
+      if (target) setPendingQuizSpeech(speak(target.text, target.audio));
+    }
+    dispatch({ type: "sentencesDone" });
+  };
+
+  /**
+   * 답 선택 탭 — 정답 여부가 이 탭 안에서 이미 확정되므로, 이어질 재생(오답 카드 다시 듣기 /
+   * 다음 문제가 듣고 고르기)도 여기서 미리 시작해 둔다. 실제 화면 전환은 몇 초 뒤 지연 애니메이션 이후.
+   */
+  const handleAnswer = (correct: boolean, chosen: string | boolean) => {
+    if (step.kind !== "quiz") return;
+    const currentQuiz = quiz[step.index];
+    const currentTarget = content.itemsById.get(currentQuiz.targetItemId);
+    setPendingRevealSpeech(!correct && currentTarget ? speak(currentTarget.text, currentTarget.audio) : null);
+
+    const nextQuiz = quiz[step.index + 1];
+    if (nextQuiz?.type === "listen_choice") {
+      const nextTarget = content.itemsById.get(nextQuiz.targetItemId);
+      setPendingQuizSpeech(nextTarget ? speak(nextTarget.text, nextTarget.audio) : null);
+    } else {
+      setPendingQuizSpeech(null);
+    }
+    dispatch({ type: "answer", targetItemId: currentQuiz.targetItemId, correct, chosen });
   };
 
   const finishQuiz = useCallback(
@@ -137,12 +186,14 @@ export function LessonRunner({
           word={items[step.index]}
           index={step.index}
           total={items.length}
-          pendingSpeech={step.index === 0 ? firstSpeech : null}
-          onNext={() => dispatch({ type: "nextCard" })}
+          pendingSpeech={pendingCardSpeech}
+          onNext={handleNextCard}
         />
       )}
-      {step.kind === "listenAll" && <ListenAllStep words={items} onDone={() => dispatch({ type: "listenAllDone" })} />}
-      {step.kind === "sentences" && <SentencesStep sentences={lesson.sentences} onDone={() => dispatch({ type: "sentencesDone" })} />}
+      {step.kind === "listenAll" && (
+        <ListenAllStep words={items} pendingFirstSpeech={pendingListenSpeech} onDone={() => dispatch({ type: "listenAllDone" })} />
+      )}
+      {step.kind === "sentences" && <SentencesStep sentences={lesson.sentences} onDone={handleSentencesDone} />}
       {step.kind === "quiz" && (
         <QuizStep
           key={step.index}
@@ -151,7 +202,9 @@ export function LessonRunner({
           total={quiz.length}
           target={content.itemsById.get(quiz[step.index].targetItemId)!}
           feedback={step.feedback}
-          onAnswer={(correct, chosen) => dispatch({ type: "answer", targetItemId: quiz[step.index].targetItemId, correct, chosen })}
+          pendingSpeech={pendingQuizSpeech}
+          pendingRevealSpeech={pendingRevealSpeech}
+          onAnswer={handleAnswer}
           onFinished={onQuizFinished}
         />
       )}
