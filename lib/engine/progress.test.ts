@@ -1,17 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { homeCta, packProgress, recordSheetComplete, recordSheetStart, weekStamps } from "./progress";
 import { decideToday } from "./today";
-import { content, freshState, lessonId, MON, SAT, TUE } from "./__fixtures__/state";
+import { content, freshState, lessonId, MON, packId, SAT, TUE } from "./__fixtures__/state";
 
 const L1 = content.lessons[0];
 
 function startL1(dateKey = MON, attemptId = "a1") {
   return recordSheetStart(freshState(), {
     attemptId,
+    packId,
     dateKey,
     kind: "lesson",
     lessonId: L1.id,
-    wordIds: L1.wordIds,
+    itemIds: L1.itemIds,
     at: `${dateKey}T00:00:00.000Z`,
   });
 }
@@ -27,15 +28,15 @@ describe("recordSheetStart / recordSheetComplete", () => {
 
   it("완료하면 점수·오답 큐·sheet_complete 반영, 다음 날 L2", () => {
     const answers = [
-      { targetWordId: "g-grass", correct: false },
-      { targetWordId: "g-grow", correct: true },
-      { targetWordId: "g-green", correct: true },
-      { targetWordId: "g-grape", correct: true },
-      { targetWordId: "g-grandma", correct: true },
+      { targetItemId: "g-grass", correct: false },
+      { targetItemId: "g-grow", correct: true },
+      { targetItemId: "g-green", correct: true },
+      { targetItemId: "g-grape", correct: true },
+      { targetItemId: "g-grandma", correct: true },
     ];
     const s = recordSheetComplete(startL1(), "a1", answers, `${MON}T00:08:00.000Z`);
     expect(s.attempts[0]).toMatchObject({ completed: true, score: 4, finishedAt: `${MON}T00:08:00.000Z` });
-    expect(s.wrongQueue.map((i) => i.wordId)).toEqual(["g-grass"]);
+    expect(s.wrongQueue.map((i) => i.itemId)).toEqual(["g-grass"]);
     expect(s.events.map((e) => e.type)).toEqual(["sheet_start", "sheet_complete"]);
     expect(s.events[1].payload).toMatchObject({ score: 4, total: 5 });
     expect(decideToday(s, MON, content)).toEqual({ kind: "doneToday", canDoExtra: false });
@@ -43,7 +44,7 @@ describe("recordSheetStart / recordSheetComplete", () => {
   });
 
   it("같은 시도를 두 번 완료해도 한 번만 반영", () => {
-    const answers = [{ targetWordId: "g-grass", correct: false }];
+    const answers = [{ targetItemId: "g-grass", correct: false }];
     let s = recordSheetComplete(startL1(), "a1", answers, "t");
     s = recordSheetComplete(s, "a1", answers, "t");
     expect(s.events.filter((e) => e.type === "sheet_complete")).toHaveLength(1);
@@ -54,7 +55,7 @@ describe("recordSheetStart / recordSheetComplete", () => {
 describe("weekStamps", () => {
   it("월~일 7칸, 완료한 날만 도장, 오늘·미래 표시", () => {
     const s = recordSheetComplete(startL1(MON), "a1", [], "t");
-    const cells = weekStamps(s, TUE);
+    const cells = weekStamps(s, TUE, packId);
     expect(cells.map((c) => c.label)).toEqual(["월", "화", "수", "목", "금", "토", "일"]);
     expect(cells.map((c) => c.stamped)).toEqual([true, false, false, false, false, false, false]);
     expect(cells[1].isToday).toBe(true);
@@ -62,7 +63,7 @@ describe("weekStamps", () => {
   });
 
   it("미완료 시도는 도장이 아니다", () => {
-    expect(weekStamps(startL1(MON), MON)[0].stamped).toBe(false);
+    expect(weekStamps(startL1(MON), MON, packId)[0].stamped).toBe(false);
   });
 });
 
@@ -77,7 +78,7 @@ describe("packProgress / homeCta", () => {
     expect(homeCta({ kind: "lesson", lessonId: L1.id }, content)).toEqual({ label: "오늘 한 장 시작", sub: "1장 · gr 소리 ①", enabled: true });
     expect(homeCta({ kind: "doneToday", canDoExtra: false }, content).enabled).toBe(false);
     expect(homeCta({ kind: "dailyLimit" }, content).enabled).toBe(false);
-    expect(homeCta({ kind: "review", wordIds: [] }, content)).toMatchObject({ label: "복습장", enabled: false });
+    expect(homeCta({ kind: "review", itemIds: [] }, content)).toMatchObject({ label: "복습장", enabled: false });
     expect(homeCta({ kind: "packComplete" }, content).enabled).toBe(false);
   });
 

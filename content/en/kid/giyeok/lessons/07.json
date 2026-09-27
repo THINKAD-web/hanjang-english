@@ -1,16 +1,16 @@
 {
-  "id": "giyeok-07",
-  "packId": "giyeok",
+  "id": "en-kid-giyeok-07",
+  "packId": "en-kid-giyeok",
   "dayNo": 7,
   "title": "g와 k 구별",
-  "soundIntro": {
+  "focus": {
     "label": "g · k",
     "lines": [
       "g(ㄱ)와 k(ㅋ)",
       "g는 목이 울리고, k는 바람이 나와요."
     ]
   },
-  "wordIds": [
+  "itemIds": [
     "g-goat",
     "g-coat",
     "g-gold",
@@ -22,17 +22,17 @@
   ],
   "sentences": [
     {
-      "en": "The goat has a coat.",
-      "ko": "염소가 코트를 입고 있어요.",
-      "wordIds": [
+      "text": "The goat has a coat.",
+      "meaningKo": "염소가 코트를 입고 있어요.",
+      "itemIds": [
         "g-goat",
         "g-coat"
       ]
     },
     {
-      "en": "It is cold in the class.",
-      "ko": "교실이 추워요.",
-      "wordIds": [
+      "text": "It is cold in the class.",
+      "meaningKo": "교실이 추워요.",
+      "itemIds": [
         "g-cold",
         "g-class"
       ]
@@ -41,51 +41,51 @@
   "quiz": [
     {
       "type": "picture_choice",
-      "targetWordId": "g-coat",
       "options": [
         "coat",
         "goat",
         "cold"
       ],
-      "answer": "coat"
+      "answer": "coat",
+      "targetItemId": "g-coat"
     },
     {
       "type": "meaning_choice",
-      "targetWordId": "g-cold",
       "prompt": "\"추운\"은?",
       "options": [
         "cold",
         "gold",
         "coat"
       ],
-      "answer": "cold"
+      "answer": "cold",
+      "targetItemId": "g-cold"
     },
     {
       "type": "fill_blank",
-      "targetWordId": "g-class",
       "sentence": "It is cold in the ____.",
       "options": [
         "class",
         "glass",
         "coat"
       ],
-      "answer": "class"
+      "answer": "class",
+      "targetItemId": "g-class"
     },
     {
       "type": "listen_choice",
-      "targetWordId": "g-back",
       "options": [
         "back",
         "bag",
         "big"
       ],
-      "answer": "back"
+      "answer": "back",
+      "targetItemId": "g-back"
     },
     {
       "type": "ox",
-      "targetWordId": "g-goat",
       "statement": "goat = 코트",
-      "answer": false
+      "answer": false,
+      "targetItemId": "g-goat"
     }
   ],
   "reviewed": true

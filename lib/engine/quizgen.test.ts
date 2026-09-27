@@ -14,24 +14,24 @@ import {
 import { seededRandom } from "./rng";
 import { content } from "./__fixtures__/state";
 
-const w = (text: string) => content.words.find((x) => x.text === text)!;
+const w = (text: string) => content.items.find((x) => x.text === text)!;
 const ctx = { sentences: content.lessons.flatMap((l) => l.sentences) };
 
 describe("generateQuiz", () => {
   it("같은 seed 면 같은 문제", () => {
     const seed = quizSeed("2026-09-26", "g-grass");
     for (const type of allowedTypes(w("grass"), ctx)) {
-      expect(generateQuiz(w("grass"), type, content.words, seed, ctx)).toEqual(
-        generateQuiz(w("grass"), type, content.words, seed, ctx),
+      expect(generateQuiz(w("grass"), type, content.items, seed, ctx)).toEqual(
+        generateQuiz(w("grass"), type, content.items, seed, ctx),
       );
     }
   });
 
   it("보기 3개, 중복 없음, 정답 포함", () => {
-    for (const word of content.words) {
+    for (const word of content.items) {
       for (const type of allowedTypes(word, ctx)) {
-        const q = generateQuiz(word, type, content.words, quizSeed("2026-09-26", word.id), ctx);
-        expect(q.targetWordId).toBe(word.id);
+        const q = generateQuiz(word, type, content.items, quizSeed("2026-09-26", word.id), ctx);
+        expect(q.targetItemId).toBe(word.id);
         if (q.type === "ox") continue;
         expect(q.options).toHaveLength(3);
         expect(new Set(q.options).size).toBe(3);
@@ -44,7 +44,7 @@ describe("generateQuiz", () => {
   it("imageable: false 단어는 그림 문항 불가 (ground, goose)", () => {
     expect(allowedTypes(w("ground"), ctx)).not.toContain("picture_choice");
     expect(allowedTypes(w("goose"), ctx)).not.toContain("picture_choice");
-    expect(() => generateQuiz(w("ground"), "picture_choice", content.words, "s", ctx)).toThrow();
+    expect(() => generateQuiz(w("ground"), "picture_choice", content.items, "s", ctx)).toThrow();
   });
 
   it("원형이 든 예문이 없으면 빈칸 문항 불가 (gate), 변형만 있어도 불가 (greet ← greets)", () => {
@@ -63,10 +63,10 @@ describe("generateQuiz", () => {
     let falseCount = 0;
     const N = 400;
     for (let i = 0; i < N; i++) {
-      const word = content.words[i % content.words.length];
-      const q = generateQuiz(word, "ox", content.words, `seed${i}`, ctx);
+      const word = content.items[i % content.items.length];
+      const q = generateQuiz(word, "ox", content.items, `seed${i}`, ctx);
       if (q.type !== "ox") throw new Error();
-      expect(q.answer).toBe(q.statement === `${word.text} = ${word.meaning}`);
+      expect(q.answer).toBe(q.statement === `${word.text} = ${word.meaningKo}`);
       if (!q.answer) falseCount++;
     }
     expect(falseCount / N).toBeGreaterThan(0.4);
@@ -75,21 +75,21 @@ describe("generateQuiz", () => {
 });
 
 describe("pickDistractors", () => {
-  it("같은 sound 태그 + 비슷한 철자를 우선한다", () => {
+  it("같은 태그 + 비슷한 철자를 우선한다", () => {
     const grass = w("grass");
-    const picked = pickDistractors(grass, content.words, seededRandom("x"), 2);
+    const picked = pickDistractors(grass, content.items, seededRandom("x"), 2);
     expect(picked).toHaveLength(2);
-    for (const d of picked) expect(d.sound).toBe("gr");
+    for (const d of picked) expect(d.tags).toContain("gr");
   });
 });
 
 describe("buildReviewQuiz", () => {
   it("5문항, 유형을 골고루 섞는다", () => {
-    const ids = content.lessons[0].wordIds;
+    const ids = content.lessons[0].itemIds;
     const quiz = buildReviewQuiz(ids, content, "2026-09-26");
     expect(quiz).toHaveLength(5);
     expect(new Set(quiz.map((q) => q.type)).size).toBe(QUIZ_TYPES.length);
-    expect(quiz.map((q) => q.targetWordId)).toEqual(ids.slice(0, 5));
+    expect(quiz.map((q) => q.targetItemId)).toEqual(ids.slice(0, 5));
   });
 
   it("그림 불가 단어만 있어도 그림 문항을 내지 않는다", () => {
@@ -100,7 +100,7 @@ describe("buildReviewQuiz", () => {
   it("단어가 5개 미만이면 돌려가며 5문항", () => {
     const quiz = buildReviewQuiz(["g-grow"], content, "2026-09-26");
     expect(quiz).toHaveLength(5);
-    expect(quiz.every((q) => q.targetWordId === "g-grow")).toBe(true);
+    expect(quiz.every((q) => q.targetItemId === "g-grow")).toBe(true);
   });
 
   it("같은 날이면 같은 문제", () => {
@@ -118,7 +118,7 @@ describe("meaning_choice 조사", () => {
     ["group", '"무리, 모둠"은?'],
     ["glue", '"풀(접착제)"은?'],
   ])("%s → %s", (text, prompt) => {
-    const q = generateQuiz(w(text), "meaning_choice", content.words, "s", ctx);
+    const q = generateQuiz(w(text), "meaning_choice", content.items, "s", ctx);
     expect(q.type === "meaning_choice" && q.prompt).toBe(prompt);
   });
 });
@@ -167,8 +167,8 @@ describe("shuffleSheetOptions (정답 위치)", () => {
   });
 
   it("오답 삽입 문항에도 적용된다", () => {
-    const quiz = shuffleSheetOptions(buildLessonQuiz(content.lessons[1], content, "2026-09-28", "g-grow"), "2026-09-28", "giyeok-02");
-    expect(quiz[4].targetWordId).toBe("g-grow");
+    const quiz = shuffleSheetOptions(buildLessonQuiz(content.lessons[1], content, "2026-09-28", "g-grow"), "2026-09-28", "en-kid-giyeok-02");
+    expect(quiz[4].targetItemId).toBe("g-grow");
     expect(quiz[4].type !== "ox" && quiz[4].options).toContain("grow");
   });
 });

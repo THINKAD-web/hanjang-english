@@ -1,16 +1,16 @@
 {
-  "id": "giyeok-06",
-  "packId": "giyeok",
+  "id": "en-kid-giyeok-06",
+  "packId": "en-kid-giyeok",
   "dayNo": 6,
   "title": "끝소리 g",
-  "soundIntro": {
+  "focus": {
     "label": "-g",
     "lines": [
       "끝에 오는 g",
       "받침 ㄱ처럼 짧게 닫아요. (dog = 도ㄱ)"
     ]
   },
-  "wordIds": [
+  "itemIds": [
     "g-bag",
     "g-big",
     "g-dog",
@@ -22,18 +22,18 @@
   ],
   "sentences": [
     {
-      "en": "The big dog has a red bag.",
-      "ko": "큰 개가 빨간 가방을 가지고 있어요.",
-      "wordIds": [
+      "text": "The big dog has a red bag.",
+      "meaningKo": "큰 개가 빨간 가방을 가지고 있어요.",
+      "itemIds": [
         "g-big",
         "g-dog",
         "g-bag"
       ]
     },
     {
-      "en": "A frog and a pig sit by the flag.",
-      "ko": "개구리와 돼지가 깃발 옆에 앉아 있어요.",
-      "wordIds": [
+      "text": "A frog and a pig sit by the flag.",
+      "meaningKo": "개구리와 돼지가 깃발 옆에 앉아 있어요.",
+      "itemIds": [
         "g-frog",
         "g-pig",
         "g-flag"
@@ -43,51 +43,51 @@
   "quiz": [
     {
       "type": "picture_choice",
-      "targetWordId": "g-frog",
       "options": [
         "frog",
         "flag",
         "dog"
       ],
-      "answer": "frog"
+      "answer": "frog",
+      "targetItemId": "g-frog"
     },
     {
       "type": "meaning_choice",
-      "targetWordId": "g-leg",
       "prompt": "\"다리\"는?",
       "options": [
         "leg",
         "egg",
         "bag"
       ],
-      "answer": "leg"
+      "answer": "leg",
+      "targetItemId": "g-leg"
     },
     {
       "type": "fill_blank",
-      "targetWordId": "g-dog",
       "sentence": "The big ____ has a red bag.",
       "options": [
         "dog",
         "egg",
         "leg"
       ],
-      "answer": "dog"
+      "answer": "dog",
+      "targetItemId": "g-dog"
     },
     {
       "type": "listen_choice",
-      "targetWordId": "g-pig",
       "options": [
         "pig",
         "big",
         "bag"
       ],
-      "answer": "pig"
+      "answer": "pig",
+      "targetItemId": "g-pig"
     },
     {
       "type": "ox",
-      "targetWordId": "g-egg",
       "statement": "egg = 다리",
-      "answer": false
+      "answer": false,
+      "targetItemId": "g-egg"
     }
   ],
   "reviewed": true

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "en-kid-giyeok",
+    "language": "en",
+    "audience": "kid",
+    "title": "어린이 영어",
+    "brandLabel": "한장영어",
+    "unitLabel": "ㄱ",
+    "status": "live",
+    "contentPath": "en/kid/giyeok"
+  },
+  {
+    "id": "ja-kid-hiragana",
+    "language": "ja",
+    "audience": "kid",
+    "title": "어린이 일본어",
+    "brandLabel": "한장일본어",
+    "unitLabel": "あ",
+    "status": "soon"
+  },
+  {
+    "id": "en-adult-travel",
+    "language": "en",
+    "audience": "adult",
+    "title": "성인 영어 · 출장",
+    "brandLabel": "한장영어",
+    "unitLabel": "travel",
+    "status": "soon"
+  },
+  {
+    "id": "ja-adult-travel",
+    "language": "ja",
+    "audience": "adult",
+    "title": "성인 일본어 · 여행",
+    "brandLabel": "한장일본어",
+    "unitLabel": "travel",
+    "status": "soon"
+  }
+]

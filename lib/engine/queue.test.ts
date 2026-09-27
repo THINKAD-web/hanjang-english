@@ -1,14 +1,18 @@
 import { describe, expect, it } from "vitest";
-import type { Attempt } from "@/lib/store/types";
+import { DEFAULT_PROFILE_ID, type Attempt, type WrongItem } from "@/lib/store/types";
 import { activeItems, applyAttempt, dueItems, setReviewEnabled } from "./queue";
+
+const PACK = "en-kid-giyeok";
 
 function attempt(dateKey: string, answers: [string, boolean][], completed = true): Attempt {
   return {
     id: "x",
+    profileId: DEFAULT_PROFILE_ID,
+    packId: PACK,
     dateKey,
     kind: "review",
-    wordIds: answers.map(([id]) => id),
-    answers: answers.map(([targetWordId, correct]) => ({ targetWordId, correct })),
+    itemIds: answers.map(([id]) => id),
+    answers: answers.map(([targetItemId, correct]) => ({ targetItemId, correct })),
     score: answers.filter(([, c]) => c).length,
     startedAt: "",
     completed,
@@ -16,10 +20,12 @@ function attempt(dateKey: string, answers: [string, boolean][], completed = true
 }
 
 describe("applyAttempt", () => {
-  it("새로 틀린 단어를 추가한다 (다음 날 복습)", () => {
+  it("새로 틀린 아이템을 추가한다 (다음 날 복습)", () => {
     expect(applyAttempt([], attempt("2026-09-25", [["g-grow", false]]))).toEqual([
       {
-        wordId: "g-grow",
+        profileId: DEFAULT_PROFILE_ID,
+        packId: PACK,
+        itemId: "g-grow",
         wrongCount: 1,
         firstWrongDate: "2026-09-25",
         lastWrongDate: "2026-09-25",
@@ -29,7 +35,7 @@ describe("applyAttempt", () => {
     ]);
   });
 
-  it("다시 틀리면 wrongCount+1, 졸업했던 단어도 재활성", () => {
+  it("다시 틀리면 wrongCount+1, 졸업했던 아이템도 재활성", () => {
     let q = applyAttempt([], attempt("2026-09-21", [["g-grow", false]]));
     q = applyAttempt(q, attempt("2026-09-22", [["g-grow", true]]));
     expect(q[0].active).toBe(false);
@@ -37,7 +43,7 @@ describe("applyAttempt", () => {
     expect(q[0]).toMatchObject({ wrongCount: 2, firstWrongDate: "2026-09-21", lastWrongDate: "2026-09-24", nextReviewDate: "2026-09-25", active: true });
   });
 
-  it("한 시도에서 같은 단어를 틀리고 맞히면 틀린 쪽 우선", () => {
+  it("한 시도에서 같은 아이템을 틀리고 맞히면 틀린 쪽 우선", () => {
     let q = applyAttempt([], attempt("2026-09-21", [["g-grow", false]]));
     q = applyAttempt(q, attempt("2026-09-22", [["g-grow", true], ["g-grow", false]]));
     expect(q[0]).toMatchObject({ wrongCount: 2, active: true });
@@ -47,29 +53,48 @@ describe("applyAttempt", () => {
     expect(applyAttempt([], attempt("2026-09-21", [["g-grow", false]], false))).toEqual([]);
   });
 
-  it("큐에 없는 단어를 맞힌 것은 아무 영향 없음", () => {
+  it("큐에 없는 아이템을 맞힌 것은 아무 영향 없음", () => {
     expect(applyAttempt([], attempt("2026-09-21", [["g-grow", true]]))).toEqual([]);
+  });
+
+  it("다른 팩의 같은 itemId 는 섞이지 않는다", () => {
+    const other = { ...attempt("2026-09-21", [["g-grow", false]]), packId: "ja-kid-hiragana" };
+    let q = applyAttempt([], attempt("2026-09-21", [["g-grow", false]]));
+    q = applyAttempt(q, other);
+    expect(q).toHaveLength(2);
+    expect(new Set(q.map((i) => i.packId))).toEqual(new Set([PACK, "ja-kid-hiragana"]));
   });
 });
 
 describe("조회", () => {
+  const item = (over: Partial<WrongItem>): WrongItem => ({
+    profileId: DEFAULT_PROFILE_ID,
+    packId: PACK,
+    itemId: "x",
+    wrongCount: 1,
+    firstWrongDate: "2026-09-21",
+    lastWrongDate: "2026-09-21",
+    nextReviewDate: "2026-09-22",
+    active: true,
+    ...over,
+  });
   const q = [
-    { wordId: "b", wrongCount: 1, firstWrongDate: "2026-09-22", lastWrongDate: "2026-09-22", nextReviewDate: "2026-09-23", active: true },
-    { wordId: "a", wrongCount: 1, firstWrongDate: "2026-09-21", lastWrongDate: "2026-09-21", nextReviewDate: "2026-09-22", active: true },
-    { wordId: "c", wrongCount: 1, firstWrongDate: "2026-09-21", lastWrongDate: "2026-09-21", nextReviewDate: "2026-09-22", active: false },
+    item({ itemId: "b", firstWrongDate: "2026-09-22", lastWrongDate: "2026-09-22", nextReviewDate: "2026-09-23" }),
+    item({ itemId: "a" }),
+    item({ itemId: "c", active: false }),
   ];
 
   it("activeItems 는 오래된 순", () => {
-    expect(activeItems(q).map((i) => i.wordId)).toEqual(["a", "b"]);
+    expect(activeItems(q, PACK).map((i) => i.itemId)).toEqual(["a", "b"]);
   });
 
   it("dueItems 는 nextReviewDate ≤ 오늘", () => {
-    expect(dueItems(q, "2026-09-22").map((i) => i.wordId)).toEqual(["a"]);
-    expect(dueItems(q, "2026-09-23").map((i) => i.wordId)).toEqual(["a", "b"]);
+    expect(dueItems(q, "2026-09-22", PACK).map((i) => i.itemId)).toEqual(["a"]);
+    expect(dueItems(q, "2026-09-23", PACK).map((i) => i.itemId)).toEqual(["a", "b"]);
   });
 
   it("setReviewEnabled OFF/ON", () => {
-    expect(setReviewEnabled(q, "a", false).find((i) => i.wordId === "a")?.active).toBe(false);
-    expect(setReviewEnabled(q, "c", true).find((i) => i.wordId === "c")?.active).toBe(true);
+    expect(setReviewEnabled(q, PACK, "a", false).find((i) => i.itemId === "a")?.active).toBe(false);
+    expect(setReviewEnabled(q, PACK, "c", true).find((i) => i.itemId === "c")?.active).toBe(true);
   });
 });

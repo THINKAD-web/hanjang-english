@@ -1,5 +1,5 @@
 import type { Content } from "@/lib/content/schema";
-import type { AnswerRecord, Attempt, State } from "@/lib/store/types";
+import { DEFAULT_PROFILE_ID, type AnswerRecord, type Attempt, type State } from "@/lib/store/types";
 import { weekRange, type DateKey } from "./date";
 import { applyAttempt } from "./queue";
 import { completedLessonIds, type TodayDecision } from "./today";
@@ -10,10 +10,11 @@ import { completedLessonIds, type TodayDecision } from "./today";
 
 export type SheetStartInput = {
   attemptId: string;
+  packId: string;
   dateKey: DateKey;
   kind: Attempt["kind"];
   lessonId?: string;
-  wordIds: string[];
+  itemIds: string[];
   /** ISO 시각 */
   at: string;
 };
@@ -22,10 +23,12 @@ export type SheetStartInput = {
 export function recordSheetStart(state: State, input: SheetStartInput): State {
   const attempt: Attempt = {
     id: input.attemptId,
+    profileId: DEFAULT_PROFILE_ID,
+    packId: input.packId,
     dateKey: input.dateKey,
     kind: input.kind,
     ...(input.lessonId ? { lessonId: input.lessonId } : {}),
-    wordIds: input.wordIds,
+    itemIds: input.itemIds,
     answers: [],
     score: 0,
     startedAt: input.at,
@@ -36,7 +39,13 @@ export function recordSheetStart(state: State, input: SheetStartInput): State {
     attempts: [...state.attempts, attempt],
     events: [
       ...state.events,
-      { type: "sheet_start", dateKey: input.dateKey, at: input.at, payload: { attemptId: input.attemptId, lessonId: input.lessonId ?? null } },
+      {
+        profileId: DEFAULT_PROFILE_ID,
+        type: "sheet_start",
+        dateKey: input.dateKey,
+        at: input.at,
+        payload: { attemptId: input.attemptId, packId: input.packId, lessonId: input.lessonId ?? null },
+      },
     ],
   };
 }
@@ -59,10 +68,11 @@ export function recordSheetComplete(state: State, attemptId: string, answers: An
     events: [
       ...state.events,
       {
+        profileId: DEFAULT_PROFILE_ID,
         type: "sheet_complete",
         dateKey: done.dateKey,
         at,
-        payload: { attemptId, lessonId: done.lessonId ?? null, score: done.score, total: answers.length },
+        payload: { attemptId, packId: done.packId, lessonId: done.lessonId ?? null, score: done.score, total: answers.length },
       },
     ],
   };
@@ -72,9 +82,11 @@ export type StampCell = { dateKey: DateKey; label: string; stamped: boolean; isT
 
 const DAY_LABELS = ["월", "화", "수", "목", "금", "토", "일"];
 
-/** 이번 주 도장 7칸 (월~일). 그날 완료한 장(복습장 포함)이 하나라도 있으면 도장. */
-export function weekStamps(state: State, dateKey: DateKey): StampCell[] {
-  const done = new Set(state.attempts.filter((a) => a.completed).map((a) => a.dateKey));
+/** 이번 주 도장 7칸 (월~일). 그 팩에서 그날 완료한 장(복습장 포함)이 하나라도 있으면 도장. */
+export function weekStamps(state: State, dateKey: DateKey, packId: string): StampCell[] {
+  const done = new Set(
+    state.attempts.filter((a) => a.completed && a.packId === packId && a.profileId === DEFAULT_PROFILE_ID).map((a) => a.dateKey),
+  );
   return weekRange(dateKey).map((d, i) => ({
     dateKey: d,
     label: DAY_LABELS[i],
@@ -84,10 +96,10 @@ export function weekStamps(state: State, dateKey: DateKey): StampCell[] {
   }));
 }
 
-/** "ㄱ · 3/8장" 용: 완료한 장 수 */
+/** "ㄱ · 3/8장" 용: 이 팩에서 완료한 장 수 */
 export function packProgress(state: State, content: Content): { done: number; total: number } {
   const ids = new Set(content.lessons.map((l) => l.id));
-  return { done: completedLessonIds(state).filter((id) => ids.has(id)).length, total: content.lessons.length };
+  return { done: completedLessonIds(state, content.pack.id).filter((id) => ids.has(id)).length, total: content.lessons.length };
 }
 
 export type HomeCta = { label: string; sub?: string; enabled: boolean };
@@ -108,6 +120,6 @@ export function homeCta(decision: TodayDecision, content: Content): HomeCta {
     case "review":
       return { label: "복습장", sub: "곧 열려요", enabled: false };
     case "packComplete":
-      return { label: "ㄱ 팩 완료!", sub: "다음 자음은 준비 중이에요", enabled: false };
+      return { label: `${content.pack.unitLabel} 완료!`, sub: "다음 단위는 준비 중이에요", enabled: false };
   }
 }

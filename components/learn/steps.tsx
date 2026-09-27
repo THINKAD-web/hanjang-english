@@ -3,14 +3,14 @@
 import { useEffect, useEffectEvent, useState } from "react";
 import { BigButton, SpeakButton } from "@/components/ui";
 import { WordCard, WordPicture } from "@/components/word-card";
-import type { Lesson, Quiz, Sentence, Word } from "@/lib/content/schema";
+import type { Item, Lesson, Quiz, Sentence } from "@/lib/content/schema";
 import type { QuizFeedback } from "@/lib/engine/sheet";
 import { NO_TTS_DELAY_MS, speak, stopSpeaking, ttsSupported } from "@/lib/tts";
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 /** 재생이 끝나면(또는 음성을 못 쓰면 표시 후 1.5초 뒤) resolve */
-async function playOrWait(word: Word, shownAt: number, pending?: Promise<boolean> | null): Promise<void> {
+async function playOrWait(word: Item, shownAt: number, pending?: Promise<boolean> | null): Promise<void> {
   const ok = await (pending ?? speak(word.text, word.audio));
   if (!ok) await sleep(Math.max(0, NO_TTS_DELAY_MS - (Date.now() - shownAt)));
 }
@@ -22,11 +22,11 @@ export function IntroStep({ lesson, onStart }: { lesson: Lesson; onStart: () => 
     <section className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
       <p className="text-xl font-semibold text-amber-800">오늘의 소리</p>
       <p lang="en" className="text-7xl font-bold text-slate-900">
-        {lesson.soundIntro.label}
+        {lesson.focus.label}
       </p>
       <div className="space-y-3 text-2xl leading-relaxed text-slate-800">
-        <p>{lesson.soundIntro.lines[0]}</p>
-        <p>{lesson.soundIntro.lines[1]}</p>
+        <p>{lesson.focus.lines[0]}</p>
+        <p>{lesson.focus.lines[1]}</p>
       </div>
       <BigButton onClick={onStart}>시작</BigButton>
       <p className="text-base text-slate-600">소리가 나와요. 소리를 켜 주세요 🔈</p>
@@ -47,7 +47,7 @@ export function CardStep({
   pendingSpeech,
   onNext,
 }: {
-  word: Word;
+  word: Item;
   index: number;
   total: number;
   pendingSpeech: Promise<boolean> | null;
@@ -86,7 +86,7 @@ export function CardStep({
 // ───────────────────────── 전체 듣기 ─────────────────────────
 
 /** 8단어 연속 재생. 건너뛰기 없음 — 끝나야 "다음" 이 켜진다. */
-export function ListenAllStep({ words, onDone }: { words: Word[]; onDone: () => void }) {
+export function ListenAllStep({ words, onDone }: { words: Item[]; onDone: () => void }) {
   const [current, setCurrent] = useState(0);
   const [finished, setFinished] = useState(false);
 
@@ -144,13 +144,13 @@ export function SentencesStep({ sentences, onDone }: { sentences: Sentence[]; on
     <section className="flex flex-1 flex-col gap-6">
       <p className="text-center text-2xl font-bold text-slate-800">예문</p>
       {sentences.map((s) => (
-        <div key={s.en} className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
+        <div key={s.text} className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
           <p lang="en" className="text-3xl font-bold leading-snug text-slate-900">
-            {s.en}
+            {s.text}
           </p>
-          <p className="text-2xl text-slate-700">{s.ko}</p>
+          <p className="text-2xl text-slate-700">{s.meaningKo}</p>
           <div>
-            <SpeakButton text={s.en} label="듣기" />
+            <SpeakButton text={s.text} label="듣기" />
           </div>
         </div>
       ))}
@@ -183,7 +183,7 @@ export function QuizStep({
   quiz: Quiz;
   index: number;
   total: number;
-  target: Word;
+  target: Item;
   feedback: QuizFeedback | null;
   onAnswer: (correct: boolean, chosen: string | boolean) => void;
   onFinished: () => void;
@@ -237,7 +237,7 @@ export function QuizStep({
   );
 }
 
-function QuizPrompt({ quiz, target }: { quiz: Quiz; target: Word }) {
+function QuizPrompt({ quiz, target }: { quiz: Quiz; target: Item }) {
   switch (quiz.type) {
     case "picture_choice":
       return (
@@ -262,7 +262,7 @@ function QuizPrompt({ quiz, target }: { quiz: Quiz; target: Word }) {
         <div className="flex flex-col items-center gap-3">
           <p className="text-2xl text-slate-800">잘 듣고 고르세요</p>
           <SpeakButton text={target.text} audio={target.audio} label="한 번 더" />
-          {!ttsSupported() ? <p className="text-lg text-slate-600">소리가 안 나와요 · 뜻: {target.meaning}</p> : null}
+          {!ttsSupported() ? <p className="text-lg text-slate-600">소리가 안 나와요 · 뜻: {target.meaningKo}</p> : null}
         </div>
       );
     case "ox":
@@ -356,7 +356,7 @@ export function DoneStep({
 }: {
   score: number;
   total: number;
-  wrongWords: Word[];
+  wrongWords: Item[];
   onHome: () => void;
 }) {
   return (
