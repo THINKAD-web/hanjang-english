@@ -2,15 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
-import { BigButton, Screen } from "@/components/ui";
+import { Screen } from "@/components/ui";
 import { loadContent } from "@/lib/content/load";
 import type { DateKey } from "@/lib/engine/date";
-import { recordSheetAbort, recordSheetComplete, recordSheetStart, recordStepTime } from "@/lib/engine/progress";
-import { decideToday } from "@/lib/engine/today";
+import { recordNextPackRequest, recordSheetAbort, recordSheetComplete, recordSheetStart, recordStepTime } from "@/lib/engine/progress";
+import { decideSheet, decideToday, type TodayDecision } from "@/lib/engine/today";
 import type { State } from "@/lib/store/types";
 import { newAttemptId, useProgress } from "@/lib/use-progress";
 import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
+import { DailyLimitScreen, DoneTodayScreen, PackCompleteScreen } from "./decision-screens";
 import { LessonRunner } from "./lesson-runner";
+import { ReviewRunner } from "./review-runner";
 
 /**
  * `/learn/[packId]` — 오늘 할 일은 항상 엔진(decideToday)이 정한다. URL 로 장을 건너뛸 수 없다
@@ -30,10 +32,13 @@ export function LearnScreen({ packId }: { packId: string }) {
 }
 
 /**
- * 들어온 순간의 상태로 오늘 할 장을 한 번만 정한다.
+ * 들어온 순간의 상태로 오늘 할 일을 한 번만 정한다.
  * (진행 중에 기록이 바뀌어도 화면이 다른 장으로 바뀌지 않도록)
- * decideToday 가 lesson 을 반환할 때만 처리한다. 그 외(복습장·하루 한도 등)는
- * "오늘 학습 준비 중" 임시 화면만 보여준다 — PR4 에서 해당 화면으로 교체한다.
+ *
+ * decideToday 의 5가지 결과를 모두 화면에 연결한다 (PR4 지시서 1장):
+ * lesson → LessonRunner(PR3), review → ReviewRunner(복습장), doneToday/dailyLimit/packComplete →
+ * 각각의 안내 화면. doneToday 의 "하나 더 하기" 는 decideSheet 로 판단 1·2 단계(하루 한도 체크)를
+ * 건너뛰고 바로 다음 장/복습장/팩 완료를 구한다 (today.ts 의 SheetDecision 주석 참고).
  */
 function LearnGate({
   packId,
@@ -50,16 +55,86 @@ function LearnGate({
   const dateParam = useDateParam();
   const content = loadContent(packId);
   const [decision] = useState(() => decideToday(initialState, dateKey, content));
+  const [extra, setExtra] = useState<TodayDecision | null>(null);
   const startedAtRef = useRef<string | null>(null);
   const goHome = useCallback(() => router.push(withDebugDate("/", dateParam)), [router, dateParam]);
 
-  const lesson = decision.kind === "lesson" ? content.lessons.find((l) => l.id === decision.lessonId) : undefined;
+  const effective = extra ?? decision;
+
+  if (effective.kind === "dailyLimit") {
+    return <DailyLimitScreen onHome={goHome} />;
+  }
+
+  if (effective.kind === "doneToday") {
+    return (
+      <DoneTodayScreen
+        canDoExtra={effective.canDoExtra}
+        onExtra={() => setExtra(decideSheet(initialState, dateKey, content))}
+        onHome={goHome}
+      />
+    );
+  }
+
+  if (effective.kind === "packComplete") {
+    return (
+      <PackCompleteScreen
+        unitLabel={content.pack.unitLabel}
+        wordCount={content.items.length}
+        onRequestNextPack={() =>
+          void update((s) =>
+            recordNextPackRequest(s, {
+              dateKey,
+              at: new Date().toISOString(),
+              payload: { packId, completedUnit: content.pack.unitKey },
+            }),
+          )
+        }
+      />
+    );
+  }
+
+  if (effective.kind === "review") {
+    const itemIds = effective.itemIds;
+    return (
+      <ReviewRunner
+        content={content}
+        itemIds={itemIds}
+        dateKey={dateKey}
+        onStart={() => {
+          startedAtRef.current = new Date().toISOString();
+          void update((s) => recordSheetStart(s, { packId, dateKey, at: startedAtRef.current! }));
+        }}
+        onComplete={(answers, timings) => {
+          const finishedAt = new Date().toISOString();
+          void update((s) => {
+            const withAttempt = recordSheetComplete(s, {
+              attemptId: newAttemptId(),
+              packId,
+              dateKey,
+              kind: "review",
+              itemIds,
+              answers,
+              startedAt: startedAtRef.current ?? finishedAt,
+              finishedAt,
+            });
+            return recordStepTime(withAttempt, { packId, dateKey, at: finishedAt, timings });
+          });
+        }}
+        onAbort={(step, elapsedMs) =>
+          void update((s) => recordSheetAbort(s, { packId, dateKey, at: new Date().toISOString(), step, elapsedMs }))
+        }
+        onHome={goHome}
+      />
+    );
+  }
+
+  const lesson = content.lessons.find((l) => l.id === effective.lessonId);
   if (!lesson) {
+    // 데이터 정합성이 깨진 예외 상황(존재하지 않는 lessonId)에서만 나온다.
     return (
       <Screen>
         <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
           <p className="text-3xl font-bold text-slate-900">오늘 학습 준비 중이에요</p>
-          <BigButton onClick={goHome}>홈으로</BigButton>
         </div>
       </Screen>
     );
@@ -70,7 +145,7 @@ function LearnGate({
       content={content}
       lesson={lesson}
       dateKey={dateKey}
-      injectedItemId={decision.kind === "lesson" ? decision.injectedItemId : undefined}
+      injectedItemId={effective.injectedItemId}
       onStart={() => {
         startedAtRef.current = new Date().toISOString();
         void update((s) => recordSheetStart(s, { packId, lessonId: lesson.id, dateKey, at: startedAtRef.current! }));

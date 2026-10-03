@@ -89,7 +89,7 @@ function HomeReady({
           {livePacks.map((p) => (
             <li key={p.id}>
               <Link
-                href={`/packs/${p.id}`}
+                href={withDebugDate(`/packs/${p.id}`, dateParam)}
                 className="flex items-center justify-between rounded-2xl bg-white px-5 py-3 ring-1 ring-amber-200"
               >
                 <span className="text-lg font-semibold text-slate-900">
