@@ -85,8 +85,19 @@ export function CardStep({
 
 // ───────────────────────── 전체 듣기 ─────────────────────────
 
-/** 8단어 연속 재생. 건너뛰기 없음 — 끝나야 "다음" 이 켜진다. */
-export function ListenAllStep({ words, onDone }: { words: Item[]; onDone: () => void }) {
+/**
+ * 8단어 연속 재생. 건너뛰기 없음 — 끝나야 "다음" 이 켜진다.
+ * 첫 단어는 이전 화면(마지막 카드)의 "다음" 탭에서 이미 재생을 시작했으므로(iOS) 그 promise 를 기다린다.
+ */
+export function ListenAllStep({
+  words,
+  pendingFirstSpeech,
+  onDone,
+}: {
+  words: Item[];
+  pendingFirstSpeech?: Promise<boolean> | null;
+  onDone: () => void;
+}) {
   const [current, setCurrent] = useState(0);
   const [finished, setFinished] = useState(false);
 
@@ -97,7 +108,7 @@ export function ListenAllStep({ words, onDone }: { words: Item[]; onDone: () => 
       for (let i = 0; i < words.length; i++) {
         if (!alive) return;
         setCurrent(i);
-        await playOrWait(words[i], Date.now());
+        await playOrWait(words[i], Date.now(), i === 0 ? pendingFirstSpeech : null);
         await sleep(250);
       }
       if (alive) setFinished(true);
@@ -106,7 +117,7 @@ export function ListenAllStep({ words, onDone }: { words: Item[]; onDone: () => 
       alive = false;
       stopSpeaking();
     };
-  }, [words]);
+  }, [words, pendingFirstSpeech]);
 
   return (
     <section className="flex flex-1 flex-col gap-6">
@@ -177,6 +188,8 @@ export function QuizStep({
   total,
   target,
   feedback,
+  pendingSpeech,
+  pendingRevealSpeech,
   onAnswer,
   onFinished,
 }: {
@@ -185,6 +198,10 @@ export function QuizStep({
   total: number;
   target: Item;
   feedback: QuizFeedback | null;
+  /** 듣고 고르기 자동 재생 — 이전 화면의 탭에서 이미 시작한 재생이 있으면 그걸 쓴다(iOS). */
+  pendingSpeech?: Promise<boolean> | null;
+  /** 오답 카드 다시 듣기 — 답 선택 탭에서 이미 시작한 재생이 있으면 그걸 쓴다(iOS). */
+  pendingRevealSpeech?: Promise<boolean> | null;
   onAnswer: (correct: boolean, chosen: string | boolean) => void;
   onFinished: () => void;
 }) {
@@ -193,8 +210,8 @@ export function QuizStep({
 
   // 듣고 고르기: 문제가 보이면 자동 재생
   useEffect(() => {
-    if (quiz.type === "listen_choice") void speak(target.text, target.audio);
-  }, [quiz, target]);
+    if (quiz.type === "listen_choice") void (pendingSpeech ?? speak(target.text, target.audio));
+  }, [quiz, target, pendingSpeech]);
 
   // 채점 후 넘어가기
   useEffect(() => {
@@ -207,7 +224,7 @@ export function QuizStep({
         await sleep(WRONG_ANSWER_MS);
         if (!alive) return;
         setShowCard(true);
-        void speak(target.text, target.audio);
+        void (pendingRevealSpeech ?? speak(target.text, target.audio));
         await sleep(WRONG_CARD_MS);
       }
       if (alive) finished();
@@ -215,7 +232,7 @@ export function QuizStep({
     return () => {
       alive = false;
     };
-  }, [feedback, target]);
+  }, [feedback, target, pendingRevealSpeech]);
 
   return (
     <section className="flex flex-1 flex-col gap-6">

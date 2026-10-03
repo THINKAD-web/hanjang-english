@@ -4,14 +4,15 @@ import Link from "next/link";
 import { ConsonantRow } from "@/components/consonant-row";
 import { ProgressBar, Screen } from "@/components/ui";
 import { loadContent } from "@/lib/content/load";
-import { packProgress } from "@/lib/engine/progress";
+import { packProgress, recordPackInterest } from "@/lib/engine/progress";
 import { completedLessonIds } from "@/lib/engine/today";
 import { useProgress } from "@/lib/use-progress";
-import { useDateParam, withDebugDate } from "@/lib/use-today-key";
+import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 
 /** `/packs/[packId]` — 팩 안 목차 (기획안 v2 7-2). */
 export function PackDetailScreen({ packId }: { packId: string }) {
-  const { state } = useProgress();
+  const { state, update } = useProgress();
+  const dateKey = useTodayKey();
   const dateParam = useDateParam();
   const content = loadContent(packId);
 
@@ -26,6 +27,11 @@ export function PackDetailScreen({ packId }: { packId: string }) {
   const progress = packProgress(state, content);
   const done = new Set(completedLessonIds(state, packId));
 
+  const onLockedConsonantClick = (consonant: string) => {
+    const today = dateKey ?? new Date().toISOString().slice(0, 10);
+    void update((s) => recordPackInterest(s, { dateKey: today, at: new Date().toISOString(), payload: { packId, unit: consonant } }));
+  };
+
   return (
     <Screen>
       <header>
@@ -34,7 +40,7 @@ export function PackDetailScreen({ packId }: { packId: string }) {
       </header>
 
       <ProgressBar label={`${content.pack.unitLabel} ${progress.done}/${progress.total}장`} ratio={progress.done / progress.total} />
-      <ConsonantRow active={content.pack.unitLabel} />
+      <ConsonantRow active={content.pack.unitLabel} onLockedClick={onLockedConsonantClick} />
 
       <section aria-label="다시 보기">
         <h2 className="mb-2 text-lg font-semibold text-slate-700">끝낸 장</h2>

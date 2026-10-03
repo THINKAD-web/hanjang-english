@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { loadContent, loadPacksSummary } from "@/lib/content/load";
+import type { PackSummary } from "@/lib/content/schema";
 import { addDays, formatDateLabel, type DateKey } from "@/lib/engine/date";
-import { homeCta, packProgress, weekStamps } from "@/lib/engine/progress";
+import { homeCta, packProgress, recordPackInterest, weekStamps } from "@/lib/engine/progress";
 import { decideToday } from "@/lib/engine/today";
 import type { State } from "@/lib/store/types";
 import { warmUpVoices } from "@/lib/tts";
@@ -18,13 +20,23 @@ const content = loadContent(DEFAULT_PACK_ID);
 
 export function HomeScreen() {
   const dateKey = useTodayKey();
-  const { state, reset } = useProgress();
+  const { state, reset, update } = useProgress();
   if (!dateKey || !state) return <HomeSkeleton />;
-  return <HomeReady dateKey={dateKey} state={state} onReset={reset} />;
+  return <HomeReady dateKey={dateKey} state={state} onReset={reset} update={update} />;
 }
 
 /** 홈 정보구조 (기획안 v2 7-1): 이어서 카드 + 이번 주 도장 + 내 팩. */
-function HomeReady({ dateKey, state, onReset }: { dateKey: DateKey; state: State; onReset: () => Promise<void> }) {
+function HomeReady({
+  dateKey,
+  state,
+  onReset,
+  update,
+}: {
+  dateKey: DateKey;
+  state: State;
+  onReset: () => Promise<void>;
+  update: (fn: (s: State) => State) => Promise<State>;
+}) {
   const router = useRouter();
   const dateParam = useDateParam();
   const decision = decideToday(state, dateKey, content);
@@ -33,6 +45,16 @@ function HomeReady({ dateKey, state, onReset }: { dateKey: DateKey; state: State
   const packs = loadPacksSummary();
   const livePacks = packs.filter((p) => p.status === "live");
   const soonPacks = packs.filter((p) => p.status === "soon");
+  const [showSoon, setShowSoon] = useState(false);
+
+  const openSoonPacks = () => {
+    if (!showSoon) {
+      void update((s) =>
+        recordPackInterest(s, { dateKey, at: new Date().toISOString(), payload: { candidates: soonPacks.map((p: PackSummary) => p.id) } }),
+      );
+    }
+    setShowSoon((v) => !v);
+  };
 
   return (
     <Screen>
@@ -78,13 +100,26 @@ function HomeReady({ dateKey, state, onReset }: { dateKey: DateKey; state: State
             </li>
           ))}
           <li>
-            <Link
-              href="/packs"
-              className="flex items-center justify-between rounded-2xl bg-white px-5 py-3 text-slate-500 ring-1 ring-slate-200"
+            <button
+              type="button"
+              onClick={openSoonPacks}
+              className="flex w-full items-center justify-between rounded-2xl bg-white px-5 py-3 text-slate-500 ring-1 ring-slate-200"
             >
               <span className="text-lg font-semibold">+ 팩 추가</span>
               <span className="text-sm">{soonPacks.length}개 준비 중</span>
-            </Link>
+            </button>
+            {showSoon ? (
+              <ul className="mt-2 flex flex-col gap-1 rounded-2xl bg-amber-50 p-3 text-base text-slate-700">
+                {soonPacks.map((p) => (
+                  <li key={p.id} className="flex items-center justify-between">
+                    <span>
+                      {p.title} · {p.unitLabel}
+                    </span>
+                    <span className="text-sm text-slate-500">🔒 준비 중</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </li>
         </ul>
       </section>
