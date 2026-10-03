@@ -4,6 +4,7 @@ import {
   packProgress,
   recordNextPackRequest,
   recordPackInterest,
+  recordParentView,
   recordSheetAbort,
   recordSheetComplete,
   recordSheetStart,
@@ -109,6 +110,14 @@ describe("recordNextPackRequest", () => {
     expect(s.events).toEqual([
       { profileId: "child", type: "next_pack_request", dateKey: MON, at: `${MON}T00:00:00.000Z`, payload: { packId, completedUnit: "giyeok" } },
     ]);
+  });
+});
+
+describe("recordParentView", () => {
+  it("parent_view 이벤트만 남긴다", () => {
+    const s = recordParentView(freshState(), { dateKey: MON, at: `${MON}T00:00:00.000Z`, payload: { packId, dateKey: MON } });
+    expect(s.attempts).toEqual([]);
+    expect(s.events).toEqual([{ profileId: "child", type: "parent_view", dateKey: MON, at: `${MON}T00:00:00.000Z`, payload: { packId, dateKey: MON } }]);
   });
 });
 
