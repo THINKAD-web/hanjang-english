@@ -1,8 +1,8 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { checkNormalized } from "../check";
 import { normalizeContent, zodErrors } from "../normalize";
-import { LESSON_TYPES, RawPackSchema, type Item, type LessonType } from "../schema";
+import { ITEM_KINDS, LESSON_TYPES, RawPackSchema, type Item, type LessonType } from "../schema";
 import { newPlan, readJsonIfExists, toJsonFile, type Plan } from "./plan";
 
 /**
@@ -14,6 +14,8 @@ import { newPlan, readJsonIfExists, toJsonFile, type Plan } from "./plan";
  */
 
 export const CSV_HEADER = ["text", "meaningKo", "emoji", "tags", "imageable", "reading"] as const;
+/** 위 열 말고 쓸 수 있는 선택 열: kind(word|phrase|kana|hanzi) — 비우면 --kind 값. 한 CSV 에 글자와 낱말을 섞을 때 쓴다. */
+const OPTIONAL_COLUMNS = ["kind"] as const;
 
 /** RFC 4180 정도의 CSV: 따옴표 필드, "" 이스케이프, 필드 안 줄바꿈, BOM 제거. */
 export function parseCsv(input: string): string[][] {
@@ -75,6 +77,8 @@ export type CsvOptions = {
   testOnly: boolean;
   /** 이미 검수 완료(reviewed: true)된 레슨 파일을 바꿔도 되는가 */
   forceReviewed: boolean;
+  /** pack.json 내용을 디스크 대신 이걸로 쓴다 (content:seed 가 팩을 만들면서 바로 레슨을 채울 때) */
+  packJson?: unknown;
 };
 
 export function parseItems(csv: string, o: Pick<CsvOptions, "kind">, plan: Plan): Item[] {
@@ -86,7 +90,7 @@ export function parseItems(csv: string, o: Pick<CsvOptions, "kind">, plan: Plan)
   const header = rows[0].map((h) => h.trim());
   const col = (name: string) => header.indexOf(name);
   if (col("text") < 0) plan.errors.push(`CSV 헤더에 text 열이 필요하다 (현재: ${header.join(",")}). 권장 헤더: ${CSV_HEADER.join(",")}`);
-  const unknown = header.filter((h) => !(CSV_HEADER as readonly string[]).includes(h));
+  const unknown = header.filter((h) => !(CSV_HEADER as readonly string[]).includes(h) && !(OPTIONAL_COLUMNS as readonly string[]).includes(h));
   if (unknown.length) plan.warnings.push(`알 수 없는 열을 무시한다: ${unknown.join(", ")}`);
   if (plan.errors.length) return [];
 
@@ -113,9 +117,11 @@ export function parseItems(csv: string, o: Pick<CsvOptions, "kind">, plan: Plan)
       .split(/[|;]/)
       .map((t) => t.trim())
       .filter(Boolean);
+    const kindCell = cell(r, "kind");
+    if (kindCell && !ITEM_KINDS.includes(kindCell as Item["kind"])) plan.errors.push(`${line}행: kind "${kindCell}" 는 ${ITEM_KINDS.join(", ")} 중 하나`);
     items.push({
       id,
-      kind: o.kind,
+      kind: (kindCell || o.kind) as Item["kind"],
       text,
       ...(meaningKo ? { meaningKo } : {}),
       ...(reading ? { reading } : {}),
@@ -133,7 +139,7 @@ export function planCsv(root: string, csv: string, o: CsvOptions): Plan {
   if (!LESSON_TYPES.includes(o.lessonType)) plan.errors.push(`--type ${o.lessonType} 는 ${LESSON_TYPES.join(", ")} 중 하나`);
 
   const packDir = path.join(root, "packs", o.packId);
-  const packJson = readJsonIfExists(path.join(packDir, "pack.json"));
+  const packJson = o.packJson ?? readJsonIfExists(path.join(packDir, "pack.json"));
   if (packJson === undefined) plan.errors.push(`content/packs/${o.packId}/pack.json 이 없다 — 먼저 npm run content:new ${o.packId} 로 팩을 만든다`);
   const pack = packJson === undefined ? null : RawPackSchema.safeParse(packJson);
   if (pack && !pack.success) plan.errors.push(...zodErrors("pack.json", pack.error));

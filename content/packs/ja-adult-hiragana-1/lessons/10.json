@@ -1,0 +1,63 @@
+{
+  "order": 10,
+  "title": "ひらがな 10",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3093",
+      "kind": "kana",
+      "text": "ん",
+      "reading": "n",
+      "imageable": false,
+      "tags": [
+        "わ행"
+      ]
+    },
+    {
+      "id": "u3055u304fu3089",
+      "kind": "word",
+      "text": "さくら",
+      "meaningKo": "벚꽃",
+      "reading": "sakura",
+      "imageable": false,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "u306du3053",
+      "kind": "word",
+      "text": "ねこ",
+      "meaningKo": "고양이",
+      "reading": "neko",
+      "imageable": false,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "u3084u307e",
+      "kind": "word",
+      "text": "やま",
+      "meaningKo": "산",
+      "reading": "yama",
+      "imageable": false,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "u307fu305a",
+      "kind": "word",
+      "text": "みず",
+      "meaningKo": "물",
+      "reading": "mizu",
+      "imageable": false,
+      "tags": [
+        "word"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

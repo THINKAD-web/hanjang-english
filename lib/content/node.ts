@@ -8,6 +8,7 @@ import { bundleOf, manifestOf, type Manifest, type PackBundle } from "./bundle";
 import { checkNormalized } from "./check";
 import { normalizeContent, zodErrors, type RawContent } from "./normalize";
 import { SubjectsFileSchema, type Content, type Subject } from "./schema";
+import { visibleContent, visibleManifest, type Visibility } from "./visibility";
 
 export const contentRoot = (): string => path.join(process.cwd(), "content");
 export const publicContentDir = (): string => path.join(process.cwd(), "public", "content");
@@ -106,14 +107,20 @@ export function buildAll(root: string = contentRoot()): BuildResult {
   };
 }
 
-/** public/content 를 비우고 새로 쓴다. 같은 입력이면 항상 같은 바이트. */
-export function writeBuild(result: BuildResult, outDir: string = publicContentDir()): { files: number } {
+/**
+ * public/content 를 비우고 새로 쓴다. 같은 입력이면 항상 같은 바이트.
+ * visibility 를 주면 공개되지 않는 팩·레슨은 파일로도 내보내지 않는다 (Production 배포에 시드·검수 전 콘텐츠가 실리지 않게).
+ */
+export function writeBuild(result: BuildResult, outDir: string = publicContentDir(), visibility?: Visibility): { files: number } {
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(path.join(outDir, "packs"), { recursive: true });
-  writeFileSync(path.join(outDir, "manifest.json"), JSON.stringify(result.manifest) + "\n");
+  const manifest = visibility ? visibleManifest(result.manifest, visibility) : result.manifest;
+  writeFileSync(path.join(outDir, "manifest.json"), JSON.stringify(manifest) + "\n");
   let files = 1;
-  for (const [packId, bundle] of result.bundles) {
-    writeFileSync(path.join(outDir, "packs", `${packId}.json`), JSON.stringify(bundle) + "\n");
+  for (const content of result.contents) {
+    const shown = visibility ? visibleContent(content, visibility) : content;
+    if (!shown) continue;
+    writeFileSync(path.join(outDir, "packs", `${content.pack.id}.json`), JSON.stringify(bundleOf(shown)) + "\n");
     files++;
   }
   return { files };

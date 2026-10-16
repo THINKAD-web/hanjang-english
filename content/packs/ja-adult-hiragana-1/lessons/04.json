@@ -1,0 +1,59 @@
+{
+  "order": 4,
+  "title": "ひらがな 4",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u305f",
+      "kind": "kana",
+      "text": "た",
+      "reading": "ta",
+      "imageable": false,
+      "tags": [
+        "た행"
+      ]
+    },
+    {
+      "id": "u3061",
+      "kind": "kana",
+      "text": "ち",
+      "reading": "chi",
+      "imageable": false,
+      "tags": [
+        "た행"
+      ]
+    },
+    {
+      "id": "u3064",
+      "kind": "kana",
+      "text": "つ",
+      "reading": "tsu",
+      "imageable": false,
+      "tags": [
+        "た행"
+      ]
+    },
+    {
+      "id": "u3066",
+      "kind": "kana",
+      "text": "て",
+      "reading": "te",
+      "imageable": false,
+      "tags": [
+        "た행"
+      ]
+    },
+    {
+      "id": "u3068",
+      "kind": "kana",
+      "text": "と",
+      "reading": "to",
+      "imageable": false,
+      "tags": [
+        "た행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

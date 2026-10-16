@@ -7,6 +7,7 @@ import { join } from "node:path";
 import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
 import { buildAll } from "@/lib/content/node";
 import { renderReviewMarkdown } from "@/lib/content/review";
+import { publicLessonCount } from "@/lib/content/visibility";
 
 const root = process.cwd();
 const result = buildAll();
@@ -26,12 +27,12 @@ if (!content) {
 writeFileSync(join(root, "docs/content-review.md"), renderReviewMarkdown(content));
 
 // 팩별 요약
-console.log("팩                      상태   레슨  아이템  검수완료  testOnly");
+console.log("팩                      상태   레슨  아이템  검수완료  testOnly  Production공개");
 for (const c of result.contents) {
   const reviewed = c.lessons.filter((l) => l.reviewed).length;
   const testOnly = c.lessons.filter((l) => l.testOnly).length;
   console.log(
-    `${c.pack.id.padEnd(23)} ${c.pack.status.padEnd(5)} ${String(c.lessons.length).padStart(4)}  ${String(c.items.length).padStart(5)}  ${String(reviewed).padStart(7)}  ${String(testOnly).padStart(7)}`,
+    `${c.pack.id.padEnd(23)} ${c.pack.status.padEnd(5)} ${String(c.lessons.length).padStart(4)}  ${String(c.items.length).padStart(5)}  ${String(reviewed).padStart(7)}  ${String(testOnly).padStart(7)}  ${String(publicLessonCount(c.pack, c.lessons)).padStart(12)}`,
   );
 }
 

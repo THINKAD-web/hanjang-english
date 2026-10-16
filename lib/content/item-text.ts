@@ -29,9 +29,9 @@ export function speechOf(item: Item): string {
   return item.audioText ?? item.text;
 }
 
-/** 화면에 보여줄 설명 한 줄(카드 아래). 문제는 정답을 가리고 싶을 수 있으니 빈 문자열일 수 있다. */
+/** 화면에 보여줄 설명 한 줄(카드 아래). 문제는 "= 정답" (틀린 문제를 다시 보여줄 때 쓴다 — 풀이 중에는 카드를 쓰지 않는다). */
 export function captionOf(item: Item): string {
-  if (item.kind === "problem") return "";
+  if (item.kind === "problem") return `= ${item.answer ?? ""}`;
   if (item.kind === "kana") return item.reading ?? "";
   return item.meaningKo ?? "";
 }

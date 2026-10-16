@@ -1,0 +1,89 @@
+{
+  "order": 5,
+  "title": "길 · 교통",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "transport-01",
+      "kind": "phrase",
+      "text": "How do I get to the station?",
+      "meaningKo": "역에 어떻게 가나요?",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    },
+    {
+      "id": "transport-02",
+      "kind": "phrase",
+      "text": "Is it far from here?",
+      "meaningKo": "여기서 먼가요?",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    },
+    {
+      "id": "transport-03",
+      "kind": "phrase",
+      "text": "Where is the nearest subway?",
+      "meaningKo": "가장 가까운 지하철역이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    },
+    {
+      "id": "transport-04",
+      "kind": "phrase",
+      "text": "Does this bus go to the museum?",
+      "meaningKo": "이 버스 박물관에 가나요?",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    },
+    {
+      "id": "transport-05",
+      "kind": "phrase",
+      "text": "Which platform should I go to?",
+      "meaningKo": "몇 번 승강장으로 가야 하나요?",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    },
+    {
+      "id": "transport-06",
+      "kind": "phrase",
+      "text": "One ticket to downtown, please.",
+      "meaningKo": "시내까지 표 한 장 주세요.",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    },
+    {
+      "id": "transport-07",
+      "kind": "phrase",
+      "text": "Please take me to this address.",
+      "meaningKo": "이 주소로 가 주세요.",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    },
+    {
+      "id": "transport-08",
+      "kind": "phrase",
+      "text": "Could you stop here, please?",
+      "meaningKo": "여기서 세워 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "transport"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

@@ -8,6 +8,19 @@
   "brandLabel": "한장영어",
   "unitKey": "travel",
   "unitLabel": "travel",
+  "tagLabel": "상황",
   "ttsLang": "en-US",
-  "status": "soon"
+  "status": "soon",
+  "rules": {
+    "itemsPerLesson": 8,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": [
+      "meaning_choice",
+      "listen_choice",
+      "ox"
+    ],
+    "autoQuiz": true
+  }
 }

@@ -1,0 +1,89 @@
+{
+  "order": 6,
+  "title": "쇼핑",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "shopping-01",
+      "kind": "phrase",
+      "text": "How much is this?",
+      "meaningKo": "이거 얼마예요?",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "shopping-02",
+      "kind": "phrase",
+      "text": "Do you have a smaller size?",
+      "meaningKo": "더 작은 사이즈 있나요?",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "shopping-03",
+      "kind": "phrase",
+      "text": "Can I try this on?",
+      "meaningKo": "입어 봐도 될까요?",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "shopping-04",
+      "kind": "phrase",
+      "text": "Do you accept credit cards?",
+      "meaningKo": "신용카드 되나요?",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "shopping-05",
+      "kind": "phrase",
+      "text": "Can I get a discount?",
+      "meaningKo": "할인 되나요?",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "shopping-06",
+      "kind": "phrase",
+      "text": "I'm just looking, thank you.",
+      "meaningKo": "그냥 구경 중이에요, 감사합니다.",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "shopping-07",
+      "kind": "phrase",
+      "text": "Could you wrap it as a gift?",
+      "meaningKo": "선물 포장해 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "shopping-08",
+      "kind": "phrase",
+      "text": "Can I get a receipt?",
+      "meaningKo": "영수증 받을 수 있을까요?",
+      "imageable": false,
+      "tags": [
+        "shopping"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

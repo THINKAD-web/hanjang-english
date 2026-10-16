@@ -1,0 +1,742 @@
+{
+  "pack": {
+    "id": "en-adult-travel",
+    "subjectId": "en-adult",
+    "title": "성인 영어 · 출장",
+    "level": "A1",
+    "levelOrder": 1,
+    "order": 1,
+    "brandLabel": "한장영어",
+    "unitKey": "travel",
+    "unitLabel": "travel",
+    "tagLabel": "상황",
+    "ttsLang": "en-US",
+    "status": "soon",
+    "rules": {
+      "itemsPerLesson": 8,
+      "sentencesPerLesson": 0,
+      "minItemsPerSentence": 0,
+      "quizPerLesson": 5,
+      "allowedQuizTypes": [
+        "meaning_choice",
+        "listen_choice",
+        "ox"
+      ],
+      "autoQuiz": true
+    }
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "공항",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "airport-01",
+          "kind": "phrase",
+          "text": "Where is the check-in counter?",
+          "meaningKo": "체크인 카운터가 어디예요?",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        },
+        {
+          "id": "airport-02",
+          "kind": "phrase",
+          "text": "I'd like a window seat, please.",
+          "meaningKo": "창가 자리로 부탁해요.",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        },
+        {
+          "id": "airport-03",
+          "kind": "phrase",
+          "text": "Can I take this on board?",
+          "meaningKo": "이걸 기내에 들고 탈 수 있나요?",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        },
+        {
+          "id": "airport-04",
+          "kind": "phrase",
+          "text": "Here is my passport.",
+          "meaningKo": "여기 여권이에요.",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        },
+        {
+          "id": "airport-05",
+          "kind": "phrase",
+          "text": "What time does boarding start?",
+          "meaningKo": "탑승은 몇 시에 시작하나요?",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        },
+        {
+          "id": "airport-06",
+          "kind": "phrase",
+          "text": "Which gate is my flight?",
+          "meaningKo": "제 비행기는 몇 번 게이트예요?",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        },
+        {
+          "id": "airport-07",
+          "kind": "phrase",
+          "text": "My flight is delayed.",
+          "meaningKo": "제 비행기가 지연됐어요.",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        },
+        {
+          "id": "airport-08",
+          "kind": "phrase",
+          "text": "Where can I pick up my bag?",
+          "meaningKo": "짐은 어디서 찾나요?",
+          "imageable": false,
+          "tags": [
+            "airport"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 2,
+      "title": "입국 · 환전",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "arrival-01",
+          "kind": "phrase",
+          "text": "What is the purpose of your visit?",
+          "meaningKo": "방문 목적이 무엇인가요?",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        },
+        {
+          "id": "arrival-02",
+          "kind": "phrase",
+          "text": "I'm here on vacation.",
+          "meaningKo": "휴가로 왔어요.",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        },
+        {
+          "id": "arrival-03",
+          "kind": "phrase",
+          "text": "I'm staying for five days.",
+          "meaningKo": "5일 동안 머물 거예요.",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        },
+        {
+          "id": "arrival-04",
+          "kind": "phrase",
+          "text": "I have nothing to declare.",
+          "meaningKo": "신고할 물품이 없어요.",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        },
+        {
+          "id": "arrival-05",
+          "kind": "phrase",
+          "text": "Where do I exchange money?",
+          "meaningKo": "환전은 어디서 하나요?",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        },
+        {
+          "id": "arrival-06",
+          "kind": "phrase",
+          "text": "How do I get to the city center?",
+          "meaningKo": "시내까지 어떻게 가나요?",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        },
+        {
+          "id": "arrival-07",
+          "kind": "phrase",
+          "text": "Is there a shuttle bus?",
+          "meaningKo": "셔틀버스가 있나요?",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        },
+        {
+          "id": "arrival-08",
+          "kind": "phrase",
+          "text": "Could you call a taxi for me?",
+          "meaningKo": "택시 좀 불러 주시겠어요?",
+          "imageable": false,
+          "tags": [
+            "arrival"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 3,
+      "title": "호텔",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "hotel-01",
+          "kind": "phrase",
+          "text": "I have a reservation under Kim.",
+          "meaningKo": "김 이름으로 예약했어요.",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        },
+        {
+          "id": "hotel-02",
+          "kind": "phrase",
+          "text": "What time is check-out?",
+          "meaningKo": "체크아웃은 몇 시예요?",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        },
+        {
+          "id": "hotel-03",
+          "kind": "phrase",
+          "text": "Does the room have Wi-Fi?",
+          "meaningKo": "방에 와이파이가 되나요?",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        },
+        {
+          "id": "hotel-04",
+          "kind": "phrase",
+          "text": "Could I get extra towels?",
+          "meaningKo": "수건을 더 받을 수 있을까요?",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        },
+        {
+          "id": "hotel-05",
+          "kind": "phrase",
+          "text": "The air conditioner doesn't work.",
+          "meaningKo": "에어컨이 작동하지 않아요.",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        },
+        {
+          "id": "hotel-06",
+          "kind": "phrase",
+          "text": "Can I leave my luggage here?",
+          "meaningKo": "짐을 여기 맡겨도 될까요?",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        },
+        {
+          "id": "hotel-07",
+          "kind": "phrase",
+          "text": "Is breakfast included?",
+          "meaningKo": "아침 식사가 포함인가요?",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        },
+        {
+          "id": "hotel-08",
+          "kind": "phrase",
+          "text": "Could I have a late check-out?",
+          "meaningKo": "늦은 체크아웃이 가능할까요?",
+          "imageable": false,
+          "tags": [
+            "hotel"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 4,
+      "title": "식당",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "restaurant-01",
+          "kind": "phrase",
+          "text": "A table for two, please.",
+          "meaningKo": "두 명 자리 부탁해요.",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        },
+        {
+          "id": "restaurant-02",
+          "kind": "phrase",
+          "text": "Can I see the menu?",
+          "meaningKo": "메뉴 좀 볼 수 있을까요?",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        },
+        {
+          "id": "restaurant-03",
+          "kind": "phrase",
+          "text": "What do you recommend?",
+          "meaningKo": "추천 메뉴가 뭐예요?",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        },
+        {
+          "id": "restaurant-04",
+          "kind": "phrase",
+          "text": "I'm allergic to peanuts.",
+          "meaningKo": "땅콩 알레르기가 있어요.",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        },
+        {
+          "id": "restaurant-05",
+          "kind": "phrase",
+          "text": "I'll have the same.",
+          "meaningKo": "같은 걸로 할게요.",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        },
+        {
+          "id": "restaurant-06",
+          "kind": "phrase",
+          "text": "Could we get some water?",
+          "meaningKo": "물 좀 주시겠어요?",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        },
+        {
+          "id": "restaurant-07",
+          "kind": "phrase",
+          "text": "Can I have the check, please?",
+          "meaningKo": "계산서 주세요.",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        },
+        {
+          "id": "restaurant-08",
+          "kind": "phrase",
+          "text": "Is the tip included?",
+          "meaningKo": "팁이 포함돼 있나요?",
+          "imageable": false,
+          "tags": [
+            "restaurant"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 5,
+      "title": "길 · 교통",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "transport-01",
+          "kind": "phrase",
+          "text": "How do I get to the station?",
+          "meaningKo": "역에 어떻게 가나요?",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        },
+        {
+          "id": "transport-02",
+          "kind": "phrase",
+          "text": "Is it far from here?",
+          "meaningKo": "여기서 먼가요?",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        },
+        {
+          "id": "transport-03",
+          "kind": "phrase",
+          "text": "Where is the nearest subway?",
+          "meaningKo": "가장 가까운 지하철역이 어디예요?",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        },
+        {
+          "id": "transport-04",
+          "kind": "phrase",
+          "text": "Does this bus go to the museum?",
+          "meaningKo": "이 버스 박물관에 가나요?",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        },
+        {
+          "id": "transport-05",
+          "kind": "phrase",
+          "text": "Which platform should I go to?",
+          "meaningKo": "몇 번 승강장으로 가야 하나요?",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        },
+        {
+          "id": "transport-06",
+          "kind": "phrase",
+          "text": "One ticket to downtown, please.",
+          "meaningKo": "시내까지 표 한 장 주세요.",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        },
+        {
+          "id": "transport-07",
+          "kind": "phrase",
+          "text": "Please take me to this address.",
+          "meaningKo": "이 주소로 가 주세요.",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        },
+        {
+          "id": "transport-08",
+          "kind": "phrase",
+          "text": "Could you stop here, please?",
+          "meaningKo": "여기서 세워 주시겠어요?",
+          "imageable": false,
+          "tags": [
+            "transport"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 6,
+      "title": "쇼핑",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "shopping-01",
+          "kind": "phrase",
+          "text": "How much is this?",
+          "meaningKo": "이거 얼마예요?",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        },
+        {
+          "id": "shopping-02",
+          "kind": "phrase",
+          "text": "Do you have a smaller size?",
+          "meaningKo": "더 작은 사이즈 있나요?",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        },
+        {
+          "id": "shopping-03",
+          "kind": "phrase",
+          "text": "Can I try this on?",
+          "meaningKo": "입어 봐도 될까요?",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        },
+        {
+          "id": "shopping-04",
+          "kind": "phrase",
+          "text": "Do you accept credit cards?",
+          "meaningKo": "신용카드 되나요?",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        },
+        {
+          "id": "shopping-05",
+          "kind": "phrase",
+          "text": "Can I get a discount?",
+          "meaningKo": "할인 되나요?",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        },
+        {
+          "id": "shopping-06",
+          "kind": "phrase",
+          "text": "I'm just looking, thank you.",
+          "meaningKo": "그냥 구경 중이에요, 감사합니다.",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        },
+        {
+          "id": "shopping-07",
+          "kind": "phrase",
+          "text": "Could you wrap it as a gift?",
+          "meaningKo": "선물 포장해 주시겠어요?",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        },
+        {
+          "id": "shopping-08",
+          "kind": "phrase",
+          "text": "Can I get a receipt?",
+          "meaningKo": "영수증 받을 수 있을까요?",
+          "imageable": false,
+          "tags": [
+            "shopping"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 7,
+      "title": "도움 요청",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "help-01",
+          "kind": "phrase",
+          "text": "Could you help me, please?",
+          "meaningKo": "도와주시겠어요?",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        },
+        {
+          "id": "help-02",
+          "kind": "phrase",
+          "text": "I lost my wallet.",
+          "meaningKo": "지갑을 잃어버렸어요.",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        },
+        {
+          "id": "help-03",
+          "kind": "phrase",
+          "text": "Please call the police.",
+          "meaningKo": "경찰을 불러 주세요.",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        },
+        {
+          "id": "help-04",
+          "kind": "phrase",
+          "text": "I need a doctor.",
+          "meaningKo": "의사가 필요해요.",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        },
+        {
+          "id": "help-05",
+          "kind": "phrase",
+          "text": "Where is the nearest pharmacy?",
+          "meaningKo": "가장 가까운 약국이 어디예요?",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        },
+        {
+          "id": "help-06",
+          "kind": "phrase",
+          "text": "I don't feel well.",
+          "meaningKo": "몸이 안 좋아요.",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        },
+        {
+          "id": "help-07",
+          "kind": "phrase",
+          "text": "Can you speak more slowly?",
+          "meaningKo": "좀 더 천천히 말씀해 주시겠어요?",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        },
+        {
+          "id": "help-08",
+          "kind": "phrase",
+          "text": "I don't understand.",
+          "meaningKo": "이해하지 못했어요.",
+          "imageable": false,
+          "tags": [
+            "help"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 8,
+      "title": "대화",
+      "type": "vocab",
+      "items": [
+        {
+          "id": "talk-01",
+          "kind": "phrase",
+          "text": "Nice to meet you.",
+          "meaningKo": "만나서 반가워요.",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        },
+        {
+          "id": "talk-02",
+          "kind": "phrase",
+          "text": "Excuse me, may I ask something?",
+          "meaningKo": "실례합니다, 뭐 하나 여쭤봐도 될까요?",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        },
+        {
+          "id": "talk-03",
+          "kind": "phrase",
+          "text": "Could you take a picture of us?",
+          "meaningKo": "사진 좀 찍어 주시겠어요?",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        },
+        {
+          "id": "talk-04",
+          "kind": "phrase",
+          "text": "Where are you from?",
+          "meaningKo": "어디서 오셨어요?",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        },
+        {
+          "id": "talk-05",
+          "kind": "phrase",
+          "text": "I'm from Korea.",
+          "meaningKo": "한국에서 왔어요.",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        },
+        {
+          "id": "talk-06",
+          "kind": "phrase",
+          "text": "Thank you for your help.",
+          "meaningKo": "도와주셔서 감사합니다.",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        },
+        {
+          "id": "talk-07",
+          "kind": "phrase",
+          "text": "Have a nice day.",
+          "meaningKo": "좋은 하루 보내세요.",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        },
+        {
+          "id": "talk-08",
+          "kind": "phrase",
+          "text": "See you tomorrow.",
+          "meaningKo": "내일 봐요.",
+          "imageable": false,
+          "tags": [
+            "talk"
+          ]
+        }
+      ],
+      "reviewed": false,
+      "testOnly": true
+    }
+  ]
+}

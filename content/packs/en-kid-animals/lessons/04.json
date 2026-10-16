@@ -1,0 +1,97 @@
+{
+  "order": 4,
+  "title": "동물 4",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "owl",
+      "kind": "word",
+      "text": "owl",
+      "meaningKo": "부엉이",
+      "emoji": "🦉",
+      "imageable": true,
+      "tags": [
+        "bird"
+      ]
+    },
+    {
+      "id": "penguin",
+      "kind": "word",
+      "text": "penguin",
+      "meaningKo": "펭귄",
+      "emoji": "🐧",
+      "imageable": true,
+      "tags": [
+        "bird"
+      ]
+    },
+    {
+      "id": "dolphin",
+      "kind": "word",
+      "text": "dolphin",
+      "meaningKo": "돌고래",
+      "emoji": "🐬",
+      "imageable": true,
+      "tags": [
+        "sea"
+      ]
+    },
+    {
+      "id": "whale",
+      "kind": "word",
+      "text": "whale",
+      "meaningKo": "고래",
+      "emoji": "🐳",
+      "imageable": true,
+      "tags": [
+        "sea"
+      ]
+    },
+    {
+      "id": "shark",
+      "kind": "word",
+      "text": "shark",
+      "meaningKo": "상어",
+      "emoji": "🦈",
+      "imageable": true,
+      "tags": [
+        "sea"
+      ]
+    },
+    {
+      "id": "crab",
+      "kind": "word",
+      "text": "crab",
+      "meaningKo": "게",
+      "emoji": "🦀",
+      "imageable": true,
+      "tags": [
+        "sea"
+      ]
+    },
+    {
+      "id": "octopus",
+      "kind": "word",
+      "text": "octopus",
+      "meaningKo": "문어",
+      "emoji": "🐙",
+      "imageable": true,
+      "tags": [
+        "sea"
+      ]
+    },
+    {
+      "id": "fox",
+      "kind": "word",
+      "text": "fox",
+      "meaningKo": "여우",
+      "emoji": "🦊",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

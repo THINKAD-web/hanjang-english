@@ -471,7 +471,7 @@ export function DoneStep({ score, total, wrongWords, onHome }: { score: number; 
               <div className="min-w-0 flex-1">
                 <WordCard word={w} size="sm" />
               </div>
-              <SpeakButton text={speechOf(w)} audio={w.audio} label="듣기" />
+              {w.kind === "problem" ? null : <SpeakButton text={speechOf(w)} audio={w.audio} label="듣기" />}
             </div>
           ))}
         </div>

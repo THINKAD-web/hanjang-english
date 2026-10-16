@@ -14,9 +14,11 @@ function autoKid() {
   return normalizeContent({
     pack: { ...pack, rules },
     items: raw.items,
-    lessons: (raw.lessons as Record<string, unknown>[]).map(({ quiz: _q, ...l }) => l),
+    lessons: (raw.lessons as Record<string, unknown>[]).map((l) => omitQuiz(l)),
   });
 }
+
+const omitQuiz = (l: Record<string, unknown>) => Object.fromEntries(Object.entries(l).filter(([k]) => k !== "quiz"));
 
 describe("자동 퀴즈 — 영어 단어 팩", () => {
   const { content, errors } = autoKid();
@@ -53,7 +55,7 @@ describe("자동 퀴즈 — 영어 단어 팩", () => {
     const r = normalizeContent({
       pack: { ...pack, rules: { ...pack.rules, autoQuiz: true, minimalPairs: undefined } },
       items,
-      lessons: (stripped.lessons as Record<string, unknown>[]).map(({ quiz: _q, ...l }) => l),
+      lessons: (stripped.lessons as Record<string, unknown>[]).map((l) => omitQuiz(l)),
     });
     expect(r.errors).toEqual([]);
     for (const l of r.content!.lessons)

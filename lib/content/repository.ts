@@ -1,5 +1,6 @@
 import { contentOf, type Manifest, type PackBundle } from "./bundle";
 import type { Content, Lesson } from "./schema";
+import { defaultVisibility, visibleContent, visibleManifest, type Visibility } from "./visibility";
 
 /**
  * 화면이 콘텐츠를 얻는 유일한 통로. 파일 경로를 화면 코드에서 직접 import 하지 않는다.
@@ -23,7 +24,8 @@ type FetchResponse = { ok: boolean; status: number; json(): Promise<unknown> };
 export type FetchLike = (url: string) => Promise<FetchResponse>;
 
 /** public/content (content:build 산출물)를 fetch 한다. 같은 요청은 한 번만 보내고 결과를 메모리에 둔다. */
-export function createFetchRepository(opts: { baseUrl?: string; fetchImpl?: FetchLike } = {}): ContentRepository {
+export function createFetchRepository(opts: { baseUrl?: string; fetchImpl?: FetchLike; visibility?: Visibility } = {}): ContentRepository {
+  const visibility = opts.visibility ?? defaultVisibility();
   const base = opts.baseUrl ?? "/content";
   const doFetch: FetchLike = opts.fetchImpl ?? ((url) => fetch(url));
   const cache = new Map<string, Promise<unknown>>();
@@ -47,10 +49,16 @@ export function createFetchRepository(opts: { baseUrl?: string; fetchImpl?: Fetc
     return (await res.json()) as T;
   }
 
+  // 공개 여부 판단은 visibility.ts 한 곳에서 — 화면은 이미 걸러진 결과만 받는다
   return {
-    getManifest: () => once("manifest", () => getJson<Manifest>(`${base}/manifest.json`, "manifest")),
+    getManifest: () => once("manifest", async () => visibleManifest(await getJson<Manifest>(`${base}/manifest.json`, "manifest"), visibility)),
     getPack: (packId) =>
-      once(`pack:${packId}`, async () => contentOf(await getJson<PackBundle>(`${base}/packs/${encodeURIComponent(packId)}.json`, `팩 ${packId}`))),
+      once(`pack:${packId}`, async () => {
+        const full = contentOf(await getJson<PackBundle>(`${base}/packs/${encodeURIComponent(packId)}.json`, `팩 ${packId}`));
+        const visible = visibleContent(full, visibility);
+        if (!visible) throw new ContentNotFoundError(`팩 ${packId} (공개된 레슨이 없다)`);
+        return visible;
+      }),
     async getLesson(packId, lessonId) {
       const content = await this.getPack(packId);
       const lesson = content.lessons.find((l) => l.id === lessonId);

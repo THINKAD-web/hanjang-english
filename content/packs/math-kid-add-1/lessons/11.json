@@ -1,0 +1,18 @@
+{
+  "order": 11,
+  "title": "덧셈 11",
+  "type": "math",
+  "intro": {
+    "title": "덧셈",
+    "content": "더하기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+  },
+  "generator": {
+    "kind": "arithmetic",
+    "op": "+",
+    "count": 8,
+    "min": 1,
+    "max": 9
+  },
+  "reviewed": false,
+  "testOnly": true
+}

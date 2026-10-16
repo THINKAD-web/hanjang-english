@@ -1,0 +1,89 @@
+{
+  "order": 4,
+  "title": "식당",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "restaurant-01",
+      "kind": "phrase",
+      "text": "A table for two, please.",
+      "meaningKo": "두 명 자리 부탁해요.",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-02",
+      "kind": "phrase",
+      "text": "Can I see the menu?",
+      "meaningKo": "메뉴 좀 볼 수 있을까요?",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-03",
+      "kind": "phrase",
+      "text": "What do you recommend?",
+      "meaningKo": "추천 메뉴가 뭐예요?",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-04",
+      "kind": "phrase",
+      "text": "I'm allergic to peanuts.",
+      "meaningKo": "땅콩 알레르기가 있어요.",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-05",
+      "kind": "phrase",
+      "text": "I'll have the same.",
+      "meaningKo": "같은 걸로 할게요.",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-06",
+      "kind": "phrase",
+      "text": "Could we get some water?",
+      "meaningKo": "물 좀 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-07",
+      "kind": "phrase",
+      "text": "Can I have the check, please?",
+      "meaningKo": "계산서 주세요.",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "restaurant-08",
+      "kind": "phrase",
+      "text": "Is the tip included?",
+      "meaningKo": "팁이 포함돼 있나요?",
+      "imageable": false,
+      "tags": [
+        "restaurant"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

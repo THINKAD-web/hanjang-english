@@ -1,0 +1,390 @@
+{
+  "pack": {
+    "id": "math-kid-sub-1",
+    "subjectId": "math-kid",
+    "title": "어린이 수학 · 뺄셈 1",
+    "level": "초등 1",
+    "levelOrder": 1,
+    "order": 2,
+    "unitLabel": "뺄셈",
+    "tagLabel": "연산",
+    "ttsLang": "ko-KR",
+    "status": "live",
+    "rules": {
+      "itemsPerLesson": 8,
+      "sentencesPerLesson": 0,
+      "minItemsPerSentence": 0,
+      "quizPerLesson": 5,
+      "allowedQuizTypes": [
+        "fill_blank"
+      ],
+      "autoQuiz": true
+    }
+  },
+  "lessons": [
+    {
+      "order": 1,
+      "title": "뺄셈 1",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 5
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 2,
+      "title": "뺄셈 2",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 5
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 3,
+      "title": "뺄셈 3",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 5
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 4,
+      "title": "뺄셈 4",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 5
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 5,
+      "title": "뺄셈 5",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 9
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 6,
+      "title": "뺄셈 6",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 9
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 7,
+      "title": "뺄셈 7",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 9
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 8,
+      "title": "뺄셈 8",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 9
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 9,
+      "title": "뺄셈 9",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 30,
+        "noBorrow": true
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 10,
+      "title": "뺄셈 10",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 30,
+        "noBorrow": true
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 11,
+      "title": "뺄셈 11",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 30,
+        "noBorrow": true
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 12,
+      "title": "뺄셈 12",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 30,
+        "noBorrow": true
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 13,
+      "title": "뺄셈 13",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 20
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 14,
+      "title": "뺄셈 14",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 20
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 15,
+      "title": "뺄셈 15",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 20
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 16,
+      "title": "뺄셈 16",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 1,
+        "max": 20
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 17,
+      "title": "뺄셈 17",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 50
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 18,
+      "title": "뺄셈 18",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 50
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 19,
+      "title": "뺄셈 19",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 50
+      },
+      "reviewed": false,
+      "testOnly": true
+    },
+    {
+      "order": 20,
+      "title": "뺄셈 20",
+      "type": "math",
+      "intro": {
+        "title": "뺄셈",
+        "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+      },
+      "generator": {
+        "kind": "arithmetic",
+        "op": "-",
+        "count": 8,
+        "min": 10,
+        "max": 50
+      },
+      "reviewed": false,
+      "testOnly": true
+    }
+  ]
+}

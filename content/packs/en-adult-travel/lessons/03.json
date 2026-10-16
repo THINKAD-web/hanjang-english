@@ -1,0 +1,89 @@
+{
+  "order": 3,
+  "title": "호텔",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "hotel-01",
+      "kind": "phrase",
+      "text": "I have a reservation under Kim.",
+      "meaningKo": "김 이름으로 예약했어요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-02",
+      "kind": "phrase",
+      "text": "What time is check-out?",
+      "meaningKo": "체크아웃은 몇 시예요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-03",
+      "kind": "phrase",
+      "text": "Does the room have Wi-Fi?",
+      "meaningKo": "방에 와이파이가 되나요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-04",
+      "kind": "phrase",
+      "text": "Could I get extra towels?",
+      "meaningKo": "수건을 더 받을 수 있을까요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-05",
+      "kind": "phrase",
+      "text": "The air conditioner doesn't work.",
+      "meaningKo": "에어컨이 작동하지 않아요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-06",
+      "kind": "phrase",
+      "text": "Can I leave my luggage here?",
+      "meaningKo": "짐을 여기 맡겨도 될까요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-07",
+      "kind": "phrase",
+      "text": "Is breakfast included?",
+      "meaningKo": "아침 식사가 포함인가요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "hotel-08",
+      "kind": "phrase",
+      "text": "Could I have a late check-out?",
+      "meaningKo": "늦은 체크아웃이 가능할까요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}
