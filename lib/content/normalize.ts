@@ -1,0 +1,119 @@
+import type { z } from "zod";
+import { resolveSteps } from "./lesson-steps";
+import {
+  ItemsFileSchema,
+  RawLessonSchema,
+  RawPackSchema,
+  type Content,
+  type Item,
+  type Lesson,
+  type RawLesson,
+} from "./schema";
+
+/**
+ * 저작용(raw) 콘텐츠 → 앱용(normalized) Content.
+ * 순수 함수다 (파일을 읽지 않는다). 파일 읽기는 lib/content/node.ts / scripts 가 맡는다.
+ *
+ * 하는 일
+ * - zod 로 모양 검증 (pack.json / items.json / 레슨)
+ * - 레슨의 인라인 items 를 팩 공용 아이템 뱅크에 합치고 itemIds 로 통일
+ * - id·packId 기본값, steps 기본값(타입별 + intro/문장 없으면 건너뜀)
+ * - pack.lessonCount 를 실제 레슨 수로 계산 (적혀 있으면 일치해야 한다)
+ */
+
+export type RawContent = { pack: unknown; items?: unknown; lessons: unknown[] };
+
+export type NormalizeResult = { content: Content | null; errors: string[] };
+
+export function zodErrors(where: string, err: z.ZodError): string[] {
+  return err.issues.map((i) => `${where}${i.path.length ? `.${i.path.join(".")}` : ""}: ${i.message}`);
+}
+
+export const lessonIdFor = (packId: string, order: number) => `${packId}-${String(order).padStart(2, "0")}`;
+
+export function normalizeContent(raw: RawContent): NormalizeResult {
+  const errors: string[] = [];
+
+  const pack = RawPackSchema.safeParse(raw.pack);
+  if (!pack.success) errors.push(...zodErrors("pack.json", pack.error));
+
+  const bank = raw.items === undefined ? { success: true as const, data: [] as Item[] } : ItemsFileSchema.safeParse(raw.items);
+  if (!bank.success) errors.push(...zodErrors("items.json", bank.error));
+
+  const rawLessons: RawLesson[] = [];
+  raw.lessons.forEach((l, i) => {
+    const r = RawLessonSchema.safeParse(l);
+    if (r.success) rawLessons.push(r.data);
+    else errors.push(...zodErrors(`lessons[${i}]`, r.error));
+  });
+  if (!pack.success || !bank.success || errors.length) return { content: null, errors };
+
+  const packData = pack.data;
+  const items: Item[] = [...bank.data];
+  const byId = new Map<string, Item>();
+  for (const it of items) {
+    if (byId.has(it.id)) errors.push(`items.json: id 중복 ${it.id}`);
+    byId.set(it.id, it);
+  }
+
+  const lessons: Lesson[] = rawLessons.map((l) => {
+    const id = l.id ?? lessonIdFor(packData.id, l.order);
+    if (l.items && l.itemIds) errors.push(`${id}: items 와 itemIds 는 함께 쓸 수 없다`);
+
+    let itemIds: string[];
+    if (l.items) {
+      itemIds = l.items.map((it) => it.id);
+      for (const it of l.items) {
+        const existing = byId.get(it.id);
+        if (!existing) {
+          items.push(it);
+          byId.set(it.id, it);
+        } else if (JSON.stringify(existing) !== JSON.stringify(it)) {
+          errors.push(`${id}: 인라인 아이템 ${it.id} 가 다른 정의와 충돌한다`);
+        }
+      }
+    } else if (l.itemIds) {
+      itemIds = l.itemIds;
+    } else {
+      itemIds = [];
+      errors.push(`${id}: items 또는 itemIds 가 필요하다`);
+    }
+
+    let quiz = l.quiz;
+    if (!quiz) {
+      quiz = [];
+      errors.push(`${id}: quiz 가 없다 (이 팩은 autoQuiz 가 꺼져 있거나 아직 지원하지 않는다)`);
+    }
+
+    return {
+      id,
+      packId: l.packId ?? packData.id,
+      order: l.order,
+      title: l.title,
+      type: l.type,
+      ...(l.intro ? { intro: l.intro } : {}),
+      itemIds,
+      sentences: l.sentences,
+      steps: resolveSteps({ type: l.type, steps: l.steps, intro: l.intro, sentences: l.sentences }),
+      quiz,
+      reviewed: l.reviewed,
+      testOnly: l.testOnly,
+    };
+  });
+  lessons.sort((a, b) => a.order - b.order);
+
+  if (packData.lessonCount !== undefined && packData.lessonCount !== lessons.length)
+    errors.push(`레슨 수 ${lessons.length} ≠ pack.lessonCount ${packData.lessonCount}`);
+
+  if (errors.length) return { content: null, errors };
+
+  return {
+    content: {
+      pack: { ...packData, lessonCount: lessons.length },
+      items,
+      itemsById: new Map(items.map((it) => [it.id, it])),
+      lessons,
+    },
+    errors,
+  };
+}

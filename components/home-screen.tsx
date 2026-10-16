@@ -16,6 +16,7 @@ import { useProgress } from "@/lib/use-progress";
 import { isDebug, useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { StampRow } from "./stamp-row";
 import { BigButton, ProgressBar, Screen } from "./ui";
+import { unitLabelOf } from "@/lib/content/pack-text";
 
 const DEFAULT_PACK_ID = "en-kid-giyeok";
 const content = loadContent(DEFAULT_PACK_ID);
@@ -67,9 +68,9 @@ function HomeReady({
 
       <section aria-label="이어서" className="flex flex-col gap-2 rounded-3xl bg-white p-4 shadow-sm ring-1 ring-amber-200">
         <p className="text-lg font-semibold text-slate-700">
-          이어서 — {content.pack.title} · {content.pack.unitLabel} {progress.done}/{progress.total}
+          이어서 — {content.pack.title} · {unitLabelOf(content.pack)} {progress.done}/{progress.total}
         </p>
-        <ProgressBar label={`${content.pack.unitLabel} · ${progress.done}/${progress.total}장`} ratio={progress.done / progress.total} />
+        <ProgressBar label={`${unitLabelOf(content.pack)} · ${progress.done}/${progress.total}장`} ratio={progress.done / progress.total} />
         <BigButton
           className="min-h-24 text-3xl"
           disabled={!cta.enabled}

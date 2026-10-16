@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-04",
   "packId": "en-kid-giyeok",
-  "dayNo": 4,
+  "order": 4,
   "title": "gl 소리 (gr과 비교)",
-  "focus": {
-    "label": "gl",
-    "lines": [
-      "gl은 혀끝을 윗니 뒤에 대요",
-      "grass(잔디)와 glass(유리)는 한 소리 차이!"
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "gl",
+    "content": "gl은 혀끝을 윗니 뒤에 대요\ngrass(잔디)와 glass(유리)는 한 소리 차이!"
   },
   "itemIds": [
     "g-glass",

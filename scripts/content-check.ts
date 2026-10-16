@@ -5,7 +5,7 @@
 import { readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { checkContent } from "@/lib/content/check";
-import { CONTENT_REGISTRY, DEFAULT_PACK_ID, loadPacksSummary, parseContent } from "@/lib/content/load";
+import { CONTENT_REGISTRY, DEFAULT_PACK_ID, loadPacksSummary, loadSubjects, parseContent } from "@/lib/content/load";
 import { renderReviewMarkdown } from "@/lib/content/review";
 
 const root = process.cwd();
@@ -21,10 +21,19 @@ for (const packId of Object.keys(CONTENT_REGISTRY)) {
   if (!summaries.some((s) => s.id === packId)) errors.push(`content/packs.json 에 ${packId} 가 없다`);
 }
 
+// subjects.json: 과목 id 는 고유, 팩의 subjectId 는 실제 과목을 가리켜야 한다.
+const subjectIds = new Set<string>();
+for (const sub of loadSubjects()) {
+  if (subjectIds.has(sub.id)) errors.push(`content/subjects.json: 과목 id 중복 ${sub.id}`);
+  subjectIds.add(sub.id);
+}
+
 for (const [packId, raw] of Object.entries(CONTENT_REGISTRY)) {
   const summary = summaries.find((s) => s.id === packId);
   const at = `[${packId}]`;
   errors.push(...checkContent(raw).map((e) => `${at} ${e}`));
+  const subjectId = (raw.pack as { subjectId?: string }).subjectId;
+  if (subjectId && !subjectIds.has(subjectId)) errors.push(`${at} pack.json: subjectId ${subjectId} 가 content/subjects.json 에 없다`);
 
   // 레슨 JSON 을 추가하고 load.ts 에 import 하지 않은 경우를 잡는다.
   if (summary?.contentPath) {
@@ -46,6 +55,6 @@ const content = parseContent(CONTENT_REGISTRY[DEFAULT_PACK_ID]);
 const outPath = join(root, "docs/content-review.md");
 writeFileSync(outPath, renderReviewMarkdown(content));
 
-const pending = content.lessons.filter((l) => !l.reviewed).map((l) => `L${l.dayNo}`);
+const pending = content.lessons.filter((l) => !l.reviewed).map((l) => `L${l.order}`);
 console.log(`content:check 통과 — 팩 ${Object.keys(CONTENT_REGISTRY).length}개, 아이템 ${content.items.length}개, 레슨 ${content.lessons.length}장`);
 console.log(`검수표: docs/content-review.md${pending.length ? ` (검수 대기: ${pending.join(", ")})` : ""}`);

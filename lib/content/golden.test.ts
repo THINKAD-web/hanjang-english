@@ -16,9 +16,10 @@ function viewLesson(l: (typeof content.lessons)[number]) {
   return {
     id: l.id,
     packId: l.packId,
-    dayNo: l.dayNo,
+    dayNo: l.order,
     title: l.title,
-    focus: l.focus,
+    // intro {title, content} ↔ 예전 focus {label, lines[2]}
+    focus: l.intro ? { label: l.intro.title, lines: l.intro.content.split("\n") } : undefined,
     itemIds: l.itemIds,
     sentences: l.sentences,
     quiz: l.quiz,

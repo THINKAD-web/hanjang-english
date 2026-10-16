@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-08",
   "packId": "en-kid-giyeok",
-  "dayNo": 8,
+  "order": 8,
   "title": "ㄱ 마무리장",
-  "focus": {
-    "label": "ㄱ",
-    "lines": [
-      "ㄱ 팩 마무리!",
-      "gr, gl, g, 끝소리 g를 다 모았어요."
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "ㄱ",
+    "content": "ㄱ 팩 마무리!\ngr, gl, g, 끝소리 g를 다 모았어요."
   },
   "itemIds": [
     "g-grow",

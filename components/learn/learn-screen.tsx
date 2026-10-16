@@ -13,6 +13,7 @@ import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { DailyLimitScreen, DoneTodayScreen, PackCompleteScreen } from "./decision-screens";
 import { LessonRunner } from "./lesson-runner";
 import { ReviewRunner } from "./review-runner";
+import { unitLabelOf } from "@/lib/content/pack-text";
 
 /**
  * `/learn/[packId]` — 오늘 할 일은 항상 엔진(decideToday)이 정한다. URL 로 장을 건너뛸 수 없다
@@ -78,7 +79,7 @@ function LearnGate({
   if (effective.kind === "packComplete") {
     return (
       <PackCompleteScreen
-        unitLabel={content.pack.unitLabel}
+        unitLabel={unitLabelOf(content.pack)}
         wordCount={content.items.length}
         onRequestNextPack={() =>
           void update((s) =>

@@ -12,7 +12,7 @@ import { DEFAULT_PROFILE_ID, type Attempt, type State } from "@/lib/store/types"
  */
 export function completeLessonsUpTo(state: State, content: Content, n: number, dateKey: DateKey): State {
   const done = new Set(completedLessonIds(state, content.pack.id));
-  const missing = content.lessons.filter((l) => l.dayNo <= n && !done.has(l.id));
+  const missing = content.lessons.filter((l) => l.order <= n && !done.has(l.id));
   const added: Attempt[] = missing.map((lesson, i) => {
     const day = addDays(dateKey, -(missing.length - i));
     const answers = lesson.quiz.map((q) => ({ targetItemId: q.targetItemId, correct: true }));

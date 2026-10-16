@@ -1,0 +1,7 @@
+[
+  { "id": "en-kid", "name": "어린이 영어", "audience": "kid", "icon": "🔤", "order": 1 },
+  { "id": "math-kid", "name": "어린이 수학", "audience": "kid", "icon": "➕", "order": 2 },
+  { "id": "ja-kid", "name": "어린이 일본어", "audience": "kid", "icon": "🎌", "order": 3 },
+  { "id": "en-adult", "name": "성인 영어", "audience": "adult", "icon": "✈️", "order": 1 },
+  { "id": "ja-adult", "name": "성인 일본어", "audience": "adult", "icon": "🗾", "order": 2 }
+]

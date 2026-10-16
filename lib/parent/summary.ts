@@ -1,3 +1,4 @@
+import { meaningOf } from "@/lib/content/item-text";
 import type { Content } from "@/lib/content/schema";
 import { weekRange, type DateKey } from "@/lib/engine/date";
 import { weekStamps, type StampCell } from "@/lib/engine/progress";
@@ -41,7 +42,7 @@ export function wrongWordById(state: State, content: Content, itemId: string): W
   const item = content.itemsById.get(itemId);
   if (!item) return null;
   const entry = state.wrongQueue.find((w) => w.packId === content.pack.id && w.itemId === itemId && w.profileId === DEFAULT_PROFILE_ID);
-  return { itemId, text: item.text, meaningKo: item.meaningKo, reviewOn: entry?.active ?? false };
+  return { itemId, text: item.text, meaningKo: meaningOf(item), reviewOn: entry?.active ?? false };
 }
 
 export function todaySummary(state: State, content: Content, dateKey: DateKey): TodaySummary {

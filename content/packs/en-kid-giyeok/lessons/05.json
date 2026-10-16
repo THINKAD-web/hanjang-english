@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-05",
   "packId": "en-kid-giyeok",
-  "dayNo": 5,
+  "order": 5,
   "title": "gr 소리 ②",
-  "focus": {
-    "label": "gr",
-    "lines": [
-      "gr 한 번 더!",
-      "'그ㄹ'을 빠르게 붙여 읽어요."
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "gr",
+    "content": "gr 한 번 더!\n'그ㄹ'을 빠르게 붙여 읽어요."
   },
   "itemIds": [
     "g-grandpa",

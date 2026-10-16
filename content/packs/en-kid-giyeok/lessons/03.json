@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-03",
   "packId": "en-kid-giyeok",
-  "dayNo": 3,
+  "order": 3,
   "title": "g 소리: 장소·동물·물건",
-  "focus": {
-    "label": "g",
-    "lines": [
-      "g로 시작하는 것들",
-      "첫소리를 '그'로 짧게 내요."
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "g",
+    "content": "g로 시작하는 것들\n첫소리를 '그'로 짧게 내요."
   },
   "itemIds": [
     "g-garden",

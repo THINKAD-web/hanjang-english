@@ -10,6 +10,7 @@ import { initSheet, sheetReducer, sheetScore, wrongItemIds, type SheetState } fr
 import type { AnswerRecord } from "@/lib/store/types";
 import { speak, stopSpeaking } from "@/lib/tts";
 import { CardStep, DoneStep, IntroStep, ListenAllStep, QuizStep, SentencesStep } from "./steps";
+import { unitLabelOf } from "@/lib/content/pack-text";
 
 export type LessonRunnerProps = {
   content: Content;
@@ -166,7 +167,7 @@ export function LessonRunner({
       ) : null}
       <div className="flex items-center gap-3">
         <div className="flex-1">
-          <ProgressBar label={`${content.pack.unitLabel} · ${lesson.dayNo}/${content.lessons.length}장`} ratio={stepRatio} />
+          <ProgressBar label={`${unitLabelOf(content.pack)} · ${lesson.order}/${content.lessons.length}장`} ratio={stepRatio} />
         </div>
         {onAbort && step.kind !== "done" ? (
           <button

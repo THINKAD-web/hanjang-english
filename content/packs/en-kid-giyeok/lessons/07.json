@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-07",
   "packId": "en-kid-giyeok",
-  "dayNo": 7,
+  "order": 7,
   "title": "g와 k 구별",
-  "focus": {
-    "label": "g · k",
-    "lines": [
-      "g(ㄱ)와 k(ㅋ)",
-      "g는 목이 울리고, k는 바람이 나와요."
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "g · k",
+    "content": "g(ㄱ)와 k(ㅋ)\ng는 목이 울리고, k는 바람이 나와요."
   },
   "itemIds": [
     "g-goat",

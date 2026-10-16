@@ -3,6 +3,7 @@ import { DEFAULT_PROFILE_ID, type AnswerRecord, type Attempt, type State } from 
 import { weekRange, type DateKey } from "./date";
 import { applyAttempt } from "./queue";
 import { completedLessonIds, type TodayDecision } from "./today";
+import { unitLabelOf } from "@/lib/content/pack-text";
 
 /**
  * 진행 기록 갱신과 홈 화면용 파생 값. 모두 순수 함수 (저장은 호출하는 쪽에서).
@@ -184,7 +185,7 @@ export function homeCta(decision: TodayDecision, content: Content): HomeCta {
   switch (decision.kind) {
     case "lesson": {
       const lesson = content.lessons.find((l) => l.id === decision.lessonId);
-      return { label: "오늘 한 장 시작", sub: lesson ? `${lesson.dayNo}장 · ${lesson.title}` : undefined, enabled: true };
+      return { label: "오늘 한 장 시작", sub: lesson ? `${lesson.order}장 · ${lesson.title}` : undefined, enabled: true };
     }
     case "review":
       return { label: "오늘은 복습장", enabled: true };
@@ -193,6 +194,6 @@ export function homeCta(decision: TodayDecision, content: Content): HomeCta {
     case "dailyLimit":
       return { label: "내일 또 만나요", enabled: false };
     case "packComplete":
-      return { label: `${content.pack.unitLabel} 팩 완료!`, enabled: true };
+      return { label: `${unitLabelOf(content.pack)} 팩 완료!`, enabled: true };
   }
 }

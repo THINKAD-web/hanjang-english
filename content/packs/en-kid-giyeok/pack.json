@@ -1,0 +1,43 @@
+{
+  "id": "en-kid-giyeok",
+  "subjectId": "en-kid",
+  "title": "어린이 영어",
+  "level": "초급",
+  "levelOrder": 1,
+  "order": 1,
+  "brandLabel": "한장영어",
+  "unitKey": "giyeok",
+  "unitLabel": "ㄱ",
+  "tagLabel": "소리",
+  "ttsLang": "en-US",
+  "status": "live",
+  "access": "free",
+  "lessonCount": 8,
+  "rules": {
+    "itemsPerLesson": 8,
+    "sentencesPerLesson": 2,
+    "minItemsPerSentence": 2,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": ["picture_choice", "meaning_choice", "fill_blank", "listen_choice", "ox"],
+    "requiredQuizTypes": ["picture_choice", "meaning_choice", "fill_blank", "listen_choice", "ox"],
+    "allowQuizTypeSubstitution": true,
+    "autoQuiz": false,
+    "minimalPairs": [
+      {
+        "lessonId": "en-kid-giyeok-04",
+        "label": "gr-gl",
+        "minQuizzes": 2,
+        "swaps": [{ "at": "prefix", "a": "gr", "b": "gl" }]
+      },
+      {
+        "lessonId": "en-kid-giyeok-07",
+        "label": "g-k",
+        "minQuizzes": 4,
+        "swaps": [
+          { "at": "prefix", "a": "g", "b": "c" },
+          { "at": "suffix", "a": "g", "b": "ck" }
+        ]
+      }
+    ]
+  }
+}

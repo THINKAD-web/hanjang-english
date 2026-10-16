@@ -9,6 +9,7 @@ import { packProgress, recordPackInterest } from "@/lib/engine/progress";
 import { completedLessonIds } from "@/lib/engine/today";
 import { useProgress } from "@/lib/use-progress";
 import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
+import { unitLabelOf } from "@/lib/content/pack-text";
 
 /** `/packs/[packId]` — 팩 안 목차 (기획안 v2 7-2). */
 export function PackDetailScreen({ packId }: { packId: string }) {
@@ -41,9 +42,9 @@ export function PackDetailScreen({ packId }: { packId: string }) {
         <p className="text-lg text-slate-600">{content.pack.brandLabel}</p>
       </header>
 
-      <ProgressBar label={`${content.pack.unitLabel} ${progress.done}/${progress.total}장`} ratio={progress.done / progress.total} />
+      <ProgressBar label={`${unitLabelOf(content.pack)} ${progress.done}/${progress.total}장`} ratio={progress.done / progress.total} />
       {wrongCount > 0 ? <p className="text-base font-semibold text-amber-800">오답 {wrongCount}개 복습 예정</p> : null}
-      <ConsonantRow active={content.pack.unitLabel} onLockedClick={onLockedConsonantClick} />
+      <ConsonantRow active={unitLabelOf(content.pack)} onLockedClick={onLockedConsonantClick} />
 
       <section aria-label="다시 보기">
         <h2 className="mb-2 text-lg font-semibold text-slate-700">끝낸 장</h2>
@@ -57,7 +58,7 @@ export function PackDetailScreen({ packId }: { packId: string }) {
                     href={withDebugDate(`/learn/${packId}/${l.id}`, dateParam)}
                     className="flex min-h-12 items-center rounded-xl bg-white px-4 text-lg font-semibold text-sky-800 ring-1 ring-amber-200"
                   >
-                    {String(l.dayNo).padStart(2, "0")}
+                    {String(l.order).padStart(2, "0")}
                   </Link>
                 </li>
               ))}

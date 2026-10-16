@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-01",
   "packId": "en-kid-giyeok",
-  "dayNo": 1,
+  "order": 1,
   "title": "gr 소리 ①",
-  "focus": {
-    "label": "gr",
-    "lines": [
-      "ㄱ + ㄹ = gr",
-      "혀를 굴리며 '그ㄹ' 하고 이어 읽어요."
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "gr",
+    "content": "ㄱ + ㄹ = gr\n혀를 굴리며 '그ㄹ' 하고 이어 읽어요."
   },
   "itemIds": [
     "g-grape",

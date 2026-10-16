@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-06",
   "packId": "en-kid-giyeok",
-  "dayNo": 6,
+  "order": 6,
   "title": "끝소리 g",
-  "focus": {
-    "label": "-g",
-    "lines": [
-      "끝에 오는 g",
-      "받침 ㄱ처럼 짧게 닫아요. (dog = 도ㄱ)"
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "-g",
+    "content": "끝에 오는 g\n받침 ㄱ처럼 짧게 닫아요. (dog = 도ㄱ)"
   },
   "itemIds": [
     "g-bag",

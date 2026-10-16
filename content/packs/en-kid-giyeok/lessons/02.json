@@ -1,14 +1,12 @@
 {
   "id": "en-kid-giyeok-02",
   "packId": "en-kid-giyeok",
-  "dayNo": 2,
+  "order": 2,
   "title": "g 소리 기초",
-  "focus": {
-    "label": "g",
-    "lines": [
-      "ㄱ = g",
-      "목에서 부드럽게 '그' 소리가 나요."
-    ]
+  "type": "phonics",
+  "intro": {
+    "title": "g",
+    "content": "ㄱ = g\n목에서 부드럽게 '그' 소리가 나요."
   },
   "itemIds": [
     "g-go",

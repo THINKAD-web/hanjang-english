@@ -3,6 +3,7 @@
 import { useEffect, useEffectEvent, useState } from "react";
 import { BigButton, SpeakButton } from "@/components/ui";
 import { WordCard, WordPicture } from "@/components/word-card";
+import { LESSON_TYPE_LABEL } from "@/lib/content/lesson-steps";
 import type { Item, Lesson, Quiz, Sentence } from "@/lib/content/schema";
 import type { QuizFeedback } from "@/lib/engine/sheet";
 import { NO_TTS_DELAY_MS, speak, stopSpeaking, ttsSupported } from "@/lib/tts";
@@ -18,16 +19,25 @@ async function playOrWait(word: Item, shownAt: number, pending?: Promise<boolean
 // ───────────────────────── 오늘의 소리 ─────────────────────────
 
 export function IntroStep({ lesson, onStart }: { lesson: Lesson; onStart: () => void }) {
+  const intro = lesson.intro;
   return (
     <section className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
-      <p className="text-xl font-semibold text-amber-800">오늘의 소리</p>
-      <p lang="en" className="text-7xl font-bold text-slate-900">
-        {lesson.focus.label}
-      </p>
-      <div className="space-y-3 text-2xl leading-relaxed text-slate-800">
-        <p>{lesson.focus.lines[0]}</p>
-        <p>{lesson.focus.lines[1]}</p>
-      </div>
+      <p className="text-xl font-semibold text-amber-800">{LESSON_TYPE_LABEL[lesson.type]}</p>
+      {intro ? (
+        <>
+          <p lang="en" className="text-7xl font-bold text-slate-900">
+            {intro.title}
+          </p>
+          <div className="space-y-3 text-2xl leading-relaxed text-slate-800">
+            {intro.content.split("\n").map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
+          </div>
+          {intro.tip ? <p className="text-xl text-slate-600">{intro.tip}</p> : null}
+        </>
+      ) : (
+        <p className="text-4xl font-bold text-slate-900">{lesson.title}</p>
+      )}
       <BigButton onClick={onStart}>시작</BigButton>
       <p className="text-base text-slate-600">소리가 나와요. 소리를 켜 주세요 🔈</p>
     </section>
