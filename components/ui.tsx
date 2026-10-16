@@ -28,6 +28,15 @@ export function SpeakButton({ text, audio, label = "다시 듣기" }: { text: st
   );
 }
 
+/** Debug(Preview) 에서만 보이는 "검수 전" 표시 — 공개 조건(live · 검수 완료 · testOnly 아님)을 못 채운 레슨/팩. */
+export function PreReleaseBadge() {
+  return (
+    <span className="inline-flex items-center rounded-full bg-yellow-200 px-2 py-0.5 text-sm font-bold text-yellow-900" title="Production 에는 나가지 않아요">
+      검수 전
+    </span>
+  );
+}
+
 /** 상단 진행 바: "ㄱ · 3/8장" + 단계 진행률 */
 export function ProgressBar({ label, ratio }: { label: string; ratio: number }) {
   const pct = Math.round(Math.min(1, Math.max(0, ratio)) * 100);

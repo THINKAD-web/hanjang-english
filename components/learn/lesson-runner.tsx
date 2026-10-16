@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
-import { ProgressBar, Screen } from "@/components/ui";
+import { PreReleaseBadge, ProgressBar, Screen } from "@/components/ui";
+import { isPreRelease } from "@/lib/content/visibility";
+import { isDebug } from "@/lib/use-today-key";
 import type { Content, Item, Lesson } from "@/lib/content/schema";
 import type { DateKey } from "@/lib/engine/date";
 import { buildLessonQuiz, shuffleSheetOptions } from "@/lib/engine/quizgen";
@@ -185,6 +187,11 @@ export function LessonRunner({
         {banner ? <p className="rounded-xl bg-amber-100 px-3 py-2 text-center text-base font-semibold text-amber-900">{banner}</p> : null}
         <div className="flex items-center gap-3">
           <div className="flex-1">
+            {isDebug && isPreRelease(content.pack, lesson) ? (
+              <div className="mb-1">
+                <PreReleaseBadge />
+              </div>
+            ) : null}
             <ProgressBar label={`${unitLabelOf(content.pack)} · ${lesson.order}/${content.lessons.length}장`} ratio={stepRatio} />
           </div>
           {onAbort && step.kind !== "done" ? (

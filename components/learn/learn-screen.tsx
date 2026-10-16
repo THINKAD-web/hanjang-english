@@ -5,6 +5,7 @@ import { useCallback, useRef, useState } from "react";
 import { LoadFailed, Screen } from "@/components/ui";
 import type { Content } from "@/lib/content/schema";
 import { useManifest, usePackContent } from "@/lib/content/use-content";
+import { packUnavailable } from "@/lib/packs/availability";
 import { isUnlocked } from "@/lib/packs/catalog";
 import type { DateKey } from "@/lib/engine/date";
 import { recordNextPackRequest, recordSheetAbort, recordSheetComplete, recordSheetStart, recordStepTime } from "@/lib/engine/progress";
@@ -30,8 +31,7 @@ export function LearnScreen({ packId }: { packId: string }) {
   const manifest = useManifest();
   // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩 · 아직 잠긴 팩은 앱이 터지지 않게 /packs 로 보낸다.
   const locked = pack.status === "ready" && Boolean(state) && manifest.status === "ready" && !isUnlocked(state!, pack.data.pack, manifest.data);
-  const unavailable =
-    pack.status === "missing" || locked || (pack.status === "ready" && (pack.data.pack.status !== "live" || pack.data.lessons.length === 0));
+  const unavailable = packUnavailable(pack, locked);
   useRedirect(unavailable, withDebugDate("/packs", dateParam));
   if (pack.status === "error" || manifest.status === "error") return <LoadFailed />;
   if (!dateKey || !state || pack.status !== "ready" || manifest.status !== "ready" || unavailable) {

@@ -2,17 +2,18 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { LoadFailed, ProgressBar, Screen } from "@/components/ui";
+import { LoadFailed, PreReleaseBadge, ProgressBar, Screen } from "@/components/ui";
 import type { Manifest, ManifestPack } from "@/lib/content/bundle";
 import { objectParticle } from "@/lib/content/josa";
 import { unitLabelOf } from "@/lib/content/pack-text";
 import type { Audience } from "@/lib/content/schema";
 import { useManifest } from "@/lib/content/use-content";
+import { isPreRelease } from "@/lib/content/visibility";
 import { recordPackInterest } from "@/lib/engine/progress";
 import { activeProfile, audienceOf, isUnlocked, levelsOf, packProgressOf, packsOf, subjectsOf } from "@/lib/packs/catalog";
 import type { State } from "@/lib/store/types";
 import { useProgress } from "@/lib/use-progress";
-import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
+import { isDebug, useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 
 const AUDIENCE_LABEL: Record<Audience, string> = { kid: "어린이", adult: "성인" };
 
@@ -180,21 +181,27 @@ function PackCard({
   href: string;
   onSoon: () => void;
 }) {
-  const name = (
+
+
+  // Debug 에서는 레슨이 있는 준비 중 팩도 열어 볼 수 있다. Production 에서는 목록에만 보인다.
+  const openable = pack.status === "live" || (isDebug && pack.lessons.length > 0);
+  const preRelease = isDebug && (pack.status !== "live" || pack.lessons.some((l) => isPreRelease(pack, l)));
+  const title = (
     <>
       <span className="block text-xl font-bold">{pack.title}</span>
       <span className="block text-base text-slate-600">{pack.brandLabel ?? unitLabelOf(pack)}</span>
+      {preRelease ? <PreReleaseBadge /> : null}
     </>
   );
 
-  if (pack.status === "soon") {
+  if (!openable) {
     return (
       <button
         type="button"
         onClick={onSoon}
         className="flex w-full items-center justify-between rounded-2xl bg-white px-5 py-4 text-left text-slate-500 ring-1 ring-slate-200"
       >
-        <span>{name}</span>
+        <span>{title}</span>
         <span className="shrink-0 text-sm">🔒 준비 중</span>
       </button>
     );
@@ -205,7 +212,7 @@ function PackCard({
         className="flex items-center justify-between rounded-2xl bg-white px-5 py-4 text-slate-500 ring-1 ring-slate-200"
         aria-disabled="true"
       >
-        <span>{name}</span>
+        <span>{title}</span>
         <span className="shrink-0 text-right text-sm">
           🔒 {afterTitle ? `${afterTitle}${objectParticle(afterTitle)} 끝내면` : "앞 팩을 끝내면"}
         </span>
@@ -216,7 +223,7 @@ function PackCard({
   return (
     <Link href={href} className="flex flex-col gap-2 rounded-2xl bg-white px-5 py-4 text-slate-900 shadow-sm ring-1 ring-amber-200">
       <span className="flex items-center justify-between">
-        <span>{name}</span>
+        <span>{title}</span>
         <span className="shrink-0 text-sky-700">{done > 0 ? "이어서 ›" : "시작 ›"}</span>
       </span>
       <ProgressBar label={`${unitLabelOf(pack)} · ${done}/${total}장`} ratio={total > 0 ? done / total : 0} />

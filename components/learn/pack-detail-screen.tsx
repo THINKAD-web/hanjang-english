@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import { ConsonantRow } from "@/components/consonant-row";
-import { LoadFailed, ProgressBar, Screen } from "@/components/ui";
+import { LoadFailed, PreReleaseBadge, ProgressBar, Screen } from "@/components/ui";
+import { isPreRelease } from "@/lib/content/visibility";
 import { useManifest, usePackContent } from "@/lib/content/use-content";
+import { packUnavailable } from "@/lib/packs/availability";
 import { isUnlocked } from "@/lib/packs/catalog";
 import { activeItems } from "@/lib/engine/queue";
 import { packProgress, recordPackInterest } from "@/lib/engine/progress";
 import { completedLessonIds } from "@/lib/engine/today";
 import { useProgress } from "@/lib/use-progress";
 import { useRedirect } from "@/lib/use-redirect";
-import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
+import { isDebug, useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { unitLabelOf } from "@/lib/content/pack-text";
 
 /** 자음 줄(ㄱ ㄴ ㄷ …)은 "ㄱ" 같은 자음 단위 팩에만 의미가 있다 (동물·덧셈 같은 팩에는 없다). */
@@ -25,8 +27,7 @@ export function PackDetailScreen({ packId }: { packId: string }) {
   const manifest = useManifest();
   // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩 · 아직 잠긴 팩은 /packs 로 보낸다.
   const locked = pack.status === "ready" && Boolean(state) && manifest.status === "ready" && !isUnlocked(state!, pack.data.pack, manifest.data);
-  const unavailable =
-    pack.status === "missing" || locked || (pack.status === "ready" && (pack.data.pack.status !== "live" || pack.data.lessons.length === 0));
+  const unavailable = packUnavailable(pack, locked);
   useRedirect(unavailable, withDebugDate("/packs", dateParam));
 
   if (pack.status === "error" || manifest.status === "error") return <LoadFailed />;
@@ -74,6 +75,7 @@ export function PackDetailScreen({ packId }: { packId: string }) {
                     className="flex min-h-12 items-center rounded-xl bg-white px-4 text-lg font-semibold text-sky-800 ring-1 ring-amber-200"
                   >
                     {String(l.order).padStart(2, "0")}
+                    {isDebug && isPreRelease(content.pack, l) ? <PreReleaseBadge /> : null}
                   </Link>
                 </li>
               ))}

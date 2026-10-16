@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { mathDistractors } from "@/lib/engine/quizgen";
 import { seededRandom } from "@/lib/engine/rng";
 import { checkNormalized } from "./check";
-import { contentRoot, readRawPack } from "./node";
+import { contentRoot, loadContent, readRawPack } from "./node";
 import { normalizeContent } from "./normalize";
 import { quizAnswerOf } from "./item-text";
 
@@ -124,5 +124,31 @@ describe("연산 문제 보기", () => {
   it("가까운 값(±1, ±2)을 우선한다", () => {
     const wrong = mathDistractors(20, seededRandom("x"));
     expect(wrong.every((v) => Math.abs(v - 20) <= 2)).toBe(true);
+  });
+});
+
+describe("자동 퀴즈 — 정답 위치 분포", () => {
+  it("보기가 있는 문항의 정답이 1·2·3번째에 고르게 나온다 (한 자리에 쏠리지 않음)", () => {
+    const counts = [0, 0, 0];
+    for (const id of ["en-kid-animals", "math-kid-add-1", "math-kid-sub-1", "en-adult-travel", "ja-adult-hiragana-1"]) {
+      const c = loadContent(id);
+      for (const l of c.lessons) for (const q of l.quiz) if (q.type !== "ox") counts[q.options.indexOf(q.answer)]++;
+    }
+    const total = counts.reduce((a, b) => a + b, 0);
+    expect(total).toBeGreaterThan(150);
+    for (const n of counts) expect(n / total).toBeGreaterThan(0.2); // 이상적인 1/3 에서 크게 벗어나지 않는다
+  });
+
+  it("O/X 정답은 O 와 X 가 모두 나온다", () => {
+    const answers = new Set<boolean>();
+    for (const l of loadContent("en-adult-travel").lessons) for (const q of l.quiz) if (q.type === "ox") answers.add(q.answer);
+    expect(answers.size).toBe(2);
+  });
+
+  it("자동 생성된 모든 보기는 중복이 없다 (시드 5개 팩 전체)", () => {
+    for (const id of ["en-kid-animals", "math-kid-add-1", "math-kid-sub-1", "en-adult-travel", "ja-adult-hiragana-1"]) {
+      for (const l of loadContent(id).lessons)
+        for (const q of l.quiz) if (q.type !== "ox") expect(new Set(q.options).size, `${l.id} ${q.type}`).toBe(3);
+    }
   });
 });
