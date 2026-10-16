@@ -60,9 +60,10 @@ export function setReviewEnabled(
   itemId: string,
   on: boolean,
   today?: DateKey,
+  profileId: string = DEFAULT_PROFILE_ID,
 ): WrongItem[] {
   return queue.map((item) => {
-    if (item.packId !== packId || item.itemId !== itemId) return item;
+    if (item.packId !== packId || item.itemId !== itemId || item.profileId !== profileId) return item;
     return on && today ? { ...item, active: true, nextReviewDate: addDays(today, 1) } : { ...item, active: on };
   });
 }

@@ -112,7 +112,7 @@ function LearnGate({
         dateKey={dateKey}
         onStart={() => {
           startedAtRef.current = new Date().toISOString();
-          void update((s) => recordSheetStart(s, { packId, dateKey, at: startedAtRef.current! }));
+          void update((s) => recordSheetStart(s, { packId, subjectId: content.pack.subjectId, dateKey, at: startedAtRef.current! }));
         }}
         onComplete={(answers, timings) => {
           const finishedAt = new Date().toISOString();
@@ -120,6 +120,7 @@ function LearnGate({
             const withAttempt = recordSheetComplete(s, {
               attemptId: newAttemptId(),
               packId,
+              subjectId: content.pack.subjectId,
               dateKey,
               kind: "review",
               itemIds,
@@ -158,7 +159,7 @@ function LearnGate({
       injectedItemId={effective.injectedItemId}
       onStart={() => {
         startedAtRef.current = new Date().toISOString();
-        void update((s) => recordSheetStart(s, { packId, lessonId: lesson.id, dateKey, at: startedAtRef.current! }));
+        void update((s) => recordSheetStart(s, { packId, subjectId: content.pack.subjectId, lessonId: lesson.id, dateKey, at: startedAtRef.current! }));
       }}
       onComplete={(answers, timings) => {
         const finishedAt = new Date().toISOString();
@@ -166,6 +167,7 @@ function LearnGate({
           const withAttempt = recordSheetComplete(s, {
             attemptId: newAttemptId(),
             packId,
+            subjectId: content.pack.subjectId,
             dateKey,
             kind: "lesson",
             lessonId: lesson.id,

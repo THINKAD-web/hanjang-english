@@ -6,7 +6,6 @@ import { BigButton, Screen } from "@/components/ui";
 import { todayKey } from "@/lib/engine/date";
 import { resetProgress, setGrade, setParentPin } from "@/lib/parent/account";
 import { hashPin, isValidPin, verifyPin } from "@/lib/parent/pin";
-import { DEFAULT_PROFILE_ID } from "@/lib/store/types";
 import { useDateParam, withDebugDate } from "@/lib/use-today-key";
 import { ParentGate, type ParentApi } from "./parent-gate";
 import { PinInput } from "./pin-input";
@@ -18,7 +17,7 @@ export function AccountScreen() {
 
 function AccountContent({ state, update }: ParentApi) {
   const dateParam = useDateParam();
-  const grade = state.profiles.find((p) => p.id === DEFAULT_PROFILE_ID)?.grade;
+  const grade = state.profiles.find((p) => p.id === state.activeProfileId)?.grade;
   const [resetDone, setResetDone] = useState(false);
 
   // 파일명 날짜는 기기의 실제 오늘 (디버그 날짜가 아니라).

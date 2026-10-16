@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "account": {
+    "pinHash": null
+  },
+  "profiles": [
+    {
+      "id": "child",
+      "type": "child",
+      "grade": 3
+    }
+  ],
+  "tracks": [
+    {
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "status": "active"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "a1",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-21",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-01",
+      "itemIds": [
+        "g-grape",
+        "g-green",
+        "g-grass",
+        "g-grow",
+        "g-ground",
+        "g-group",
+        "g-grandma",
+        "g-great"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-grow",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-green",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grandma",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grape",
+          "correct": false
+        }
+      ],
+      "score": 3,
+      "startedAt": "2026-09-21T00:00:00.000Z",
+      "finishedAt": "2026-09-21T00:08:00.000Z",
+      "completed": true
+    }
+  ],
+  "wrongQueue": [
+    {
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "itemId": "g-grape",
+      "wrongCount": 1,
+      "firstWrongDate": "2026-09-21",
+      "lastWrongDate": "2026-09-21",
+      "nextReviewDate": "2026-09-22",
+      "active": true
+    }
+  ],
+  "events": [
+    {
+      "profileId": "child",
+      "type": "sheet_complete",
+      "dateKey": "2026-09-21",
+      "at": "2026-09-21T00:08:00.000Z",
+      "payload": {
+        "packId": "en-kid-giyeok",
+        "lessonId": "en-kid-giyeok-01"
+      }
+    }
+  ]
+}

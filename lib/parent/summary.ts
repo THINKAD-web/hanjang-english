@@ -3,7 +3,7 @@ import type { Content } from "@/lib/content/schema";
 import { weekRange, type DateKey } from "@/lib/engine/date";
 import { weekStamps, type StampCell } from "@/lib/engine/progress";
 import { activeItems } from "@/lib/engine/queue";
-import { DEFAULT_PROFILE_ID, type Attempt, type State } from "@/lib/store/types";
+import type { Attempt, State } from "@/lib/store/types";
 
 /**
  * 부모 요약 계산 (기획안 v2 12장). 진도·점수·오답은 Attempt·WrongQueue 에서 매번 읽어서 계산하고
@@ -11,7 +11,7 @@ import { DEFAULT_PROFILE_ID, type Attempt, type State } from "@/lib/store/types"
  */
 
 function completedAttempts(state: State, packId: string): Attempt[] {
-  return state.attempts.filter((a) => a.completed && a.packId === packId && a.profileId === DEFAULT_PROFILE_ID);
+  return state.attempts.filter((a) => a.completed && a.packId === packId && a.profileId === state.activeProfileId);
 }
 
 export type AttemptLine = { kind: Attempt["kind"]; total: number; correct: number };
@@ -41,7 +41,7 @@ export function attemptLabel(line: AttemptLine): string {
 export function wrongWordById(state: State, content: Content, itemId: string): WrongWord | null {
   const item = content.itemsById.get(itemId);
   if (!item) return null;
-  const entry = state.wrongQueue.find((w) => w.packId === content.pack.id && w.itemId === itemId && w.profileId === DEFAULT_PROFILE_ID);
+  const entry = state.wrongQueue.find((w) => w.packId === content.pack.id && w.itemId === itemId && w.profileId === state.activeProfileId);
   return { itemId, text: item.text, meaningKo: meaningOf(item), reviewOn: entry?.active ?? false };
 }
 
@@ -58,7 +58,7 @@ export function todaySummary(state: State, content: Content, dateKey: DateKey): 
 
 /** 현재 활성 오답 (오래된 순). 토글을 끄면 여기서 빠진다. */
 export function currentWrong(state: State, content: Content): WrongWord[] {
-  return activeItems(state.wrongQueue, content.pack.id)
+  return activeItems(state.wrongQueue, content.pack.id, state.activeProfileId)
     .map((w) => wrongWordById(state, content, w.itemId))
     .filter((w): w is WrongWord => w !== null);
 }
@@ -100,7 +100,7 @@ export function weekSummary(state: State, content: Content, dateKey: DateKey): W
   const week = new Set(weekRange(dateKey));
   return {
     // 홈의 도장 칸과 같은 함수 — 계산을 복사하지 않는다.
-    stamps: weekStamps(state, dateKey, content.pack.id),
+    stamps: weekStamps(state, dateKey),
     doneCount: completedAttempts(state, content.pack.id).filter((a) => week.has(a.dateKey)).length,
     trickySounds: trickyTags(state, content, dateKey),
   };

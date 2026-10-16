@@ -8,7 +8,7 @@ import { z } from "zod";
 
 const dateKey = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 
-/** MVP 는 프로필이 하나뿐이라 이 id 를 고정으로 쓴다. */
+/** 처음 만들어지는 프로필의 id. 이후에는 `state.activeProfileId` 가 지금 쓰는 프로필을 가리킨다. */
 export const DEFAULT_PROFILE_ID = "child";
 
 export const ProfileSchema = z.object({
@@ -22,6 +22,8 @@ export type Profile = z.infer<typeof ProfileSchema>;
 export const TrackSchema = z.object({
   profileId: z.string(),
   packId: z.string(),
+  /** 과목 (없으면 옛 기록 — 팩에서 알아낸다) */
+  subjectId: z.string().optional(),
   status: z.enum(["active"]),
 });
 export type Track = z.infer<typeof TrackSchema>;
@@ -33,6 +35,8 @@ export const AttemptSchema = z.object({
   id: z.string(),
   profileId: z.string(),
   packId: z.string(),
+  /** 과목 (옛 기록은 마이그레이션이 채운다. 없어도 읽을 수 있다) */
+  subjectId: z.string().optional(),
   dateKey,
   kind: z.enum(["lesson", "review"]),
   lessonId: z.string().optional(),
@@ -78,12 +82,17 @@ export const EventSchema = z.object({
 });
 export type AppEvent = z.infer<typeof EventSchema>;
 
-export const STATE_SCHEMA_VERSION = 2;
+/** 저장 형식 버전. 옛 형식(`schemaVersion: 2`)은 lib/store/migrate.ts 가 읽어서 올린다. */
+export const STATE_VERSION = 2;
 
 export const StateSchema = z.object({
-  schemaVersion: z.literal(STATE_SCHEMA_VERSION),
+  stateVersion: z.literal(STATE_VERSION),
   account: z.object({ pinHash: z.string().nullable() }),
   profiles: z.array(ProfileSchema),
+  /** 지금 쓰는 프로필 (한 기기에서 아이/어른 전환) */
+  activeProfileId: z.string(),
+  /** 마지막으로 연 팩 (홈이 어느 팩을 먼저 보여줄지) */
+  activePackId: z.string().nullable(),
   tracks: z.array(TrackSchema),
   attempts: z.array(AttemptSchema),
   wrongQueue: z.array(WrongItemSchema),
@@ -93,9 +102,11 @@ export type State = z.infer<typeof StateSchema>;
 
 export function createInitialState(defaultPackId: string): State {
   return {
-    schemaVersion: STATE_SCHEMA_VERSION,
+    stateVersion: STATE_VERSION,
     account: { pinHash: null },
     profiles: [{ id: DEFAULT_PROFILE_ID, type: "child", grade: 3 }],
+    activeProfileId: DEFAULT_PROFILE_ID,
+    activePackId: defaultPackId,
     tracks: [{ profileId: DEFAULT_PROFILE_ID, packId: defaultPackId, status: "active" }],
     attempts: [],
     wrongQueue: [],

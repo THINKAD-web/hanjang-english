@@ -89,7 +89,7 @@ function HomeReady({
         {cta.sub ? <p className="text-center text-lg text-slate-600">{cta.sub}</p> : null}
       </section>
 
-      <StampRow cells={weekStamps(state, dateKey, content.pack.id)} />
+      <StampRow cells={weekStamps(state, dateKey)} />
 
       <section aria-label="내 팩">
         <h2 className="mb-2 text-lg font-semibold text-slate-700">내 팩</h2>
