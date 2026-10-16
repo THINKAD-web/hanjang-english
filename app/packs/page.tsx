@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageTitle } from "@/lib/brand";
 import { loadPacksSummary } from "@/lib/content/load";
 
-export const metadata: Metadata = { title: "내 팩 · 오늘 한장" };
+export const metadata: Metadata = { title: pageTitle("내 팩") };
 
 /** 내 팩 + 추가 (기획안 v2 6·7-3장). 준비 중 팩은 목록만 보여주고 아직 누를 수 없다. */
 export default function PacksPage() {

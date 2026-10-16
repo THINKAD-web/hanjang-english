@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { BRAND } from "@/lib/brand";
 import { loadContent, loadPacksSummary } from "@/lib/content/load";
 import type { PackSummary } from "@/lib/content/schema";
 import { addDays, formatDateLabel, type DateKey } from "@/lib/engine/date";
@@ -60,7 +61,7 @@ function HomeReady({
   return (
     <Screen>
       <header className="flex items-baseline justify-between">
-        <h1 className="text-3xl font-bold text-slate-900">오늘 한장</h1>
+        <h1 className="text-3xl font-bold text-slate-900">{BRAND.appName}</h1>
         <p className="text-xl font-semibold text-slate-700">{formatDateLabel(dateKey)}</p>
       </header>
 
@@ -146,7 +147,7 @@ function HomeReady({
 function HomeSkeleton() {
   return (
     <Screen>
-      <h1 className="text-3xl font-bold text-slate-900">오늘 한장</h1>
+      <h1 className="text-3xl font-bold text-slate-900">{BRAND.appName}</h1>
       <div className="h-24 animate-pulse rounded-2xl bg-amber-100" aria-hidden />
     </Screen>
   );

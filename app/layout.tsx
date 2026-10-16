@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { BRAND, BRAND_DESCRIPTION } from "@/lib/brand";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "오늘 한장", template: "%s" },
-  description: "하루에 한 장. 오늘 한장의 첫 팩, 한장영어.",
+  title: { default: BRAND.appName, template: "%s" },
+  description: BRAND_DESCRIPTION,
 };
 
 export const viewport: Viewport = {
