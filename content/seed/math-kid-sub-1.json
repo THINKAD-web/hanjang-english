@@ -19,6 +19,9 @@
         "fill_blank"
       ],
       "autoQuiz": true
+    },
+    "unlock": {
+      "afterPackId": "math-kid-add-1"
     }
   },
   "lessons": [

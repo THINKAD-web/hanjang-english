@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { ConsonantRow } from "@/components/consonant-row";
 import { LoadFailed, ProgressBar, Screen } from "@/components/ui";
-import { usePackContent } from "@/lib/content/use-content";
+import { useManifest, usePackContent } from "@/lib/content/use-content";
+import { isUnlocked } from "@/lib/packs/catalog";
 import { activeItems } from "@/lib/engine/queue";
 import { packProgress, recordPackInterest } from "@/lib/engine/progress";
 import { completedLessonIds } from "@/lib/engine/today";
@@ -12,18 +13,24 @@ import { useRedirect } from "@/lib/use-redirect";
 import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { unitLabelOf } from "@/lib/content/pack-text";
 
+/** 자음 줄(ㄱ ㄴ ㄷ …)은 "ㄱ" 같은 자음 단위 팩에만 의미가 있다 (동물·덧셈 같은 팩에는 없다). */
+const isConsonantUnit = (label: string) => /^[ㄱ-ㅎ]$/.test(label);
+
 /** `/packs/[packId]` — 팩 안 목차 (기획안 v2 7-2). */
 export function PackDetailScreen({ packId }: { packId: string }) {
   const { state, update } = useProgress();
   const dateKey = useTodayKey();
   const dateParam = useDateParam();
   const pack = usePackContent(packId);
-  // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩은 /packs 로 보낸다.
-  const unavailable = pack.status === "missing" || (pack.status === "ready" && (pack.data.pack.status !== "live" || pack.data.lessons.length === 0));
+  const manifest = useManifest();
+  // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩 · 아직 잠긴 팩은 /packs 로 보낸다.
+  const locked = pack.status === "ready" && Boolean(state) && manifest.status === "ready" && !isUnlocked(state!, pack.data.pack, manifest.data);
+  const unavailable =
+    pack.status === "missing" || locked || (pack.status === "ready" && (pack.data.pack.status !== "live" || pack.data.lessons.length === 0));
   useRedirect(unavailable, withDebugDate("/packs", dateParam));
 
-  if (pack.status === "error") return <LoadFailed />;
-  if (!state || pack.status !== "ready" || unavailable) {
+  if (pack.status === "error" || manifest.status === "error") return <LoadFailed />;
+  if (!state || pack.status !== "ready" || manifest.status !== "ready" || unavailable) {
     return (
       <Screen>
         <div className="h-40 animate-pulse rounded-3xl bg-amber-100" aria-hidden />
@@ -50,7 +57,9 @@ export function PackDetailScreen({ packId }: { packId: string }) {
 
       <ProgressBar label={`${unitLabelOf(content.pack)} ${progress.done}/${progress.total}장`} ratio={progress.done / progress.total} />
       {wrongCount > 0 ? <p className="text-base font-semibold text-amber-800">오답 {wrongCount}개 복습 예정</p> : null}
-      <ConsonantRow active={unitLabelOf(content.pack)} onLockedClick={onLockedConsonantClick} />
+      {isConsonantUnit(unitLabelOf(content.pack)) ? (
+        <ConsonantRow active={unitLabelOf(content.pack)} onLockedClick={onLockedConsonantClick} />
+      ) : null}
 
       <section aria-label="다시 보기">
         <h2 className="mb-2 text-lg font-semibold text-slate-700">끝낸 장</h2>
