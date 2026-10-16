@@ -1,4 +1,4 @@
-import { DEFAULT_PACK_ID } from "@/lib/content/load";
+import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
 import { createInitialState, StateSchema, type ProgressStore, type State } from "./types";
 
 export const STORAGE_KEY = "hanjang-state-v2";

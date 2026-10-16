@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Screen } from "@/components/ui";
+import { LoadFailed, Screen } from "@/components/ui";
 import { StampRow } from "@/components/stamp-row";
-import { DEFAULT_PACK_ID, loadContent } from "@/lib/content/load";
+import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
+import type { Content } from "@/lib/content/schema";
+import { usePackContent } from "@/lib/content/use-content";
 import { formatDateLabel } from "@/lib/engine/date";
 import { recordParentView } from "@/lib/engine/progress";
 import { toggleWrongReview } from "@/lib/parent/account";
@@ -42,13 +44,25 @@ function recordViewOnce(dateKey: string, packId: string, update: ParentApi["upda
 
 /** `/parent` — PIN 통과 후 오늘 요약 · 이번 주 · 현재 오답. 그래프 없이 텍스트와 작은 칸만 (PR5 지시서 3장). */
 export function ParentScreen() {
-  return <ParentGate>{(api) => <ParentContent {...api} />}</ParentGate>;
+  return <ParentGate>{(api) => <ParentLoader {...api} />}</ParentGate>;
 }
 
-function ParentContent({ state, update }: ParentApi) {
+function ParentLoader(api: ParentApi) {
+  const pack = usePackContent(DEFAULT_PACK_ID);
+  if (pack.status === "error" || pack.status === "missing") return <LoadFailed />;
+  if (pack.status !== "ready") {
+    return (
+      <Screen>
+        <div className="h-40 animate-pulse rounded-3xl bg-amber-100" aria-hidden />
+      </Screen>
+    );
+  }
+  return <ParentContent {...api} content={pack.data} />;
+}
+
+function ParentContent({ state, update, content }: ParentApi & { content: Content }) {
   const dateKey = useTodayKey();
   const dateParam = useDateParam();
-  const content = loadContent(DEFAULT_PACK_ID);
   const packId = content.pack.id;
   // 이 화면에서 끈 오답도 되돌릴 수 있게 목록에 남겨 두는 순서 (화면을 다시 열면 비워진다)
   const [pinned, setPinned] = useState<string[]>([]);

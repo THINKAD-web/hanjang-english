@@ -1,5 +1,5 @@
 import { meaningPrompt } from "@/lib/content/josa";
-import type { RawContent } from "@/lib/content/load";
+import type { RawContent } from "@/lib/content/normalize";
 
 /**
  * 성인 영어(문장) 샘플 1장. 기획안 v2 5-5·8장 — picture_choice 를 낼 그림이 없는 팩에서

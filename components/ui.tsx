@@ -49,3 +49,15 @@ export function ProgressBar({ label, ratio }: { label: string; ratio: number }) 
 export function Screen({ children }: { children: ReactNode }) {
   return <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-4 pb-10 pt-6">{children}</main>;
 }
+
+/** 콘텐츠를 불러오지 못했을 때 (네트워크 등). 다시 시도하면 새로 요청한다. */
+export function LoadFailed({ message = "내용을 불러오지 못했어요" }: { message?: string }) {
+  return (
+    <Screen>
+      <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
+        <p className="text-2xl font-bold text-slate-900">{message}</p>
+        <BigButton onClick={() => window.location.reload()}>다시 시도</BigButton>
+      </div>
+    </Screen>
+  );
+}

@@ -2,13 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
-import { Screen } from "@/components/ui";
-import { loadContent } from "@/lib/content/load";
+import { LoadFailed, Screen } from "@/components/ui";
+import type { Content } from "@/lib/content/schema";
+import { usePackContent } from "@/lib/content/use-content";
 import type { DateKey } from "@/lib/engine/date";
 import { recordNextPackRequest, recordSheetAbort, recordSheetComplete, recordSheetStart, recordStepTime } from "@/lib/engine/progress";
 import { decideSheet, decideToday, type TodayDecision } from "@/lib/engine/today";
 import type { State } from "@/lib/store/types";
 import { newAttemptId, useProgress } from "@/lib/use-progress";
+import { useRedirect } from "@/lib/use-redirect";
 import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { DailyLimitScreen, DoneTodayScreen, PackCompleteScreen } from "./decision-screens";
 import { LessonRunner } from "./lesson-runner";
@@ -21,15 +23,21 @@ import { unitLabelOf } from "@/lib/content/pack-text";
  */
 export function LearnScreen({ packId }: { packId: string }) {
   const dateKey = useTodayKey();
+  const dateParam = useDateParam();
   const { state, update } = useProgress();
-  if (!dateKey || !state) {
+  const pack = usePackContent(packId);
+  // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩은 앱이 터지지 않게 /packs 로 보낸다.
+  const unavailable = pack.status === "missing" || (pack.status === "ready" && (pack.data.pack.status !== "live" || pack.data.lessons.length === 0));
+  useRedirect(unavailable, withDebugDate("/packs", dateParam));
+  if (pack.status === "error") return <LoadFailed />;
+  if (!dateKey || !state || pack.status !== "ready" || unavailable) {
     return (
       <Screen>
         <div className="h-40 animate-pulse rounded-3xl bg-amber-100" aria-hidden />
       </Screen>
     );
   }
-  return <LearnGate packId={packId} initialState={state} dateKey={dateKey} update={update} />;
+  return <LearnGate packId={packId} content={pack.data} initialState={state} dateKey={dateKey} update={update} />;
 }
 
 /**
@@ -43,18 +51,19 @@ export function LearnScreen({ packId }: { packId: string }) {
  */
 function LearnGate({
   packId,
+  content,
   initialState,
   dateKey,
   update,
 }: {
   packId: string;
+  content: Content;
   initialState: State;
   dateKey: DateKey;
   update: (fn: (s: State) => State) => Promise<State>;
 }) {
   const router = useRouter();
   const dateParam = useDateParam();
-  const content = loadContent(packId);
   const [decision] = useState(() => decideToday(initialState, dateKey, content));
   const [extra, setExtra] = useState<TodayDecision | null>(null);
   const startedAtRef = useRef<string | null>(null);

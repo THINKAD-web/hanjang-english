@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { checkContent, isPair, sentenceUsesText } from "./check";
-import { CONTENT_REGISTRY, parseContent, type RawContent } from "./load";
+import type { RawContent } from "./normalize";
+import { parseContent, readRawPack } from "./node";
 
-const rawGiyeok = CONTENT_REGISTRY["en-kid-giyeok"];
+const rawGiyeok = readRawPack("en-kid-giyeok");
 
 // 테스트에서 JSON 을 일부러 망가뜨리기 위한 느슨한 타입.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

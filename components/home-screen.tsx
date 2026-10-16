@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BRAND } from "@/lib/brand";
-import { loadContent, loadPacksSummary } from "@/lib/content/load";
-import type { PackSummary } from "@/lib/content/schema";
+import type { Manifest } from "@/lib/content/bundle";
+import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
+import type { Content } from "@/lib/content/schema";
+import { useManifest, usePackContent } from "@/lib/content/use-content";
 import { addDays, formatDateLabel, type DateKey } from "@/lib/engine/date";
 import { homeCta, packProgress, recordPackInterest, weekStamps } from "@/lib/engine/progress";
 import { decideToday } from "@/lib/engine/today";
@@ -15,17 +17,17 @@ import { warmUpVoices } from "@/lib/tts";
 import { useProgress } from "@/lib/use-progress";
 import { isDebug, useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { StampRow } from "./stamp-row";
-import { BigButton, ProgressBar, Screen } from "./ui";
+import { BigButton, LoadFailed, ProgressBar, Screen } from "./ui";
 import { unitLabelOf } from "@/lib/content/pack-text";
-
-const DEFAULT_PACK_ID = "en-kid-giyeok";
-const content = loadContent(DEFAULT_PACK_ID);
 
 export function HomeScreen() {
   const dateKey = useTodayKey();
   const { state, reset, update } = useProgress();
-  if (!dateKey || !state) return <HomeSkeleton />;
-  return <HomeReady dateKey={dateKey} state={state} onReset={reset} update={update} />;
+  const manifest = useManifest();
+  const pack = usePackContent(DEFAULT_PACK_ID);
+  if (manifest.status === "error" || pack.status === "error" || pack.status === "missing") return <LoadFailed />;
+  if (!dateKey || !state || manifest.status !== "ready" || pack.status !== "ready") return <HomeSkeleton />;
+  return <HomeReady dateKey={dateKey} state={state} onReset={reset} update={update} manifest={manifest.data} content={pack.data} />;
 }
 
 /** 홈 정보구조 (기획안 v2 7-1): 이어서 카드 + 이번 주 도장 + 내 팩. */
@@ -34,26 +36,29 @@ function HomeReady({
   state,
   onReset,
   update,
+  manifest,
+  content,
 }: {
   dateKey: DateKey;
   state: State;
   onReset: () => Promise<void>;
   update: (fn: (s: State) => State) => Promise<State>;
+  manifest: Manifest;
+  content: Content;
 }) {
   const router = useRouter();
   const dateParam = useDateParam();
   const decision = decideToday(state, dateKey, content);
   const cta = homeCta(decision, content);
   const progress = packProgress(state, content);
-  const packs = loadPacksSummary();
-  const livePacks = packs.filter((p) => p.status === "live");
-  const soonPacks = packs.filter((p) => p.status === "soon");
+  const livePacks = manifest.packs.filter((p) => p.status === "live");
+  const soonPacks = manifest.packs.filter((p) => p.status === "soon");
   const [showSoon, setShowSoon] = useState(false);
 
   const openSoonPacks = () => {
     if (!showSoon) {
       void update((s) =>
-        recordPackInterest(s, { dateKey, at: new Date().toISOString(), payload: { candidates: soonPacks.map((p: PackSummary) => p.id) } }),
+        recordPackInterest(s, { dateKey, at: new Date().toISOString(), payload: { candidates: soonPacks.map((p) => p.id) } }),
       );
     }
     setShowSoon((v) => !v);
@@ -96,7 +101,7 @@ function HomeReady({
                 className="flex items-center justify-between rounded-2xl bg-white px-5 py-3 ring-1 ring-amber-200"
               >
                 <span className="text-lg font-semibold text-slate-900">
-                  {p.title} · {p.unitLabel}
+                  {p.title} · {unitLabelOf(p)}
                 </span>
                 <span className="text-sky-700">진행 중 ›</span>
               </Link>
@@ -116,7 +121,7 @@ function HomeReady({
                 {soonPacks.map((p) => (
                   <li key={p.id} className="flex items-center justify-between">
                     <span>
-                      {p.title} · {p.unitLabel}
+                      {p.title} · {unitLabelOf(p)}
                     </span>
                     <span className="text-sm text-slate-500">🔒 준비 중</span>
                   </li>

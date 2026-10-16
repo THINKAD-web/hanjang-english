@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { ConsonantRow } from "@/components/consonant-row";
-import { ProgressBar, Screen } from "@/components/ui";
-import { loadContent } from "@/lib/content/load";
+import { LoadFailed, ProgressBar, Screen } from "@/components/ui";
+import { usePackContent } from "@/lib/content/use-content";
 import { activeItems } from "@/lib/engine/queue";
 import { packProgress, recordPackInterest } from "@/lib/engine/progress";
 import { completedLessonIds } from "@/lib/engine/today";
 import { useProgress } from "@/lib/use-progress";
+import { useRedirect } from "@/lib/use-redirect";
 import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { unitLabelOf } from "@/lib/content/pack-text";
 
@@ -16,15 +17,20 @@ export function PackDetailScreen({ packId }: { packId: string }) {
   const { state, update } = useProgress();
   const dateKey = useTodayKey();
   const dateParam = useDateParam();
-  const content = loadContent(packId);
+  const pack = usePackContent(packId);
+  // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩은 /packs 로 보낸다.
+  const unavailable = pack.status === "missing" || (pack.status === "ready" && (pack.data.pack.status !== "live" || pack.data.lessons.length === 0));
+  useRedirect(unavailable, withDebugDate("/packs", dateParam));
 
-  if (!state) {
+  if (pack.status === "error") return <LoadFailed />;
+  if (!state || pack.status !== "ready" || unavailable) {
     return (
       <Screen>
         <div className="h-40 animate-pulse rounded-3xl bg-amber-100" aria-hidden />
       </Screen>
     );
   }
+  const content = pack.data;
 
   const progress = packProgress(state, content);
   const done = new Set(completedLessonIds(state, packId));

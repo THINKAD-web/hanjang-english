@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# 콘텐츠 빌드 산출물 (npm run content:build)
+/public/content/
+
 # next.js
 /.next/
 /out/

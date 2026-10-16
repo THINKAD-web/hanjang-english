@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildLessonQuiz, buildReviewQuiz, shuffleSheetOptions } from "@/lib/engine/quizgen";
-import { loadContent } from "./load";
+import { loadContent } from "./node";
 import golden from "./__golden__/en-kid-giyeok.json";
 
 /**
