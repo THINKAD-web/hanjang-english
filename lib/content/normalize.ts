@@ -1,4 +1,6 @@
 import type { z } from "zod";
+import { buildAutoQuiz } from "./auto-quiz";
+import { generateProblems } from "./generator";
 import { resolveSteps } from "./lesson-steps";
 import {
   ItemsFileSchema,
@@ -18,6 +20,7 @@ import {
  * - zod 로 모양 검증 (pack.json / items.json / 레슨)
  * - 레슨의 인라인 items 를 팩 공용 아이템 뱅크에 합치고 itemIds 로 통일
  * - id·packId 기본값, steps 기본값(타입별 + intro/문장 없으면 건너뜀)
+ * - 레슨의 generator 로 연산 문제 아이템 생성, 퀴즈를 적지 않은 레슨은 pack.rules.autoQuiz 로 자동 생성
  * - pack.lessonCount 를 실제 레슨 수로 계산 (적혀 있으면 일치해야 한다)
  */
 
@@ -59,11 +62,19 @@ export function normalizeContent(raw: RawContent): NormalizeResult {
   const lessons: Lesson[] = rawLessons.map((l) => {
     const id = l.id ?? lessonIdFor(packData.id, l.order);
     if (l.items && l.itemIds) errors.push(`${id}: items 와 itemIds 는 함께 쓸 수 없다`);
+    if (l.generator && (l.items || l.itemIds)) errors.push(`${id}: generator 는 items·itemIds 와 함께 쓸 수 없다`);
+
+    let inline = l.items;
+    if (l.generator) {
+      const made = generateProblems(l.generator, id);
+      if ("error" in made) errors.push(made.error);
+      else inline = made.items;
+    }
 
     let itemIds: string[];
-    if (l.items) {
-      itemIds = l.items.map((it) => it.id);
-      for (const it of l.items) {
+    if (inline) {
+      itemIds = inline.map((it) => it.id);
+      for (const it of inline) {
         const existing = byId.get(it.id);
         if (!existing) {
           items.push(it);
@@ -76,15 +87,10 @@ export function normalizeContent(raw: RawContent): NormalizeResult {
       itemIds = l.itemIds;
     } else {
       itemIds = [];
-      errors.push(`${id}: items 또는 itemIds 가 필요하다`);
+      if (!l.generator) errors.push(`${id}: items, itemIds 또는 generator 가 필요하다`);
     }
 
-    let quiz = l.quiz;
-    if (!quiz) {
-      quiz = [];
-      errors.push(`${id}: quiz 가 없다 (이 팩은 autoQuiz 가 꺼져 있거나 아직 지원하지 않는다)`);
-    }
-
+    // 퀴즈는 아이템이 모두 합쳐진 뒤에 만든다 (보기 후보가 팩 전체 아이템이다)
     return {
       id,
       packId: l.packId ?? packData.id,
@@ -95,12 +101,30 @@ export function normalizeContent(raw: RawContent): NormalizeResult {
       itemIds,
       sentences: l.sentences,
       steps: resolveSteps({ type: l.type, steps: l.steps, intro: l.intro, sentences: l.sentences }),
-      quiz,
+      quiz: l.quiz ?? [],
       reviewed: l.reviewed,
       testOnly: l.testOnly,
     };
   });
   lessons.sort((a, b) => a.order - b.order);
+
+  const needQuiz = new Set(rawLessons.filter((l) => !l.quiz).map((l) => l.id ?? lessonIdFor(packData.id, l.order)));
+  for (const lesson of lessons) {
+    if (!needQuiz.has(lesson.id)) continue;
+    if (!packData.rules.autoQuiz) {
+      errors.push(`${lesson.id}: quiz 가 없다 (이 팩은 rules.autoQuiz 가 꺼져 있다)`);
+      continue;
+    }
+    const made = buildAutoQuiz({
+      lessonId: lesson.id,
+      items: lesson.itemIds.map((id) => byId.get(id)).filter((it): it is Item => Boolean(it)),
+      pool: items,
+      sentences: lesson.sentences,
+      rules: packData.rules,
+    });
+    if ("error" in made) errors.push(made.error);
+    else lesson.quiz = made.quiz;
+  }
 
   if (packData.lessonCount !== undefined && packData.lessonCount !== lessons.length)
     errors.push(`레슨 수 ${lessons.length} ≠ pack.lessonCount ${packData.lessonCount}`);

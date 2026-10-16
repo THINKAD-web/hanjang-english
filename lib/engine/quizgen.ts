@@ -43,12 +43,42 @@ function shareTag(a: Item, b: Item): boolean {
  * 그중에서 seed 로 n 개를 고른다 (항상 같은 보기만 나오지 않도록).
  */
 export function pickDistractors(item: Item, pool: readonly Item[], rng: Rng, n = 2): Item[] {
+  const seen = new Set<string>();
   const ranked = pool
-    .filter((it) => it.id !== item.id && it.text !== item.text && meaningOf(it) !== meaningOf(item))
+    // 같은 종류끼리만 (글자 옆에 단어가 보기로 섞여 나오지 않게). 정답·뜻이 같은 것, 보기 글자가 겹치는 것도 뺀다.
+    .filter((it) => it.kind === item.kind && it.id !== item.id && it.text !== item.text && meaningOf(it) !== meaningOf(item))
     .map((it) => ({ it, tag: shareTag(it, item) ? 0 : 1, dist: levenshtein(item.text, it.text) }))
     .sort((a, b) => a.tag - b.tag || a.dist - b.dist || a.it.id.localeCompare(b.it.id))
-    .map((x) => x.it);
+    .map((x) => x.it)
+    .filter((it) => {
+      const key = quizAnswerOf(it);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   return shuffle(ranked.slice(0, n + 2), rng).slice(0, n);
+}
+
+/**
+ * 연산 문제의 오답 보기: 정답 ±1, ±2, 두 자리 수의 자릿수 바꾸기·십의 자리 ±1. 음수·중복·정답과 같은 값은 없다.
+ * 가까운 값(±1, ±2)을 우선하고, 모자라면 더 먼 값으로 채운다.
+ */
+export function mathDistractors(answer: number, rng: Rng, n = 2): number[] {
+  const near = [answer + 1, answer - 1, answer + 2, answer - 2];
+  const digits = String(answer);
+  const swapped = digits.length === 2 ? [Number(`${digits[1]}${digits[0]}`)] : [];
+  const far = [...swapped, answer + 10, answer - 10, answer + 3, answer - 3, answer + 4, answer + 5];
+  const ok = (v: number) => v >= 0 && v !== answer;
+  const uniq = (xs: number[]) => [...new Set(xs.filter(ok))];
+  const pool = uniq(near);
+  // 가까운 값 → 자릿수 바꾸기 등 순서로, 그중에서 seed 로 뽑는다
+  const picked = shuffle(pool, rng).slice(0, n);
+  for (const v of uniq(far)) {
+    if (picked.length >= n) break;
+    if (!picked.includes(v)) picked.push(v);
+  }
+  for (let v = answer + 1; picked.length < n; v++) if (!picked.includes(v)) picked.push(v);
+  return picked.slice(0, n);
 }
 
 /** 문장에서 아이템 원형이 그대로(변형 아님) 나오는 첫 자리를 ____ 로 바꾼다. 없으면 null. */
@@ -68,6 +98,8 @@ function fillBlankSentences(item: Item, ctx: QuizContext): string[] {
 
 /** 이 아이템으로 낼 수 있는 유형. imageable: false 아이템은 picture_choice 제외, 원형이 든 예문이 없으면 fill_blank 제외. */
 export function allowedTypes(item: Item, ctx: QuizContext, rules?: Pick<PackRules, "allowedQuizTypes">): QuizType[] {
+  // 연산 문제는 "식 = ____" 빈칸 채우기만 낸다 (그림·뜻·듣기·OX 가 성립하지 않는다)
+  if (item.kind === "problem") return !rules || rules.allowedQuizTypes.includes("fill_blank") ? ["fill_blank"] : [];
   return QUIZ_TYPES.filter((t) => {
     if (rules && !rules.allowedQuizTypes.includes(t)) return false;
     if (t === "picture_choice") return item.imageable;
@@ -87,6 +119,11 @@ export function generateQuiz(
     throw new Error(`${item.text} 로는 ${type} 문항을 낼 수 없다`);
   }
   const rng = seededRandom(seed);
+  if (item.kind === "problem") {
+    const answer = quizAnswerOf(item);
+    const wrong = mathDistractors(Number(answer), rng).map(String);
+    return { type: "fill_blank", targetItemId: item.id, sentence: `${item.text} = ____`, options: shuffle([answer, ...wrong], rng) as Options, answer };
+  }
   const distractors = pickDistractors(item, pool, rng);
   const answer = quizAnswerOf(item);
   const options = () => shuffle([answer, ...distractors.map(quizAnswerOf)], rng) as Options;

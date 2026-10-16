@@ -1,6 +1,7 @@
+import { verifyProblem } from "./arithmetic";
 import { meaningChoicePrompt, meaningOf, quizAnswerOf } from "./item-text";
 import { normalizeContent, type RawContent } from "./normalize";
-import type { ChoiceQuiz, Content, Item, Lesson, PackRules, PairSwap, QuizType } from "./schema";
+import { SUBSTITUTE_FOR_PICTURE, type ChoiceQuiz, type Content, type Item, type Lesson, type PackRules, type PairSwap, type QuizType } from "./schema";
 
 /**
  * content:check 규칙 (지시서 4-4 + 기획안 v2 5-5 예외 + 대량 개발 지시서 3-2).
@@ -8,7 +9,7 @@ import type { ChoiceQuiz, Content, Item, Lesson, PackRules, PairSwap, QuizType }
  * 개수·유형 규칙은 전부 `pack.rules` 를 읽는다 (코드에 박힌 숫자 없음).
  */
 
-export const SUBSTITUTE_FOR_PICTURE: readonly QuizType[] = ["fill_blank", "listen_choice"];
+export { SUBSTITUTE_FOR_PICTURE };
 
 /** 단어의 앞/끝을 a↔b 로 바꾸면 짝인가. 예) grass↔glass (prefix gr↔gl), bag↔back (suffix g↔ck). 순서는 상관없다. */
 export function isPair(swaps: readonly PairSwap[], a: string, b: string): boolean {
@@ -141,6 +142,18 @@ export function checkNormalized(content: Content): string[] {
           errors.push(`${where}: "${s.text}" 에 ${it.text} 가 없다`);
       }
     });
+
+    // 연산 문제: 정답을 다시 계산해 맞춰 보고, 한 레슨 안에서 같은 식이 두 번 나오지 않는지 본다
+    const seenExpr = new Set<string>();
+    for (const id of lesson.itemIds) {
+      const it = byId.get(id);
+      if (!it || it.kind !== "problem") continue;
+      const problem = verifyProblem(it);
+      if (problem) errors.push(`${at}.${id}: ${problem}`);
+      const key = it.text.replace(/\s+/g, "");
+      if (seenExpr.has(key)) errors.push(`${at}: 같은 식 "${it.text}" 가 두 번 나온다`);
+      seenExpr.add(key);
+    }
 
     // 스텝
     if (lesson.steps.includes("practice") && lesson.itemIds.some((id) => byId.get(id) && byId.get(id)!.kind !== "problem"))

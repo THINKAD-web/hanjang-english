@@ -9,10 +9,6 @@ import { z } from "zod";
  * - normalized(앱용): 빌드(normalize)가 정리한 결과. 앱과 엔진은 이것만 본다.
  */
 
-export const LANGUAGES = ["en", "ja", "zh"] as const;
-export const LanguageSchema = z.enum(LANGUAGES);
-export type Language = z.infer<typeof LanguageSchema>;
-
 export const AUDIENCES = ["kid", "adult"] as const;
 export const AudienceSchema = z.enum(AUDIENCES);
 export type Audience = z.infer<typeof AudienceSchema>;
@@ -131,6 +127,9 @@ export const QUIZ_TYPES = [
 ] as const satisfies readonly QuizType[];
 export const QuizTypeSchema = z.enum(QUIZ_TYPES);
 
+/** 장에 그림 가능한 아이템이 없을 때 picture_choice 자리를 대신할 수 있는 유형 (규칙: PackRules.allowQuizTypeSubstitution) */
+export const SUBSTITUTE_FOR_PICTURE: readonly QuizType[] = ["fill_blank", "listen_choice"];
+
 /** 그림 문항의 정답이 될 수 있는 아이템인가. */
 export function canBePictureQuiz(item: Item): boolean {
   return item.imageable;
@@ -244,21 +243,38 @@ export type Pack = z.infer<typeof PackSchema>;
 export const RawPackSchema = z.object({ ...packShape, lessonCount: z.number().int().min(0).optional() }).strict();
 export type RawPack = z.infer<typeof RawPackSchema>;
 
-/** (C3 에서 폴더 자동 등록으로 대체되며 사라진다) 예전 content/packs.json 한 행. */
-export const PackSummarySchema = z
+// ───────────────────────── Generator (math) ─────────────────────────
+
+export const ARITHMETIC_OPS = ["+", "-", "×", "÷"] as const;
+export type ArithmeticOp = (typeof ARITHMETIC_OPS)[number];
+
+/**
+ * 연산 문제 생성기. 레슨에 `generator` 를 적으면 빌드가 problem 아이템 `count` 개를 만든다.
+ * 같은 레슨이면 항상 같은 문제 (seed 기본값 = 레슨 id). 한 레슨 안에서 같은 식은 나오지 않는다.
+ * - 피연산자는 모두 [min, max] 안. 나눗셈은 나누는 수·몫이 [min, max] (나누는 수 ≥ 1), 나뉘는 수 = 나누는 수 × 몫.
+ * - noCarry: 덧셈에서 어느 자리도 받아올림이 없다. noBorrow: 뺄셈에서 어느 자리도 받아내림이 없다.
+ * - allowNegative: false(기본)면 뺄셈 답이 음수가 되지 않는다.
+ */
+export const GeneratorSchema = z
   .object({
-    id: z.string().min(1),
-    language: LanguageSchema,
-    audience: AudienceSchema,
-    title: z.string().min(1),
-    brandLabel: z.string().min(1),
-    unitLabel: z.string().min(1),
-    status: z.enum(["live", "soon"]),
-    contentPath: z.string().min(1).optional(),
+    kind: z.literal("arithmetic"),
+    op: z.enum(ARITHMETIC_OPS),
+    min: z.number().int().min(0),
+    max: z.number().int().min(1).max(999),
+    count: z.number().int().min(1).max(100),
+    noCarry: z.boolean().default(false),
+    noBorrow: z.boolean().default(false),
+    allowNegative: z.boolean().default(false),
+    seed: z.string().min(1).optional(),
   })
-  .strict();
-export type PackSummary = z.infer<typeof PackSummarySchema>;
-export const PacksFileSchema = z.array(PackSummarySchema);
+  .strict()
+  .superRefine((g, ctx) => {
+    if (g.min > g.max) ctx.addIssue({ code: "custom", path: ["min"], message: "min 이 max 보다 클 수 없다" });
+    if (g.noCarry && g.op !== "+") ctx.addIssue({ code: "custom", path: ["noCarry"], message: "noCarry 는 덧셈(+)에만 쓴다" });
+    if (g.noBorrow && g.op !== "-") ctx.addIssue({ code: "custom", path: ["noBorrow"], message: "noBorrow 는 뺄셈(-)에만 쓴다" });
+    if (g.allowNegative && g.op !== "-") ctx.addIssue({ code: "custom", path: ["allowNegative"], message: "allowNegative 는 뺄셈(-)에만 쓴다" });
+  });
+export type Generator = z.infer<typeof GeneratorSchema>;
 
 // ───────────────────────── Lesson ─────────────────────────
 
@@ -292,6 +308,8 @@ export const RawLessonSchema = z
     intro: IntroSchema.optional(),
     items: z.array(ItemSchema).optional(),
     itemIds: z.array(z.string()).optional(),
+    /** 문제를 직접 적는 대신 생성 규칙만 적는다 (items·itemIds 와 함께 쓸 수 없다) */
+    generator: GeneratorSchema.optional(),
     sentences: z.array(SentenceSchema).default([]),
     steps: z.array(StepTypeSchema).min(1).optional(),
     quiz: z.array(QuizSchema).optional(),
