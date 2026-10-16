@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { speak } from "@/lib/tts";
+import { useSpeechLang } from "@/lib/tts-lang";
 
 /** 큰 주 버튼. 높이 56px 이상, 글자 24px. */
 export function BigButton({ className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
@@ -14,10 +15,11 @@ export function BigButton({ className = "", ...props }: ButtonHTMLAttributes<HTM
 
 /** 🔊 다시 듣기 */
 export function SpeakButton({ text, audio, label = "다시 듣기" }: { text: string; audio?: string; label?: string }) {
+  const lang = useSpeechLang();
   return (
     <button
       type="button"
-      onClick={() => void speak(text, audio)}
+      onClick={() => void speak(text, audio, lang)}
       className="inline-flex min-h-14 shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-amber-100 px-5 text-xl font-semibold text-amber-900 ring-1 ring-amber-300 active:scale-95"
     >
       <span aria-hidden>🔊</span>

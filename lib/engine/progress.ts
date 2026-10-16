@@ -93,7 +93,10 @@ export function recordSheetComplete(base: State, input: SheetCompleteInput): Sta
   };
 }
 
-export type SheetStep = "sound" | "cards" | "listen" | "sentences" | "quiz";
+export type SheetStep = "sound" | "cards" | "listen" | "sentences" | "practice" | "patterns" | "quiz";
+
+/** 단계별 소요 시간(ms). 거치지 않은 단계는 키가 없다 (예전 장은 sound·cards·listen·sentences·quiz 다섯 개). */
+export type StepTimings = Partial<Record<SheetStep, number>>;
 
 /** 닫기(중단) 확인: Attempt 는 만들지 않고 sheet_abort 이벤트만 남긴다. */
 export function recordSheetAbort(
@@ -118,7 +121,7 @@ export function recordSheetAbort(
 /** 완료 시 단계별 소요 시간(ms) 기록 — 화면엔 보여주지 않고 데이터만 쌓는다 (8분 초과 여부 실측용). */
 export function recordStepTime(
   state: State,
-  input: { packId: string; lessonId?: string; dateKey: DateKey; at: string; timings: Record<SheetStep, number> },
+  input: { packId: string; lessonId?: string; dateKey: DateKey; at: string; timings: StepTimings },
 ): State {
   return {
     ...state,

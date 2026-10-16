@@ -1,5 +1,8 @@
+"use client";
+
 import { captionOf } from "@/lib/content/item-text";
 import type { Item } from "@/lib/content/schema";
+import { useSpeechLang } from "@/lib/tts-lang";
 
 /** 그림(이미지 우선, 없으면 이모지). 그림이 없는 단어는 빈 자리 없이 글자만. */
 export function WordPicture({ word, size = "lg" }: { word: Item; size?: "lg" | "sm" }) {
@@ -19,6 +22,7 @@ export function WordPicture({ word, size = "lg" }: { word: Item; size?: "lg" | "
 /** 단어 카드: 그림 · 철자(32px 이상) · 뜻 */
 export function WordCard({ word, size = "lg" }: { word: Item; size?: "lg" | "sm" }) {
   const lg = size === "lg";
+  const lang = useSpeechLang().split("-")[0];
   return (
     <div
       className={`flex w-full flex-col items-center rounded-3xl bg-white shadow-sm ring-1 ring-amber-200 ${
@@ -27,7 +31,7 @@ export function WordCard({ word, size = "lg" }: { word: Item; size?: "lg" | "sm"
     >
       <WordPicture word={word} size={size} />
       <div className={lg ? "text-center" : ""}>
-        <p lang="en" className={`font-bold tracking-tight text-slate-900 ${lg ? "text-5xl" : "text-3xl"}`}>
+        <p lang={lang} className={`font-bold tracking-tight text-slate-900 ${lg ? "text-5xl" : "text-3xl"}`}>
           {word.text}
         </p>
         <p className={`text-slate-600 ${lg ? "mt-2 text-2xl" : "text-xl"}`}>{captionOf(word)}</p>

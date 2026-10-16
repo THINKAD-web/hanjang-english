@@ -5,11 +5,12 @@ import { ProgressBar, Screen } from "@/components/ui";
 import type { Content, Item, Lesson } from "@/lib/content/schema";
 import type { DateKey } from "@/lib/engine/date";
 import { buildLessonQuiz, shuffleSheetOptions } from "@/lib/engine/quizgen";
-import type { SheetStep } from "@/lib/engine/progress";
-import { initSheet, sheetReducer, sheetScore, wrongItemIds, type SheetState } from "@/lib/engine/sheet";
+import type { SheetStep as TimingKey, StepTimings } from "@/lib/engine/progress";
+import { initSheet, sheetProgress, sheetReducer, sheetScore, wrongItemIds, type SheetAction, type SheetState } from "@/lib/engine/sheet";
 import type { AnswerRecord } from "@/lib/store/types";
-import { speak, stopSpeaking } from "@/lib/tts";
-import { CardStep, DoneStep, IntroStep, ListenAllStep, QuizStep, SentencesStep } from "./steps";
+import { speakItem, stopSpeaking } from "@/lib/tts";
+import { SpeechLangProvider } from "@/lib/tts-lang";
+import { CardStep, DoneStep, IntroStep, ListenAllStep, PatternsStep, PracticeStep, QuizStep, SentencesStep } from "./steps";
 import { unitLabelOf } from "@/lib/content/pack-text";
 
 export type LessonRunnerProps = {
@@ -18,9 +19,9 @@ export type LessonRunnerProps = {
   dateKey: DateKey;
   /** 오늘 장으로 실행할 때만 넘긴다. undefined 면 "다시 보기" — 진행·오답 기록을 남기지 않는다. */
   onStart?: () => void;
-  onComplete?: (answers: AnswerRecord[], timings: Record<SheetStep, number>) => void;
+  onComplete?: (answers: AnswerRecord[], timings: StepTimings) => void;
   /** 넘기면 우측 상단에 ✕(닫기)가 뜬다. 확인 후 onHome 을 이어서 부른다. "다시 보기"에는 넘기지 않는다. */
-  onAbort?: (step: SheetStep, elapsedMs: number) => void;
+  onAbort?: (step: TimingKey, elapsedMs: number) => void;
   onHome: () => void;
   /** 오답 삽입 대상 (오늘 장 실행일 때만) */
   injectedItemId?: string;
@@ -30,18 +31,27 @@ export type LessonRunnerProps = {
   banner?: string;
 };
 
-const STEP_KEY: Partial<Record<SheetState["step"]["kind"], SheetStep>> = {
+const STEP_KEY: Partial<Record<SheetState["step"]["kind"], TimingKey>> = {
   intro: "sound",
   card: "cards",
   listenAll: "listen",
   sentences: "sentences",
+  practice: "practice",
+  patterns: "patterns",
   quiz: "quiz",
 };
 
-const ZERO_TIMINGS: Record<SheetStep, number> = { sound: 0, cards: 0, listen: 0, sentences: 0, quiz: 0 };
+/** 예전 장(소리·카드·듣기·예문·퀴즈)이 항상 남기던 다섯 키. 새 단계는 거쳤을 때만 키가 생긴다. */
+const BASE_TIMINGS: StepTimings = {
+  sound: 0,
+  cards: 0,
+  listen: 0,
+  sentences: 0,
+  quiz: 0,
+};
 
 /**
- * 소리 → 카드 → 전체 듣기 → 예문 → 퀴즈 → 완료 한 벌.
+ * 레슨의 steps(소리 → 카드 → 전체 듣기 → 예문 → 연습/패턴 → 퀴즈 중 레슨 타입이 고른 순서) → 완료 한 벌.
  * `/learn/[packId]`(오늘 장)와 `/learn/[packId]/[lessonId]`(다시 보기) 가 함께 쓴다.
  */
 export function LessonRunner({
@@ -64,7 +74,15 @@ export function LessonRunner({
     () => shuffleSheetOptions(buildLessonQuiz(lesson, content, dateKey, injectedItemId), dateKey, sheetId ?? lesson.id),
     [lesson, content, dateKey, injectedItemId, sheetId],
   );
-  const [sheet, dispatch] = useReducer(sheetReducer, undefined, () => initSheet(items.length, quiz.length));
+  const lang = content.pack.ttsLang;
+  const problems = useMemo(() => items.filter((it) => it.kind === "problem"), [items]);
+  const [sheet, dispatch] = useReducer(sheetReducer, undefined, () =>
+    initSheet(items.length, quiz.length, {
+      plan: lesson.steps,
+      practiceCount: problems.length,
+      patternCount: items.length,
+    }),
+  );
   // iOS Safari 는 speechSynthesis.speak() 가 탭 핸들러 안에서 "직접" 호출돼야 재생을 허용한다.
   // useEffect/setTimeout 안에서 부르면 (첫 재생이 아무리 성공했어도) 이후 호출이 막힐 수 있다.
   // 그래서 다음 화면의 speak() 는 그 화면으로 넘어가게 하는 탭 핸들러 안에서 "미리" 시작해 두고,
@@ -75,47 +93,43 @@ export function LessonRunner({
   const [pendingRevealSpeech, setPendingRevealSpeech] = useState<Promise<boolean> | null>(null);
 
   // 단계별 소요 시간(ms) — 화면엔 보여주지 않고 완료 시 이벤트로만 남긴다 (기획안 14장 8분 실측)
-  const timingsRef = useRef<Record<SheetStep, number>>({ ...ZERO_TIMINGS });
-  const lastRef = useRef<{ key: SheetStep; at: number } | null>(null);
+  const timingsRef = useRef<StepTimings>({ ...BASE_TIMINGS });
+  const lastRef = useRef<{ key: TimingKey; at: number } | null>(null);
   useEffect(() => {
     const now = Date.now();
-    if (lastRef.current) timingsRef.current[lastRef.current.key] += now - lastRef.current.at;
+    if (lastRef.current)
+      timingsRef.current[lastRef.current.key] = (timingsRef.current[lastRef.current.key] ?? 0) + now - lastRef.current.at;
     const key = STEP_KEY[sheet.step.kind];
     lastRef.current = key ? { key, at: now } : null;
   }, [sheet.step.kind]);
-  const snapshotTimings = useCallback((): Record<SheetStep, number> => {
+  const snapshotTimings = useCallback((): StepTimings => {
     const snap = { ...timingsRef.current };
-    if (lastRef.current) snap[lastRef.current.key] += Date.now() - lastRef.current.at;
+    if (lastRef.current) snap[lastRef.current.key] = (snap[lastRef.current.key] ?? 0) + Date.now() - lastRef.current.at;
     return snap;
   }, []);
 
+  /**
+   * 다음 화면이 자동 재생으로 시작하면, 그 재생을 이 탭 핸들러 안에서 미리 시작해 둔다(iOS Safari).
+   * 어느 화면으로 가는지는 리듀서에 물어본다 — 단계 순서를 여기서 따로 알 필요가 없다.
+   */
+  const advance = (action: SheetAction) => {
+    const nextSheet = sheetReducer(sheet, action);
+    if (nextSheet === sheet) return;
+    const next = nextSheet.step;
+    if (next.kind === "card") {
+      setPendingCardSpeech(speakItem(items[next.index], lang));
+    } else if (next.kind === "listenAll" && items[0]) {
+      setPendingListenSpeech(speakItem(items[0], lang));
+    } else if (next.kind === "quiz" && quiz[next.index]?.type === "listen_choice") {
+      const target = content.itemsById.get(quiz[next.index].targetItemId);
+      if (target) setPendingQuizSpeech(speakItem(target, lang));
+    }
+    dispatch(action);
+  };
+
   const handleStart = () => {
-    // iOS Safari: 사용자가 탭한 이 핸들러 안에서 첫 재생을 시작해야 이후 자동 재생이 된다
-    setPendingCardSpeech(speak(items[0].text, items[0].audio));
     onStart?.();
-    dispatch({ type: "start" });
-  };
-
-  /** "다음" 탭 — 다음 카드(또는 전체 듣기 첫 단어)의 speak() 를 이 탭 핸들러 안에서 바로 시작한다. */
-  const handleNextCard = () => {
-    if (step.kind !== "card") return;
-    const nextIndex = step.index + 1;
-    if (nextIndex < items.length) {
-      setPendingCardSpeech(speak(items[nextIndex].text, items[nextIndex].audio));
-    } else if (items[0]) {
-      setPendingListenSpeech(speak(items[0].text, items[0].audio));
-    }
-    dispatch({ type: "nextCard" });
-  };
-
-  /** "퀴즈 풀기" 탭 — 첫 문제가 듣고 고르기면 그 speak() 도 이 탭 핸들러 안에서 미리 시작한다. */
-  const handleSentencesDone = () => {
-    const firstQuiz = quiz[0];
-    if (firstQuiz?.type === "listen_choice") {
-      const target = content.itemsById.get(firstQuiz.targetItemId);
-      if (target) setPendingQuizSpeech(speak(target.text, target.audio));
-    }
-    dispatch({ type: "sentencesDone" });
+    advance({ type: "start" });
   };
 
   /**
@@ -126,16 +140,21 @@ export function LessonRunner({
     if (step.kind !== "quiz") return;
     const currentQuiz = quiz[step.index];
     const currentTarget = content.itemsById.get(currentQuiz.targetItemId);
-    setPendingRevealSpeech(!correct && currentTarget ? speak(currentTarget.text, currentTarget.audio) : null);
+    setPendingRevealSpeech(!correct && currentTarget ? speakItem(currentTarget, lang) : null);
 
     const nextQuiz = quiz[step.index + 1];
     if (nextQuiz?.type === "listen_choice") {
       const nextTarget = content.itemsById.get(nextQuiz.targetItemId);
-      setPendingQuizSpeech(nextTarget ? speak(nextTarget.text, nextTarget.audio) : null);
+      setPendingQuizSpeech(nextTarget ? speakItem(nextTarget, lang) : null);
     } else {
       setPendingQuizSpeech(null);
     }
-    dispatch({ type: "answer", targetItemId: currentQuiz.targetItemId, correct, chosen });
+    dispatch({
+      type: "answer",
+      targetItemId: currentQuiz.targetItemId,
+      correct,
+      chosen,
+    });
   };
 
   const finishQuiz = useCallback(
@@ -158,89 +177,88 @@ export function LessonRunner({
   };
 
   const step = sheet.step;
-  const stepRatio = progressRatio(sheet);
+  const stepRatio = sheetProgress(sheet);
 
   return (
-    <Screen>
-      {banner ? (
-        <p className="rounded-xl bg-amber-100 px-3 py-2 text-center text-base font-semibold text-amber-900">{banner}</p>
-      ) : null}
-      <div className="flex items-center gap-3">
-        <div className="flex-1">
-          <ProgressBar label={`${unitLabelOf(content.pack)} · ${lesson.order}/${content.lessons.length}장`} ratio={stepRatio} />
+    <SpeechLangProvider lang={lang}>
+      <Screen>
+        {banner ? <p className="rounded-xl bg-amber-100 px-3 py-2 text-center text-base font-semibold text-amber-900">{banner}</p> : null}
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <ProgressBar label={`${unitLabelOf(content.pack)} · ${lesson.order}/${content.lessons.length}장`} ratio={stepRatio} />
+          </div>
+          {onAbort && step.kind !== "done" ? (
+            <button
+              type="button"
+              aria-label="그만하고 홈으로"
+              onClick={handleAbort}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-2xl font-bold text-slate-600 ring-1 ring-slate-200"
+            >
+              ✕
+            </button>
+          ) : null}
         </div>
-        {onAbort && step.kind !== "done" ? (
-          <button
-            type="button"
-            aria-label="그만하고 홈으로"
-            onClick={handleAbort}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-2xl font-bold text-slate-600 ring-1 ring-slate-200"
-          >
-            ✕
-          </button>
-        ) : null}
-      </div>
-      {step.kind === "intro" && <IntroStep lesson={lesson} onStart={handleStart} />}
-      {step.kind === "card" && (
-        <CardStep
-          key={step.index}
-          word={items[step.index]}
-          index={step.index}
-          total={items.length}
-          pendingSpeech={pendingCardSpeech}
-          onNext={handleNextCard}
-        />
-      )}
-      {step.kind === "listenAll" && (
-        <ListenAllStep words={items} pendingFirstSpeech={pendingListenSpeech} onDone={() => dispatch({ type: "listenAllDone" })} />
-      )}
-      {step.kind === "sentences" && <SentencesStep sentences={lesson.sentences} onDone={handleSentencesDone} />}
-      {step.kind === "quiz" && (
-        <QuizStep
-          key={step.index}
-          quiz={quiz[step.index]}
-          index={step.index}
-          total={quiz.length}
-          target={content.itemsById.get(quiz[step.index].targetItemId)!}
-          feedback={step.feedback}
-          pendingSpeech={pendingQuizSpeech}
-          pendingRevealSpeech={pendingRevealSpeech}
-          onAnswer={handleAnswer}
-          onFinished={onQuizFinished}
-        />
-      )}
-      {step.kind === "done" && (
-        <DoneStep
-          score={sheetScore(sheet)}
-          total={quiz.length}
-          wrongWords={wrongItemIds(sheet)
-            .map((id) => content.itemsById.get(id)!)
-            .filter(Boolean)}
-          onHome={() => {
-            stopSpeaking();
-            onHome();
-          }}
-        />
-      )}
-    </Screen>
+        {step.kind === "intro" && <IntroStep lesson={lesson} onStart={handleStart} />}
+        {step.kind === "card" && (
+          <CardStep
+            key={step.index}
+            word={items[step.index]}
+            index={step.index}
+            total={items.length}
+            pendingSpeech={pendingCardSpeech}
+            onNext={() => advance({ type: "nextCard" })}
+          />
+        )}
+        {step.kind === "listenAll" && (
+          <ListenAllStep words={items} pendingFirstSpeech={pendingListenSpeech} onDone={() => advance({ type: "listenAllDone" })} />
+        )}
+        {step.kind === "sentences" && <SentencesStep sentences={lesson.sentences} onDone={() => advance({ type: "sentencesDone" })} />}
+        {step.kind === "practice" && (
+          <PracticeStep
+            key={step.index}
+            problem={problems[step.index]}
+            index={step.index}
+            total={problems.length}
+            onNext={() => advance({ type: "nextPractice" })}
+          />
+        )}
+        {step.kind === "patterns" && (
+          <PatternsStep
+            key={step.index}
+            pattern={items[step.index]}
+            index={step.index}
+            total={items.length}
+            onNext={() => advance({ type: "nextPattern" })}
+          />
+        )}
+        {step.kind === "quiz" && (
+          <QuizStep
+            key={step.index}
+            quiz={quiz[step.index]}
+            index={step.index}
+            total={quiz.length}
+            target={content.itemsById.get(quiz[step.index].targetItemId)!}
+            feedback={step.feedback}
+            pendingSpeech={pendingQuizSpeech}
+            pendingRevealSpeech={pendingRevealSpeech}
+            onAnswer={handleAnswer}
+            onFinished={onQuizFinished}
+          />
+        )}
+        {step.kind === "done" && (
+          <DoneStep
+            score={sheetScore(sheet)}
+            total={quiz.length}
+            wrongWords={wrongItemIds(sheet)
+              .map((id) => content.itemsById.get(id)!)
+              .filter(Boolean)}
+            onHome={() => {
+              stopSpeaking();
+              onHome();
+            }}
+          />
+        )}
+      </Screen>
+    </SpeechLangProvider>
   );
-}
-
-/** 상단 진행 바: 소리 1 + 카드 N + 전체 듣기 1 + 예문 1 + 퀴즈 M 단계 중 어디인지 */
-function progressRatio(s: SheetState): number {
-  const total = 1 + s.itemCount + 1 + 1 + s.quizCount;
-  const step = s.step;
-  const done =
-    step.kind === "intro"
-      ? 0
-      : step.kind === "card"
-        ? 1 + step.index
-        : step.kind === "listenAll"
-          ? 1 + s.itemCount
-          : step.kind === "sentences"
-            ? 2 + s.itemCount
-            : step.kind === "quiz"
-              ? 3 + s.itemCount + step.index
-              : total;
-  return done / total;
 }
