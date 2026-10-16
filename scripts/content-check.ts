@@ -25,6 +25,16 @@ if (!content) {
 }
 writeFileSync(join(root, "docs/content-review.md"), renderReviewMarkdown(content));
 
+// 팩별 요약
+console.log("팩                      상태   레슨  아이템  검수완료  testOnly");
+for (const c of result.contents) {
+  const reviewed = c.lessons.filter((l) => l.reviewed).length;
+  const testOnly = c.lessons.filter((l) => l.testOnly).length;
+  console.log(
+    `${c.pack.id.padEnd(23)} ${c.pack.status.padEnd(5)} ${String(c.lessons.length).padStart(4)}  ${String(c.items.length).padStart(5)}  ${String(reviewed).padStart(7)}  ${String(testOnly).padStart(7)}`,
+  );
+}
+
 const pending = content.lessons.filter((l) => !l.reviewed).map((l) => `L${l.order}`);
 console.log(`content:check 통과 — 팩 ${result.contents.length}개, 아이템 ${content.items.length}개, 레슨 ${content.lessons.length}장`);
 console.log(`검수표: docs/content-review.md${pending.length ? ` (검수 대기: ${pending.join(", ")})` : ""}`);

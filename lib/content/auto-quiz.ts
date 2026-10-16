@@ -28,7 +28,8 @@ export type AutoQuizResult = { quiz: Quiz[] } | { error: string };
 
 function wantedTypes(rules: PackRules, hasImageable: boolean): QuizType[] {
   const required = rules.requiredQuizTypes ?? [];
-  let base: QuizType[] = [...(required.length ? required : rules.allowedQuizTypes)];
+  // 필수 유형을 따로 정하지 않았다면, 그림 가능한 아이템이 없는 장에서는 그림 문항을 빼고 나머지로 채운다
+  let base: QuizType[] = required.length ? [...required] : rules.allowedQuizTypes.filter((t) => hasImageable || t !== "picture_choice");
   if (rules.allowQuizTypeSubstitution && !hasImageable && base.includes("picture_choice")) {
     // picture_choice 한 자리를 fill_blank 나 listen_choice 로 바꾼다. 이미 필수로 들어 있는 두 유형과 합쳐 3칸(각각 1개 이상)이 된다.
     const sub = SUBSTITUTE_FOR_PICTURE.find((t) => rules.allowedQuizTypes.includes(t));
