@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "购物 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u4fbfu5b9cu4e00u70b9",
+      "kind": "hanzi",
+      "text": "便宜一点",
+      "meaningKo": "좀 깎아 주세요",
+      "reading": "piányi yīdiǎn",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u53efu4ee5u5237u5361u5417",
+      "kind": "hanzi",
+      "text": "可以刷卡吗",
+      "meaningKo": "카드 되나요?",
+      "reading": "kěyǐ shuākǎ ma",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u6211u8981u4e2du53f7",
+      "kind": "hanzi",
+      "text": "我要中号",
+      "meaningKo": "미디엄 주세요",
+      "reading": "wǒ yào zhōnghào",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u6709u522bu7684u989cu8272u5417",
+      "kind": "hanzi",
+      "text": "有别的颜色吗",
+      "meaningKo": "다른 색 있나요?",
+      "reading": "yǒu biéde yánsè ma",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u8bd5u8863u95f4u5728u54ea",
+      "kind": "hanzi",
+      "text": "试衣间在哪",
+      "meaningKo": "탈의실이 어디예요?",
+      "reading": "shìyī jiān zài nǎ",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u6211u770bu770b",
+      "kind": "hanzi",
+      "text": "我看看",
+      "meaningKo": "구경만 할게요",
+      "reading": "wǒ kànkan",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "问候 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u4f60u597d",
+      "kind": "hanzi",
+      "text": "你好",
+      "meaningKo": "안녕하세요",
+      "reading": "nǐ hǎo",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u8c22u8c22",
+      "kind": "hanzi",
+      "text": "谢谢",
+      "meaningKo": "감사합니다",
+      "reading": "xièxie",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u5bf9u4e0du8d77",
+      "kind": "hanzi",
+      "text": "对不起",
+      "meaningKo": "미안합니다",
+      "reading": "duìbuqǐ",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u8bf7",
+      "kind": "hanzi",
+      "text": "请",
+      "meaningKo": "부탁합니다",
+      "reading": "qǐng",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u662f",
+      "kind": "hanzi",
+      "text": "是",
+      "meaningKo": "네",
+      "reading": "shì",
+      "imageable": false,
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "u4e0du662f",
+      "kind": "hanzi",
+      "text": "不是",
+      "meaningKo": "아니요",
+      "reading": "bù shì",
+      "imageable": false,
+      "tags": [
+        "basic"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

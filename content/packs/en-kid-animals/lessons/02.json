@@ -92,6 +92,6 @@
       ]
     }
   ],
-  "reviewed": false,
-  "testOnly": true
+  "reviewed": true,
+  "testOnly": false
 }

@@ -1,0 +1,19 @@
+text,meaningKo,emoji,tags,imageable
+sunny,맑은,☀️,weather,true
+cloudy,흐린,☁️,weather,true
+rainy,비 오는,🌧️,weather,true
+snowy,눈 오는,❄️,weather,true
+windy,바람 부는,💨,weather,true
+hot,더운,🔥,weather,true
+cold,추운,🥶,weather,true
+warm,따뜻한,🌤️,weather,true
+storm,폭풍,⛈️,weather,true
+rainbow,무지개,🌈,weather,true
+fog,안개,🌫️,weather,true
+thunder,천둥,⚡,weather,true
+cloud,구름,☁️,weather,true
+sun,해,☀️,weather,true
+moon,달,🌙,weather,true
+star,별,⭐,weather,true
+ice,얼음,🧊,weather,true
+spring,봄,🌸,weather,true

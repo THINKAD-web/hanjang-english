@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "airport 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "is-there-a-delayu3f",
+      "kind": "phrase",
+      "text": "Is there a delay?",
+      "meaningKo": "지연됐나요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "i-need-to-change-my-flight",
+      "kind": "phrase",
+      "text": "I need to change my flight.",
+      "meaningKo": "항공편 변경해야 해요.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "this-is-my-boarding-pass",
+      "kind": "phrase",
+      "text": "This is my boarding pass.",
+      "meaningKo": "탑승권입니다.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "where-is-the-restroomu3f",
+      "kind": "phrase",
+      "text": "Where is the restroom?",
+      "meaningKo": "화장실이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "i-feel-sick",
+      "kind": "phrase",
+      "text": "I feel sick.",
+      "meaningKo": "몸이 안 좋아요.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "thank-you-for-your-help",
+      "kind": "phrase",
+      "text": "Thank you for your help.",
+      "meaningKo": "도와주셔서 감사합니다.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "airport 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "where-is-the-check-in-counteru3f",
+      "kind": "phrase",
+      "text": "Where is the check-in counter?",
+      "meaningKo": "체크인 카운터가 어디예요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "i-have-a-reservation",
+      "kind": "phrase",
+      "text": "I have a reservation.",
+      "meaningKo": "예약했어요.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "here-is-my-passport",
+      "kind": "phrase",
+      "text": "Here is my passport.",
+      "meaningKo": "여권입니다.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "is-this-flight-on-timeu3f",
+      "kind": "phrase",
+      "text": "Is this flight on time?",
+      "meaningKo": "이 비행기 정시 출발인가요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "which-gate-is-itu3f",
+      "kind": "phrase",
+      "text": "Which gate is it?",
+      "meaningKo": "게이트가 어디예요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "i-d-like-a-window-seat",
+      "kind": "phrase",
+      "text": "I'd like a window seat.",
+      "meaningKo": "창가 좌석 주세요.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,kind
+I have a reservation under Kim.,김으로 예약했어요.,hotel,false,phrase
+I'd like to check in.,체크인할게요.,hotel,false,phrase
+What time is check-out?,체크아웃 시간이 언제예요?,hotel,false,phrase
+Could I have a wake-up call?,모닝콜 부탁해요.,hotel,false,phrase
+"The Wi-Fi password, please.",와이파이 비밀번호 주세요.,hotel,false,phrase
+Is breakfast included?,조식 포함인가요?,hotel,false,phrase
+Could you send housekeeping?,청소 부탁해요.,hotel,false,phrase
+The air conditioner is broken.,에어컨이 고장났어요.,hotel,false,phrase
+I need extra towels.,수건 더 주세요.,hotel,false,phrase
+Could I extend my stay?,연박 가능한가요?,hotel,false,phrase
+Where is the gym?,헬스장이 어디예요?,hotel,false,phrase
+I'd like to check out.,체크아웃할게요.,hotel,false,phrase
+Can I store my luggage?,짐 맡길 수 있나요?,hotel,false,phrase
+Is there room service?,룸서비스 있나요?,hotel,false,phrase
+The key card doesn't work.,카드키가 안 돼요.,hotel,false,phrase
+Could I get a late check-out?,레이트 체크아웃 가능한가요?,hotel,false,phrase
+I'd like a quiet room.,조용한 방 주세요.,hotel,false,phrase
+Thank you for a great stay.,좋은 숙박이었어요.,hotel,false,phrase

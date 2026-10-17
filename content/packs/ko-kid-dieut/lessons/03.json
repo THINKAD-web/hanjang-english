@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "ㄷ 3",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "ud1a0ub07c",
+      "kind": "word",
+      "text": "토끼",
+      "meaningKo": "토끼",
+      "emoji": "🐰",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ud0c0uc870",
+      "kind": "word",
+      "text": "타조",
+      "meaningKo": "타조",
+      "emoji": "🦤",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ud130ub110",
+      "kind": "word",
+      "text": "터널",
+      "meaningKo": "터널",
+      "emoji": "🚇",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ud2a4ub9bd",
+      "kind": "word",
+      "text": "튤립",
+      "meaningKo": "튤립",
+      "emoji": "🌷",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ud0c1uc790",
+      "kind": "word",
+      "text": "탁자",
+      "meaningKo": "탁자",
+      "emoji": "🪑",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ud154ub808ube44",
+      "kind": "word",
+      "text": "텔레비",
+      "meaningKo": "텔레비",
+      "emoji": "📺",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

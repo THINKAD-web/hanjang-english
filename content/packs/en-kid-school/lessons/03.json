@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "학교 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "eraser",
+      "kind": "word",
+      "text": "eraser",
+      "meaningKo": "지우개",
+      "emoji": "🧽",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "notebook",
+      "kind": "word",
+      "text": "notebook",
+      "meaningKo": "공책",
+      "emoji": "📓",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "school",
+      "kind": "word",
+      "text": "school",
+      "meaningKo": "학교",
+      "emoji": "🏫",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "playground",
+      "kind": "word",
+      "text": "playground",
+      "meaningKo": "운동장",
+      "emoji": "⚽",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "library",
+      "kind": "word",
+      "text": "library",
+      "meaningKo": "도서관",
+      "emoji": "📖",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "clock",
+      "kind": "word",
+      "text": "clock",
+      "meaningKo": "시계",
+      "emoji": "🕐",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

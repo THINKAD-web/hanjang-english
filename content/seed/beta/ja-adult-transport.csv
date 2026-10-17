@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,kind
+駅はどこですか,역이 어디예요?,trans,false,phrase
+切符を買いたいです,표 사고 싶어요,trans,false,phrase
+この電車は何番線ですか,이 기차 몇 번 선로예요?,trans,false,phrase
+次の停車駅はどこですか,다음 역이 어디예요?,trans,false,phrase
+乗り換えはどこですか,환승은 어디서 해요?,trans,false,phrase
+タクシーを呼んでください,택시 불러 주세요,trans,false,phrase
+空港まで行きたいです,공항까지 가고 싶어요,trans,false,phrase
+ICカードは使えますか,IC카드 되나요?,trans,false,phrase
+終電は何時ですか,막차가 몇 시예요?,trans,false,phrase
+バス停はどこですか,버스 정류장이 어디예요?,trans,false,phrase
+道に迷いました,길을 잃었어요,trans,false,phrase
+ここから歩けますか,여기서 걸어갈 수 있나요?,trans,false,phrase
+遅延していますか,지연됐나요?,trans,false,phrase
+指定席をお願いします,지정석 주세요,trans,false,phrase
+降りる駅を教えてください,내릴 역 알려 주세요,trans,false,phrase
+定期券はありますか,정기권 있나요?,trans,false,phrase
+左側にお下がりください,왼쪽으로 비켜 주세요,trans,false,phrase
+ありがとうございました,감사했습니다,trans,false,phrase

@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "ㄷ 1",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3137",
+      "kind": "word",
+      "text": "ㄷ",
+      "meaningKo": "디귿",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u314c",
+      "kind": "word",
+      "text": "ㅌ",
+      "meaningKo": "티읕",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "ub2e4",
+      "kind": "word",
+      "text": "다",
+      "meaningKo": "다",
+      "imageable": false,
+      "tags": [
+        "syll"
+      ]
+    },
+    {
+      "id": "ub354",
+      "kind": "word",
+      "text": "더",
+      "meaningKo": "더",
+      "imageable": false,
+      "tags": [
+        "syll"
+      ]
+    },
+    {
+      "id": "ub3c4",
+      "kind": "word",
+      "text": "도",
+      "meaningKo": "도",
+      "imageable": false,
+      "tags": [
+        "syll"
+      ]
+    },
+    {
+      "id": "ub450",
+      "kind": "word",
+      "text": "두",
+      "meaningKo": "두",
+      "imageable": false,
+      "tags": [
+        "syll"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

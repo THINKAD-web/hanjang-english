@@ -2,6 +2,10 @@
   { "id": "en-kid", "name": "어린이 영어", "audience": "kid", "icon": "🔤", "order": 1 },
   { "id": "math-kid", "name": "어린이 수학", "audience": "kid", "icon": "➕", "order": 2 },
   { "id": "ja-kid", "name": "어린이 일본어", "audience": "kid", "icon": "🎌", "order": 3 },
+  { "id": "science-kid", "name": "어린이 상식", "audience": "kid", "icon": "🔬", "order": 4 },
+  { "id": "ko-kid", "name": "어린이 한글", "audience": "kid", "icon": "ㄱ", "order": 5 },
   { "id": "en-adult", "name": "성인 영어", "audience": "adult", "icon": "✈️", "order": 1 },
-  { "id": "ja-adult", "name": "성인 일본어", "audience": "adult", "icon": "🗾", "order": 2 }
+  { "id": "ja-adult", "name": "성인 일본어", "audience": "adult", "icon": "🗾", "order": 2 },
+  { "id": "zh-adult", "name": "성인 중국어", "audience": "adult", "icon": "中", "order": 3 },
+  { "id": "ko-adult", "name": "성인 한국어", "audience": "adult", "icon": "🇰🇷", "order": 4 }
 ]

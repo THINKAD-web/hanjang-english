@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "opinion 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "i-think-we-should-wait",
+      "kind": "phrase",
+      "text": "I think we should wait.",
+      "meaningKo": "기다리는 게 좋겠어요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "in-my-opinionu2c-that-s-risky",
+      "kind": "phrase",
+      "text": "In my opinion, that's risky.",
+      "meaningKo": "제 생각엔 위험해요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "i-agree-with-you",
+      "kind": "phrase",
+      "text": "I agree with you.",
+      "meaningKo": "동의해요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "i-m-not-sure-about-that",
+      "kind": "phrase",
+      "text": "I'm not sure about that.",
+      "meaningKo": "그건 잘 모르겠어요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "could-you-explain-moreu3f",
+      "kind": "phrase",
+      "text": "Could you explain more?",
+      "meaningKo": "더 설명해 주실래요?",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "that-makes-sense",
+      "kind": "phrase",
+      "text": "That makes sense.",
+      "meaningKo": "말이 되네요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

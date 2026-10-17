@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "동작 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "play",
+      "kind": "word",
+      "text": "play",
+      "meaningKo": "놀다",
+      "emoji": "🎮",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "swim",
+      "kind": "word",
+      "text": "swim",
+      "meaningKo": "수영하다",
+      "emoji": "🏊",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "draw",
+      "kind": "word",
+      "text": "draw",
+      "meaningKo": "그리다",
+      "emoji": "🎨",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "clap",
+      "kind": "word",
+      "text": "clap",
+      "meaningKo": "박수치다",
+      "emoji": "👏",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "smile",
+      "kind": "word",
+      "text": "smile",
+      "meaningKo": "웃다",
+      "emoji": "😊",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "listen",
+      "kind": "word",
+      "text": "listen",
+      "meaningKo": "듣다",
+      "emoji": "👂",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,26 @@
+{
+  "id": "en-kid-food",
+  "subjectId": "en-kid",
+  "title": "어린이 영어 · 음식",
+  "level": "초급",
+  "levelOrder": 1,
+  "order": 6,
+  "ttsLang": "en-US",
+  "status": "live",
+  "access": "free",
+  "rules": {
+    "itemsPerLesson": 6,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": [
+      "picture_choice",
+      "meaning_choice",
+      "listen_choice",
+      "ox"
+    ],
+    "autoQuiz": true
+  },
+  "unitLabel": "음식",
+  "tagLabel": "먹을거"
+}

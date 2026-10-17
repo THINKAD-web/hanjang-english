@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "동작 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "run",
+      "kind": "word",
+      "text": "run",
+      "meaningKo": "달리다",
+      "emoji": "🏃",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "walk",
+      "kind": "word",
+      "text": "walk",
+      "meaningKo": "걷다",
+      "emoji": "🚶",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "jump",
+      "kind": "word",
+      "text": "jump",
+      "meaningKo": "뛰다",
+      "emoji": "🦘",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "sit",
+      "kind": "word",
+      "text": "sit",
+      "meaningKo": "앉다",
+      "emoji": "🪑",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "stand",
+      "kind": "word",
+      "text": "stand",
+      "meaningKo": "서다",
+      "emoji": "🧍",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "eat",
+      "kind": "word",
+      "text": "eat",
+      "meaningKo": "먹다",
+      "emoji": "🍽️",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

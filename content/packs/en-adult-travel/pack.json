@@ -10,7 +10,7 @@
   "unitLabel": "travel",
   "tagLabel": "상황",
   "ttsLang": "en-US",
-  "status": "soon",
+  "status": "live",
   "rules": {
     "itemsPerLesson": 8,
     "sentencesPerLesson": 0,

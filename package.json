@@ -18,7 +18,8 @@
     "content:import": "tsx scripts/content-import.ts",
     "content:csv": "tsx scripts/content-csv.ts",
     "content:report": "tsx scripts/content-report.ts",
-    "content:seed": "tsx scripts/content-seed.ts"
+    "content:seed": "tsx scripts/content-seed.ts",
+    "content:beta-expand": "tsx scripts/content-beta-expand.ts"
   },
   "dependencies": {
     "next": "16.3.6",

@@ -47,7 +47,11 @@ describe.each(FIXTURES)("마이그레이션 %s", (name) => {
   it("도장·진도·오답 수·오늘 판단이 이전 기록 그대로 계산된다", () => {
     const s = result.state;
     // 도장: 옛 기록의 완료 날짜 집합과 칸마다 일치
-    const doneDates = new Set<string>(legacy.attempts.filter((a: { completed: boolean }) => a.completed).map((a: { dateKey: string }) => a.dateKey));
+    const doneDates = new Set<string>(
+      legacy.attempts
+        .filter((a: { completed: boolean; kind: string }) => a.completed && a.kind === "lesson")
+        .map((a: { dateKey: string }) => a.dateKey),
+    );
     for (const day of ["2026-09-21", "2026-09-24", "2026-09-27", "2026-09-30"]) {
       const cells = weekStamps(s, day);
       expect(cells.map((c) => c.stamped)).toEqual(weekRange(day).map((d) => doneDates.has(d)));

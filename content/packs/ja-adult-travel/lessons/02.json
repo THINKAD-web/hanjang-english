@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "travel 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u30c8u30a4u30ecu306fu3069u3053u3067u3059u304b",
+      "kind": "phrase",
+      "text": "トイレはどこですか",
+      "meaningKo": "화장실이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "travel"
+      ]
+    },
+    {
+      "id": "u99c5u306fu3069u3053u3067u3059u304b",
+      "kind": "phrase",
+      "text": "駅はどこですか",
+      "meaningKo": "역이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "travel"
+      ]
+    },
+    {
+      "id": "u3044u304fu3089u3067u3059u304b",
+      "kind": "phrase",
+      "text": "いくらですか",
+      "meaningKo": "얼마예요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "ください",
+      "meaningKo": "주세요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u6c34u3092u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "水をください",
+      "meaningKo": "물 주세요",
+      "imageable": false,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "u30e1u30cbu30e5u30fcu3092u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "メニューをください",
+      "meaningKo": "메뉴 주세요",
+      "imageable": false,
+      "tags": [
+        "food"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

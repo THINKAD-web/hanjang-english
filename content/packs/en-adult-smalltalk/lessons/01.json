@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "chat 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "how-s-your-week-goingu3f",
+      "kind": "phrase",
+      "text": "How's your week going?",
+      "meaningKo": "한 주 어떻게 지내세요?",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "nice-weather-today",
+      "kind": "phrase",
+      "text": "Nice weather today.",
+      "meaningKo": "오늘 날씨 좋네요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "did-you-have-a-good-weekendu3f",
+      "kind": "phrase",
+      "text": "Did you have a good weekend?",
+      "meaningKo": "주말 잘 보내셨어요?",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "how-was-your-tripu3f",
+      "kind": "phrase",
+      "text": "How was your trip?",
+      "meaningKo": "출장 어떠셨어요?",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "long-time-no-see",
+      "kind": "phrase",
+      "text": "Long time no see.",
+      "meaningKo": "오랜만이에요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "what-have-you-been-up-tou3f",
+      "kind": "phrase",
+      "text": "What have you been up to?",
+      "meaningKo": "요즘 뭐 하고 지내세요?",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

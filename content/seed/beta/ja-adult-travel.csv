@@ -1,0 +1,19 @@
+text,meaningKo,emoji,tags,imageable,kind
+こんにちは,안녕하세요,,greet,false,phrase
+ありがとう,감사합니다,,greet,false,phrase
+すみません,실례합니다,,greet,false,phrase
+お願いします,부탁합니다,,greet,false,phrase
+はい,네,,basic,false,phrase
+いいえ,아니요,,basic,false,phrase
+トイレはどこですか,화장실이 어디예요?,,travel,false,phrase
+駅はどこですか,역이 어디예요?,,travel,false,phrase
+いくらですか,얼마예요?,,shop,false,phrase
+ください,주세요,,shop,false,phrase
+水をください,물 주세요,,food,false,phrase
+メニューをください,메뉴 주세요,,food,false,phrase
+予約しました,예약했어요,,hotel,false,phrase
+チェックイン,체크인,,hotel,false,phrase
+写真を撮ってもいいですか,사진 찍어도 될까요?,,travel,false,phrase
+助けてください,도와주세요,,help,false,phrase
+道に迷いました,길을 잃었어요,,help,false,phrase
+タクシーをお願いします,택시 불러 주세요,,travel,false,phrase

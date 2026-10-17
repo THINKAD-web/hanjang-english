@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "dining 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "a-table-for-twou2c-please",
+      "kind": "phrase",
+      "text": "A table for two, please.",
+      "meaningKo": "두 명 자리 주세요.",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "could-we-see-the-menuu3f",
+      "kind": "phrase",
+      "text": "Could we see the menu?",
+      "meaningKo": "메뉴판 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "i-d-like-to-order",
+      "kind": "phrase",
+      "text": "I'd like to order.",
+      "meaningKo": "주문할게요.",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "what-do-you-recommendu3f",
+      "kind": "phrase",
+      "text": "What do you recommend?",
+      "meaningKo": "추천 메뉴가 뭐예요?",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "i-m-allergic-to-nuts",
+      "kind": "phrase",
+      "text": "I'm allergic to nuts.",
+      "meaningKo": "견과류 알레르기가 있어요.",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "no-iceu2c-please",
+      "kind": "phrase",
+      "text": "No ice, please.",
+      "meaningKo": "얼음 빼 주세요.",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

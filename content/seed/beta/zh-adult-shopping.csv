@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,reading,kind
+一,하나,number,false,yī,hanzi
+二,둘,number,false,èr,hanzi
+三,셋,number,false,sān,hanzi
+十,열,number,false,shí,hanzi
+百,백,number,false,bǎi,hanzi
+太贵了,너무 비싸요,shop,false,tài guì le,hanzi
+便宜一点,좀 깎아 주세요,shop,false,piányi yīdiǎn,hanzi
+可以刷卡吗,카드 되나요?,shop,false,kěyǐ shuākǎ ma,hanzi
+我要中号,미디엄 주세요,shop,false,wǒ yào zhōnghào,hanzi
+有别的颜色吗,다른 색 있나요?,shop,false,yǒu biéde yánsè ma,hanzi
+试衣间在哪,탈의실이 어디예요?,shop,false,shìyī jiān zài nǎ,hanzi
+我看看,구경만 할게요,shop,false,wǒ kànkan,hanzi
+买单,계산할게요,shop,false,mǎidān,hanzi
+打折吗,할인하나요?,shop,false,dǎzhé ma,hanzi
+包邮吗,무료 배송인가요?,shop,false,bāoyóu ma,hanzi
+退货,환불,shop,false,tuìhuò,hanzi
+发票,영수증,shop,false,fāpiào,hanzi
+谢谢,감사합니다,greet,false,xièxie,hanzi

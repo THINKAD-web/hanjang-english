@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "ㄱㄴ 3",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u314d",
+      "kind": "word",
+      "text": "ㅍ",
+      "meaningKo": "피읖",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u314e",
+      "kind": "word",
+      "text": "ㅎ",
+      "meaningKo": "히읗",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u314f",
+      "kind": "word",
+      "text": "ㅏ",
+      "meaningKo": "아",
+      "imageable": false,
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "u3151",
+      "kind": "word",
+      "text": "ㅑ",
+      "meaningKo": "야",
+      "imageable": false,
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "u3153",
+      "kind": "word",
+      "text": "ㅓ",
+      "meaningKo": "어",
+      "imageable": false,
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "u3155",
+      "kind": "word",
+      "text": "ㅕ",
+      "meaningKo": "여",
+      "imageable": false,
+      "tags": [
+        "vowel"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "transport 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u9045u5ef6u3057u3066u3044u307eu3059u304b",
+      "kind": "phrase",
+      "text": "遅延していますか",
+      "meaningKo": "지연됐나요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u6307u5b9au5e2du3092u304au9858u3044u3057u307eu3059",
+      "kind": "phrase",
+      "text": "指定席をお願いします",
+      "meaningKo": "지정석 주세요",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u964du308au308bu99c5u3092u6559u3048u3066u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "降りる駅を教えてください",
+      "meaningKo": "내릴 역 알려 주세요",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u5b9au671fu5238u306fu3042u308au307eu3059u304b",
+      "kind": "phrase",
+      "text": "定期券はありますか",
+      "meaningKo": "정기권 있나요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u5de6u5074u306bu304au4e0bu304cu308au304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "左側にお下がりください",
+      "meaningKo": "왼쪽으로 비켜 주세요",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u3042u308au304cu3068u3046u3054u3056u3044u307eu3057u305f",
+      "kind": "phrase",
+      "text": "ありがとうございました",
+      "meaningKo": "감사했습니다",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

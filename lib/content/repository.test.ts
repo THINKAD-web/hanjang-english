@@ -50,39 +50,55 @@ describe("content build", () => {
 });
 
 describe("ContentRepository — 공개 게이트", () => {
-  it("Production: 시드 팩은 목록에도 없고 열 수도 없다. Debug 에서는 열린다", async () => {
+  it("Production: 베타 공개 팩(math)과 정식 팩만 열리고, 나머지 시드 팩은 없다. Debug 에서는 전부 열린다", async () => {
     const { dir } = build();
     const prod = createFetchRepository({ fetchImpl: fakeFetch(dir, { n: 0 }), visibility: { debug: false } });
     const ids = (await prod.getManifest()).packs.map((p) => p.id);
     expect(ids).toContain("en-kid-giyeok");
-    expect(ids).not.toContain("math-kid-add-1");
-    await expect(prod.getPack("math-kid-add-1")).rejects.toBeInstanceOf(ContentNotFoundError);
-    await expect(prod.getPack("en-adult-travel")).rejects.toBeInstanceOf(ContentNotFoundError);
+    expect(ids).toContain("math-kid-add-1");
+    expect(ids).toContain("en-adult-travel");
+    expect(ids).toContain("ja-adult-hiragana-1");
+
+    const math = await prod.getPack("math-kid-add-1");
+    expect(math.lessons).toHaveLength(10);
+    const travel = await prod.getPack("en-adult-travel");
+    expect(travel.lessons).toHaveLength(5);
+    const hira = await prod.getPack("ja-adult-hiragana-1");
+    expect(hira.lessons).toHaveLength(5);
 
     const debug = createFetchRepository({ fetchImpl: fakeFetch(dir, { n: 0 }), visibility: { debug: true } });
     expect((await debug.getManifest()).packs.map((p) => p.id)).toContain("math-kid-add-1");
     expect((await debug.getPack("math-kid-add-1")).lessons).toHaveLength(20);
   });
 
-  it("Production 빌드 산출물에는 시드 팩 파일이 아예 없다 (Debug 빌드에는 있다)", () => {
+  it("Production 빌드에는 베타 공개 팩만 포함되고, Debug 빌드에는 시드 팩 전부가 있다", () => {
     const result = buildAll();
     const prod = mkdtempSync(path.join(tmpdir(), "content-prod-"));
     writeBuild(result, prod, { debug: false });
     const files = readdirSync(path.join(prod, "packs"));
     expect(files).toContain("en-kid-giyeok.json");
-    expect(files).not.toContain("math-kid-add-1.json");
-    expect(files).not.toContain("en-adult-travel.json");
-    expect(readFileSync(path.join(prod, "manifest.json"), "utf8")).not.toContain("math-kid-add-1");
+    expect(files).toContain("math-kid-add-1.json");
+    expect(files).toContain("en-adult-travel.json");
+    expect(files).toContain("ja-adult-hiragana-1.json");
+    const prodManifest = JSON.parse(readFileSync(path.join(prod, "manifest.json"), "utf8"));
+    const math = prodManifest.packs.find((p: { id: string }) => p.id === "math-kid-add-1");
+    expect(math.lessonCount).toBe(10);
     const debug = mkdtempSync(path.join(tmpdir(), "content-debug-"));
     writeBuild(result, debug, { debug: true });
     expect(readdirSync(path.join(debug, "packs"))).toContain("math-kid-add-1.json");
   });
 
-  it("Production: 시드 팩 전부의 공개 레슨 수는 0, 정식 팩은 8", async () => {
+  it("Production: 공개 레슨 수 (정식·베타)", async () => {
     const result = buildAll();
     const exposed = Object.fromEntries(result.contents.map((c) => [c.pack.id, publicLessonCount(c.pack, c.lessons)]));
-    for (const id of ["math-kid-add-1", "math-kid-sub-1", "en-kid-animals", "en-adult-travel", "ja-adult-hiragana-1"]) expect(exposed[id]).toBe(0);
+    expect(exposed["en-kid-animals"]).toBe(3);
+    expect(exposed["math-kid-sub-1"]).toBe(3);
     expect(exposed["en-kid-giyeok"]).toBe(8);
+    expect(exposed["math-kid-add-1"]).toBe(10);
+    expect(exposed["en-adult-travel"]).toBe(5);
+    expect(exposed["ja-adult-hiragana-1"]).toBe(5);
+    expect(exposed["en-kid-colors"]).toBe(3);
+    expect(exposed["ja-adult-travel"]).toBe(3);
   });
 });
 

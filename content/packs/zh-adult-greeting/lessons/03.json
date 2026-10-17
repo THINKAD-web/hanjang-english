@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "问候 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u53efu4ee5",
+      "kind": "hanzi",
+      "text": "可以",
+      "meaningKo": "괜찮아요/가능해요",
+      "reading": "kěyǐ",
+      "imageable": false,
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "u4e0du53efu4ee5",
+      "kind": "hanzi",
+      "text": "不可以",
+      "meaningKo": "안 됩니다",
+      "reading": "bù kěyǐ",
+      "imageable": false,
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "u5728u54eau91cc",
+      "kind": "hanzi",
+      "text": "在哪里",
+      "meaningKo": "어디예요?",
+      "reading": "zài nǎlǐ",
+      "imageable": false,
+      "tags": [
+        "travel"
+      ]
+    },
+    {
+      "id": "u6211u8981u8fd9u4e2a",
+      "kind": "hanzi",
+      "text": "我要这个",
+      "meaningKo": "이걸 주세요",
+      "reading": "wǒ yào",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u4e0du8981",
+      "kind": "hanzi",
+      "text": "不要",
+      "meaningKo": "필요 없어요",
+      "reading": "bù yào",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u5e2eu52a9",
+      "kind": "hanzi",
+      "text": "帮助",
+      "meaningKo": "도와주세요",
+      "reading": "bāngzhù",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

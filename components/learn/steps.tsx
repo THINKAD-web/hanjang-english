@@ -7,6 +7,7 @@ import { LESSON_TYPE_LABEL } from "@/lib/content/lesson-steps";
 import type { Item, Lesson, Quiz, Sentence } from "@/lib/content/schema";
 import type { QuizFeedback } from "@/lib/engine/sheet";
 import { speechOf } from "@/lib/content/item-text";
+import { sfxCorrect, sfxWrong } from "@/lib/sfx";
 import { NO_TTS_DELAY_MS, speak, stopSpeaking, ttsSupported } from "@/lib/tts";
 import { useSpeechLang } from "@/lib/tts-lang";
 
@@ -289,6 +290,12 @@ export function QuizStep({
     if (quiz.type === "listen_choice") void (pendingSpeech ?? speak(speechOf(target), target.audio, lang));
   }, [quiz, target, pendingSpeech, lang]);
 
+  const grade = (correct: boolean, chosen: string | boolean) => {
+    if (correct) sfxCorrect();
+    else sfxWrong();
+    onAnswer(correct, chosen);
+  };
+
   // 채점 후 넘어가기
   useEffect(() => {
     if (!feedback) return;
@@ -319,12 +326,12 @@ export function QuizStep({
       {showCard ? (
         <WordCard word={target} />
       ) : quiz.type === "ox" ? (
-        <OxButtons answer={quiz.answer} feedback={feedback} onAnswer={onAnswer} />
+        <OxButtons answer={quiz.answer} feedback={feedback} onAnswer={grade} />
       ) : (
-        <ChoiceButtons options={quiz.options} answer={quiz.answer} feedback={feedback} onAnswer={onAnswer} />
+        <ChoiceButtons options={quiz.options} answer={quiz.answer} feedback={feedback} onAnswer={grade} />
       )}
-      <p className="min-h-8 text-center text-2xl font-bold" aria-live="polite">
-        {feedback ? (feedback.correct ? "딩동댕! 🎉" : "정답을 확인해요") : ""}
+      <p className={`min-h-8 text-center text-2xl font-bold ${feedback?.correct ? "quiz-correct-pop text-emerald-700" : ""}`} aria-live="polite">
+        {feedback ? (feedback.correct ? "딩동댕! 🎉" : "다음에 다시 도전해요 · 정답을 확인해요") : ""}
       </p>
     </section>
   );
@@ -370,16 +377,17 @@ function QuizPrompt({ quiz, target }: { quiz: Quiz; target: Item }) {
 }
 
 function optionClass(state: "idle" | "right" | "wrong" | "dim") {
-  const base = "min-h-16 w-full rounded-2xl px-4 text-3xl font-bold transition active:scale-[0.98]";
+  const base =
+    "min-h-[3.75rem] w-full rounded-[var(--radius-card)] px-4 text-2xl font-bold shadow-[var(--shadow-soft)] transition active:scale-[0.98]";
   switch (state) {
     case "right":
-      return `${base} bg-emerald-600 text-white ring-4 ring-emerald-300`;
+      return `${base} bg-emerald-600 text-white ring-2 ring-emerald-300`;
     case "wrong":
-      return `${base} bg-rose-600 text-white`;
+      return `${base} bg-rose-600 text-white ring-2 ring-rose-300`;
     case "dim":
-      return `${base} bg-white text-slate-500 ring-1 ring-slate-200`;
+      return `${base} bg-white text-slate-500 ring-1 ring-slate-200 shadow-none`;
     default:
-      return `${base} bg-white text-slate-900 ring-2 ring-sky-200`;
+      return `${base} bg-white text-slate-900 ring-2 ring-[var(--color-ring)]`;
   }
 }
 

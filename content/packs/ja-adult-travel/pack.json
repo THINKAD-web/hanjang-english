@@ -2,12 +2,25 @@
   "id": "ja-adult-travel",
   "subjectId": "ja-adult",
   "title": "성인 일본어 · 여행",
-  "level": "A1",
+  "level": "초급",
   "levelOrder": 1,
-  "order": 1,
+  "order": 2,
   "brandLabel": "한장일본어",
   "unitKey": "travel",
   "unitLabel": "travel",
   "ttsLang": "ja-JP",
-  "status": "soon"
+  "status": "live",
+  "rules": {
+    "itemsPerLesson": 6,
+    "allowedQuizTypes": [
+      "meaning_choice",
+      "listen_choice",
+      "ox"
+    ],
+    "autoQuiz": true,
+    "quizPerLesson": 5,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0
+  },
+  "tagLabel": "상황"
 }

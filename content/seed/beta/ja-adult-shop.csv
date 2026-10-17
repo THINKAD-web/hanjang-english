@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,kind
+いらっしゃいませ,어서 오세요,shop,false,phrase
+見ているだけです,그냥 구경이에요,shop,false,phrase
+試着できますか,입어 봐도 될까요?,shop,false,phrase
+もう少し安くなりますか,좀 깎아 주실 수 있나요?,shop,false,phrase
+カードで払えますか,카드 되나요?,shop,false,phrase
+レシートをください,영수증 주세요,shop,false,phrase
+袋は要りません,봉투는 필요 없어요,shop,false,phrase
+別の色はありますか,다른 색 있나요?,shop,false,phrase
+サイズはありますか,사이즈 있나요?,shop,false,phrase
+包装お願いします,포장 부탁해요,shop,false,phrase
+予約した商品です,예약한 상품이에요,shop,false,phrase
+返品できますか,반품 되나요?,shop,false,phrase
+交換したいです,교환하고 싶어요,shop,false,phrase
+在庫はありますか,재고 있나요?,shop,false,phrase
+おすすめは何ですか,추천이 뭐예요?,shop,false,phrase
+これにします,이걸로 할게요,shop,false,phrase
+少々お待ちください,잠시만 기다려 주세요,shop,false,phrase
+ありがとうございました,감사했습니다,shop,false,phrase

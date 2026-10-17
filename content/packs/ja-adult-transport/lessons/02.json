@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "transport 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u7a7au6e2fu307eu3067u884cu304du305fu3044u3067u3059",
+      "kind": "phrase",
+      "text": "空港まで行きたいです",
+      "meaningKo": "공항까지 가고 싶어요",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "icu30abu30fcu30c9u306fu4f7fu3048u307eu3059u304b",
+      "kind": "phrase",
+      "text": "ICカードは使えますか",
+      "meaningKo": "IC카드 되나요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u7d42u96fbu306fu4f55u6642u3067u3059u304b",
+      "kind": "phrase",
+      "text": "終電は何時ですか",
+      "meaningKo": "막차가 몇 시예요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u30d0u30b9u505cu306fu3069u3053u3067u3059u304b",
+      "kind": "phrase",
+      "text": "バス停はどこですか",
+      "meaningKo": "버스 정류장이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u9053u306bu8ff7u3044u307eu3057u305f",
+      "kind": "phrase",
+      "text": "道に迷いました",
+      "meaningKo": "길을 잃었어요",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u3053u3053u304bu3089u6b69u3051u307eu3059u304b",
+      "kind": "phrase",
+      "text": "ここから歩けますか",
+      "meaningKo": "여기서 걸어갈 수 있나요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

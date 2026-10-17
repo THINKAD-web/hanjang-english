@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "나라 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "korea",
+      "kind": "word",
+      "text": "Korea",
+      "meaningKo": "한국",
+      "emoji": "🇰🇷",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "usa",
+      "kind": "word",
+      "text": "USA",
+      "meaningKo": "미국",
+      "emoji": "🇺🇸",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "japan",
+      "kind": "word",
+      "text": "Japan",
+      "meaningKo": "일본",
+      "emoji": "🇯🇵",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "china",
+      "kind": "word",
+      "text": "China",
+      "meaningKo": "중국",
+      "emoji": "🇨🇳",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "france",
+      "kind": "word",
+      "text": "France",
+      "meaningKo": "프랑스",
+      "emoji": "🇫🇷",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "uk",
+      "kind": "word",
+      "text": "UK",
+      "meaningKo": "영국",
+      "emoji": "🇬🇧",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "dining 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "could-we-have-the-billu3f",
+      "kind": "phrase",
+      "text": "Could we have the bill?",
+      "meaningKo": "계산서 주세요.",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "is-service-includedu3f",
+      "kind": "phrase",
+      "text": "Is service included?",
+      "meaningKo": "봉사료 포함인가요?",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "this-is-delicious",
+      "kind": "phrase",
+      "text": "This is delicious.",
+      "meaningKo": "맛있어요.",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "could-i-have-some-wateru3f",
+      "kind": "phrase",
+      "text": "Could I have some water?",
+      "meaningKo": "물 좀 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "we-re-ready-to-order",
+      "kind": "phrase",
+      "text": "We're ready to order.",
+      "meaningKo": "주문할 준비 됐어요.",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    },
+    {
+      "id": "could-we-split-the-billu3f",
+      "kind": "phrase",
+      "text": "Could we split the bill?",
+      "meaningKo": "더치페이 할 수 있을까요?",
+      "imageable": false,
+      "tags": [
+        "dine"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

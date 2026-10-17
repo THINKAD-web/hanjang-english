@@ -20,12 +20,16 @@ export type WrongWord = {
   itemId: string;
   text: string;
   meaningKo: string;
+  tags: string[];
   /** "내일 복습에 넣기" 토글 상태 = WrongQueue.active */
   reviewOn: boolean;
 };
 
 export type TodaySummary = {
+  /** 오늘 lesson Attempt 가 1개 이상 */
   done: boolean;
+  /** 오늘 완료한 장(lesson) 수 — review·오답 연습은 제외 */
+  lessonCount: number;
   attempts: AttemptLine[];
   /** 오늘 틀린 단어 (처음 틀린 순서, 중복 없음). 토글을 꺼서 큐에서 빠진 단어도 남겨서 다시 켤 수 있게 한다. */
   wrong: WrongWord[];
@@ -42,15 +46,17 @@ export function wrongWordById(state: State, content: Content, itemId: string): W
   const item = content.itemsById.get(itemId);
   if (!item) return null;
   const entry = state.wrongQueue.find((w) => w.packId === content.pack.id && w.itemId === itemId && w.profileId === state.activeProfileId);
-  return { itemId, text: item.text, meaningKo: meaningOf(item), reviewOn: entry?.active ?? false };
+  return { itemId, text: item.text, meaningKo: meaningOf(item), tags: item.tags ?? [], reviewOn: entry?.active ?? false };
 }
 
 export function todaySummary(state: State, content: Content, dateKey: DateKey): TodaySummary {
   const today = completedAttempts(state, content.pack.id).filter((a) => a.dateKey === dateKey);
+  const lessons = today.filter((a) => a.kind === "lesson");
   const wrongIds: string[] = [];
   for (const a of today) for (const ans of a.answers) if (!ans.correct && !wrongIds.includes(ans.targetItemId)) wrongIds.push(ans.targetItemId);
   return {
-    done: today.length > 0,
+    done: lessons.length > 0,
+    lessonCount: lessons.length,
     attempts: today.map((a) => ({ kind: a.kind, total: a.answers.length, correct: a.answers.filter((x) => x.correct).length })),
     wrong: wrongIds.map((id) => wrongWordById(state, content, id)).filter((w): w is WrongWord => w !== null),
   };
@@ -101,7 +107,7 @@ export function weekSummary(state: State, content: Content, dateKey: DateKey): W
   return {
     // 홈의 도장 칸과 같은 함수 — 계산을 복사하지 않는다.
     stamps: weekStamps(state, dateKey),
-    doneCount: completedAttempts(state, content.pack.id).filter((a) => week.has(a.dateKey)).length,
+    doneCount: completedAttempts(state, content.pack.id).filter((a) => a.kind === "lesson" && week.has(a.dateKey)).length,
     trickySounds: trickyTags(state, content, dateKey),
   };
 }

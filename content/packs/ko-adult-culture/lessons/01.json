@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "문화 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "uc548ub155ud558uc138uc694",
+      "kind": "phrase",
+      "text": "안녕하세요",
+      "meaningKo": "안녕하세요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uac10uc0acud569ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "감사합니다",
+      "meaningKo": "감사합니다",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uc2e4ub840ud569ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "실례합니다",
+      "meaningKo": "실례합니다",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uc218uace0ud558uc168uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "수고하셨습니다",
+      "meaningKo": "수고하셨습니다",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "ub9ceuc774-ub4dcuc138uc694",
+      "kind": "phrase",
+      "text": "많이 드세요",
+      "meaningKo": "많이 드세요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uc798-uba39uaca0uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "잘 먹겠습니다",
+      "meaningKo": "잘 먹겠습니다",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "날씨 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "cold",
+      "kind": "word",
+      "text": "cold",
+      "meaningKo": "추운",
+      "emoji": "🥶",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "warm",
+      "kind": "word",
+      "text": "warm",
+      "meaningKo": "따뜻한",
+      "emoji": "🌤️",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "storm",
+      "kind": "word",
+      "text": "storm",
+      "meaningKo": "폭풍",
+      "emoji": "⛈️",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "rainbow",
+      "kind": "word",
+      "text": "rainbow",
+      "meaningKo": "무지개",
+      "emoji": "🌈",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "fog",
+      "kind": "word",
+      "text": "fog",
+      "meaningKo": "안개",
+      "emoji": "🌫️",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "thunder",
+      "kind": "word",
+      "text": "thunder",
+      "meaningKo": "천둥",
+      "emoji": "⚡",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

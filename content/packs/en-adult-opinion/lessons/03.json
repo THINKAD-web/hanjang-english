@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "opinion 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "i-disagree-politely",
+      "kind": "phrase",
+      "text": "I disagree politely.",
+      "meaningKo": "정중히 반대 의견이에요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "what-do-you-recommendu3f",
+      "kind": "phrase",
+      "text": "What do you recommend?",
+      "meaningKo": "뭐를 추천하세요?",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "let-s-hear-everyone-s-view",
+      "kind": "phrase",
+      "text": "Let's hear everyone's view.",
+      "meaningKo": "다들 의견 들어 봐요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "i-need-time-to-decide",
+      "kind": "phrase",
+      "text": "I need time to decide.",
+      "meaningKo": "결정하려면 시간이 필요해요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "that-sounds-reasonable",
+      "kind": "phrase",
+      "text": "That sounds reasonable.",
+      "meaningKo": "합리적으로 들려요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "thanks-for-sharing-your-thoughts",
+      "kind": "phrase",
+      "text": "Thanks for sharing your thoughts.",
+      "meaningKo": "의견 감사합니다.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "학교 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "teacher",
+      "kind": "word",
+      "text": "teacher",
+      "meaningKo": "선생님",
+      "emoji": "👩‍🏫",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "student",
+      "kind": "word",
+      "text": "student",
+      "meaningKo": "학생",
+      "emoji": "🧑‍🎓",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "classroom",
+      "kind": "word",
+      "text": "classroom",
+      "meaningKo": "교실",
+      "emoji": "🏫",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "homework",
+      "kind": "word",
+      "text": "homework",
+      "meaningKo": "숙제",
+      "emoji": "📝",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "test",
+      "kind": "word",
+      "text": "test",
+      "meaningKo": "시험",
+      "emoji": "📄",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "ruler",
+      "kind": "word",
+      "text": "ruler",
+      "meaningKo": "자",
+      "emoji": "📏",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

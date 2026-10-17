@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "chat 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "take-your-time",
+      "kind": "phrase",
+      "text": "Take your time.",
+      "meaningKo": "천천히 하세요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "sounds-like-a-plan",
+      "kind": "phrase",
+      "text": "Sounds like a plan.",
+      "meaningKo": "그렇게 하죠.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "catch-you-later",
+      "kind": "phrase",
+      "text": "Catch you later.",
+      "meaningKo": "나중에 봐요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "have-a-safe-flight",
+      "kind": "phrase",
+      "text": "Have a safe flight.",
+      "meaningKo": "안전한 비행 되세요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "good-luck-with-the-presentation",
+      "kind": "phrase",
+      "text": "Good luck with the presentation.",
+      "meaningKo": "발표 화이팅.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "keep-me-posted",
+      "kind": "phrase",
+      "text": "Keep me posted.",
+      "meaningKo": "소식 알려주세요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

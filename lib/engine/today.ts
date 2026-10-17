@@ -22,9 +22,15 @@ export const WEEKDAY_REVIEW_THRESHOLD = 3;
 export const REVIEW_MIN_ITEMS = 5;
 export const REVIEW_MAX_ITEMS = 8;
 
+/** 하루 한도·catch-up 판단에 쓰는 완료 장 (복습·오답 연습 review Attempt 는 제외). */
 export function completedAttemptsOn(state: State, dateKey: DateKey, packId: string) {
   return state.attempts.filter(
-    (a) => a.completed && a.dateKey === dateKey && a.packId === packId && a.profileId === state.activeProfileId,
+    (a) =>
+      a.completed &&
+      a.kind === "lesson" &&
+      a.dateKey === dateKey &&
+      a.packId === packId &&
+      a.profileId === state.activeProfileId,
   );
 }
 

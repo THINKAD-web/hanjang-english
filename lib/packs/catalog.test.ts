@@ -11,6 +11,8 @@ import {
   isOpenPack,
   isUnlocked,
   levelsOf,
+  openPackCountForAudience,
+  openPackCountForSubject,
   packProgressOf,
   packsOf,
   subjectsOf,
@@ -78,6 +80,13 @@ describe("과목 · 레벨 · 팩 목록", () => {
   it("대상(아이/성인)별 과목, 팩이 없는 과목은 뺀다", () => {
     expect(subjectsOf(manifest, "kid").map((s) => s.id)).toEqual(["en-kid", "math-kid"]);
     expect(subjectsOf(manifest, "adult").map((s) => s.id)).toEqual(["en-adult"]);
+  });
+
+  it("열린 팩 수 — 과목·대상 합산 (soon·레슨 없음 제외)", () => {
+    expect(openPackCountForSubject(manifest, "en-kid")).toBe(3);
+    expect(openPackCountForSubject(manifest, "en-adult")).toBe(0);
+    expect(openPackCountForAudience(manifest, "kid")).toBe(4);
+    expect(openPackCountForAudience(manifest, "adult")).toBe(0);
   });
 
   it("레벨 칩은 levelOrder 순서, 같은 레벨은 하나", () => {

@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { ProfileAvatar } from "@/components/design-system";
 import { BigButton, Screen } from "@/components/ui";
+import { loadPrefs, setSfxEnabled } from "@/lib/prefs/client";
 import { todayKey } from "@/lib/engine/date";
 import { addProfile, resetProgress, setGrade, setParentPin, switchProfile } from "@/lib/parent/account";
 import { activeProfile } from "@/lib/packs/catalog";
@@ -22,6 +24,26 @@ function AccountContent({ state, update }: ParentApi) {
   const current = activeProfile(state);
   const grade = current.grade;
   const [resetDone, setResetDone] = useState(false);
+  const [exportPreview, setExportPreview] = useState(false);
+  const [sfx, setSfx] = useState(() => loadPrefs().sfx);
+
+  const exportPreviewJson = useMemo(
+    () =>
+      JSON.stringify(
+        {
+          stateVersion: state.stateVersion,
+          activeProfileId: state.activeProfileId,
+          profiles: state.profiles.map((p) => ({ id: p.id, type: p.type, name: p.name, grade: p.grade })),
+          attemptCount: state.attempts.length,
+          wrongQueueCount: state.wrongQueue.length,
+          eventCount: state.events.length,
+          note: "PIN 해시·전체 Attempt 내용은 미리보기에 포함하지 않아요",
+        },
+        null,
+        2,
+      ),
+    [state],
+  );
 
   // 파일명 날짜는 기기의 실제 오늘 (디버그 날짜가 아니라).
   const exportJson = () => {
@@ -81,10 +103,36 @@ function AccountContent({ state, update }: ParentApi) {
 
       <PinChange pinHash={state.account.pinHash} onChange={(hash) => update((s) => setParentPin(s, hash))} />
 
-      <section aria-label="기록 내보내기" className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
+      <section aria-label="효과음" className="flex flex-col gap-3 rounded-[var(--radius-panel)] bg-[var(--color-surface)] p-5 shadow-[var(--shadow-soft)] ring-1 ring-[var(--color-ring)]">
+        <h2 className="text-xl font-bold text-slate-900">효과음</h2>
+        <label className="flex items-center justify-between gap-3 text-lg font-semibold text-slate-800">
+          정답·도장 소리
+          <input
+            type="checkbox"
+            checked={sfx}
+            onChange={(e) => setSfx(setSfxEnabled(e.target.checked).sfx)}
+            className="h-7 w-7 accent-sky-700"
+          />
+        </label>
+        <p className="text-sm text-slate-600">단어 읽기(TTS)와는 별개예요. 이 기기에만 저장돼요.</p>
+      </section>
+
+      <section aria-label="기록 내보내기" className="flex flex-col gap-3 rounded-[var(--radius-panel)] bg-[var(--color-surface)] p-5 shadow-[var(--shadow-soft)] ring-1 ring-[var(--color-ring)]">
         <h2 className="text-xl font-bold text-slate-900">사용 기록 내보내기</h2>
         <p className="text-base text-slate-600">이 기기에 저장된 기록 전체를 JSON 파일로 내려받아요.</p>
-        <BigButton onClick={exportJson}>내보내기</BigButton>
+        <div className="grid grid-cols-2 gap-2">
+          <BigButton onClick={exportJson}>내보내기</BigButton>
+          <button
+            type="button"
+            onClick={() => setExportPreview((p) => !p)}
+            className="min-h-[3.25rem] rounded-[var(--radius-card)] bg-white text-lg font-bold text-sky-800 ring-2 ring-sky-200"
+          >
+            {exportPreview ? "미리보기 닫기" : "미리보기"}
+          </button>
+        </div>
+        {exportPreview ? (
+          <pre className="max-h-48 overflow-auto rounded-xl bg-slate-50 p-3 text-left text-xs text-slate-700">{exportPreviewJson}</pre>
+        ) : null}
       </section>
 
       <section aria-label="전체 초기화" className="mt-auto flex flex-col gap-3 rounded-3xl bg-rose-50 p-5 ring-1 ring-rose-200">
@@ -181,9 +229,12 @@ function ProfilesSection({
       <ul className="flex flex-col gap-2">
         {profiles.map((p) => (
           <li key={p.id} className="flex items-center justify-between gap-3 rounded-2xl bg-amber-50 px-4 py-3">
-            <span className="min-w-0">
-              <span className="block truncate text-lg font-semibold text-slate-900">{p.name ?? PROFILE_TYPE_LABEL[p.type]}</span>
-              <span className="block text-base text-slate-600">{PROFILE_TYPE_LABEL[p.type]}</span>
+            <span className="flex min-w-0 items-center gap-3">
+              <ProfileAvatar name={p.name} type={p.type} />
+              <span className="min-w-0">
+                <span className="block truncate text-lg font-semibold text-slate-900">{p.name ?? PROFILE_TYPE_LABEL[p.type]}</span>
+                <span className="block text-base text-slate-600">{PROFILE_TYPE_LABEL[p.type]}</span>
+              </span>
             </span>
             {p.id === activeId ? (
               <span className="shrink-0 rounded-full bg-sky-700 px-4 py-2 text-base font-semibold text-white">사용 중</span>

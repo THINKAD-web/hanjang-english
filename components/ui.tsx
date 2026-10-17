@@ -8,7 +8,7 @@ export function BigButton({ className = "", ...props }: ButtonHTMLAttributes<HTM
     <button
       type="button"
       {...props}
-      className={`min-h-16 w-full rounded-2xl bg-sky-700 px-6 text-2xl font-bold text-white shadow-sm transition active:scale-[0.98] disabled:bg-slate-300 disabled:text-slate-600 ${className}`}
+      className={`min-h-[3.25rem] w-full rounded-[var(--radius-card)] bg-[var(--color-accent)] px-6 text-2xl font-bold text-white shadow-[var(--shadow-soft)] transition active:scale-[0.98] disabled:bg-slate-300 disabled:text-slate-600 ${className}`}
     />
   );
 }
@@ -42,9 +42,9 @@ export function ProgressBar({ label, ratio }: { label: string; ratio: number }) 
   const pct = Math.round(Math.min(1, Math.max(0, ratio)) * 100);
   return (
     <div className="w-full">
-      <p className="mb-1 text-lg font-semibold text-slate-700">{label}</p>
+      {label ? <p className="mb-1 text-base font-bold text-slate-700">{label}</p> : null}
       <div
-        className="h-3 w-full overflow-hidden rounded-full bg-amber-100"
+        className="h-2.5 w-full overflow-hidden rounded-full bg-amber-100/90 shadow-inner"
         role="progressbar"
         aria-label={label}
         aria-valuemin={0}
@@ -57,8 +57,14 @@ export function ProgressBar({ label, ratio }: { label: string; ratio: number }) 
   );
 }
 
-export function Screen({ children }: { children: ReactNode }) {
-  return <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-4 pb-10 pt-6">{children}</main>;
+export function Screen({ children, compact }: { children: ReactNode; compact?: boolean }) {
+  return (
+    <main
+      className={`mx-auto flex w-full max-w-md flex-1 flex-col px-4 pb-8 pt-5 ${compact ? "gap-4" : "gap-6"}`}
+    >
+      {children}
+    </main>
+  );
 }
 
 /** 콘텐츠를 불러오지 못했을 때 (네트워크 등). 다시 시도하면 새로 요청한다. */

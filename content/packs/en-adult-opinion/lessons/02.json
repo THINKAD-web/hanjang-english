@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "opinion 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "i-see-your-point",
+      "kind": "phrase",
+      "text": "I see your point.",
+      "meaningKo": "말씀하신 뜻 알겠어요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "let-s-discuss-it-later",
+      "kind": "phrase",
+      "text": "Let's discuss it later.",
+      "meaningKo": "나중에 논의해요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "i-prefer-the-first-option",
+      "kind": "phrase",
+      "text": "I prefer the first option.",
+      "meaningKo": "첫 번째가 더 나아요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "that-s-a-good-idea",
+      "kind": "phrase",
+      "text": "That's a good idea.",
+      "meaningKo": "좋은 생각이에요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "i-m-concerned-about-the-cost",
+      "kind": "phrase",
+      "text": "I'm concerned about the cost.",
+      "meaningKo": "비용이 걱정돼요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    },
+    {
+      "id": "we-need-more-data",
+      "kind": "phrase",
+      "text": "We need more data.",
+      "meaningKo": "데이터가 더 필요해요.",
+      "imageable": false,
+      "tags": [
+        "opinion"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

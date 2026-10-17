@@ -6,16 +6,17 @@ import { attemptLabel, currentWrong, listedWrongIds, todaySummary, trickyTags, w
 
 describe("오늘 요약", () => {
   it("푼 게 없으면 done=false", () => {
-    expect(todaySummary(freshState(), content, MON)).toEqual({ done: false, attempts: [], wrong: [] });
+    expect(todaySummary(freshState(), content, MON)).toEqual({ done: false, lessonCount: 0, attempts: [], wrong: [] });
   });
 
   it("장 완료: 점수와 오늘 틀린 단어(철자+뜻)", () => {
     const s = doLesson(freshState(), lessonId(1), MON, { wrong: ["g-grow"] });
     const t = todaySummary(s, content, MON);
     expect(t.done).toBe(true);
+    expect(t.lessonCount).toBe(1);
     expect(t.attempts).toEqual([{ kind: "lesson", total: 5, correct: 4 }]);
     expect(attemptLabel(t.attempts[0])).toBe("5문제 중 4개 맞았어요");
-    expect(t.wrong).toEqual([{ itemId: "g-grow", text: "grow", meaningKo: "자라다", reviewOn: true }]);
+    expect(t.wrong).toEqual([{ itemId: "g-grow", text: "grow", meaningKo: "자라다", tags: ["gr"], reviewOn: true }]);
   });
 
   it("다른 날 기록은 오늘 요약에 섞이지 않는다", () => {
@@ -31,6 +32,8 @@ describe("오늘 요약", () => {
       { targetItemId: "g-green", correct: true },
     ]);
     const t = todaySummary(s, content, TUE);
+    expect(t.done).toBe(false);
+    expect(t.lessonCount).toBe(0);
     expect(t.attempts).toEqual([{ kind: "review", total: 4, correct: 3 }]);
     expect(attemptLabel(t.attempts[0])).toBe("복습 4문제 중 3개");
   });
@@ -42,6 +45,7 @@ describe("오늘 요약", () => {
       { targetItemId: "g-grass", correct: false },
     ]);
     const t = todaySummary(s, content, MON);
+    expect(t.lessonCount).toBe(1);
     expect(t.attempts).toHaveLength(2);
     expect(t.wrong.map((w) => w.itemId)).toEqual(["g-grow", "g-grass"]);
   });
@@ -88,7 +92,12 @@ describe("현재 오답 목록: 끈 단어도 되돌릴 수 있게 남긴다", (
 });
 
 describe("이번 주", () => {
-  it("칸은 홈 도장과 같은 함수 결과, 완료 장 수는 이번 주 완료 Attempt 수", () => {
+  it("복습만 한 날은 doneCount 에 넣지 않는다", () => {
+    const s = doReview(freshState(), MON, [{ targetItemId: "g-grow", correct: true }]);
+    expect(weekSummary(s, content, MON).doneCount).toBe(0);
+  });
+
+  it("칸은 홈 도장과 같은 함수 결과, 완료 장 수는 이번 주 lesson Attempt 수", () => {
     let s = doLesson(freshState(), lessonId(1), MON, {});
     s = doLesson(s, lessonId(2), TUE, {});
     s = doLesson(s, lessonId(3), "2026-09-14", {}); // 지난주

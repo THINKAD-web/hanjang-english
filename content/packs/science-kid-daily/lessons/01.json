@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "자연 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "sun",
+      "kind": "word",
+      "text": "sun",
+      "meaningKo": "태양",
+      "emoji": "☀️",
+      "imageable": true,
+      "tags": [
+        "sky"
+      ]
+    },
+    {
+      "id": "moon",
+      "kind": "word",
+      "text": "moon",
+      "meaningKo": "달",
+      "emoji": "🌙",
+      "imageable": true,
+      "tags": [
+        "sky"
+      ]
+    },
+    {
+      "id": "star",
+      "kind": "word",
+      "text": "star",
+      "meaningKo": "별",
+      "emoji": "⭐",
+      "imageable": true,
+      "tags": [
+        "sky"
+      ]
+    },
+    {
+      "id": "cloud",
+      "kind": "word",
+      "text": "cloud",
+      "meaningKo": "구름",
+      "emoji": "☁️",
+      "imageable": true,
+      "tags": [
+        "sky"
+      ]
+    },
+    {
+      "id": "rain",
+      "kind": "word",
+      "text": "rain",
+      "meaningKo": "비",
+      "emoji": "🌧️",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "snow",
+      "kind": "word",
+      "text": "snow",
+      "meaningKo": "눈",
+      "emoji": "❄️",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

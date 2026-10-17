@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "shop 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u888bu306fu8981u308au307eu305bu3093",
+      "kind": "phrase",
+      "text": "袋は要りません",
+      "meaningKo": "봉투는 필요 없어요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u5225u306eu8272u306fu3042u308au307eu3059u304b",
+      "kind": "phrase",
+      "text": "別の色はありますか",
+      "meaningKo": "다른 색 있나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u30b5u30a4u30bau306fu3042u308au307eu3059u304b",
+      "kind": "phrase",
+      "text": "サイズはありますか",
+      "meaningKo": "사이즈 있나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u5305u88c5u304au9858u3044u3057u307eu3059",
+      "kind": "phrase",
+      "text": "包装お願いします",
+      "meaningKo": "포장 부탁해요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u4e88u7d04u3057u305fu5546u54c1u3067u3059",
+      "kind": "phrase",
+      "text": "予約した商品です",
+      "meaningKo": "예약한 상품이에요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u8fd4u54c1u3067u304du307eu3059u304b",
+      "kind": "phrase",
+      "text": "返品できますか",
+      "meaningKo": "반품 되나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

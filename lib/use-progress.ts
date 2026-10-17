@@ -18,6 +18,7 @@ export function getStore(): LocalProgressStore {
 /**
  * 기기에 저장된 진행 상태. 처음 렌더(서버 포함)에는 null 이고 클라이언트에서 불러온 뒤 채워진다.
  * update 는 load → fn → save 후 화면 상태도 갱신한다.
+ * 같은 기기에서 탭을 여러 개 열면 마지막 저장이 이긴다(storage 동기화 없음).
  */
 export function useProgress() {
   const [state, setState] = useState<State | null>(null);

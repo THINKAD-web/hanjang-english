@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "shop 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u3044u3089u3063u3057u3083u3044u307eu305b",
+      "kind": "phrase",
+      "text": "いらっしゃいませ",
+      "meaningKo": "어서 오세요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u898bu3066u3044u308bu3060u3051u3067u3059",
+      "kind": "phrase",
+      "text": "見ているだけです",
+      "meaningKo": "그냥 구경이에요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u8a66u7740u3067u304du307eu3059u304b",
+      "kind": "phrase",
+      "text": "試着できますか",
+      "meaningKo": "입어 봐도 될까요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u3082u3046u5c11u3057u5b89u304fu306au308au307eu3059u304b",
+      "kind": "phrase",
+      "text": "もう少し安くなりますか",
+      "meaningKo": "좀 깎아 주실 수 있나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u30abu30fcu30c9u3067u6255u3048u307eu3059u304b",
+      "kind": "phrase",
+      "text": "カードで払えますか",
+      "meaningKo": "카드 되나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u30ecu30b7u30fcu30c8u3092u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "レシートをください",
+      "meaningKo": "영수증 주세요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

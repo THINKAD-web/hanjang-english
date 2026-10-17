@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "email 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "sorry-for-the-late-reply",
+      "kind": "phrase",
+      "text": "Sorry for the late reply.",
+      "meaningKo": "늦은 답장 죄송합니다.",
+      "imageable": false,
+      "tags": [
+        "email"
+      ]
+    },
+    {
+      "id": "looking-forward-to-your-reply",
+      "kind": "phrase",
+      "text": "Looking forward to your reply.",
+      "meaningKo": "답변 기다리겠습니다.",
+      "imageable": false,
+      "tags": [
+        "email"
+      ]
+    },
+    {
+      "id": "best-regards",
+      "kind": "phrase",
+      "text": "Best regards.",
+      "meaningKo": "감사합니다 (맺음말).",
+      "imageable": false,
+      "tags": [
+        "email"
+      ]
+    },
+    {
+      "id": "kind-regards",
+      "kind": "phrase",
+      "text": "Kind regards.",
+      "meaningKo": "안부 인사드립니다.",
+      "imageable": false,
+      "tags": [
+        "email"
+      ]
+    },
+    {
+      "id": "please-see-below",
+      "kind": "phrase",
+      "text": "Please see below.",
+      "meaningKo": "아래 내용 참고해 주세요.",
+      "imageable": false,
+      "tags": [
+        "email"
+      ]
+    },
+    {
+      "id": "for-your-reference",
+      "kind": "phrase",
+      "text": "For your reference.",
+      "meaningKo": "참고용입니다.",
+      "imageable": false,
+      "tags": [
+        "email"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

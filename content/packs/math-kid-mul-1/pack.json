@@ -1,0 +1,23 @@
+{
+  "id": "math-kid-mul-1",
+  "subjectId": "math-kid",
+  "title": "어린이 수학 · 곱셈 1",
+  "level": "초등 2",
+  "levelOrder": 1,
+  "order": 4,
+  "ttsLang": "ko-KR",
+  "status": "live",
+  "access": "free",
+  "rules": {
+    "itemsPerLesson": 6,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": [
+      "fill_blank"
+    ],
+    "autoQuiz": true
+  },
+  "unitLabel": "곱셈",
+  "tagLabel": "연산"
+}

@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "shop 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "how-much-is-thisu3f",
+      "kind": "phrase",
+      "text": "How much is this?",
+      "meaningKo": "이거 얼마예요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "do-you-have-this-in-mediumu3f",
+      "kind": "phrase",
+      "text": "Do you have this in medium?",
+      "meaningKo": "미디엄 있나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "can-i-try-this-onu3f",
+      "kind": "phrase",
+      "text": "Can I try this on?",
+      "meaningKo": "입어 봐도 될까요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "i-ll-take-it",
+      "kind": "phrase",
+      "text": "I'll take it.",
+      "meaningKo": "살게요.",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "do-you-accept-credit-cardsu3f",
+      "kind": "phrase",
+      "text": "Do you accept credit cards?",
+      "meaningKo": "카드 되나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "is-there-a-discountu3f",
+      "kind": "phrase",
+      "text": "Is there a discount?",
+      "meaningKo": "할인 있나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "몸 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "head",
+      "kind": "word",
+      "text": "head",
+      "meaningKo": "머리",
+      "emoji": "🧠",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "eye",
+      "kind": "word",
+      "text": "eye",
+      "meaningKo": "눈",
+      "emoji": "👁️",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "ear",
+      "kind": "word",
+      "text": "ear",
+      "meaningKo": "귀",
+      "emoji": "👂",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "nose",
+      "kind": "word",
+      "text": "nose",
+      "meaningKo": "코",
+      "emoji": "👃",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "mouth",
+      "kind": "word",
+      "text": "mouth",
+      "meaningKo": "입",
+      "emoji": "👄",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "hand",
+      "kind": "word",
+      "text": "hand",
+      "meaningKo": "손",
+      "emoji": "✋",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

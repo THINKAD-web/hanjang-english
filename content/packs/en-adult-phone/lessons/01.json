@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "phone 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "hellou2c-this-is-kim-speaking",
+      "kind": "phrase",
+      "text": "Hello, this is Kim speaking.",
+      "meaningKo": "안녕하세요, 김입니다.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "may-i-speak-to-mr-leeu3f",
+      "kind": "phrase",
+      "text": "May I speak to Mr. Lee?",
+      "meaningKo": "이 씨 바꿔 주실 수 있나요?",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "could-you-call-me-backu3f",
+      "kind": "phrase",
+      "text": "Could you call me back?",
+      "meaningKo": "다시 전화해 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "i-m-on-another-line",
+      "kind": "phrase",
+      "text": "I'm on another line.",
+      "meaningKo": "통화 중이에요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "can-i-leave-a-messageu3f",
+      "kind": "phrase",
+      "text": "Can I leave a message?",
+      "meaningKo": "메시지 남겨도 될까요?",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "sorryu2c-wrong-number",
+      "kind": "phrase",
+      "text": "Sorry, wrong number.",
+      "meaningKo": "잘못 걸었어요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

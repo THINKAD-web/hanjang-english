@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "음식 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "apple",
+      "kind": "word",
+      "text": "apple",
+      "meaningKo": "사과",
+      "emoji": "🍎",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "banana",
+      "kind": "word",
+      "text": "banana",
+      "meaningKo": "바나나",
+      "emoji": "🍌",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "bread",
+      "kind": "word",
+      "text": "bread",
+      "meaningKo": "빵",
+      "emoji": "🥖",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "milk",
+      "kind": "word",
+      "text": "milk",
+      "meaningKo": "우유",
+      "emoji": "🥛",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "egg",
+      "kind": "word",
+      "text": "egg",
+      "meaningKo": "달걀",
+      "emoji": "🥚",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "rice",
+      "kind": "word",
+      "text": "rice",
+      "meaningKo": "밥",
+      "emoji": "🍚",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

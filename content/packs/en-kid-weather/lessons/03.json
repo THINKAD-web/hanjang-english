@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "날씨 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "cloud",
+      "kind": "word",
+      "text": "cloud",
+      "meaningKo": "구름",
+      "emoji": "☁️",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "sun",
+      "kind": "word",
+      "text": "sun",
+      "meaningKo": "해",
+      "emoji": "☀️",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "moon",
+      "kind": "word",
+      "text": "moon",
+      "meaningKo": "달",
+      "emoji": "🌙",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "star",
+      "kind": "word",
+      "text": "star",
+      "meaningKo": "별",
+      "emoji": "⭐",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "ice",
+      "kind": "word",
+      "text": "ice",
+      "meaningKo": "얼음",
+      "emoji": "🧊",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "spring",
+      "kind": "word",
+      "text": "spring",
+      "meaningKo": "봄",
+      "emoji": "🌸",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

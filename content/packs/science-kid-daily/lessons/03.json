@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "자연 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "earth",
+      "kind": "word",
+      "text": "earth",
+      "meaningKo": "땅",
+      "emoji": "🌍",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "sea",
+      "kind": "word",
+      "text": "sea",
+      "meaningKo": "바다",
+      "emoji": "🌊",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "mountain",
+      "kind": "word",
+      "text": "mountain",
+      "meaningKo": "산",
+      "emoji": "⛰️",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "river",
+      "kind": "word",
+      "text": "river",
+      "meaningKo": "강",
+      "emoji": "🏞️",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "rock",
+      "kind": "word",
+      "text": "rock",
+      "meaningKo": "돌",
+      "emoji": "🪨",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "seed",
+      "kind": "word",
+      "text": "seed",
+      "meaningKo": "씨앗",
+      "emoji": "🌱",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}
