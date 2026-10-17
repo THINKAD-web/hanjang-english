@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "몸 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "face",
+      "kind": "word",
+      "text": "face",
+      "meaningKo": "얼굴",
+      "emoji": "😀",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "neck",
+      "kind": "word",
+      "text": "neck",
+      "meaningKo": "목",
+      "emoji": "🧣",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "shoulder",
+      "kind": "word",
+      "text": "shoulder",
+      "meaningKo": "어깨",
+      "emoji": "🤷",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "knee",
+      "kind": "word",
+      "text": "knee",
+      "meaningKo": "무릎",
+      "emoji": "🦵",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "back",
+      "kind": "word",
+      "text": "back",
+      "meaningKo": "등",
+      "emoji": "🧍",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "heart",
+      "kind": "word",
+      "text": "heart",
+      "meaningKo": "심장",
+      "emoji": "❤️",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

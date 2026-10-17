@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "购物 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u4e70u5355",
+      "kind": "hanzi",
+      "text": "买单",
+      "meaningKo": "계산할게요",
+      "reading": "mǎidān",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u6253u6298u5417",
+      "kind": "hanzi",
+      "text": "打折吗",
+      "meaningKo": "할인하나요?",
+      "reading": "dǎzhé ma",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u5305u90aeu5417",
+      "kind": "hanzi",
+      "text": "包邮吗",
+      "meaningKo": "무료 배송인가요?",
+      "reading": "bāoyóu ma",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u9000u8d27",
+      "kind": "hanzi",
+      "text": "退货",
+      "meaningKo": "환불",
+      "reading": "tuìhuò",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u53d1u7968",
+      "kind": "hanzi",
+      "text": "发票",
+      "meaningKo": "영수증",
+      "reading": "fāpiào",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u8c22u8c22",
+      "kind": "hanzi",
+      "text": "谢谢",
+      "meaningKo": "감사합니다",
+      "reading": "xièxie",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

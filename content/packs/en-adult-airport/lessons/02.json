@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "airport 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "how-much-is-the-baggage-feeu3f",
+      "kind": "phrase",
+      "text": "How much is the baggage fee?",
+      "meaningKo": "수하물 요금이 얼마예요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "my-luggage-is-missing",
+      "kind": "phrase",
+      "text": "My luggage is missing.",
+      "meaningKo": "수하물이 없어졌어요.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "where-is-customsu3f",
+      "kind": "phrase",
+      "text": "Where is customs?",
+      "meaningKo": "세관이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "i-am-here-for-business",
+      "kind": "phrase",
+      "text": "I am here for business.",
+      "meaningKo": "출장 왔어요.",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "could-you-help-meu3f",
+      "kind": "phrase",
+      "text": "Could you help me?",
+      "meaningKo": "도와주실 수 있나요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    },
+    {
+      "id": "when-does-boarding-startu3f",
+      "kind": "phrase",
+      "text": "When does boarding start?",
+      "meaningKo": "탑승은 언제 시작하나요?",
+      "imageable": false,
+      "tags": [
+        "air"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

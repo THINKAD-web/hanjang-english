@@ -1,0 +1,25 @@
+{
+  "id": "en-adult-airport",
+  "subjectId": "en-adult",
+  "title": "성인 영어 · 공항",
+  "level": "초급",
+  "levelOrder": 1,
+  "order": 7,
+  "ttsLang": "en-US",
+  "status": "live",
+  "access": "free",
+  "rules": {
+    "itemsPerLesson": 6,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": [
+      "meaning_choice",
+      "listen_choice",
+      "ox"
+    ],
+    "autoQuiz": true
+  },
+  "unitLabel": "airport",
+  "tagLabel": "공항"
+}

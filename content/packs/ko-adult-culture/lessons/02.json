@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "문화 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "uc798-uba39uc5c8uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "잘 먹었습니다",
+      "meaningKo": "잘 먹었습니다",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "ucd95ud558ud569ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "축하합니다",
+      "meaningKo": "축하합니다",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uc0c8ud574-ubcf5-ub9ceuc774-ubc1buc73cuc138uc694",
+      "kind": "phrase",
+      "text": "새해 복 많이 받으세요",
+      "meaningKo": "새해 복 많이 받으세요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "ub4e4uc5b4uac00uc138uc694",
+      "kind": "phrase",
+      "text": "들어가세요",
+      "meaningKo": "들어가세요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uc870uc2ecud788-uac00uc138uc694",
+      "kind": "phrase",
+      "text": "조심히 가세요",
+      "meaningKo": "조심히 가세요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uc591uc190uc73cub85c-ub4dcub9acuc138uc694",
+      "kind": "phrase",
+      "text": "양손으로 드리세요",
+      "meaningKo": "양손으로 드리세요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

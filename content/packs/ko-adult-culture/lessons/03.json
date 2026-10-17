@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "문화 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "uc5f0uc7a5uc790uaed8-uba3cuc800",
+      "kind": "phrase",
+      "text": "연장자께 먼저",
+      "meaningKo": "연장자께 먼저",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uc2e0ubc1cuc744-ubc97uc5b4uc694",
+      "kind": "phrase",
+      "text": "신발을 벗어요",
+      "meaningKo": "신발을 벗어요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "ubaa9uc18cub9acub97c-ub0aeucdb0uc694",
+      "kind": "phrase",
+      "text": "목소리를 낮춰요",
+      "meaningKo": "목소리를 낮춰요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "ub208-ub9deucda4uc740-uc9e7uac8c",
+      "kind": "phrase",
+      "text": "눈 맞춤은 짧게",
+      "meaningKo": "눈 맞춤은 짧게",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uba85ud568uc740-ub450-uc190uc73cub85c",
+      "kind": "phrase",
+      "text": "명함은 두 손으로",
+      "meaningKo": "명함은 두 손으로",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    },
+    {
+      "id": "uac10uc0acuc758-ub9c8uc74cuc744-ud45cud604ud574uc694",
+      "kind": "phrase",
+      "text": "감사의 마음을 표현해요",
+      "meaningKo": "감사의 마음을 표현해요",
+      "imageable": false,
+      "tags": [
+        "culture"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

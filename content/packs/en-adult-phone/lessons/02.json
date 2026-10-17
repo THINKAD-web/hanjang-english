@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "phone 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "the-line-is-breaking-up",
+      "kind": "phrase",
+      "text": "The line is breaking up.",
+      "meaningKo": "통화가 끊겨요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "could-you-speak-louderu3f",
+      "kind": "phrase",
+      "text": "Could you speak louder?",
+      "meaningKo": "크게 말씀해 주세요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "i-ll-text-you-the-details",
+      "kind": "phrase",
+      "text": "I'll text you the details.",
+      "meaningKo": "자세한 건 문자로 보낼게요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "when-is-a-good-time-to-callu3f",
+      "kind": "phrase",
+      "text": "When is a good time to call?",
+      "meaningKo": "언제 전화하면 좋을까요?",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "i-m-running-late",
+      "kind": "phrase",
+      "text": "I'm running late.",
+      "meaningKo": "조금 늦을 것 같아요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "let-s-schedule-a-call",
+      "kind": "phrase",
+      "text": "Let's schedule a call.",
+      "meaningKo": "통화 시간 잡아요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "phone 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "i-can-t-hear-you-well",
+      "kind": "phrase",
+      "text": "I can't hear you well.",
+      "meaningKo": "잘 안 들려요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "i-ll-call-you-tomorrow",
+      "kind": "phrase",
+      "text": "I'll call you tomorrow.",
+      "meaningKo": "내일 전화할게요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "is-now-a-good-timeu3f",
+      "kind": "phrase",
+      "text": "Is now a good time?",
+      "meaningKo": "지금 통화 괜찮으세요?",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "please-hold-for-a-moment",
+      "kind": "phrase",
+      "text": "Please hold for a moment.",
+      "meaningKo": "잠시만 기다려 주세요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "i-ll-transfer-you",
+      "kind": "phrase",
+      "text": "I'll transfer you.",
+      "meaningKo": "연결해 드릴게요.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    },
+    {
+      "id": "thanks-for-calling",
+      "kind": "phrase",
+      "text": "Thanks for calling.",
+      "meaningKo": "전화 주셔서 감사합니다.",
+      "imageable": false,
+      "tags": [
+        "phone"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

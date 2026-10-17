@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "음식 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "salad",
+      "kind": "word",
+      "text": "salad",
+      "meaningKo": "샐러드",
+      "emoji": "🥗",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "cheese",
+      "kind": "word",
+      "text": "cheese",
+      "meaningKo": "치즈",
+      "emoji": "🧀",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "fish",
+      "kind": "word",
+      "text": "fish",
+      "meaningKo": "생선",
+      "emoji": "🐟",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "chicken",
+      "kind": "word",
+      "text": "chicken",
+      "meaningKo": "닭고기",
+      "emoji": "🍗",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "carrot",
+      "kind": "word",
+      "text": "carrot",
+      "meaningKo": "당근",
+      "emoji": "🥕",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "grape",
+      "kind": "word",
+      "text": "grape",
+      "meaningKo": "포도",
+      "emoji": "🍇",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

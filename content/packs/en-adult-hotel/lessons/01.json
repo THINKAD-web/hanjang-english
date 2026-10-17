@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "hotel 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "i-have-a-reservation-under-kim",
+      "kind": "phrase",
+      "text": "I have a reservation under Kim.",
+      "meaningKo": "김으로 예약했어요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "i-d-like-to-check-in",
+      "kind": "phrase",
+      "text": "I'd like to check in.",
+      "meaningKo": "체크인할게요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "what-time-is-check-outu3f",
+      "kind": "phrase",
+      "text": "What time is check-out?",
+      "meaningKo": "체크아웃 시간이 언제예요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "could-i-have-a-wake-up-callu3f",
+      "kind": "phrase",
+      "text": "Could I have a wake-up call?",
+      "meaningKo": "모닝콜 부탁해요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "the-wi-fi-passwordu2c-please",
+      "kind": "phrase",
+      "text": "The Wi-Fi password, please.",
+      "meaningKo": "와이파이 비밀번호 주세요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "is-breakfast-includedu3f",
+      "kind": "phrase",
+      "text": "Is breakfast included?",
+      "meaningKo": "조식 포함인가요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

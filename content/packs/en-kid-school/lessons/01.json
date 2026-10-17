@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "학교 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "book",
+      "kind": "word",
+      "text": "book",
+      "meaningKo": "책",
+      "emoji": "📚",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "pen",
+      "kind": "word",
+      "text": "pen",
+      "meaningKo": "펜",
+      "emoji": "🖊️",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "pencil",
+      "kind": "word",
+      "text": "pencil",
+      "meaningKo": "연필",
+      "emoji": "✏️",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "desk",
+      "kind": "word",
+      "text": "desk",
+      "meaningKo": "책상",
+      "emoji": "🪑",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "chair",
+      "kind": "word",
+      "text": "chair",
+      "meaningKo": "의자",
+      "emoji": "🪑",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "bag",
+      "kind": "word",
+      "text": "bag",
+      "meaningKo": "가방",
+      "emoji": "🎒",
+      "imageable": true,
+      "tags": [
+        "school"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

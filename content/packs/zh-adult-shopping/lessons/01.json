@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "购物 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u4e00",
+      "kind": "hanzi",
+      "text": "一",
+      "meaningKo": "하나",
+      "reading": "yī",
+      "imageable": false,
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "u4e8c",
+      "kind": "hanzi",
+      "text": "二",
+      "meaningKo": "둘",
+      "reading": "èr",
+      "imageable": false,
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "u4e09",
+      "kind": "hanzi",
+      "text": "三",
+      "meaningKo": "셋",
+      "reading": "sān",
+      "imageable": false,
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "u5341",
+      "kind": "hanzi",
+      "text": "十",
+      "meaningKo": "열",
+      "reading": "shí",
+      "imageable": false,
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "u767e",
+      "kind": "hanzi",
+      "text": "百",
+      "meaningKo": "백",
+      "reading": "bǎi",
+      "imageable": false,
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "u592au8d35u4e86",
+      "kind": "hanzi",
+      "text": "太贵了",
+      "meaningKo": "너무 비싸요",
+      "reading": "tài guì le",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

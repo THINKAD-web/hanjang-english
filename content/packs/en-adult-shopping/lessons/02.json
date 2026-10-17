@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "shop 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "where-is-the-fitting-roomu3f",
+      "kind": "phrase",
+      "text": "Where is the fitting room?",
+      "meaningKo": "탈의실이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "i-m-just-looking",
+      "kind": "phrase",
+      "text": "I'm just looking.",
+      "meaningKo": "그냥 구경이에요.",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "could-i-get-a-receiptu3f",
+      "kind": "phrase",
+      "text": "Could I get a receipt?",
+      "meaningKo": "영수증 주세요.",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "do-you-have-another-coloru3f",
+      "kind": "phrase",
+      "text": "Do you have another color?",
+      "meaningKo": "다른 색 있나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "it-s-too-expensive",
+      "kind": "phrase",
+      "text": "It's too expensive.",
+      "meaningKo": "너무 비싸요.",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "can-i-return-thisu3f",
+      "kind": "phrase",
+      "text": "Can I return this?",
+      "meaningKo": "환불 가능한가요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

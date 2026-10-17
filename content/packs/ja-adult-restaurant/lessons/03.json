@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "restaurant 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u30c6u30a4u30afu30a2u30a6u30c8u3067u304du307eu3059u304b",
+      "kind": "phrase",
+      "text": "テイクアウトできますか",
+      "meaningKo": "포장 되나요?",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u30afu30ecu30b8u30c3u30c8u30abu30fcu30c9u4f7fu3048u307eu3059u304b",
+      "kind": "phrase",
+      "text": "クレジットカード使えますか",
+      "meaningKo": "카드 되나요?",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u5e2du3092u5909u3048u3089u308cu307eu3059u304b",
+      "kind": "phrase",
+      "text": "席を変えられますか",
+      "meaningKo": "자리 바꿀 수 있나요?",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u30c7u30b6u30fcu30c8u306fu3042u308au307eu3059u304b",
+      "kind": "phrase",
+      "text": "デザートはありますか",
+      "meaningKo": "디저트 있나요?",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u3054u3061u305du3046u3055u307eu3067u3057u305f",
+      "kind": "phrase",
+      "text": "ごちそうさまでした",
+      "meaningKo": "잘 먹었습니다",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u307eu305fu6765u307eu3059",
+      "kind": "phrase",
+      "text": "また来ます",
+      "meaningKo": "또 올게요",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

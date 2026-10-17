@@ -14,11 +14,11 @@ describe("베타 카탈로그 (Production 공개)", () => {
     .map((c) => ({ id: c.pack.id, subjectId: c.pack.subjectId, n: publicLessonCount(c.pack, c.lessons) }))
     .filter((p) => p.n > 0);
 
-  it("어린이·성인 각각 10개 내외 팩이 Production 에서 열린다", () => {
+  it("어린이·성인 각각 18개 내외 팩이 Production 에서 열린다", () => {
     const kid = openPacks.filter((p) => kidSubjectIds.has(p.subjectId));
     const adult = openPacks.filter((p) => adultSubjectIds.has(p.subjectId));
-    expect(kid.length).toBeGreaterThanOrEqual(10);
-    expect(adult.length).toBeGreaterThanOrEqual(10);
+    expect(kid.length).toBeGreaterThanOrEqual(18);
+    expect(adult.length).toBeGreaterThanOrEqual(18);
   });
 
   it("en-kid-giyeok 공개 8장은 유지", () => {

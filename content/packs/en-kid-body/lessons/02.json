@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "몸 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "foot",
+      "kind": "word",
+      "text": "foot",
+      "meaningKo": "발",
+      "emoji": "🦶",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "arm",
+      "kind": "word",
+      "text": "arm",
+      "meaningKo": "팔",
+      "emoji": "💪",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "leg",
+      "kind": "word",
+      "text": "leg",
+      "meaningKo": "다리",
+      "emoji": "🦵",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "finger",
+      "kind": "word",
+      "text": "finger",
+      "meaningKo": "손가락",
+      "emoji": "☝️",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "tooth",
+      "kind": "word",
+      "text": "tooth",
+      "meaningKo": "이",
+      "emoji": "🦷",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "hair",
+      "kind": "word",
+      "text": "hair",
+      "meaningKo": "머리카락",
+      "emoji": "💇",
+      "imageable": true,
+      "tags": [
+        "body"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

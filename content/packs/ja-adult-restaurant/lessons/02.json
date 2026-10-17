@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "restaurant 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u304au4f1au8a08u304au9858u3044u3057u307eu3059",
+      "kind": "phrase",
+      "text": "お会計お願いします",
+      "meaningKo": "계산해 주세요",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u304au3044u3057u3044u3067u3059",
+      "kind": "phrase",
+      "text": "おいしいです",
+      "meaningKo": "맛있어요",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u8f9bu304fu306au3044u3082u306e",
+      "kind": "phrase",
+      "text": "辛くないもの",
+      "meaningKo": "안 매운 거요",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u30d9u30b8u30bfu30eau30a2u30f3u3067u3059",
+      "kind": "phrase",
+      "text": "ベジタリアンです",
+      "meaningKo": "채식이에요",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u6c34u3092u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "水をください",
+      "meaningKo": "물 주세요",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    },
+    {
+      "id": "u3082u3046u5c11u3057u5f85u3063u3066u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "もう少し待ってください",
+      "meaningKo": "조금만 기다려 주세요",
+      "imageable": false,
+      "tags": [
+        "rest"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

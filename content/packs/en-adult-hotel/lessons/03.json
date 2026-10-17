@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "hotel 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "can-i-store-my-luggageu3f",
+      "kind": "phrase",
+      "text": "Can I store my luggage?",
+      "meaningKo": "짐 맡길 수 있나요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "is-there-room-serviceu3f",
+      "kind": "phrase",
+      "text": "Is there room service?",
+      "meaningKo": "룸서비스 있나요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "the-key-card-doesn-t-work",
+      "kind": "phrase",
+      "text": "The key card doesn't work.",
+      "meaningKo": "카드키가 안 돼요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "could-i-get-a-late-check-outu3f",
+      "kind": "phrase",
+      "text": "Could I get a late check-out?",
+      "meaningKo": "레이트 체크아웃 가능한가요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "i-d-like-a-quiet-room",
+      "kind": "phrase",
+      "text": "I'd like a quiet room.",
+      "meaningKo": "조용한 방 주세요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "thank-you-for-a-great-stay",
+      "kind": "phrase",
+      "text": "Thank you for a great stay.",
+      "meaningKo": "좋은 숙박이었어요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

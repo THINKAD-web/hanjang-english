@@ -240,6 +240,216 @@ const ADULT_CSV: CsvPack[] = [
   },
 ];
 
+/** 카탈로그 확장 — 어린이·성인 각 ~18–20팩 (기존 팩 유지) */
+const KID_EXPAND: CsvPack[] = [
+  {
+    packId: "en-kid-food",
+    subjectId: "en-kid",
+    title: "어린이 영어 · 음식",
+    csv: "en-kid-food.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "word",
+    order: 6,
+    unitLabel: "음식",
+    tagLabel: "먹을거",
+    rules: { itemsPerLesson: 6, allowedQuizTypes: ["picture_choice", "meaning_choice", "listen_choice", "ox"] },
+  },
+  {
+    packId: "en-kid-weather",
+    subjectId: "en-kid",
+    title: "어린이 영어 · 날씨",
+    csv: "en-kid-weather.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "word",
+    order: 7,
+    unitLabel: "날씨",
+    tagLabel: "하늘",
+  },
+  {
+    packId: "en-kid-school",
+    subjectId: "en-kid",
+    title: "어린이 영어 · 학교",
+    csv: "en-kid-school.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "word",
+    order: 8,
+    unitLabel: "학교",
+    tagLabel: "교실",
+  },
+  {
+    packId: "en-kid-actions",
+    subjectId: "en-kid",
+    title: "어린이 영어 · 동작",
+    csv: "en-kid-actions.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "word",
+    order: 9,
+    unitLabel: "동작",
+    tagLabel: "동사",
+  },
+  {
+    packId: "en-kid-body",
+    subjectId: "en-kid",
+    title: "어린이 영어 · 몸",
+    csv: "en-kid-body.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "word",
+    order: 10,
+    unitLabel: "몸",
+    tagLabel: "신체",
+  },
+  {
+    packId: "science-kid-world",
+    subjectId: "science-kid",
+    title: "어린이 상식 · 나라",
+    csv: "science-kid-world.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "word",
+    ttsLang: "ko-KR",
+    order: 2,
+    unitLabel: "나라",
+    tagLabel: "세계",
+  },
+  {
+    packId: "ko-kid-dieut",
+    subjectId: "ko-kid",
+    title: "어린이 한글 · ㄷ·ㅌ",
+    csv: "ko-kid-dieut.csv",
+    size: 6,
+    lessonType: "phonics",
+    kind: "word",
+    ttsLang: "ko-KR",
+    order: 2,
+    unitLabel: "ㄷ",
+    tagLabel: "글자",
+    rules: { itemsPerLesson: 6, quizPerLesson: 5, allowedQuizTypes: ["meaning_choice", "listen_choice", "ox"], autoQuiz: true },
+  },
+];
+
+const ADULT_EXPAND: CsvPack[] = [
+  {
+    packId: "en-adult-airport",
+    subjectId: "en-adult",
+    title: "성인 영어 · 공항",
+    csv: "en-adult-airport.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    order: 7,
+    unitLabel: "airport",
+    tagLabel: "공항",
+    rules: { itemsPerLesson: 6, allowedQuizTypes: ["meaning_choice", "listen_choice", "ox"], autoQuiz: true },
+  },
+  {
+    packId: "en-adult-hotel",
+    subjectId: "en-adult",
+    title: "성인 영어 · 호텔",
+    csv: "en-adult-hotel.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    order: 8,
+    unitLabel: "hotel",
+    tagLabel: "숙박",
+  },
+  {
+    packId: "en-adult-shopping",
+    subjectId: "en-adult",
+    title: "성인 영어 · 쇼핑",
+    csv: "en-adult-shopping.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    order: 9,
+    unitLabel: "shop",
+    tagLabel: "쇼핑",
+  },
+  {
+    packId: "en-adult-phone",
+    subjectId: "en-adult",
+    title: "성인 영어 · 전화",
+    csv: "en-adult-phone.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    order: 10,
+    unitLabel: "phone",
+    tagLabel: "통화",
+  },
+  {
+    packId: "en-adult-opinion",
+    subjectId: "en-adult",
+    title: "성인 영어 · 의견",
+    csv: "en-adult-opinion.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    order: 11,
+    unitLabel: "opinion",
+    tagLabel: "표현",
+  },
+  {
+    packId: "ja-adult-restaurant",
+    subjectId: "ja-adult",
+    title: "성인 일본어 · 식당",
+    csv: "ja-adult-restaurant.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    ttsLang: "ja-JP",
+    order: 4,
+    unitLabel: "restaurant",
+    tagLabel: "식당",
+    rules: { itemsPerLesson: 6, allowedQuizTypes: ["meaning_choice", "listen_choice", "ox"], autoQuiz: true },
+  },
+  {
+    packId: "ja-adult-transport",
+    subjectId: "ja-adult",
+    title: "성인 일본어 · 교통",
+    csv: "ja-adult-transport.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    ttsLang: "ja-JP",
+    order: 5,
+    unitLabel: "transport",
+    tagLabel: "교통",
+  },
+  {
+    packId: "zh-adult-shopping",
+    subjectId: "zh-adult",
+    title: "성인 중국어 · 쇼핑",
+    csv: "zh-adult-shopping.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "hanzi",
+    ttsLang: "zh-CN",
+    order: 2,
+    unitLabel: "购物",
+    tagLabel: "쇼핑",
+    rules: { itemsPerLesson: 6, allowedQuizTypes: ["meaning_choice", "listen_choice", "ox"], autoQuiz: true },
+  },
+  {
+    packId: "ko-adult-culture",
+    subjectId: "ko-adult",
+    title: "성인 한국어 · 문화",
+    csv: "ko-adult-culture.csv",
+    size: 6,
+    lessonType: "vocab",
+    kind: "phrase",
+    ttsLang: "ko-KR",
+    order: 2,
+    unitLabel: "문화",
+    tagLabel: "예절",
+  },
+];
+
 function mergePlan(...parts: ReturnType<typeof planNewPack>[]) {
   const files = new Map<string, string>();
   const errors: string[] = [];
@@ -347,6 +557,48 @@ function ensureCsvPack(spec: CsvPack) {
   openAllLessons(spec.packId);
 }
 
+function writeMathDivPack() {
+  const packId = "math-kid-div-1";
+  if (!existsSync(path.join(root, "packs", packId))) {
+    const scaffold = planNewPack(root, {
+      packId,
+      subjectId: "math-kid",
+      title: "어린이 수학 · 나눗셈 1",
+      ttsLang: "ko-KR",
+      level: "초등 3",
+      levelOrder: 1,
+      order: 5,
+    });
+    if (scaffold.errors.length) throw new Error(scaffold.errors.join("; "));
+    applyPlan(scaffold, root, { dryRun: false });
+  }
+  patchPackJson(packId, {
+    title: "어린이 수학 · 나눗셈 1",
+    unitLabel: "나눗셈",
+    tagLabel: "연산",
+    rules: {
+      itemsPerLesson: 6,
+      quizPerLesson: 5,
+      allowedQuizTypes: ["fill_blank"],
+      autoQuiz: true,
+    },
+  });
+  const intro = { title: "나눗셈", content: "나누기 문제를 풀어요\n식을 보고 알맞은 몫을 맞혀 보세요" };
+  mkdirSync(path.join(root, "packs", packId, "lessons"), { recursive: true });
+  for (let order = 1; order <= 3; order++) {
+    const lesson = {
+      order,
+      title: `나눗셈 ${order}`,
+      type: "math",
+      intro,
+      generator: { kind: "arithmetic", op: "÷", count: 6, min: 1, max: order === 1 ? 5 : order === 2 ? 7 : 9 },
+      reviewed: true,
+      testOnly: false,
+    };
+    writeFileSync(path.join(root, "packs", packId, "lessons", `${String(order).padStart(2, "0")}.json`), `${JSON.stringify(lesson, null, 2)}\n`);
+  }
+}
+
 function writeMathMulPack() {
   const packId = "math-kid-mul-1";
   if (!existsSync(path.join(root, "packs", packId))) {
@@ -390,11 +642,12 @@ function writeMathMulPack() {
 }
 
 console.log("content:beta-expand — subjects 확인 후 팩 생성");
-for (const spec of [...KID_CSV, ...ADULT_CSV]) {
+for (const spec of [...KID_CSV, ...ADULT_CSV, ...KID_EXPAND, ...ADULT_EXPAND]) {
   console.log(`  · ${spec.packId}`);
   ensureCsvPack(spec);
 }
 writeMathMulPack();
+writeMathDivPack();
 
 console.log("기존 팩 메타 공개");
 openLessonRange("en-kid-animals", 3);

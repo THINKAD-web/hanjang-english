@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "동작 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "drink",
+      "kind": "word",
+      "text": "drink",
+      "meaningKo": "마시다",
+      "emoji": "🥤",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "read",
+      "kind": "word",
+      "text": "read",
+      "meaningKo": "읽다",
+      "emoji": "📖",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "write",
+      "kind": "word",
+      "text": "write",
+      "meaningKo": "쓰다",
+      "emoji": "✍️",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "sing",
+      "kind": "word",
+      "text": "sing",
+      "meaningKo": "노래하다",
+      "emoji": "🎤",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "dance",
+      "kind": "word",
+      "text": "dance",
+      "meaningKo": "춤추다",
+      "emoji": "💃",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    },
+    {
+      "id": "sleep",
+      "kind": "word",
+      "text": "sleep",
+      "meaningKo": "자다",
+      "emoji": "😴",
+      "imageable": true,
+      "tags": [
+        "action"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

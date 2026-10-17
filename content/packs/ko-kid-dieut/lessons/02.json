@@ -1,0 +1,73 @@
+{
+  "order": 2,
+  "title": "ㄷ 2",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "ub514",
+      "kind": "word",
+      "text": "디",
+      "meaningKo": "디",
+      "imageable": false,
+      "tags": [
+        "syll"
+      ]
+    },
+    {
+      "id": "ub355",
+      "kind": "word",
+      "text": "덕",
+      "meaningKo": "덕",
+      "imageable": false,
+      "tags": [
+        "syll"
+      ]
+    },
+    {
+      "id": "ub2ec",
+      "kind": "word",
+      "text": "달",
+      "meaningKo": "달",
+      "emoji": "🌙",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ub3c4uc2dc",
+      "kind": "word",
+      "text": "도시",
+      "meaningKo": "도시",
+      "emoji": "🏙️",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ub450ubd80",
+      "kind": "word",
+      "text": "두부",
+      "meaningKo": "두부",
+      "emoji": "🧈",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    },
+    {
+      "id": "ub538uae30",
+      "kind": "word",
+      "text": "딸기",
+      "meaningKo": "딸기",
+      "emoji": "🍓",
+      "imageable": true,
+      "tags": [
+        "word"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

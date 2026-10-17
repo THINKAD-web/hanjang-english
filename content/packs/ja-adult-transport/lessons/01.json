@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "transport 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u99c5u306fu3069u3053u3067u3059u304b",
+      "kind": "phrase",
+      "text": "駅はどこですか",
+      "meaningKo": "역이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u5207u7b26u3092u8cb7u3044u305fu3044u3067u3059",
+      "kind": "phrase",
+      "text": "切符を買いたいです",
+      "meaningKo": "표 사고 싶어요",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u3053u306eu96fbu8ecau306fu4f55u756au7ddau3067u3059u304b",
+      "kind": "phrase",
+      "text": "この電車は何番線ですか",
+      "meaningKo": "이 기차 몇 번 선로예요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u6b21u306eu505cu8ecau99c5u306fu3069u3053u3067u3059u304b",
+      "kind": "phrase",
+      "text": "次の停車駅はどこですか",
+      "meaningKo": "다음 역이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u4e57u308au63dbu3048u306fu3069u3053u3067u3059u304b",
+      "kind": "phrase",
+      "text": "乗り換えはどこですか",
+      "meaningKo": "환승은 어디서 해요?",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    },
+    {
+      "id": "u30bfu30afu30b7u30fcu3092u547cu3093u3067u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "タクシーを呼んでください",
+      "meaningKo": "택시 불러 주세요",
+      "imageable": false,
+      "tags": [
+        "trans"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

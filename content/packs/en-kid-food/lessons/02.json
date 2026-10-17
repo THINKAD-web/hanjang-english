@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "음식 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "water",
+      "kind": "word",
+      "text": "water",
+      "meaningKo": "물",
+      "emoji": "💧",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "juice",
+      "kind": "word",
+      "text": "juice",
+      "meaningKo": "주스",
+      "emoji": "🧃",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "pizza",
+      "kind": "word",
+      "text": "pizza",
+      "meaningKo": "피자",
+      "emoji": "🍕",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "cake",
+      "kind": "word",
+      "text": "cake",
+      "meaningKo": "케이크",
+      "emoji": "🎂",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "cookie",
+      "kind": "word",
+      "text": "cookie",
+      "meaningKo": "쿠키",
+      "emoji": "🍪",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "soup",
+      "kind": "word",
+      "text": "soup",
+      "meaningKo": "수프",
+      "emoji": "🍲",
+      "imageable": true,
+      "tags": [
+        "food"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,kind
+How much is this?,이거 얼마예요?,shop,false,phrase
+Do you have this in medium?,미디엄 있나요?,shop,false,phrase
+Can I try this on?,입어 봐도 될까요?,shop,false,phrase
+I'll take it.,살게요.,shop,false,phrase
+Do you accept credit cards?,카드 되나요?,shop,false,phrase
+Is there a discount?,할인 있나요?,shop,false,phrase
+Where is the fitting room?,탈의실이 어디예요?,shop,false,phrase
+I'm just looking.,그냥 구경이에요.,shop,false,phrase
+Could I get a receipt?,영수증 주세요.,shop,false,phrase
+Do you have another color?,다른 색 있나요?,shop,false,phrase
+It's too expensive.,너무 비싸요.,shop,false,phrase
+Can I return this?,환불 가능한가요?,shop,false,phrase
+Where is the cashier?,계산대가 어디예요?,shop,false,phrase
+I'd like a gift receipt.,선물 영수증 주세요.,shop,false,phrase
+Is this on sale?,세일 중인가요?,shop,false,phrase
+Could you wrap it?,포장해 주세요.,shop,false,phrase
+I'll pay in cash.,현금으로 할게요.,shop,false,phrase
+Thank you for your help.,도와주셔서 감사해요.,shop,false,phrase

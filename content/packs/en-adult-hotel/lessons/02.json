@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "hotel 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "could-you-send-housekeepingu3f",
+      "kind": "phrase",
+      "text": "Could you send housekeeping?",
+      "meaningKo": "청소 부탁해요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "the-air-conditioner-is-broken",
+      "kind": "phrase",
+      "text": "The air conditioner is broken.",
+      "meaningKo": "에어컨이 고장났어요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "i-need-extra-towels",
+      "kind": "phrase",
+      "text": "I need extra towels.",
+      "meaningKo": "수건 더 주세요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "could-i-extend-my-stayu3f",
+      "kind": "phrase",
+      "text": "Could I extend my stay?",
+      "meaningKo": "연박 가능한가요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "where-is-the-gymu3f",
+      "kind": "phrase",
+      "text": "Where is the gym?",
+      "meaningKo": "헬스장이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    },
+    {
+      "id": "i-d-like-to-check-out",
+      "kind": "phrase",
+      "text": "I'd like to check out.",
+      "meaningKo": "체크아웃할게요.",
+      "imageable": false,
+      "tags": [
+        "hotel"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

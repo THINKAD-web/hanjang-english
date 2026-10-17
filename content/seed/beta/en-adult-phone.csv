@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,kind
+"Hello, this is Kim speaking.","안녕하세요, 김입니다.",phone,false,phrase
+May I speak to Mr. Lee?,이 씨 바꿔 주실 수 있나요?,phone,false,phrase
+Could you call me back?,다시 전화해 주시겠어요?,phone,false,phrase
+I'm on another line.,통화 중이에요.,phone,false,phrase
+Can I leave a message?,메시지 남겨도 될까요?,phone,false,phrase
+"Sorry, wrong number.",잘못 걸었어요.,phone,false,phrase
+The line is breaking up.,통화가 끊겨요.,phone,false,phrase
+Could you speak louder?,크게 말씀해 주세요.,phone,false,phrase
+I'll text you the details.,자세한 건 문자로 보낼게요.,phone,false,phrase
+When is a good time to call?,언제 전화하면 좋을까요?,phone,false,phrase
+I'm running late.,조금 늦을 것 같아요.,phone,false,phrase
+Let's schedule a call.,통화 시간 잡아요.,phone,false,phrase
+I can't hear you well.,잘 안 들려요.,phone,false,phrase
+I'll call you tomorrow.,내일 전화할게요.,phone,false,phrase
+Is now a good time?,지금 통화 괜찮으세요?,phone,false,phrase
+Please hold for a moment.,잠시만 기다려 주세요.,phone,false,phrase
+I'll transfer you.,연결해 드릴게요.,phone,false,phrase
+Thanks for calling.,전화 주셔서 감사합니다.,phone,false,phrase

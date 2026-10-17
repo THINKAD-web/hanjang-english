@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "나라 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "germany",
+      "kind": "word",
+      "text": "Germany",
+      "meaningKo": "독일",
+      "emoji": "🇩🇪",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "italy",
+      "kind": "word",
+      "text": "Italy",
+      "meaningKo": "이탈리아",
+      "emoji": "🇮🇹",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "mexico",
+      "kind": "word",
+      "text": "Mexico",
+      "meaningKo": "멕시코",
+      "emoji": "🇲🇽",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "seoul",
+      "kind": "word",
+      "text": "Seoul",
+      "meaningKo": "서울",
+      "emoji": "🏙️",
+      "imageable": true,
+      "tags": [
+        "city"
+      ]
+    },
+    {
+      "id": "tokyo",
+      "kind": "word",
+      "text": "Tokyo",
+      "meaningKo": "도쿄",
+      "emoji": "🗼",
+      "imageable": true,
+      "tags": [
+        "city"
+      ]
+    },
+    {
+      "id": "paris",
+      "kind": "word",
+      "text": "Paris",
+      "meaningKo": "파리",
+      "emoji": "🗼",
+      "imageable": true,
+      "tags": [
+        "city"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

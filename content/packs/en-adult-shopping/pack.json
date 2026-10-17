@@ -1,0 +1,26 @@
+{
+  "id": "en-adult-shopping",
+  "subjectId": "en-adult",
+  "title": "성인 영어 · 쇼핑",
+  "level": "초급",
+  "levelOrder": 1,
+  "order": 9,
+  "ttsLang": "en-US",
+  "status": "live",
+  "access": "free",
+  "rules": {
+    "itemsPerLesson": 6,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": [
+      "picture_choice",
+      "meaning_choice",
+      "listen_choice",
+      "ox"
+    ],
+    "autoQuiz": true
+  },
+  "unitLabel": "shop",
+  "tagLabel": "쇼핑"
+}

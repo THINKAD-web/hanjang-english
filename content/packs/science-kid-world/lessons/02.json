@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "나라 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "canada",
+      "kind": "word",
+      "text": "Canada",
+      "meaningKo": "캐나다",
+      "emoji": "🇨🇦",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "australia",
+      "kind": "word",
+      "text": "Australia",
+      "meaningKo": "호주",
+      "emoji": "🇦🇺",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "brazil",
+      "kind": "word",
+      "text": "Brazil",
+      "meaningKo": "브라질",
+      "emoji": "🇧🇷",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "india",
+      "kind": "word",
+      "text": "India",
+      "meaningKo": "인도",
+      "emoji": "🇮🇳",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "egypt",
+      "kind": "word",
+      "text": "Egypt",
+      "meaningKo": "이집트",
+      "emoji": "🇪🇬",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    },
+    {
+      "id": "spain",
+      "kind": "word",
+      "text": "Spain",
+      "meaningKo": "스페인",
+      "emoji": "🇪🇸",
+      "imageable": true,
+      "tags": [
+        "country"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}
