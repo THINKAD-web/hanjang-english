@@ -10,7 +10,18 @@ import type { Audience } from "@/lib/content/schema";
 import { useManifest } from "@/lib/content/use-content";
 import { isPreRelease } from "@/lib/content/visibility";
 import { recordPackInterest } from "@/lib/engine/progress";
-import { activeProfile, audienceOf, isOpenPack, isUnlocked, levelsOf, packProgressOf, packsOf, subjectsOf } from "@/lib/packs/catalog";
+import {
+  activeProfile,
+  audienceOf,
+  isOpenPack,
+  isUnlocked,
+  levelsOf,
+  openPackCountForAudience,
+  openPackCountForSubject,
+  packProgressOf,
+  packsOf,
+  subjectsOf,
+} from "@/lib/packs/catalog";
 import type { State } from "@/lib/store/types";
 import { useProgress } from "@/lib/use-progress";
 import { isDebug, useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
@@ -59,6 +70,7 @@ function PacksReady({
   const levels = subject ? levelsOf(manifest, subject.id) : [];
   const level = levels.find((l) => l.levelOrder === levelPick) ?? levels[0];
   const packs = subject && level ? packsOf(manifest, subject.id, level.levelOrder) : [];
+  const audienceOpenTotal = openPackCountForAudience(manifest, audience);
 
   const onSoon = (p: ManifestPack) => {
     setInterest(p.id);
@@ -69,6 +81,9 @@ function PacksReady({
   return (
     <Screen>
       <h1 className="text-3xl font-bold text-slate-900">내 팩</h1>
+      <p className="text-base text-slate-600">
+        과목을 고르고 오늘 풀 팩을 시작해요 · 이 탭에 열린 팩 {audienceOpenTotal}개
+      </p>
 
       <div role="tablist" aria-label="대상" className="grid grid-cols-2 gap-2">
         {(["kid", "adult"] as const).map((a) => (
@@ -112,7 +127,10 @@ function PacksReady({
                 <span aria-hidden className="text-3xl">
                   {s.icon ?? "📘"}
                 </span>
-                {s.name}
+                <span className="leading-tight">
+                  {s.name}
+                  <span className="mt-0.5 block text-sm font-semibold text-slate-600">팩 {openPackCountForSubject(manifest, s.id)}</span>
+                </span>
               </button>
             ))}
           </section>

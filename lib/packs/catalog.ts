@@ -44,6 +44,24 @@ export function packsOf(manifest: Manifest, subjectId: string, levelOrder: numbe
   return manifest.packs.filter((p) => p.subjectId === subjectId && p.levelOrder === levelOrder).sort((a, b) => a.order - b.order || a.id.localeCompare(b.id));
 }
 
+/** 한 과목에서 지금 시작·이어서 가능한(live + 공개 레슨) 팩 수 */
+export function openPackCountForSubject(
+  manifest: Manifest,
+  subjectId: string,
+  v: Visibility = defaultVisibility(),
+): number {
+  return manifest.packs.filter((p) => p.subjectId === subjectId && isOpenPack(p, v)).length;
+}
+
+/** 대상(어린이/성인) 탭에서 열린 팩 전체 — /packs 는 과목을 골라 일부만 보이므로 안내용 */
+export function openPackCountForAudience(
+  manifest: Manifest,
+  audience: Audience,
+  v: Visibility = defaultVisibility(),
+): number {
+  return subjectsOf(manifest, audience).reduce((n, s) => n + openPackCountForSubject(manifest, s.id, v), 0);
+}
+
 export function packProgressOf(state: State, pack: Pick<ManifestPack, "id" | "lessons">): { done: number; total: number } {
   const ids = new Set(pack.lessons.map((l) => l.id));
   return { done: completedLessonIds(state, pack.id).filter((id) => ids.has(id)).length, total: pack.lessons.length };
