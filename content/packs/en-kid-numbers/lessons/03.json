@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "숫자 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "thirteen",
+      "kind": "word",
+      "text": "thirteen",
+      "meaningKo": "열셋",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "fourteen",
+      "kind": "word",
+      "text": "fourteen",
+      "meaningKo": "열넷",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "fifteen",
+      "kind": "word",
+      "text": "fifteen",
+      "meaningKo": "열다섯",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "sixteen",
+      "kind": "word",
+      "text": "sixteen",
+      "meaningKo": "열여섯",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "seventeen",
+      "kind": "word",
+      "text": "seventeen",
+      "meaningKo": "열일곱",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "eighteen",
+      "kind": "word",
+      "text": "eighteen",
+      "meaningKo": "열여덟",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

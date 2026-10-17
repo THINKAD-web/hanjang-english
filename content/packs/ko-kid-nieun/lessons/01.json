@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "ㄱㄴ 1",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3131",
+      "kind": "word",
+      "text": "ㄱ",
+      "meaningKo": "기역",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u3134",
+      "kind": "word",
+      "text": "ㄴ",
+      "meaningKo": "니은",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u3137",
+      "kind": "word",
+      "text": "ㄷ",
+      "meaningKo": "디귿",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u3139",
+      "kind": "word",
+      "text": "ㄹ",
+      "meaningKo": "리을",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u3141",
+      "kind": "word",
+      "text": "ㅁ",
+      "meaningKo": "미음",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u3142",
+      "kind": "word",
+      "text": "ㅂ",
+      "meaningKo": "비읍",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

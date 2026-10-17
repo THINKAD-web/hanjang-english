@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "예절 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "uc548ub155ud558uc138uc694",
+      "kind": "phrase",
+      "text": "안녕하세요",
+      "meaningKo": "안녕하세요 (격식)",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uac10uc0acud569ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "감사합니다",
+      "meaningKo": "감사합니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc8c4uc1a1ud569ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "죄송합니다",
+      "meaningKo": "죄송합니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc2e4ub840ud569ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "실례합니다",
+      "meaningKo": "실례합니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc798-ubd80ud0c1ub4dcub9bdub2c8ub2e4",
+      "kind": "phrase",
+      "text": "잘 부탁드립니다",
+      "meaningKo": "잘 부탁드립니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "ub2e4ub140uc624uaca0uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "다녀오겠습니다",
+      "meaningKo": "다녀오겠습니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

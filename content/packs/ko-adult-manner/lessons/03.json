@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "예절 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "ub4e4uc5b4uac00uc138uc694",
+      "kind": "phrase",
+      "text": "들어가세요",
+      "meaningKo": "들어가세요 (배웅)",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc870uc2ecud788-uac00uc138uc694",
+      "kind": "phrase",
+      "text": "조심히 가세요",
+      "meaningKo": "조심히 가세요",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc5f0ub77dub4dcub9acuaca0uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "연락드리겠습니다",
+      "meaningKo": "연락드리겠습니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "ud655uc778ud588uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "확인했습니다",
+      "meaningKo": "확인했습니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uac80ud1a0-ud6c4-ud68cuc2e0ub4dcub9acuaca0uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "검토 후 회신드리겠습니다",
+      "meaningKo": "검토 후 회신드리겠습니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc88buc740-ud558ub8e8-ubcf4ub0b4uc138uc694",
+      "kind": "phrase",
+      "text": "좋은 하루 보내세요",
+      "meaningKo": "좋은 하루 보내세요",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

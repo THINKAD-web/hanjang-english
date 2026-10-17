@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "숫자 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "seven",
+      "kind": "word",
+      "text": "seven",
+      "meaningKo": "일곱",
+      "emoji": "7️⃣",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "eight",
+      "kind": "word",
+      "text": "eight",
+      "meaningKo": "여덟",
+      "emoji": "8️⃣",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "nine",
+      "kind": "word",
+      "text": "nine",
+      "meaningKo": "아홉",
+      "emoji": "9️⃣",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "ten",
+      "kind": "word",
+      "text": "ten",
+      "meaningKo": "열",
+      "emoji": "🔟",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "eleven",
+      "kind": "word",
+      "text": "eleven",
+      "meaningKo": "열하나",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    },
+    {
+      "id": "twelve",
+      "kind": "word",
+      "text": "twelve",
+      "meaningKo": "열둘",
+      "emoji": "📌",
+      "imageable": true,
+      "tags": [
+        "num"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "색깔 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "red",
+      "kind": "word",
+      "text": "red",
+      "meaningKo": "빨강",
+      "emoji": "🔴",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "blue",
+      "kind": "word",
+      "text": "blue",
+      "meaningKo": "파랑",
+      "emoji": "🔵",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "green",
+      "kind": "word",
+      "text": "green",
+      "meaningKo": "초록",
+      "emoji": "🟢",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "yellow",
+      "kind": "word",
+      "text": "yellow",
+      "meaningKo": "노랑",
+      "emoji": "🟡",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "orange",
+      "kind": "word",
+      "text": "orange",
+      "meaningKo": "주황",
+      "emoji": "🟠",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "purple",
+      "kind": "word",
+      "text": "purple",
+      "meaningKo": "보라",
+      "emoji": "🟣",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

@@ -1,0 +1,19 @@
+text,meaningKo,emoji,tags,imageable
+mom,엄마,👩,family,true
+dad,아빠,👨,family,true
+sister,언니/누나,👧,family,true
+brother,형/오빠,👦,family,true
+baby,아기,👶,family,true
+grandma,할머니,👵,family,true
+grandpa,할아버지,👴,family,true
+aunt,이모/고모,👩‍🦱,family,true
+uncle,삼촌,👨‍🦱,family,true
+cousin,사촌,🧒,family,true
+family,가족,👨‍👩‍👧,family,true
+home,집,🏠,family,true
+love,사랑,❤️,family,true
+hug,포옹,🤗,family,true
+pet,반려동물,🐾,family,true
+friend,친구,🧑‍🤝‍🧑,family,true
+teacher,선생님,👩‍🏫,family,true
+classmate,반 친구,🎒,family,true

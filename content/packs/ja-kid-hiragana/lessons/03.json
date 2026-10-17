@@ -1,0 +1,64 @@
+{
+  "order": 3,
+  "title": "あ 3",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3055",
+      "kind": "kana",
+      "text": "さ",
+      "meaningKo": "사",
+      "reading": "sa",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u3057",
+      "kind": "kana",
+      "text": "し",
+      "meaningKo": "시",
+      "reading": "shi",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u3059",
+      "kind": "kana",
+      "text": "す",
+      "meaningKo": "스",
+      "reading": "su",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u305b",
+      "kind": "kana",
+      "text": "せ",
+      "meaningKo": "세",
+      "reading": "se",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u305d",
+      "kind": "kana",
+      "text": "そ",
+      "meaningKo": "소",
+      "reading": "so",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

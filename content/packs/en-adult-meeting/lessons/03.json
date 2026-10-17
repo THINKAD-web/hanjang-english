@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "meeting 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "could-we-move-to-the-next-itemu3f",
+      "kind": "phrase",
+      "text": "Could we move to the next item?",
+      "meaningKo": "다음 안건으로 넘어갈까요?",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "i-ll-circle-back-on-that",
+      "kind": "phrase",
+      "text": "I'll circle back on that.",
+      "meaningKo": "그건 다시 말씀드릴게요.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "let-s-wrap-up-for-today",
+      "kind": "phrase",
+      "text": "Let's wrap up for today.",
+      "meaningKo": "오늘은 여기까지 마무리할게요.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "does-that-work-for-everyoneu3f",
+      "kind": "phrase",
+      "text": "Does that work for everyone?",
+      "meaningKo": "모두 괜찮으신가요?",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "i-ll-note-that-down",
+      "kind": "phrase",
+      "text": "I'll note that down.",
+      "meaningKo": "메모해 두겠습니다.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "let-s-confirm-the-action-items",
+      "kind": "phrase",
+      "text": "Let's confirm the action items.",
+      "meaningKo": "액션 아이템 확인해요.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

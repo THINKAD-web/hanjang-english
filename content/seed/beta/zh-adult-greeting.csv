@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,reading,kind
+你好,안녕하세요,greet,false,nǐ hǎo,hanzi
+谢谢,감사합니다,greet,false,xièxie,hanzi
+对不起,미안합니다,greet,false,duìbuqǐ,hanzi
+请,부탁합니다,greet,false,qǐng,hanzi
+是,네,basic,false,shì,hanzi
+不是,아니요,basic,false,bù shì,hanzi
+多少钱,얼마예요?,shop,false,duōshao qián,hanzi
+再见,안녕히 가세요,greet,false,zàijiàn,hanzi
+我叫...,저는 ...입니다,intro,false,wǒ jiào,hanzi
+很高兴认识你,만나서 반가워요,intro,false,hěn gāoxìng,hanzi
+没关系,괜찮아요,greet,false,méi guānxi,hanzi
+请稍等,잠시만요,greet,false,qǐng shāo děng,hanzi
+可以,괜찮아요/가능해요,basic,false,kěyǐ,hanzi
+不可以,안 됩니다,basic,false,bù kěyǐ,hanzi
+在哪里,어디예요?,travel,false,zài nǎlǐ,hanzi
+我要这个,이걸 주세요,shop,false,wǒ yào,hanzi
+不要,필요 없어요,shop,false,bù yào,hanzi
+帮助,도와주세요,help,false,bāngzhù,hanzi

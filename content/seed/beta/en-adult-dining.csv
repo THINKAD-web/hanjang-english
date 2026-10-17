@@ -1,0 +1,19 @@
+text,meaningKo,tags,imageable,kind
+"A table for two, please.",두 명 자리 주세요.,dine,false,phrase
+"Could we see the menu?",메뉴판 주시겠어요?,dine,false,phrase
+"I'd like to order.",주문할게요.,dine,false,phrase
+"What do you recommend?",추천 메뉴가 뭐예요?,dine,false,phrase
+"I'm allergic to nuts.",견과류 알레르기가 있어요.,dine,false,phrase
+"No ice, please.",얼음 빼 주세요.,dine,false,phrase
+"Could we have the bill?",계산서 주세요.,dine,false,phrase
+"Is service included?",봉사료 포함인가요?,dine,false,phrase
+"This is delicious.",맛있어요.,dine,false,phrase
+"Could I have some water?",물 좀 주시겠어요?,dine,false,phrase
+"We're ready to order.",주문할 준비 됐어요.,dine,false,phrase
+"Could we split the bill?",더치페이 할 수 있을까요?,dine,false,phrase
+"I'll pay by card.",카드로 결제할게요.,dine,false,phrase
+"To go, please.",포장해 주세요.,dine,false,phrase
+"Is there a vegetarian option?",채식 메뉴 있나요?,dine,false,phrase
+"Could you make it less spicy?",덜 맵게 해 주세요.,dine,false,phrase
+"Thank you for the meal.",잘 먹었습니다.,dine,false,phrase
+"Same as last time, please.",지난번이랑 같이 주세요.,dine,false,phrase

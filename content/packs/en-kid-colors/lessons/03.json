@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "색깔 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "silver",
+      "kind": "word",
+      "text": "silver",
+      "meaningKo": "은색",
+      "emoji": "🪙",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "navy",
+      "kind": "word",
+      "text": "navy",
+      "meaningKo": "남색",
+      "emoji": "🔷",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "beige",
+      "kind": "word",
+      "text": "beige",
+      "meaningKo": "베이지",
+      "emoji": "🧸",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "cyan",
+      "kind": "word",
+      "text": "cyan",
+      "meaningKo": "하늘색",
+      "emoji": "💠",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "lime",
+      "kind": "word",
+      "text": "lime",
+      "meaningKo": "연두",
+      "emoji": "💚",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "maroon",
+      "kind": "word",
+      "text": "maroon",
+      "meaningKo": "적갈색",
+      "emoji": "🏮",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

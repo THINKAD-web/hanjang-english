@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "ㄱㄴ 2",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3145",
+      "kind": "word",
+      "text": "ㅅ",
+      "meaningKo": "시옷",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u3147",
+      "kind": "word",
+      "text": "ㅇ",
+      "meaningKo": "이응",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u3148",
+      "kind": "word",
+      "text": "ㅈ",
+      "meaningKo": "지읒",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u314a",
+      "kind": "word",
+      "text": "ㅊ",
+      "meaningKo": "치읓",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u314b",
+      "kind": "word",
+      "text": "ㅋ",
+      "meaningKo": "키읔",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    },
+    {
+      "id": "u314c",
+      "kind": "word",
+      "text": "ㅌ",
+      "meaningKo": "티읕",
+      "imageable": false,
+      "tags": [
+        "jam"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

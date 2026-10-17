@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "가족 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "grandpa",
+      "kind": "word",
+      "text": "grandpa",
+      "meaningKo": "할아버지",
+      "emoji": "👴",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "aunt",
+      "kind": "word",
+      "text": "aunt",
+      "meaningKo": "이모/고모",
+      "emoji": "👩‍🦱",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "uncle",
+      "kind": "word",
+      "text": "uncle",
+      "meaningKo": "삼촌",
+      "emoji": "👨‍🦱",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "cousin",
+      "kind": "word",
+      "text": "cousin",
+      "meaningKo": "사촌",
+      "emoji": "🧒",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "family",
+      "kind": "word",
+      "text": "family",
+      "meaningKo": "가족",
+      "emoji": "👨‍👩‍👧",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "home",
+      "kind": "word",
+      "text": "home",
+      "meaningKo": "집",
+      "emoji": "🏠",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

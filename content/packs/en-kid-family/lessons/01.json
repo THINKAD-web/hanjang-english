@@ -1,0 +1,75 @@
+{
+  "order": 1,
+  "title": "가족 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "mom",
+      "kind": "word",
+      "text": "mom",
+      "meaningKo": "엄마",
+      "emoji": "👩",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "dad",
+      "kind": "word",
+      "text": "dad",
+      "meaningKo": "아빠",
+      "emoji": "👨",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "sister",
+      "kind": "word",
+      "text": "sister",
+      "meaningKo": "언니/누나",
+      "emoji": "👧",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "brother",
+      "kind": "word",
+      "text": "brother",
+      "meaningKo": "형/오빠",
+      "emoji": "👦",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "baby",
+      "kind": "word",
+      "text": "baby",
+      "meaningKo": "아기",
+      "emoji": "👶",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "grandma",
+      "kind": "word",
+      "text": "grandma",
+      "meaningKo": "할머니",
+      "emoji": "👵",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

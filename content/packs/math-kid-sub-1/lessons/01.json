@@ -13,6 +13,6 @@
     "min": 1,
     "max": 5
   },
-  "reviewed": false,
-  "testOnly": true
+  "reviewed": true,
+  "testOnly": false
 }

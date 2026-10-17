@@ -1,0 +1,69 @@
+{
+  "order": 1,
+  "title": "travel 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u3053u3093u306bu3061u306f",
+      "kind": "phrase",
+      "text": "こんにちは",
+      "meaningKo": "안녕하세요",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u3042u308au304cu3068u3046",
+      "kind": "phrase",
+      "text": "ありがとう",
+      "meaningKo": "감사합니다",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u3059u307fu307eu305bu3093",
+      "kind": "phrase",
+      "text": "すみません",
+      "meaningKo": "실례합니다",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u304au9858u3044u3057u307eu3059",
+      "kind": "phrase",
+      "text": "お願いします",
+      "meaningKo": "부탁합니다",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u306fu3044",
+      "kind": "phrase",
+      "text": "はい",
+      "meaningKo": "네",
+      "imageable": false,
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "u3044u3044u3048",
+      "kind": "phrase",
+      "text": "いいえ",
+      "meaningKo": "아니요",
+      "imageable": false,
+      "tags": [
+        "basic"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

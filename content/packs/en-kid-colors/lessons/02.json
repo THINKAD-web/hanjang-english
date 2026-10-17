@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "색깔 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "pink",
+      "kind": "word",
+      "text": "pink",
+      "meaningKo": "분홍",
+      "emoji": "🌸",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "brown",
+      "kind": "word",
+      "text": "brown",
+      "meaningKo": "갈색",
+      "emoji": "🟤",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "black",
+      "kind": "word",
+      "text": "black",
+      "meaningKo": "검정",
+      "emoji": "⬛",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "white",
+      "kind": "word",
+      "text": "white",
+      "meaningKo": "하양",
+      "emoji": "⬜",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "gray",
+      "kind": "word",
+      "text": "gray",
+      "meaningKo": "회색",
+      "emoji": "🩶",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "gold",
+      "kind": "word",
+      "text": "gold",
+      "meaningKo": "금색",
+      "emoji": "✨",
+      "imageable": true,
+      "tags": [
+        "color"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

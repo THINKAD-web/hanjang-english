@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "present 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "i-ll-hand-over-to-my-colleague",
+      "kind": "phrase",
+      "text": "I'll hand over to my colleague.",
+      "meaningKo": "동료에게 넘기겠습니다.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "we-saw-strong-growth",
+      "kind": "phrase",
+      "text": "We saw strong growth.",
+      "meaningKo": "성장세가 좋았습니다.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "next-quarter-we-plan-to",
+      "kind": "phrase",
+      "text": "Next quarter we plan to...",
+      "meaningKo": "다음 분기에는...",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "i-ll-share-the-link-afterward",
+      "kind": "phrase",
+      "text": "I'll share the link afterward.",
+      "meaningKo": "끝나고 링크 공유할게요.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "feel-free-to-interrupt",
+      "kind": "phrase",
+      "text": "Feel free to interrupt.",
+      "meaningKo": "중간에 끊으셔도 됩니다.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "let-s-open-the-floor-for-qu26a",
+      "kind": "phrase",
+      "text": "Let's open the floor for Q&A.",
+      "meaningKo": "질의응답 시간입니다.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

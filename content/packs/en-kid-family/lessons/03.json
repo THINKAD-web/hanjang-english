@@ -1,0 +1,75 @@
+{
+  "order": 3,
+  "title": "가족 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "love",
+      "kind": "word",
+      "text": "love",
+      "meaningKo": "사랑",
+      "emoji": "❤️",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "hug",
+      "kind": "word",
+      "text": "hug",
+      "meaningKo": "포옹",
+      "emoji": "🤗",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "pet",
+      "kind": "word",
+      "text": "pet",
+      "meaningKo": "반려동물",
+      "emoji": "🐾",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "friend",
+      "kind": "word",
+      "text": "friend",
+      "meaningKo": "친구",
+      "emoji": "🧑‍🤝‍🧑",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "teacher",
+      "kind": "word",
+      "text": "teacher",
+      "meaningKo": "선생님",
+      "emoji": "👩‍🏫",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "classmate",
+      "kind": "word",
+      "text": "classmate",
+      "meaningKo": "반 친구",
+      "emoji": "🎒",
+      "imageable": true,
+      "tags": [
+        "family"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

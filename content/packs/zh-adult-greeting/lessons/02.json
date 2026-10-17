@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "问候 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u591au5c11u94b1",
+      "kind": "hanzi",
+      "text": "多少钱",
+      "meaningKo": "얼마예요?",
+      "reading": "duōshao qián",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u518du89c1",
+      "kind": "hanzi",
+      "text": "再见",
+      "meaningKo": "안녕히 가세요",
+      "reading": "zàijiàn",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u6211u53eb",
+      "kind": "hanzi",
+      "text": "我叫...",
+      "meaningKo": "저는 ...입니다",
+      "reading": "wǒ jiào",
+      "imageable": false,
+      "tags": [
+        "intro"
+      ]
+    },
+    {
+      "id": "u5f88u9ad8u5174u8ba4u8bc6u4f60",
+      "kind": "hanzi",
+      "text": "很高兴认识你",
+      "meaningKo": "만나서 반가워요",
+      "reading": "hěn gāoxìng",
+      "imageable": false,
+      "tags": [
+        "intro"
+      ]
+    },
+    {
+      "id": "u6ca1u5173u7cfb",
+      "kind": "hanzi",
+      "text": "没关系",
+      "meaningKo": "괜찮아요",
+      "reading": "méi guānxi",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    },
+    {
+      "id": "u8bf7u7a0du7b49",
+      "kind": "hanzi",
+      "text": "请稍等",
+      "meaningKo": "잠시만요",
+      "reading": "qǐng shāo děng",
+      "imageable": false,
+      "tags": [
+        "greet"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

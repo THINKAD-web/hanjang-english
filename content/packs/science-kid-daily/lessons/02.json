@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "자연 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "wind",
+      "kind": "word",
+      "text": "wind",
+      "meaningKo": "바람",
+      "emoji": "💨",
+      "imageable": true,
+      "tags": [
+        "weather"
+      ]
+    },
+    {
+      "id": "water",
+      "kind": "word",
+      "text": "water",
+      "meaningKo": "물",
+      "emoji": "💧",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "fire",
+      "kind": "word",
+      "text": "fire",
+      "meaningKo": "불",
+      "emoji": "🔥",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "tree",
+      "kind": "word",
+      "text": "tree",
+      "meaningKo": "나무",
+      "emoji": "🌳",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "flower",
+      "kind": "word",
+      "text": "flower",
+      "meaningKo": "꽃",
+      "emoji": "🌸",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "grass",
+      "kind": "word",
+      "text": "grass",
+      "meaningKo": "풀",
+      "emoji": "🌿",
+      "imageable": true,
+      "tags": [
+        "nature"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

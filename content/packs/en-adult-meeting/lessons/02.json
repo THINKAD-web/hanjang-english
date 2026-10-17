@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "meeting 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "back-to-the-agenda",
+      "kind": "phrase",
+      "text": "Back to the agenda.",
+      "meaningKo": "안건으로 돌아갈게요.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "i-agree-with-that-point",
+      "kind": "phrase",
+      "text": "I agree with that point.",
+      "meaningKo": "그 의견에 동의합니다.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "can-we-clarify-thisu3f",
+      "kind": "phrase",
+      "text": "Can we clarify this?",
+      "meaningKo": "이 부분 명확히 할 수 있을까요?",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "let-s-schedule-a-follow-up",
+      "kind": "phrase",
+      "text": "Let's schedule a follow-up.",
+      "meaningKo": "후속 일정 잡아요.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "i-ll-send-the-minutes",
+      "kind": "phrase",
+      "text": "I'll send the minutes.",
+      "meaningKo": "회의록 보내드릴게요.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    },
+    {
+      "id": "thanks-for-your-time",
+      "kind": "phrase",
+      "text": "Thanks for your time.",
+      "meaningKo": "시간 내주셔서 감사합니다.",
+      "imageable": false,
+      "tags": [
+        "meet"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

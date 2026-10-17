@@ -1,0 +1,64 @@
+{
+  "order": 2,
+  "title": "あ 2",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u304b",
+      "kind": "kana",
+      "text": "か",
+      "meaningKo": "카",
+      "reading": "ka",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u304d",
+      "kind": "kana",
+      "text": "き",
+      "meaningKo": "키",
+      "reading": "ki",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u304f",
+      "kind": "kana",
+      "text": "く",
+      "meaningKo": "쿠",
+      "reading": "ku",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u3051",
+      "kind": "kana",
+      "text": "け",
+      "meaningKo": "케",
+      "reading": "ke",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u3053",
+      "kind": "kana",
+      "text": "こ",
+      "meaningKo": "코",
+      "reading": "ko",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

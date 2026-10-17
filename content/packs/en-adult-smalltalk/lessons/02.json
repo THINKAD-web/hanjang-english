@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "chat 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "that-sounds-great",
+      "kind": "phrase",
+      "text": "That sounds great.",
+      "meaningKo": "좋네요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "i-see-what-you-mean",
+      "kind": "phrase",
+      "text": "I see what you mean.",
+      "meaningKo": "무슨 말인지 알겠어요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "that-s-a-good-point",
+      "kind": "phrase",
+      "text": "That's a good point.",
+      "meaningKo": "좋은 지적이에요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "let-me-think-about-it",
+      "kind": "phrase",
+      "text": "Let me think about it.",
+      "meaningKo": "생각해 볼게요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "i-ll-keep-that-in-mind",
+      "kind": "phrase",
+      "text": "I'll keep that in mind.",
+      "meaningKo": "기억해 둘게요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    },
+    {
+      "id": "no-worries",
+      "kind": "phrase",
+      "text": "No worries.",
+      "meaningKo": "괜찮아요.",
+      "imageable": false,
+      "tags": [
+        "chat"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

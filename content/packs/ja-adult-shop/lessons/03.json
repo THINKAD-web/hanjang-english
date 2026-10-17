@@ -1,0 +1,69 @@
+{
+  "order": 3,
+  "title": "shop 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "u4ea4u63dbu3057u305fu3044u3067u3059",
+      "kind": "phrase",
+      "text": "交換したいです",
+      "meaningKo": "교환하고 싶어요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u5728u5eabu306fu3042u308au307eu3059u304b",
+      "kind": "phrase",
+      "text": "在庫はありますか",
+      "meaningKo": "재고 있나요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u304au3059u3059u3081u306fu4f55u3067u3059u304b",
+      "kind": "phrase",
+      "text": "おすすめは何ですか",
+      "meaningKo": "추천이 뭐예요?",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u3053u308cu306bu3057u307eu3059",
+      "kind": "phrase",
+      "text": "これにします",
+      "meaningKo": "이걸로 할게요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u5c11u3005u304au5f85u3061u304fu3060u3055u3044",
+      "kind": "phrase",
+      "text": "少々お待ちください",
+      "meaningKo": "잠시만 기다려 주세요",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    },
+    {
+      "id": "u3042u308au304cu3068u3046u3054u3056u3044u307eu3057u305f",
+      "kind": "phrase",
+      "text": "ありがとうございました",
+      "meaningKo": "감사했습니다",
+      "imageable": false,
+      "tags": [
+        "shop"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}

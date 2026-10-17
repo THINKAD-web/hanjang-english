@@ -1,0 +1,69 @@
+{
+  "order": 2,
+  "title": "예절 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "ub2e4ub140uc654uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "다녀왔습니다",
+      "meaningKo": "다녀왔습니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "ub9dbuc788uac8c-ub4dcuc138uc694",
+      "kind": "phrase",
+      "text": "맛있게 드세요",
+      "meaningKo": "맛있게 드세요",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc218uace0ud558uc168uc2b5ub2c8ub2e4",
+      "kind": "phrase",
+      "text": "수고하셨습니다",
+      "meaningKo": "수고하셨습니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "ucd95ud558ub4dcub9bdub2c8ub2e4",
+      "kind": "phrase",
+      "text": "축하드립니다",
+      "meaningKo": "축하드립니다",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uc0dduc77c-ucd95ud558ud574uc694",
+      "kind": "phrase",
+      "text": "생일 축하해요",
+      "meaningKo": "생일 축하해요",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    },
+    {
+      "id": "uac74ubc30u21",
+      "kind": "phrase",
+      "text": "건배!",
+      "meaningKo": "건배!",
+      "imageable": false,
+      "tags": [
+        "manner"
+      ]
+    }
+  ],
+  "reviewed": true,
+  "testOnly": false
+}
