@@ -10,7 +10,7 @@ import type { Audience } from "@/lib/content/schema";
 import { useManifest } from "@/lib/content/use-content";
 import { isPreRelease } from "@/lib/content/visibility";
 import { recordPackInterest } from "@/lib/engine/progress";
-import { activeProfile, audienceOf, isUnlocked, levelsOf, packProgressOf, packsOf, subjectsOf } from "@/lib/packs/catalog";
+import { activeProfile, audienceOf, isOpenPack, isUnlocked, levelsOf, packProgressOf, packsOf, subjectsOf } from "@/lib/packs/catalog";
 import type { State } from "@/lib/store/types";
 import { useProgress } from "@/lib/use-progress";
 import { isDebug, useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
@@ -184,7 +184,7 @@ function PackCard({
 
 
   // Debug 에서는 레슨이 있는 준비 중 팩도 열어 볼 수 있다. Production 에서는 목록에만 보인다.
-  const openable = pack.status === "live" || (isDebug && pack.lessons.length > 0);
+  const openable = isOpenPack(pack);
   const preRelease = isDebug && (pack.status !== "live" || pack.lessons.some((l) => isPreRelease(pack, l)));
   const title = (
     <>

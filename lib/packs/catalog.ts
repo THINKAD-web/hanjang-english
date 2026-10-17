@@ -2,6 +2,7 @@ import type { Manifest, ManifestPack } from "@/lib/content/bundle";
 import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
 import type { Audience, Subject } from "@/lib/content/schema";
 import { completedLessonIds } from "@/lib/engine/today";
+import { defaultVisibility, type Visibility } from "@/lib/content/visibility";
 import type { Profile, State } from "@/lib/store/types";
 
 /**
@@ -11,6 +12,15 @@ import type { Profile, State } from "@/lib/store/types";
 
 /** 아이 프로필은 어린이 과목, 본인 프로필은 성인 과목을 먼저 보여준다. */
 export const audienceOf = (profile: Pick<Profile, "type">): Audience => (profile.type === "child" ? "kid" : "adult");
+
+/**
+ * 지금 열어서 학습할 수 있는 팩인가. live 이고 레슨이 있으면 열린다.
+ * Debug(Preview)에서는 레슨이 있는 준비 중(soon) 팩도 열린다 — 공개 전 콘텐츠(예: 성인 영어 출장)를 확인하는 용도.
+ * Production 에서 soon 팩은 목록의 "준비 중"으로만 보인다.
+ */
+export function isOpenPack(pack: Pick<ManifestPack, "status" | "lessons">, v: Visibility = defaultVisibility()): boolean {
+  return pack.lessons.length > 0 && (pack.status === "live" || v.debug);
+}
 
 export function activeProfile(state: State): Profile {
   return state.profiles.find((p) => p.id === state.activeProfileId) ?? state.profiles[0];
@@ -52,8 +62,8 @@ export function isUnlocked(state: State, pack: Pick<ManifestPack, "unlock">, man
 }
 
 /** 이 프로필이 시작해서 아직 안 끝낸 live 팩, 최근에 한 순서. 시작 전(기록 없는) 트랙은 뒤로. */
-export function inProgressPacks(state: State, manifest: Manifest, max = 3): ManifestPack[] {
-  const live = new Map(manifest.packs.filter((p) => p.status === "live" && p.lessons.length > 0).map((p) => [p.id, p]));
+export function inProgressPacks(state: State, manifest: Manifest, max = 3, v: Visibility = defaultVisibility()): ManifestPack[] {
+  const live = new Map(manifest.packs.filter((p) => isOpenPack(p, v)).map((p) => [p.id, p]));
   const last = new Map<string, string>();
   for (const a of state.attempts) {
     if (a.profileId !== state.activeProfileId || !a.completed) continue;
@@ -69,11 +79,11 @@ export function inProgressPacks(state: State, manifest: Manifest, max = 3): Mani
 }
 
 /** 홈 "이어서" 카드가 가리킬 팩: 마지막으로 연 팩 → 진행 중인 팩 → (아이 프로필이면) 기본 팩. 없으면 null. */
-export function continuePackId(state: State, manifest: Manifest): string | null {
-  const live = (id: string | null | undefined) => (id && manifest.packs.some((p) => p.id === id && p.status === "live" && p.lessons.length > 0) ? id : null);
+export function continuePackId(state: State, manifest: Manifest, v: Visibility = defaultVisibility()): string | null {
+  const live = (id: string | null | undefined) => (id && manifest.packs.some((p) => p.id === id && isOpenPack(p, v)) ? id : null);
   const owned = (id: string) => state.tracks.some((t) => t.profileId === state.activeProfileId && t.packId === id);
   if (state.activePackId && owned(state.activePackId) && live(state.activePackId)) return state.activePackId;
-  const progress = inProgressPacks(state, manifest, 1)[0];
+  const progress = inProgressPacks(state, manifest, 1, v)[0];
   if (progress) return progress.id;
   return audienceOf(activeProfile(state)) === "kid" ? live(DEFAULT_PACK_ID) : null;
 }

@@ -8,7 +8,7 @@ import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
 import type { Content } from "@/lib/content/schema";
 import { useManifest, usePackContent } from "@/lib/content/use-content";
 import { objectParticle } from "@/lib/content/josa";
-import { continuePackId } from "@/lib/packs/catalog";
+import { continuePackId, isOpenPack } from "@/lib/packs/catalog";
 import { formatDateLabel } from "@/lib/engine/date";
 import { recordParentView } from "@/lib/engine/progress";
 import { toggleWrongReview } from "@/lib/parent/account";
@@ -56,7 +56,7 @@ function ParentLoader(api: ParentApi) {
   const options = useMemo(() => {
     if (manifest.status !== "ready") return [];
     const mine = new Set(api.state.tracks.filter((t) => t.profileId === api.state.activeProfileId).map((t) => t.packId));
-    return manifest.data.packs.filter((p) => p.status === "live" && p.lessons.length > 0 && mine.has(p.id));
+    return manifest.data.packs.filter((p) => isOpenPack(p) && mine.has(p.id));
   }, [manifest, api.state.tracks, api.state.activeProfileId]);
   const fallback = manifest.status === "ready" ? continuePackId(api.state, manifest.data) : null;
   const packId =

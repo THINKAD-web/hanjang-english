@@ -8,6 +8,7 @@ import {
   audienceOf,
   continuePackId,
   inProgressPacks,
+  isOpenPack,
   isUnlocked,
   levelsOf,
   packProgressOf,
@@ -180,5 +181,30 @@ describe("프로필 추가 · 전환", () => {
     let s = withAttempts(createInitialState("en-kid-giyeok"), attempt("en-kid-giyeok", "en-kid-giyeok-01", "2026-10-12T01:00:00Z"));
     s = switchProfile(addProfile(s, { name: "나", type: "self" }), "p-2");
     expect(packProgressOf(s, manifest.packs[0]).done).toBe(0);
+  });
+});
+
+describe("Debug 에서만 열리는 준비 중 팩 (성인 영어 출장)", () => {
+  const travel = { ...pack("en-adult-travel", { subjectId: "en-adult", status: "soon", n: 8 }) };
+  const withTravel: Manifest = { ...manifest, packs: [...manifest.packs.filter((p) => p.id !== "en-adult-travel"), travel] };
+  const adultWithTrack = (): State => {
+    let s = switchProfile(addProfile(createInitialState("en-kid-giyeok"), { name: "나", type: "self" }), "p-2");
+    s = track(s, "en-adult-travel", "p-2");
+    return withAttempts(s, attempt("en-adult-travel", "en-adult-travel-01", "2026-10-12T01:00:00Z", "p-2"));
+  };
+
+  it("isOpenPack: Production 은 live 만, Debug 는 레슨 있는 soon 도", () => {
+    expect(isOpenPack(travel, { debug: false })).toBe(false);
+    expect(isOpenPack(travel, { debug: true })).toBe(true);
+    expect(isOpenPack({ ...travel, lessons: [] }, { debug: true })).toBe(false);
+    expect(isOpenPack(manifest.packs[0], { debug: false })).toBe(true);
+  });
+
+  it("Debug: 시작한 출장 팩이 내 팩·이어서에 나오고, Production 에서는 나오지 않는다", () => {
+    const s = adultWithTrack();
+    expect(inProgressPacks(s, withTravel, 3, { debug: true }).map((p) => p.id)).toEqual(["en-adult-travel"]);
+    expect(continuePackId(s, withTravel, { debug: true })).toBe("en-adult-travel");
+    expect(inProgressPacks(s, withTravel, 3, { debug: false })).toEqual([]);
+    expect(continuePackId(s, withTravel, { debug: false })).toBeNull();
   });
 });
