@@ -1,0 +1,13 @@
+{
+  "id": "ja-adult-travel",
+  "subjectId": "ja-adult",
+  "title": "성인 일본어 · 여행",
+  "level": "A1",
+  "levelOrder": 1,
+  "order": 1,
+  "brandLabel": "한장일본어",
+  "unitKey": "travel",
+  "unitLabel": "travel",
+  "ttsLang": "ja-JP",
+  "status": "soon"
+}

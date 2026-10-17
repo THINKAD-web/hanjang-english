@@ -1,0 +1,59 @@
+{
+  "order": 1,
+  "title": "ひらがな 1",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3042",
+      "kind": "kana",
+      "text": "あ",
+      "reading": "a",
+      "imageable": false,
+      "tags": [
+        "あ행"
+      ]
+    },
+    {
+      "id": "u3044",
+      "kind": "kana",
+      "text": "い",
+      "reading": "i",
+      "imageable": false,
+      "tags": [
+        "あ행"
+      ]
+    },
+    {
+      "id": "u3046",
+      "kind": "kana",
+      "text": "う",
+      "reading": "u",
+      "imageable": false,
+      "tags": [
+        "あ행"
+      ]
+    },
+    {
+      "id": "u3048",
+      "kind": "kana",
+      "text": "え",
+      "reading": "e",
+      "imageable": false,
+      "tags": [
+        "あ행"
+      ]
+    },
+    {
+      "id": "u304a",
+      "kind": "kana",
+      "text": "お",
+      "reading": "o",
+      "imageable": false,
+      "tags": [
+        "あ행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Screen } from "@/components/ui";
+import { useEffect, useMemo, useState } from "react";
+import { LoadFailed, Screen } from "@/components/ui";
 import { StampRow } from "@/components/stamp-row";
-import { DEFAULT_PACK_ID, loadContent } from "@/lib/content/load";
+import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
+import type { Content } from "@/lib/content/schema";
+import { useManifest, usePackContent } from "@/lib/content/use-content";
+import { objectParticle } from "@/lib/content/josa";
+import { continuePackId, isOpenPack } from "@/lib/packs/catalog";
 import { formatDateLabel } from "@/lib/engine/date";
 import { recordParentView } from "@/lib/engine/progress";
 import { toggleWrongReview } from "@/lib/parent/account";
@@ -42,14 +46,48 @@ function recordViewOnce(dateKey: string, packId: string, update: ParentApi["upda
 
 /** `/parent` — PIN 통과 후 오늘 요약 · 이번 주 · 현재 오답. 그래프 없이 텍스트와 작은 칸만 (PR5 지시서 3장). */
 export function ParentScreen() {
-  return <ParentGate>{(api) => <ParentContent {...api} />}</ParentGate>;
+  return <ParentGate>{(api) => <ParentLoader {...api} />}</ParentGate>;
 }
 
-function ParentContent({ state, update }: ParentApi) {
+function ParentLoader(api: ParentApi) {
+  const manifest = useManifest();
+  const [picked, setPicked] = useState<string | null>(null);
+  // 고를 수 있는 팩 = 지금 프로필이 시작한 live 팩. 아직 하나도 없으면 이어서 할 팩(기본 팩)을 보여준다.
+  const options = useMemo(() => {
+    if (manifest.status !== "ready") return [];
+    const mine = new Set(api.state.tracks.filter((t) => t.profileId === api.state.activeProfileId).map((t) => t.packId));
+    return manifest.data.packs.filter((p) => isOpenPack(p) && mine.has(p.id));
+  }, [manifest, api.state.tracks, api.state.activeProfileId]);
+  const fallback = manifest.status === "ready" ? continuePackId(api.state, manifest.data) : null;
+  const packId =
+    picked && options.some((p) => p.id === picked)
+      ? picked
+      : (options.find((p) => p.id === api.state.activePackId)?.id ?? options[0]?.id ?? fallback ?? DEFAULT_PACK_ID);
+  const pack = usePackContent(manifest.status === "ready" ? packId : null);
+  if (manifest.status === "error" || pack.status === "error" || pack.status === "missing") return <LoadFailed />;
+  if (manifest.status !== "ready" || pack.status !== "ready") {
+    return (
+      <Screen>
+        <div className="h-40 animate-pulse rounded-3xl bg-amber-100" aria-hidden />
+      </Screen>
+    );
+  }
+  return (
+    <ParentContent {...api} content={pack.data} packOptions={options.map((p) => ({ id: p.id, title: p.title }))} onPickPack={setPicked} />
+  );
+}
+
+function ParentContent({
+  state,
+  update,
+  content,
+  packOptions,
+  onPickPack,
+}: ParentApi & { content: Content; packOptions: { id: string; title: string }[]; onPickPack: (id: string) => void }) {
   const dateKey = useTodayKey();
   const dateParam = useDateParam();
-  const content = loadContent(DEFAULT_PACK_ID);
   const packId = content.pack.id;
+  const textLang = content.pack.ttsLang.split("-")[0];
   // 이 화면에서 끈 오답도 되돌릴 수 있게 목록에 남겨 두는 순서 (화면을 다시 열면 비워진다)
   const [pinned, setPinned] = useState<string[]>([]);
 
@@ -85,6 +123,23 @@ function ParentContent({ state, update }: ParentApi) {
         <p className="text-lg font-semibold text-slate-700">{formatDateLabel(dateKey)}</p>
       </header>
 
+      {packOptions.length > 1 ? (
+        <label className="flex flex-col gap-1 text-base font-semibold text-slate-700">
+          팩
+          <select
+            value={packId}
+            onChange={(e) => onPickPack(e.target.value)}
+            className="min-h-14 rounded-2xl bg-white px-4 text-xl font-bold text-slate-900 ring-2 ring-sky-200"
+          >
+            {packOptions.map((o) => (
+              <option key={o.id} value={o.id}>
+                {o.title}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : null}
+
       <section aria-label="오늘 요약" className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
         <h2 className="text-xl font-bold text-slate-900">오늘</h2>
         {today.done ? (
@@ -98,7 +153,7 @@ function ParentContent({ state, update }: ParentApi) {
             {today.wrong.length > 0 ? (
               <div className="flex flex-col gap-2">
                 <p className="text-base font-semibold text-slate-700">오늘 틀린 단어</p>
-                <WrongList words={today.wrong} onToggle={onToggle} />
+                <WrongList words={today.wrong} onToggle={onToggle} lang={textLang} />
               </div>
             ) : (
               <p className="text-lg text-emerald-700">틀린 단어가 없어요 👏</p>
@@ -116,7 +171,10 @@ function ParentContent({ state, update }: ParentApi) {
         <StampRow cells={week.stamps} />
         <p className="text-lg font-semibold text-slate-800">이번 주 {week.doneCount}장 완료</p>
         {week.trickySounds.length > 0 ? (
-          <p className="text-lg text-slate-800">{week.trickySounds.join(", ")} 소리를 자주 헷갈려요</p>
+          <p className="text-lg text-slate-800">
+            {week.trickySounds.join(", ")} {content.pack.tagLabel}
+            {objectParticle(content.pack.tagLabel)} 자주 헷갈려요
+          </p>
         ) : null}
       </section>
 
@@ -129,7 +187,7 @@ function ParentContent({ state, update }: ParentApi) {
         ) : (
           <p className="text-lg text-slate-600">복습 예정인 오답이 없어요</p>
         )}
-        {listedWrong.length > 0 ? <WrongList words={listedWrong} onToggle={onToggle} /> : null}
+        {listedWrong.length > 0 ? <WrongList words={listedWrong} onToggle={onToggle} lang={textLang} /> : null}
       </section>
 
       <nav className="mt-auto flex justify-between text-base">
@@ -144,13 +202,13 @@ function ParentContent({ state, update }: ParentApi) {
   );
 }
 
-function WrongList({ words, onToggle }: { words: WrongWord[]; onToggle: (itemId: string, on: boolean) => void }) {
+function WrongList({ words, onToggle, lang }: { words: WrongWord[]; onToggle: (itemId: string, on: boolean) => void; lang: string }) {
   return (
     <ul className="flex flex-col gap-2">
       {words.map((w) => (
         <li key={w.itemId} className="flex items-center justify-between gap-3 rounded-2xl bg-amber-50 px-4 py-3">
           <span className="min-w-0">
-            <span lang="en" className="block text-xl font-bold text-slate-900">
+            <span lang={lang} className="block text-xl font-bold text-slate-900">
               {w.text}
             </span>
             <span className="block text-base text-slate-600">{w.meaningKo}</span>

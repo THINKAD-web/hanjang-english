@@ -1,7 +1,7 @@
 import type { Content } from "@/lib/content/schema";
 import { addDays, type DateKey } from "@/lib/engine/date";
 import { completedLessonIds } from "@/lib/engine/today";
-import { DEFAULT_PROFILE_ID, type Attempt, type State } from "@/lib/store/types";
+import type { Attempt, State } from "@/lib/store/types";
 
 /**
  * 디버그 패널 전용(NEXT_PUBLIC_DEBUG=true 일 때만 UI 가 노출된다): 1장부터 N장까지 아직 안 끝낸 장을
@@ -12,13 +12,13 @@ import { DEFAULT_PROFILE_ID, type Attempt, type State } from "@/lib/store/types"
  */
 export function completeLessonsUpTo(state: State, content: Content, n: number, dateKey: DateKey): State {
   const done = new Set(completedLessonIds(state, content.pack.id));
-  const missing = content.lessons.filter((l) => l.dayNo <= n && !done.has(l.id));
+  const missing = content.lessons.filter((l) => l.order <= n && !done.has(l.id));
   const added: Attempt[] = missing.map((lesson, i) => {
     const day = addDays(dateKey, -(missing.length - i));
     const answers = lesson.quiz.map((q) => ({ targetItemId: q.targetItemId, correct: true }));
     return {
       id: `debug-${lesson.id}`,
-      profileId: DEFAULT_PROFILE_ID,
+      profileId: state.activeProfileId,
       packId: content.pack.id,
       dateKey: day,
       kind: "lesson",

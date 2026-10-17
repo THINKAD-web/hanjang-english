@@ -1,0 +1,59 @@
+{
+  "order": 5,
+  "title": "ひらがな 5",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u306a",
+      "kind": "kana",
+      "text": "な",
+      "reading": "na",
+      "imageable": false,
+      "tags": [
+        "な행"
+      ]
+    },
+    {
+      "id": "u306b",
+      "kind": "kana",
+      "text": "に",
+      "reading": "ni",
+      "imageable": false,
+      "tags": [
+        "な행"
+      ]
+    },
+    {
+      "id": "u306c",
+      "kind": "kana",
+      "text": "ぬ",
+      "reading": "nu",
+      "imageable": false,
+      "tags": [
+        "な행"
+      ]
+    },
+    {
+      "id": "u306d",
+      "kind": "kana",
+      "text": "ね",
+      "reading": "ne",
+      "imageable": false,
+      "tags": [
+        "な행"
+      ]
+    },
+    {
+      "id": "u306e",
+      "kind": "kana",
+      "text": "の",
+      "reading": "no",
+      "imageable": false,
+      "tags": [
+        "な행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

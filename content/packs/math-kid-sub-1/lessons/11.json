@@ -1,0 +1,19 @@
+{
+  "order": 11,
+  "title": "뺄셈 11",
+  "type": "math",
+  "intro": {
+    "title": "뺄셈",
+    "content": "빼기 문제를 풀어요\n식을 보고 알맞은 수를 맞혀 보세요"
+  },
+  "generator": {
+    "kind": "arithmetic",
+    "op": "-",
+    "count": 8,
+    "min": 10,
+    "max": 30,
+    "noBorrow": true
+  },
+  "reviewed": false,
+  "testOnly": true
+}

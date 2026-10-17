@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { WordCard } from "@/components/word-card";
 import { checkContent } from "@/lib/content/check";
-import { parseContent } from "@/lib/content/load";
+import { parseContent } from "@/lib/content/node";
 import { adultSample } from "./adult-sample";
 
 /**

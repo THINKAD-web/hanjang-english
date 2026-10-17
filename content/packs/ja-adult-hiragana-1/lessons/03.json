@@ -1,0 +1,59 @@
+{
+  "order": 3,
+  "title": "ひらがな 3",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3055",
+      "kind": "kana",
+      "text": "さ",
+      "reading": "sa",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u3057",
+      "kind": "kana",
+      "text": "し",
+      "reading": "shi",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u3059",
+      "kind": "kana",
+      "text": "す",
+      "reading": "su",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u305b",
+      "kind": "kana",
+      "text": "せ",
+      "reading": "se",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    },
+    {
+      "id": "u305d",
+      "kind": "kana",
+      "text": "そ",
+      "reading": "so",
+      "imageable": false,
+      "tags": [
+        "さ행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

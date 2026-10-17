@@ -1,0 +1,12 @@
+{
+  "id": "ja-kid-hiragana",
+  "subjectId": "ja-kid",
+  "title": "어린이 일본어",
+  "level": "초급",
+  "levelOrder": 1,
+  "order": 1,
+  "brandLabel": "한장일본어",
+  "unitLabel": "あ",
+  "ttsLang": "ja-JP",
+  "status": "soon"
+}

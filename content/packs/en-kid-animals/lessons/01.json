@@ -1,0 +1,97 @@
+{
+  "order": 1,
+  "title": "동물 1",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "cat",
+      "kind": "word",
+      "text": "cat",
+      "meaningKo": "고양이",
+      "emoji": "🐱",
+      "imageable": true,
+      "tags": [
+        "pet"
+      ]
+    },
+    {
+      "id": "dog",
+      "kind": "word",
+      "text": "dog",
+      "meaningKo": "개",
+      "emoji": "🐶",
+      "imageable": true,
+      "tags": [
+        "pet"
+      ]
+    },
+    {
+      "id": "bird",
+      "kind": "word",
+      "text": "bird",
+      "meaningKo": "새",
+      "emoji": "🐦",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "fish",
+      "kind": "word",
+      "text": "fish",
+      "meaningKo": "물고기",
+      "emoji": "🐟",
+      "imageable": true,
+      "tags": [
+        "sea"
+      ]
+    },
+    {
+      "id": "cow",
+      "kind": "word",
+      "text": "cow",
+      "meaningKo": "소",
+      "emoji": "🐮",
+      "imageable": true,
+      "tags": [
+        "farm"
+      ]
+    },
+    {
+      "id": "pig",
+      "kind": "word",
+      "text": "pig",
+      "meaningKo": "돼지",
+      "emoji": "🐷",
+      "imageable": true,
+      "tags": [
+        "farm"
+      ]
+    },
+    {
+      "id": "duck",
+      "kind": "word",
+      "text": "duck",
+      "meaningKo": "오리",
+      "emoji": "🦆",
+      "imageable": true,
+      "tags": [
+        "farm"
+      ]
+    },
+    {
+      "id": "horse",
+      "kind": "word",
+      "text": "horse",
+      "meaningKo": "말",
+      "emoji": "🐴",
+      "imageable": true,
+      "tags": [
+        "farm"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

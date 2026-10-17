@@ -1,0 +1,91 @@
+{
+  "id": "en-kid-giyeok-04",
+  "packId": "en-kid-giyeok",
+  "order": 4,
+  "title": "gl 소리 (gr과 비교)",
+  "type": "phonics",
+  "intro": {
+    "title": "gl",
+    "content": "gl은 혀끝을 윗니 뒤에 대요\ngrass(잔디)와 glass(유리)는 한 소리 차이!"
+  },
+  "itemIds": [
+    "g-glass",
+    "g-glasses",
+    "g-glad",
+    "g-glue",
+    "g-glove",
+    "g-globe",
+    "g-glow",
+    "g-glitter"
+  ],
+  "sentences": [
+    {
+      "text": "I am glad to get a new glove.",
+      "meaningKo": "새 장갑을 받아서 기뻐요.",
+      "itemIds": [
+        "g-glad",
+        "g-glove"
+      ]
+    },
+    {
+      "text": "Glue the glitter on the glass.",
+      "meaningKo": "유리에 반짝이를 풀로 붙여요.",
+      "itemIds": [
+        "g-glue",
+        "g-glitter",
+        "g-glass"
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "picture_choice",
+      "options": [
+        "glass",
+        "grass",
+        "class"
+      ],
+      "answer": "glass",
+      "targetItemId": "g-glass"
+    },
+    {
+      "type": "meaning_choice",
+      "prompt": "\"빛나다\"는?",
+      "options": [
+        "glow",
+        "grow",
+        "globe"
+      ],
+      "answer": "glow",
+      "targetItemId": "g-glow"
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "I am glad to get a new ____.",
+      "options": [
+        "glove",
+        "glow",
+        "glad"
+      ],
+      "answer": "glove",
+      "targetItemId": "g-glove"
+    },
+    {
+      "type": "listen_choice",
+      "options": [
+        "glad",
+        "glue",
+        "glow"
+      ],
+      "answer": "glad",
+      "targetItemId": "g-glad"
+    },
+    {
+      "type": "ox",
+      "statement": "glasses = 유리컵",
+      "answer": false,
+      "targetItemId": "g-glasses"
+    }
+  ],
+  "reviewed": true
+}

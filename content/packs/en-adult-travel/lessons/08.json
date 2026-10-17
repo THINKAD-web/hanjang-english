@@ -1,0 +1,89 @@
+{
+  "order": 8,
+  "title": "대화",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "talk-01",
+      "kind": "phrase",
+      "text": "Nice to meet you.",
+      "meaningKo": "만나서 반가워요.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "talk-02",
+      "kind": "phrase",
+      "text": "Excuse me, may I ask something?",
+      "meaningKo": "실례합니다, 뭐 하나 여쭤봐도 될까요?",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "talk-03",
+      "kind": "phrase",
+      "text": "Could you take a picture of us?",
+      "meaningKo": "사진 좀 찍어 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "talk-04",
+      "kind": "phrase",
+      "text": "Where are you from?",
+      "meaningKo": "어디서 오셨어요?",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "talk-05",
+      "kind": "phrase",
+      "text": "I'm from Korea.",
+      "meaningKo": "한국에서 왔어요.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "talk-06",
+      "kind": "phrase",
+      "text": "Thank you for your help.",
+      "meaningKo": "도와주셔서 감사합니다.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "talk-07",
+      "kind": "phrase",
+      "text": "Have a nice day.",
+      "meaningKo": "좋은 하루 보내세요.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    },
+    {
+      "id": "talk-08",
+      "kind": "phrase",
+      "text": "See you tomorrow.",
+      "meaningKo": "내일 봐요.",
+      "imageable": false,
+      "tags": [
+        "talk"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

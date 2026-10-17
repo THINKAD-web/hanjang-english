@@ -1,0 +1,22 @@
+{
+  "id": "math-kid-add-1",
+  "subjectId": "math-kid",
+  "title": "어린이 수학 · 덧셈 1",
+  "level": "초등 1",
+  "levelOrder": 1,
+  "order": 1,
+  "unitLabel": "덧셈",
+  "tagLabel": "연산",
+  "ttsLang": "ko-KR",
+  "status": "live",
+  "rules": {
+    "itemsPerLesson": 8,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": [
+      "fill_blank"
+    ],
+    "autoQuiz": true
+  }
+}

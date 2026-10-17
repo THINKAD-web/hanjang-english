@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import { BRAND, BRAND_DESCRIPTION } from "@/lib/brand";
+import { AudienceSkin } from "@/components/audience-skin";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "오늘 한장", template: "%s" },
-  description: "하루에 한 장. 오늘 한장의 첫 팩, 한장영어.",
+  title: { default: BRAND.appName, template: "%s" },
+  description: BRAND_DESCRIPTION,
 };
 
 export const viewport: Viewport = {
@@ -14,8 +16,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className="h-full antialiased">
-      <body className="flex min-h-full flex-col">{children}</body>
+    <html lang="ko" data-audience="kid" className="h-full antialiased">
+      <body className="flex min-h-full flex-col">
+        <AudienceSkin />
+        {children}
+      </body>
     </html>
   );
 }

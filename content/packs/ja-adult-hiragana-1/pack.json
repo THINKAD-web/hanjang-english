@@ -1,0 +1,25 @@
+{
+  "id": "ja-adult-hiragana-1",
+  "subjectId": "ja-adult",
+  "title": "성인 일본어 · 히라가나 1",
+  "level": "입문",
+  "levelOrder": 0,
+  "order": 1,
+  "ttsLang": "ja-JP",
+  "status": "live",
+  "access": "free",
+  "rules": {
+    "itemsPerLesson": 5,
+    "sentencesPerLesson": 0,
+    "minItemsPerSentence": 0,
+    "quizPerLesson": 5,
+    "allowedQuizTypes": [
+      "meaning_choice",
+      "listen_choice",
+      "ox"
+    ],
+    "autoQuiz": true
+  },
+  "unitLabel": "ひらがな",
+  "tagLabel": "행"
+}

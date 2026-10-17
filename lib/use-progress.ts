@@ -6,6 +6,10 @@ import type { State } from "@/lib/store/types";
 
 let store: LocalProgressStore | null = null;
 
+/** 한 화면에서 저장하면 같은 기기의 다른 구독자(예: 상단 스킨)도 새 상태를 받는다. */
+const listeners = new Set<(s: State) => void>();
+const publish = (s: State) => listeners.forEach((l) => l(s));
+
 export function getStore(): LocalProgressStore {
   store ??= new LocalProgressStore();
   return store;
@@ -25,20 +29,22 @@ export function useProgress() {
       .then((s) => {
         if (alive) setState(s);
       });
+    listeners.add(setState);
     return () => {
       alive = false;
+      listeners.delete(setState);
     };
   }, []);
 
   const update = useCallback(async (fn: (s: State) => State) => {
     const next = await getStore().update(fn);
-    setState(next);
+    publish(next);
     return next;
   }, []);
 
   const reset = useCallback(async () => {
     await getStore().reset();
-    setState(await getStore().load());
+    publish(await getStore().load());
   }, []);
 
   return { state, update, reset };

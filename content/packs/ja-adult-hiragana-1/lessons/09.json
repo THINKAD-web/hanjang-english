@@ -1,0 +1,59 @@
+{
+  "order": 9,
+  "title": "ひらがな 9",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u308b",
+      "kind": "kana",
+      "text": "る",
+      "reading": "ru",
+      "imageable": false,
+      "tags": [
+        "ら행"
+      ]
+    },
+    {
+      "id": "u308c",
+      "kind": "kana",
+      "text": "れ",
+      "reading": "re",
+      "imageable": false,
+      "tags": [
+        "ら행"
+      ]
+    },
+    {
+      "id": "u308d",
+      "kind": "kana",
+      "text": "ろ",
+      "reading": "ro",
+      "imageable": false,
+      "tags": [
+        "ら행"
+      ]
+    },
+    {
+      "id": "u308f",
+      "kind": "kana",
+      "text": "わ",
+      "reading": "wa",
+      "imageable": false,
+      "tags": [
+        "わ행"
+      ]
+    },
+    {
+      "id": "u3092",
+      "kind": "kana",
+      "text": "を",
+      "reading": "wo",
+      "imageable": false,
+      "tags": [
+        "わ행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

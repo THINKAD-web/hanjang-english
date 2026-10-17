@@ -1,0 +1,59 @@
+{
+  "order": 6,
+  "title": "ひらがな 6",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u306f",
+      "kind": "kana",
+      "text": "は",
+      "reading": "ha",
+      "imageable": false,
+      "tags": [
+        "は행"
+      ]
+    },
+    {
+      "id": "u3072",
+      "kind": "kana",
+      "text": "ひ",
+      "reading": "hi",
+      "imageable": false,
+      "tags": [
+        "は행"
+      ]
+    },
+    {
+      "id": "u3075",
+      "kind": "kana",
+      "text": "ふ",
+      "reading": "fu",
+      "imageable": false,
+      "tags": [
+        "は행"
+      ]
+    },
+    {
+      "id": "u3078",
+      "kind": "kana",
+      "text": "へ",
+      "reading": "he",
+      "imageable": false,
+      "tags": [
+        "は행"
+      ]
+    },
+    {
+      "id": "u307b",
+      "kind": "kana",
+      "text": "ほ",
+      "reading": "ho",
+      "imageable": false,
+      "tags": [
+        "は행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

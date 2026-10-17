@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { BigButton, Screen } from "@/components/ui";
 import { todayKey } from "@/lib/engine/date";
-import { resetProgress, setGrade, setParentPin } from "@/lib/parent/account";
+import { addProfile, resetProgress, setGrade, setParentPin, switchProfile } from "@/lib/parent/account";
+import { activeProfile } from "@/lib/packs/catalog";
+import type { Profile } from "@/lib/store/types";
 import { hashPin, isValidPin, verifyPin } from "@/lib/parent/pin";
-import { DEFAULT_PROFILE_ID } from "@/lib/store/types";
 import { useDateParam, withDebugDate } from "@/lib/use-today-key";
 import { ParentGate, type ParentApi } from "./parent-gate";
 import { PinInput } from "./pin-input";
@@ -18,7 +19,8 @@ export function AccountScreen() {
 
 function AccountContent({ state, update }: ParentApi) {
   const dateParam = useDateParam();
-  const grade = state.profiles.find((p) => p.id === DEFAULT_PROFILE_ID)?.grade;
+  const current = activeProfile(state);
+  const grade = current.grade;
   const [resetDone, setResetDone] = useState(false);
 
   // 파일명 날짜는 기기의 실제 오늘 (디버그 날짜가 아니라).
@@ -49,24 +51,33 @@ function AccountContent({ state, update }: ParentApi) {
         </Link>
       </header>
 
-      <section aria-label="학년" className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
-        <h2 className="text-xl font-bold text-slate-900">학년</h2>
-        <div className="grid grid-cols-2 gap-3">
-          {([3, 4] as const).map((g) => (
-            <button
-              key={g}
-              type="button"
-              aria-pressed={grade === g}
-              onClick={() => void update((s) => setGrade(s, g))}
-              className={`min-h-14 rounded-2xl text-xl font-bold ${
-                grade === g ? "bg-sky-700 text-white" : "bg-white text-slate-800 ring-2 ring-sky-200"
-              }`}
-            >
-              {g}학년
-            </button>
-          ))}
-        </div>
-      </section>
+      <ProfilesSection
+        profiles={state.profiles}
+        activeId={state.activeProfileId}
+        onSwitch={(id) => void update((s) => switchProfile(s, id))}
+        onAdd={(input) => update((s) => addProfile(s, input))}
+      />
+
+      {current.type === "child" ? (
+        <section aria-label="학년" className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
+          <h2 className="text-xl font-bold text-slate-900">학년</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {([3, 4] as const).map((g) => (
+              <button
+                key={g}
+                type="button"
+                aria-pressed={grade === g}
+                onClick={() => void update((s) => setGrade(s, g))}
+                className={`min-h-14 rounded-2xl text-xl font-bold ${
+                  grade === g ? "bg-sky-700 text-white" : "bg-white text-slate-800 ring-2 ring-sky-200"
+                }`}
+              >
+                {g}학년
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <PinChange pinHash={state.account.pinHash} onChange={(hash) => update((s) => setParentPin(s, hash))} />
 
@@ -136,6 +147,84 @@ function PinChange({ pinHash, onChange }: { pinHash: string | null; onChange: (h
         <BigButton type="submit" disabled={!isValidPin(current) || !isValidPin(next) || !isValidPin(again)}>
           PIN 바꾸기
         </BigButton>
+      </form>
+    </section>
+  );
+}
+
+const PROFILE_TYPE_LABEL: Record<Profile["type"], string> = { child: "아이", self: "나(성인)" };
+
+/** 프로필 목록 · 전환 · 추가. 아이 프로필은 어린이 과목, 나(성인) 프로필은 성인 과목을 먼저 보여준다. */
+function ProfilesSection({
+  profiles,
+  activeId,
+  onSwitch,
+  onAdd,
+}: {
+  profiles: Profile[];
+  activeId: string;
+  onSwitch: (id: string) => void;
+  onAdd: (input: { name: string; type: Profile["type"]; grade?: 3 | 4 }) => Promise<unknown>;
+}) {
+  const [name, setName] = useState("");
+  const [type, setType] = useState<Profile["type"]>("self");
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await onAdd({ name, type });
+    setName("");
+  };
+
+  return (
+    <section aria-label="프로필" className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
+      <h2 className="text-xl font-bold text-slate-900">프로필</h2>
+      <ul className="flex flex-col gap-2">
+        {profiles.map((p) => (
+          <li key={p.id} className="flex items-center justify-between gap-3 rounded-2xl bg-amber-50 px-4 py-3">
+            <span className="min-w-0">
+              <span className="block truncate text-lg font-semibold text-slate-900">{p.name ?? PROFILE_TYPE_LABEL[p.type]}</span>
+              <span className="block text-base text-slate-600">{PROFILE_TYPE_LABEL[p.type]}</span>
+            </span>
+            {p.id === activeId ? (
+              <span className="shrink-0 rounded-full bg-sky-700 px-4 py-2 text-base font-semibold text-white">사용 중</span>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onSwitch(p.id)}
+                className="min-h-12 shrink-0 rounded-full bg-white px-4 text-base font-semibold text-sky-800 ring-2 ring-sky-200"
+              >
+                이 프로필로 전환
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+      <form onSubmit={submit} className="flex flex-col gap-3">
+        <label className="flex flex-col gap-1 text-base font-semibold text-slate-700">
+          새 프로필 이름
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            maxLength={20}
+            placeholder="예: 엄마"
+            className="min-h-12 rounded-xl bg-white px-4 text-lg ring-2 ring-sky-200"
+          />
+        </label>
+        <div role="radiogroup" aria-label="프로필 종류" className="grid grid-cols-2 gap-3">
+          {(["self", "child"] as const).map((t) => (
+            <button
+              key={t}
+              type="button"
+              role="radio"
+              aria-checked={type === t}
+              onClick={() => setType(t)}
+              className={`min-h-12 rounded-2xl text-lg font-bold ${type === t ? "bg-sky-700 text-white" : "bg-white text-slate-800 ring-2 ring-sky-200"}`}
+            >
+              {PROFILE_TYPE_LABEL[t]}
+            </button>
+          ))}
+        </div>
+        <BigButton type="submit">프로필 추가</BigButton>
       </form>
     </section>
   );

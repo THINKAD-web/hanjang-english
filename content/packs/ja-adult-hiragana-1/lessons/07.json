@@ -1,0 +1,59 @@
+{
+  "order": 7,
+  "title": "ひらがな 7",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u307e",
+      "kind": "kana",
+      "text": "ま",
+      "reading": "ma",
+      "imageable": false,
+      "tags": [
+        "ま행"
+      ]
+    },
+    {
+      "id": "u307f",
+      "kind": "kana",
+      "text": "み",
+      "reading": "mi",
+      "imageable": false,
+      "tags": [
+        "ま행"
+      ]
+    },
+    {
+      "id": "u3080",
+      "kind": "kana",
+      "text": "む",
+      "reading": "mu",
+      "imageable": false,
+      "tags": [
+        "ま행"
+      ]
+    },
+    {
+      "id": "u3081",
+      "kind": "kana",
+      "text": "め",
+      "reading": "me",
+      "imageable": false,
+      "tags": [
+        "ま행"
+      ]
+    },
+    {
+      "id": "u3082",
+      "kind": "kana",
+      "text": "も",
+      "reading": "mo",
+      "imageable": false,
+      "tags": [
+        "ま행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

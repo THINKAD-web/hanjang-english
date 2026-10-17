@@ -5,10 +5,11 @@ import { BigButton, ProgressBar, Screen } from "@/components/ui";
 import type { Content, Item } from "@/lib/content/schema";
 import type { DateKey } from "@/lib/engine/date";
 import { buildReviewQuiz, shuffleSheetOptions } from "@/lib/engine/quizgen";
-import type { SheetStep } from "@/lib/engine/progress";
+import type { SheetStep, StepTimings } from "@/lib/engine/progress";
 import { initReviewSheet, sheetReducer, sheetScore, wrongItemIds, type SheetState } from "@/lib/engine/sheet";
 import type { AnswerRecord } from "@/lib/store/types";
-import { speak, stopSpeaking } from "@/lib/tts";
+import { speakItem, stopSpeaking } from "@/lib/tts";
+import { SpeechLangProvider } from "@/lib/tts-lang";
 import { CardStep, DoneStep, QuizStep } from "./steps";
 
 export type ReviewRunnerProps = {
@@ -17,7 +18,7 @@ export type ReviewRunnerProps = {
   itemIds: string[];
   dateKey: DateKey;
   onStart?: () => void;
-  onComplete?: (answers: AnswerRecord[], timings: Record<SheetStep, number>) => void;
+  onComplete?: (answers: AnswerRecord[], timings: StepTimings) => void;
   onAbort?: (step: SheetStep, elapsedMs: number) => void;
   onHome: () => void;
 };
@@ -27,7 +28,13 @@ const STEP_KEY: Partial<Record<SheetState["step"]["kind"], SheetStep>> = {
   quiz: "quiz",
 };
 
-const ZERO_TIMINGS: Record<SheetStep, number> = { sound: 0, cards: 0, listen: 0, sentences: 0, quiz: 0 };
+const ZERO_TIMINGS: StepTimings = {
+  sound: 0,
+  cards: 0,
+  listen: 0,
+  sentences: 0,
+  quiz: 0,
+};
 
 /**
  * 복습장: 단어 카드 → 퀴즈만 (오늘의 소리·전체 듣기·예문 생략, PR4 지시서 2장).
@@ -36,35 +43,37 @@ const ZERO_TIMINGS: Record<SheetStep, number> = { sound: 0, cards: 0, listen: 0,
  * "다시 보기"(review-screen.tsx, 지난 장 재실행)와는 다른 화면이다 — 이름 혼동 주의.
  */
 export function ReviewRunner({ content, itemIds, dateKey, onStart, onComplete, onAbort, onHome }: ReviewRunnerProps) {
-  const items = useMemo(
-    () => itemIds.map((id) => content.itemsById.get(id)).filter((it): it is Item => Boolean(it)),
-    [itemIds, content],
+  const items = useMemo(() => itemIds.map((id) => content.itemsById.get(id)).filter((it): it is Item => Boolean(it)), [itemIds, content]);
+  const quiz = useMemo(
+    () => shuffleSheetOptions(buildReviewQuiz(itemIds, content, dateKey), dateKey, "review"),
+    [itemIds, content, dateKey],
   );
-  const quiz = useMemo(() => shuffleSheetOptions(buildReviewQuiz(itemIds, content, dateKey), dateKey, "review"), [itemIds, content, dateKey]);
   const [sheet, dispatch] = useReducer(sheetReducer, undefined, () => initReviewSheet(items.length, quiz.length));
   const [started, setStarted] = useState(false);
+  const lang = content.pack.ttsLang;
 
   // iOS Safari 탭 핸들러 안에서 speak() 를 미리 시작해 다음 화면에 넘기는 패턴 — lesson-runner.tsx 와 동일.
   const [pendingCardSpeech, setPendingCardSpeech] = useState<Promise<boolean> | null>(null);
   const [pendingQuizSpeech, setPendingQuizSpeech] = useState<Promise<boolean> | null>(null);
   const [pendingRevealSpeech, setPendingRevealSpeech] = useState<Promise<boolean> | null>(null);
 
-  const timingsRef = useRef<Record<SheetStep, number>>({ ...ZERO_TIMINGS });
+  const timingsRef = useRef<StepTimings>({ ...ZERO_TIMINGS });
   const lastRef = useRef<{ key: SheetStep; at: number } | null>(null);
   useEffect(() => {
     const now = Date.now();
-    if (lastRef.current) timingsRef.current[lastRef.current.key] += now - lastRef.current.at;
+    if (lastRef.current)
+      timingsRef.current[lastRef.current.key] = (timingsRef.current[lastRef.current.key] ?? 0) + now - lastRef.current.at;
     const key = started ? STEP_KEY[sheet.step.kind] : "sound";
     lastRef.current = key ? { key, at: now } : null;
   }, [sheet.step.kind, started]);
-  const snapshotTimings = useCallback((): Record<SheetStep, number> => {
+  const snapshotTimings = useCallback((): StepTimings => {
     const snap = { ...timingsRef.current };
-    if (lastRef.current) snap[lastRef.current.key] += Date.now() - lastRef.current.at;
+    if (lastRef.current) snap[lastRef.current.key] = (snap[lastRef.current.key] ?? 0) + Date.now() - lastRef.current.at;
     return snap;
   }, []);
 
   const handleStart = () => {
-    if (items[0]) setPendingCardSpeech(speak(items[0].text, items[0].audio));
+    if (items[0]) setPendingCardSpeech(speakItem(items[0], lang));
     onStart?.();
     setStarted(true);
   };
@@ -73,10 +82,10 @@ export function ReviewRunner({ content, itemIds, dateKey, onStart, onComplete, o
     if (sheet.step.kind !== "card") return;
     const nextIndex = sheet.step.index + 1;
     if (nextIndex < items.length) {
-      setPendingCardSpeech(speak(items[nextIndex].text, items[nextIndex].audio));
+      setPendingCardSpeech(speakItem(items[nextIndex], lang));
     } else if (quiz[0]?.type === "listen_choice") {
       const target = content.itemsById.get(quiz[0].targetItemId);
-      if (target) setPendingQuizSpeech(speak(target.text, target.audio));
+      if (target) setPendingQuizSpeech(speakItem(target, lang));
     }
     dispatch({ type: "nextCard" });
   };
@@ -85,16 +94,21 @@ export function ReviewRunner({ content, itemIds, dateKey, onStart, onComplete, o
     if (sheet.step.kind !== "quiz") return;
     const currentQuiz = quiz[sheet.step.index];
     const currentTarget = content.itemsById.get(currentQuiz.targetItemId);
-    setPendingRevealSpeech(!correct && currentTarget ? speak(currentTarget.text, currentTarget.audio) : null);
+    setPendingRevealSpeech(!correct && currentTarget ? speakItem(currentTarget, lang) : null);
 
     const nextQuiz = quiz[sheet.step.index + 1];
     if (nextQuiz?.type === "listen_choice") {
       const nextTarget = content.itemsById.get(nextQuiz.targetItemId);
-      setPendingQuizSpeech(nextTarget ? speak(nextTarget.text, nextTarget.audio) : null);
+      setPendingQuizSpeech(nextTarget ? speakItem(nextTarget, lang) : null);
     } else {
       setPendingQuizSpeech(null);
     }
-    dispatch({ type: "answer", targetItemId: currentQuiz.targetItemId, correct, chosen });
+    dispatch({
+      type: "answer",
+      targetItemId: currentQuiz.targetItemId,
+      correct,
+      chosen,
+    });
   };
 
   const finishQuiz = useCallback(
@@ -120,67 +134,69 @@ export function ReviewRunner({ content, itemIds, dateKey, onStart, onComplete, o
   const { done, total, ratio } = reviewProgress(sheet, started);
 
   return (
-    <Screen>
-      <div className="flex items-center gap-3">
-        <div className="flex-1">
-          <ProgressBar label={`복습장 · ${done}/${total}`} ratio={ratio} />
+    <SpeechLangProvider lang={lang}>
+      <Screen>
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <ProgressBar label={`복습장 · ${done}/${total}`} ratio={ratio} />
+          </div>
+          {onAbort && started && step.kind !== "done" ? (
+            <button
+              type="button"
+              aria-label="그만하고 홈으로"
+              onClick={handleAbort}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-2xl font-bold text-slate-600 ring-1 ring-slate-200"
+            >
+              ✕
+            </button>
+          ) : null}
         </div>
-        {onAbort && started && step.kind !== "done" ? (
-          <button
-            type="button"
-            aria-label="그만하고 홈으로"
-            onClick={handleAbort}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-2xl font-bold text-slate-600 ring-1 ring-slate-200"
-          >
-            ✕
-          </button>
+        {!started ? (
+          <section className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
+            <p className="text-xl font-semibold text-amber-800">복습장</p>
+            <p className="text-2xl text-slate-800">그동안 헷갈렸던 단어들을 다시 볼까요?</p>
+            <BigButton onClick={handleStart}>시작</BigButton>
+          </section>
         ) : null}
-      </div>
-      {!started ? (
-        <section className="flex flex-1 flex-col items-center justify-center gap-8 text-center">
-          <p className="text-xl font-semibold text-amber-800">복습장</p>
-          <p className="text-2xl text-slate-800">그동안 헷갈렸던 단어들을 다시 볼까요?</p>
-          <BigButton onClick={handleStart}>시작</BigButton>
-        </section>
-      ) : null}
-      {started && step.kind === "card" && (
-        <CardStep
-          key={step.index}
-          word={items[step.index]}
-          index={step.index}
-          total={items.length}
-          pendingSpeech={pendingCardSpeech}
-          onNext={handleNextCard}
-        />
-      )}
-      {started && step.kind === "quiz" && (
-        <QuizStep
-          key={step.index}
-          quiz={quiz[step.index]}
-          index={step.index}
-          total={quiz.length}
-          target={content.itemsById.get(quiz[step.index].targetItemId)!}
-          feedback={step.feedback}
-          pendingSpeech={pendingQuizSpeech}
-          pendingRevealSpeech={pendingRevealSpeech}
-          onAnswer={handleAnswer}
-          onFinished={onQuizFinished}
-        />
-      )}
-      {started && step.kind === "done" && (
-        <DoneStep
-          score={sheetScore(sheet)}
-          total={quiz.length}
-          wrongWords={wrongItemIds(sheet)
-            .map((id) => content.itemsById.get(id)!)
-            .filter(Boolean)}
-          onHome={() => {
-            stopSpeaking();
-            onHome();
-          }}
-        />
-      )}
-    </Screen>
+        {started && step.kind === "card" && (
+          <CardStep
+            key={step.index}
+            word={items[step.index]}
+            index={step.index}
+            total={items.length}
+            pendingSpeech={pendingCardSpeech}
+            onNext={handleNextCard}
+          />
+        )}
+        {started && step.kind === "quiz" && (
+          <QuizStep
+            key={step.index}
+            quiz={quiz[step.index]}
+            index={step.index}
+            total={quiz.length}
+            target={content.itemsById.get(quiz[step.index].targetItemId)!}
+            feedback={step.feedback}
+            pendingSpeech={pendingQuizSpeech}
+            pendingRevealSpeech={pendingRevealSpeech}
+            onAnswer={handleAnswer}
+            onFinished={onQuizFinished}
+          />
+        )}
+        {started && step.kind === "done" && (
+          <DoneStep
+            score={sheetScore(sheet)}
+            total={quiz.length}
+            wrongWords={wrongItemIds(sheet)
+              .map((id) => content.itemsById.get(id)!)
+              .filter(Boolean)}
+            onHome={() => {
+              stopSpeaking();
+              onHome();
+            }}
+          />
+        )}
+      </Screen>
+    </SpeechLangProvider>
   );
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { meaningPrompt, topicParticle } from "./josa";
+import { meaningPrompt, objectParticle, topicParticle } from "./josa";
 
 describe("topicParticle", () => {
   it.each([
@@ -26,5 +26,20 @@ describe("meaningPrompt", () => {
   it("따옴표 + 조사 + 물음표", () => {
     expect(meaningPrompt("대문")).toBe('"대문"은?');
     expect(meaningPrompt("자라다")).toBe('"자라다"는?');
+  });
+});
+
+describe("숫자로 끝나는 말과 을/를", () => {
+  it.each([
+    ["덧셈 1", "은", "을"],
+    ["덧셈 2", "는", "를"],
+    ["덧셈 3", "은", "을"],
+    ["뺄셈 6", "은", "을"],
+    ["뺄셈 9", "는", "를"],
+    ["공책", "은", "을"],
+    ["소리", "는", "를"],
+  ] as const)("%s → %s / %s", (text, topic, object) => {
+    expect(topicParticle(text)).toBe(topic);
+    expect(objectParticle(text)).toBe(object);
   });
 });

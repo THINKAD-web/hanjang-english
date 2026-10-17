@@ -1,0 +1,97 @@
+{
+  "order": 3,
+  "title": "동물 3",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "zebra",
+      "kind": "word",
+      "text": "zebra",
+      "meaningKo": "얼룩말",
+      "emoji": "🦓",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "frog",
+      "kind": "word",
+      "text": "frog",
+      "meaningKo": "개구리",
+      "emoji": "🐸",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "snake",
+      "kind": "word",
+      "text": "snake",
+      "meaningKo": "뱀",
+      "emoji": "🐍",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "turtle",
+      "kind": "word",
+      "text": "turtle",
+      "meaningKo": "거북이",
+      "emoji": "🐢",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "butterfly",
+      "kind": "word",
+      "text": "butterfly",
+      "meaningKo": "나비",
+      "emoji": "🦋",
+      "imageable": true,
+      "tags": [
+        "insect"
+      ]
+    },
+    {
+      "id": "bee",
+      "kind": "word",
+      "text": "bee",
+      "meaningKo": "벌",
+      "emoji": "🐝",
+      "imageable": true,
+      "tags": [
+        "insect"
+      ]
+    },
+    {
+      "id": "ant",
+      "kind": "word",
+      "text": "ant",
+      "meaningKo": "개미",
+      "emoji": "🐜",
+      "imageable": true,
+      "tags": [
+        "insect"
+      ]
+    },
+    {
+      "id": "spider",
+      "kind": "word",
+      "text": "spider",
+      "meaningKo": "거미",
+      "emoji": "🕷️",
+      "imageable": true,
+      "tags": [
+        "insect"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

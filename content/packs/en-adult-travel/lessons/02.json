@@ -1,0 +1,89 @@
+{
+  "order": 2,
+  "title": "입국 · 환전",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "arrival-01",
+      "kind": "phrase",
+      "text": "What is the purpose of your visit?",
+      "meaningKo": "방문 목적이 무엇인가요?",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    },
+    {
+      "id": "arrival-02",
+      "kind": "phrase",
+      "text": "I'm here on vacation.",
+      "meaningKo": "휴가로 왔어요.",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    },
+    {
+      "id": "arrival-03",
+      "kind": "phrase",
+      "text": "I'm staying for five days.",
+      "meaningKo": "5일 동안 머물 거예요.",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    },
+    {
+      "id": "arrival-04",
+      "kind": "phrase",
+      "text": "I have nothing to declare.",
+      "meaningKo": "신고할 물품이 없어요.",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    },
+    {
+      "id": "arrival-05",
+      "kind": "phrase",
+      "text": "Where do I exchange money?",
+      "meaningKo": "환전은 어디서 하나요?",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    },
+    {
+      "id": "arrival-06",
+      "kind": "phrase",
+      "text": "How do I get to the city center?",
+      "meaningKo": "시내까지 어떻게 가나요?",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    },
+    {
+      "id": "arrival-07",
+      "kind": "phrase",
+      "text": "Is there a shuttle bus?",
+      "meaningKo": "셔틀버스가 있나요?",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    },
+    {
+      "id": "arrival-08",
+      "kind": "phrase",
+      "text": "Could you call a taxi for me?",
+      "meaningKo": "택시 좀 불러 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "arrival"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

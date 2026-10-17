@@ -1,5 +1,5 @@
 import { meaningPrompt } from "@/lib/content/josa";
-import type { RawContent } from "@/lib/content/load";
+import type { RawContent } from "@/lib/content/normalize";
 
 /**
  * 성인 영어(문장) 샘플 1장. 기획안 v2 5-5·8장 — picture_choice 를 낼 그림이 없는 팩에서
@@ -29,23 +29,35 @@ const bye = item("adt-bye", "It was nice meeting you.", "만나서 반가웠어�
 export const adultSample: RawContent = {
   pack: {
     id: "en-adult-travel",
-    language: "en",
-    audience: "adult",
+    subjectId: "en-adult",
     title: "성인 영어 · 출장",
+    level: "A1",
+    levelOrder: 1,
+    order: 1,
     brandLabel: "한장영어",
     unitKey: "travel",
     unitLabel: "travel",
-    lessonCount: 1,
+    ttsLang: "en-US",
     status: "soon",
+    lessonCount: 1,
+    rules: {
+      itemsPerLesson: 8,
+      sentencesPerLesson: 2,
+      quizPerLesson: 5,
+      allowedQuizTypes: ["picture_choice", "meaning_choice", "fill_blank", "listen_choice", "ox"],
+      requiredQuizTypes: ["picture_choice", "meaning_choice", "fill_blank", "listen_choice", "ox"],
+      allowQuizTypeSubstitution: true,
+    },
   },
   items: [gate, taxi, checkin, start, hold, email, check, bye],
   lessons: [
     {
       id: "en-adult-travel-01",
       packId: "en-adult-travel",
-      dayNo: 1,
+      order: 1,
       title: "공항 · 회의 시작",
-      focus: { label: "출장 첫날", lines: ["공항에서 쓰는 말과", "회의를 여는 말을 배워요."] },
+      type: "vocab",
+      intro: { title: "출장 첫날", content: "공항에서 쓰는 말과\n회의를 여는 말을 배워요." },
       itemIds: [gate.id, taxi.id, checkin.id, start.id, hold.id, email.id, check.id, bye.id],
       sentences: [
         {

@@ -1,0 +1,61 @@
+[
+  {
+    "type": "bundle",
+    "file": "math-kid-add-1.json"
+  },
+  {
+    "type": "bundle",
+    "file": "math-kid-sub-1.json"
+  },
+  {
+    "type": "bundle",
+    "file": "en-adult-travel.json"
+  },
+  {
+    "type": "csv",
+    "file": "en-kid-animals.csv",
+    "packId": "en-kid-animals",
+    "pack": {
+      "subjectId": "en-kid",
+      "title": "어린이 영어 · 동물",
+      "level": "초급",
+      "levelOrder": 1,
+      "order": 2,
+      "ttsLang": "en-US",
+      "unitLabel": "동물",
+      "tagLabel": "분류",
+      "status": "live"
+    },
+    "size": 8,
+    "lessonType": "vocab",
+    "kind": "word"
+  },
+  {
+    "type": "csv",
+    "file": "ja-adult-hiragana-1.csv",
+    "packId": "ja-adult-hiragana-1",
+    "pack": {
+      "subjectId": "ja-adult",
+      "title": "성인 일본어 · 히라가나 1",
+      "level": "입문",
+      "levelOrder": 0,
+      "order": 1,
+      "ttsLang": "ja-JP",
+      "unitLabel": "ひらがな",
+      "tagLabel": "행",
+      "rules": {
+        "itemsPerLesson": 5,
+        "quizPerLesson": 5,
+        "allowedQuizTypes": [
+          "meaning_choice",
+          "listen_choice",
+          "ox"
+        ]
+      },
+      "status": "live"
+    },
+    "size": 5,
+    "lessonType": "phonics",
+    "kind": "kana"
+  }
+]

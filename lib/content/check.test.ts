@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { checkContent, isPair, sentenceUsesText } from "./check";
-import { CONTENT_REGISTRY, parseContent, type RawContent } from "./load";
+import type { RawContent } from "./normalize";
+import { parseContent, readRawPack } from "./node";
 
-const rawGiyeok = CONTENT_REGISTRY["en-kid-giyeok"];
+const rawGiyeok = readRawPack("en-kid-giyeok");
 
 // 테스트에서 JSON 을 일부러 망가뜨리기 위한 느슨한 타입.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -118,12 +119,17 @@ describe("보조 함수", () => {
     expect(sentenceUsesText("The grasshopper jumps.", "grass")).toBe(false);
   });
 
-  it("isPair", () => {
-    expect(isPair("gr-gl", "grass", "glass")).toBe(true);
-    expect(isPair("gr-gl", "glow", "grow")).toBe(true);
-    expect(isPair("g-k", "goat", "coat")).toBe(true);
-    expect(isPair("g-k", "bag", "back")).toBe(true);
-    expect(isPair("g-k", "glass", "class")).toBe(true);
-    expect(isPair("g-k", "bag", "big")).toBe(false);
+  it("isPair — 앞/끝 글자 교체(swaps)로 짝을 판정한다", () => {
+    const GR_GL = [{ at: "prefix", a: "gr", b: "gl" }] as const;
+    const G_K = [
+      { at: "prefix", a: "g", b: "c" },
+      { at: "suffix", a: "g", b: "ck" },
+    ] as const;
+    expect(isPair(GR_GL, "grass", "glass")).toBe(true);
+    expect(isPair(GR_GL, "glow", "grow")).toBe(true);
+    expect(isPair(G_K, "goat", "coat")).toBe(true);
+    expect(isPair(G_K, "bag", "back")).toBe(true);
+    expect(isPair(G_K, "glass", "class")).toBe(true);
+    expect(isPair(G_K, "bag", "big")).toBe(false);
   });
 });

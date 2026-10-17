@@ -1,0 +1,91 @@
+{
+  "id": "en-kid-giyeok-05",
+  "packId": "en-kid-giyeok",
+  "order": 5,
+  "title": "gr 소리 ②",
+  "type": "phonics",
+  "intro": {
+    "title": "gr",
+    "content": "gr 한 번 더!\n'그ㄹ'을 빠르게 붙여 읽어요."
+  },
+  "itemIds": [
+    "g-grandpa",
+    "g-gray",
+    "g-grab",
+    "g-greet",
+    "g-grill",
+    "g-grin",
+    "g-grade",
+    "g-grasshopper"
+  ],
+  "sentences": [
+    {
+      "text": "Grandpa greets me with a grin.",
+      "meaningKo": "할아버지가 활짝 웃으며 인사해요.",
+      "itemIds": [
+        "g-grandpa",
+        "g-greet",
+        "g-grin"
+      ]
+    },
+    {
+      "text": "A gray grasshopper jumps on the grass.",
+      "meaningKo": "회색 메뚜기가 잔디 위에서 뛰어요.",
+      "itemIds": [
+        "g-gray",
+        "g-grasshopper"
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "picture_choice",
+      "options": [
+        "grasshopper",
+        "grass",
+        "grandpa"
+      ],
+      "answer": "grasshopper",
+      "targetItemId": "g-grasshopper"
+    },
+    {
+      "type": "meaning_choice",
+      "prompt": "\"움켜잡다\"는?",
+      "options": [
+        "grab",
+        "grade",
+        "grin"
+      ],
+      "answer": "grab",
+      "targetItemId": "g-grab"
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Grandpa greets me with a ____.",
+      "options": [
+        "grin",
+        "grill",
+        "green"
+      ],
+      "answer": "grin",
+      "targetItemId": "g-grin"
+    },
+    {
+      "type": "listen_choice",
+      "options": [
+        "greet",
+        "great",
+        "green"
+      ],
+      "answer": "greet",
+      "targetItemId": "g-greet"
+    },
+    {
+      "type": "ox",
+      "statement": "grandpa = 할아버지",
+      "answer": true,
+      "targetItemId": "g-grandpa"
+    }
+  ],
+  "reviewed": true
+}

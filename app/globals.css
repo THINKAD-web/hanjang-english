@@ -10,6 +10,21 @@
   --color-foreground: var(--foreground);
 }
 
+/*
+ * 성인 스킨: 아이용 따뜻한 amber 팔레트를 차분한 slate 로 바꾼다. Tailwind 색은 CSS 변수라서
+ * 변수만 다시 매기면 모든 화면이 따라 바뀐다 (컴포넌트는 대상을 몰라도 된다).
+ */
+[data-audience="adult"] {
+  --background: #f8fafc;
+  --color-amber-50: var(--color-slate-50);
+  --color-amber-100: var(--color-slate-100);
+  --color-amber-200: var(--color-slate-200);
+  --color-amber-300: var(--color-slate-300);
+  --color-amber-400: var(--color-slate-400);
+  --color-amber-800: var(--color-slate-700);
+  --color-amber-900: var(--color-slate-800);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

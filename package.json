@@ -3,14 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "tsx scripts/content-build.ts",
     "dev": "next dev",
+    "prebuild": "tsx scripts/content-build.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "content:check": "tsx scripts/content-check.ts"
+    "content:build": "tsx scripts/content-build.ts",
+    "content:check": "tsx scripts/content-check.ts",
+    "content:new": "tsx scripts/content-new.ts",
+    "content:import": "tsx scripts/content-import.ts",
+    "content:csv": "tsx scripts/content-csv.ts",
+    "content:report": "tsx scripts/content-report.ts",
+    "content:seed": "tsx scripts/content-seed.ts"
   },
   "dependencies": {
     "next": "16.3.6",

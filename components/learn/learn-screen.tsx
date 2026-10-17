@@ -2,17 +2,22 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useRef, useState } from "react";
-import { Screen } from "@/components/ui";
-import { loadContent } from "@/lib/content/load";
+import { LoadFailed, Screen } from "@/components/ui";
+import type { Content } from "@/lib/content/schema";
+import { useManifest, usePackContent } from "@/lib/content/use-content";
+import { packUnavailable } from "@/lib/packs/availability";
+import { isUnlocked } from "@/lib/packs/catalog";
 import type { DateKey } from "@/lib/engine/date";
 import { recordNextPackRequest, recordSheetAbort, recordSheetComplete, recordSheetStart, recordStepTime } from "@/lib/engine/progress";
 import { decideSheet, decideToday, type TodayDecision } from "@/lib/engine/today";
 import type { State } from "@/lib/store/types";
 import { newAttemptId, useProgress } from "@/lib/use-progress";
+import { useRedirect } from "@/lib/use-redirect";
 import { useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { DailyLimitScreen, DoneTodayScreen, PackCompleteScreen } from "./decision-screens";
 import { LessonRunner } from "./lesson-runner";
 import { ReviewRunner } from "./review-runner";
+import { unitLabelOf } from "@/lib/content/pack-text";
 
 /**
  * `/learn/[packId]` — 오늘 할 일은 항상 엔진(decideToday)이 정한다. URL 로 장을 건너뛸 수 없다
@@ -20,15 +25,23 @@ import { ReviewRunner } from "./review-runner";
  */
 export function LearnScreen({ packId }: { packId: string }) {
   const dateKey = useTodayKey();
+  const dateParam = useDateParam();
   const { state, update } = useProgress();
-  if (!dateKey || !state) {
+  const pack = usePackContent(packId);
+  const manifest = useManifest();
+  // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩 · 아직 잠긴 팩은 앱이 터지지 않게 /packs 로 보낸다.
+  const locked = pack.status === "ready" && Boolean(state) && manifest.status === "ready" && !isUnlocked(state!, pack.data.pack, manifest.data);
+  const unavailable = packUnavailable(pack, locked);
+  useRedirect(unavailable, withDebugDate("/packs", dateParam));
+  if (pack.status === "error" || manifest.status === "error") return <LoadFailed />;
+  if (!dateKey || !state || pack.status !== "ready" || manifest.status !== "ready" || unavailable) {
     return (
       <Screen>
         <div className="h-40 animate-pulse rounded-3xl bg-amber-100" aria-hidden />
       </Screen>
     );
   }
-  return <LearnGate packId={packId} initialState={state} dateKey={dateKey} update={update} />;
+  return <LearnGate packId={packId} content={pack.data} initialState={state} dateKey={dateKey} update={update} />;
 }
 
 /**
@@ -42,18 +55,19 @@ export function LearnScreen({ packId }: { packId: string }) {
  */
 function LearnGate({
   packId,
+  content,
   initialState,
   dateKey,
   update,
 }: {
   packId: string;
+  content: Content;
   initialState: State;
   dateKey: DateKey;
   update: (fn: (s: State) => State) => Promise<State>;
 }) {
   const router = useRouter();
   const dateParam = useDateParam();
-  const content = loadContent(packId);
   const [decision] = useState(() => decideToday(initialState, dateKey, content));
   const [extra, setExtra] = useState<TodayDecision | null>(null);
   const startedAtRef = useRef<string | null>(null);
@@ -78,7 +92,7 @@ function LearnGate({
   if (effective.kind === "packComplete") {
     return (
       <PackCompleteScreen
-        unitLabel={content.pack.unitLabel}
+        unitLabel={unitLabelOf(content.pack)}
         wordCount={content.items.length}
         onRequestNextPack={() =>
           void update((s) =>
@@ -102,7 +116,7 @@ function LearnGate({
         dateKey={dateKey}
         onStart={() => {
           startedAtRef.current = new Date().toISOString();
-          void update((s) => recordSheetStart(s, { packId, dateKey, at: startedAtRef.current! }));
+          void update((s) => recordSheetStart(s, { packId, subjectId: content.pack.subjectId, dateKey, at: startedAtRef.current! }));
         }}
         onComplete={(answers, timings) => {
           const finishedAt = new Date().toISOString();
@@ -110,6 +124,7 @@ function LearnGate({
             const withAttempt = recordSheetComplete(s, {
               attemptId: newAttemptId(),
               packId,
+              subjectId: content.pack.subjectId,
               dateKey,
               kind: "review",
               itemIds,
@@ -148,7 +163,7 @@ function LearnGate({
       injectedItemId={effective.injectedItemId}
       onStart={() => {
         startedAtRef.current = new Date().toISOString();
-        void update((s) => recordSheetStart(s, { packId, lessonId: lesson.id, dateKey, at: startedAtRef.current! }));
+        void update((s) => recordSheetStart(s, { packId, subjectId: content.pack.subjectId, lessonId: lesson.id, dateKey, at: startedAtRef.current! }));
       }}
       onComplete={(answers, timings) => {
         const finishedAt = new Date().toISOString();
@@ -156,6 +171,7 @@ function LearnGate({
           const withAttempt = recordSheetComplete(s, {
             attemptId: newAttemptId(),
             packId,
+            subjectId: content.pack.subjectId,
             dateKey,
             kind: "lesson",
             lessonId: lesson.id,

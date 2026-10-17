@@ -1,0 +1,97 @@
+{
+  "order": 2,
+  "title": "동물 2",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "sheep",
+      "kind": "word",
+      "text": "sheep",
+      "meaningKo": "양",
+      "emoji": "🐑",
+      "imageable": true,
+      "tags": [
+        "farm"
+      ]
+    },
+    {
+      "id": "rabbit",
+      "kind": "word",
+      "text": "rabbit",
+      "meaningKo": "토끼",
+      "emoji": "🐰",
+      "imageable": true,
+      "tags": [
+        "pet"
+      ]
+    },
+    {
+      "id": "bear",
+      "kind": "word",
+      "text": "bear",
+      "meaningKo": "곰",
+      "emoji": "🐻",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "lion",
+      "kind": "word",
+      "text": "lion",
+      "meaningKo": "사자",
+      "emoji": "🦁",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "tiger",
+      "kind": "word",
+      "text": "tiger",
+      "meaningKo": "호랑이",
+      "emoji": "🐯",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "monkey",
+      "kind": "word",
+      "text": "monkey",
+      "meaningKo": "원숭이",
+      "emoji": "🐵",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "elephant",
+      "kind": "word",
+      "text": "elephant",
+      "meaningKo": "코끼리",
+      "emoji": "🐘",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    },
+    {
+      "id": "giraffe",
+      "kind": "word",
+      "text": "giraffe",
+      "meaningKo": "기린",
+      "emoji": "🦒",
+      "imageable": true,
+      "tags": [
+        "wild"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

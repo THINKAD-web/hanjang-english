@@ -1,0 +1,59 @@
+{
+  "order": 2,
+  "title": "ひらがな 2",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u304b",
+      "kind": "kana",
+      "text": "か",
+      "reading": "ka",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u304d",
+      "kind": "kana",
+      "text": "き",
+      "reading": "ki",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u304f",
+      "kind": "kana",
+      "text": "く",
+      "reading": "ku",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u3051",
+      "kind": "kana",
+      "text": "け",
+      "reading": "ke",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    },
+    {
+      "id": "u3053",
+      "kind": "kana",
+      "text": "こ",
+      "reading": "ko",
+      "imageable": false,
+      "tags": [
+        "か행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

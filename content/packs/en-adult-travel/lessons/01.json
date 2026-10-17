@@ -1,0 +1,89 @@
+{
+  "order": 1,
+  "title": "공항",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "airport-01",
+      "kind": "phrase",
+      "text": "Where is the check-in counter?",
+      "meaningKo": "체크인 카운터가 어디예요?",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-02",
+      "kind": "phrase",
+      "text": "I'd like a window seat, please.",
+      "meaningKo": "창가 자리로 부탁해요.",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-03",
+      "kind": "phrase",
+      "text": "Can I take this on board?",
+      "meaningKo": "이걸 기내에 들고 탈 수 있나요?",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-04",
+      "kind": "phrase",
+      "text": "Here is my passport.",
+      "meaningKo": "여기 여권이에요.",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-05",
+      "kind": "phrase",
+      "text": "What time does boarding start?",
+      "meaningKo": "탑승은 몇 시에 시작하나요?",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-06",
+      "kind": "phrase",
+      "text": "Which gate is my flight?",
+      "meaningKo": "제 비행기는 몇 번 게이트예요?",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-07",
+      "kind": "phrase",
+      "text": "My flight is delayed.",
+      "meaningKo": "제 비행기가 지연됐어요.",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    },
+    {
+      "id": "airport-08",
+      "kind": "phrase",
+      "text": "Where can I pick up my bag?",
+      "meaningKo": "짐은 어디서 찾나요?",
+      "imageable": false,
+      "tags": [
+        "airport"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { DEFAULT_PACK_ID } from "@/lib/content/load";
+import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
 import { LocalProgressStore, STORAGE_KEY } from "./local";
 import { createInitialState } from "./types";
 

@@ -1,8 +1,9 @@
 import type { Content } from "@/lib/content/schema";
-import { DEFAULT_PROFILE_ID, type AnswerRecord, type Attempt, type State } from "@/lib/store/types";
+import type { AnswerRecord, Attempt, State, Track } from "@/lib/store/types";
 import { weekRange, type DateKey } from "./date";
 import { applyAttempt } from "./queue";
 import { completedLessonIds, type TodayDecision } from "./today";
+import { unitLabelOf } from "@/lib/content/pack-text";
 
 /**
  * 진행 기록 갱신과 홈 화면용 파생 값. 모두 순수 함수 (저장은 호출하는 쪽에서).
@@ -11,16 +12,27 @@ import { completedLessonIds, type TodayDecision } from "./today";
  * 미완료 시도를 별도로 저장하지 않는다 — 그래서 닫기(중단)해도 지울 Attempt 자체가 없다.
  */
 
-export type SheetStartInput = { packId: string; lessonId?: string; dateKey: DateKey; at: string };
+export type SheetStartInput = { packId: string; subjectId?: string; lessonId?: string; dateKey: DateKey; at: string };
+
+/**
+ * 이 프로필이 이 팩을 처음 시작하면 Track 을 만들고, 마지막으로 연 팩(activePackId)을 갱신한다.
+ * 팩을 고르는 화면이 따로 필요 없다 — 시작하는 순간 등록된다.
+ */
+export function ensureTrack(state: State, packId: string, subjectId?: string): State {
+  const has = state.tracks.some((t) => t.profileId === state.activeProfileId && t.packId === packId);
+  const track: Track = { profileId: state.activeProfileId, packId, ...(subjectId ? { subjectId } : {}), status: "active" };
+  return { ...state, activePackId: packId, tracks: has ? state.tracks : [...state.tracks, track] };
+}
 
 /** "시작" 탭: sheet_start 이벤트만 남긴다. Attempt 는 완료 시 recordSheetComplete 가 만든다. */
-export function recordSheetStart(state: State, input: SheetStartInput): State {
+export function recordSheetStart(base: State, input: SheetStartInput): State {
+  const state = ensureTrack(base, input.packId, input.subjectId);
   return {
     ...state,
     events: [
       ...state.events,
       {
-        profileId: DEFAULT_PROFILE_ID,
+        profileId: state.activeProfileId,
         type: "sheet_start",
         dateKey: input.dateKey,
         at: input.at,
@@ -33,6 +45,7 @@ export function recordSheetStart(state: State, input: SheetStartInput): State {
 export type SheetCompleteInput = {
   attemptId: string;
   packId: string;
+  subjectId?: string;
   dateKey: DateKey;
   kind: Attempt["kind"];
   lessonId?: string;
@@ -45,12 +58,14 @@ export type SheetCompleteInput = {
 };
 
 /** 퀴즈까지 끝냄: 완료된 Attempt 를 만들고 오답 큐에 반영, sheet_complete 이벤트를 남긴다. */
-export function recordSheetComplete(state: State, input: SheetCompleteInput): State {
+export function recordSheetComplete(base: State, input: SheetCompleteInput): State {
+  const state = ensureTrack(base, input.packId, input.subjectId);
   const score = input.answers.filter((a) => a.correct).length;
   const attempt: Attempt = {
     id: input.attemptId,
-    profileId: DEFAULT_PROFILE_ID,
+    profileId: state.activeProfileId,
     packId: input.packId,
+    ...(input.subjectId ? { subjectId: input.subjectId } : {}),
     dateKey: input.dateKey,
     kind: input.kind,
     ...(input.lessonId ? { lessonId: input.lessonId } : {}),
@@ -68,7 +83,7 @@ export function recordSheetComplete(state: State, input: SheetCompleteInput): St
     events: [
       ...state.events,
       {
-        profileId: DEFAULT_PROFILE_ID,
+        profileId: state.activeProfileId,
         type: "sheet_complete",
         dateKey: input.dateKey,
         at: input.finishedAt,
@@ -78,7 +93,10 @@ export function recordSheetComplete(state: State, input: SheetCompleteInput): St
   };
 }
 
-export type SheetStep = "sound" | "cards" | "listen" | "sentences" | "quiz";
+export type SheetStep = "sound" | "cards" | "listen" | "sentences" | "practice" | "patterns" | "quiz";
+
+/** 단계별 소요 시간(ms). 거치지 않은 단계는 키가 없다 (예전 장은 sound·cards·listen·sentences·quiz 다섯 개). */
+export type StepTimings = Partial<Record<SheetStep, number>>;
 
 /** 닫기(중단) 확인: Attempt 는 만들지 않고 sheet_abort 이벤트만 남긴다. */
 export function recordSheetAbort(
@@ -90,7 +108,7 @@ export function recordSheetAbort(
     events: [
       ...state.events,
       {
-        profileId: DEFAULT_PROFILE_ID,
+        profileId: state.activeProfileId,
         type: "sheet_abort",
         dateKey: input.dateKey,
         at: input.at,
@@ -103,14 +121,14 @@ export function recordSheetAbort(
 /** 완료 시 단계별 소요 시간(ms) 기록 — 화면엔 보여주지 않고 데이터만 쌓는다 (8분 초과 여부 실측용). */
 export function recordStepTime(
   state: State,
-  input: { packId: string; lessonId?: string; dateKey: DateKey; at: string; timings: Record<SheetStep, number> },
+  input: { packId: string; lessonId?: string; dateKey: DateKey; at: string; timings: StepTimings },
 ): State {
   return {
     ...state,
     events: [
       ...state.events,
       {
-        profileId: DEFAULT_PROFILE_ID,
+        profileId: state.activeProfileId,
         type: "step_time",
         dateKey: input.dateKey,
         at: input.at,
@@ -126,7 +144,7 @@ export function recordPackInterest(state: State, input: { dateKey: DateKey; at: 
     ...state,
     events: [
       ...state.events,
-      { profileId: DEFAULT_PROFILE_ID, type: "pack_interest", dateKey: input.dateKey, at: input.at, payload: input.payload },
+      { profileId: state.activeProfileId, type: "pack_interest", dateKey: input.dateKey, at: input.at, payload: input.payload },
     ],
   };
 }
@@ -137,7 +155,7 @@ export function recordNextPackRequest(state: State, input: { dateKey: DateKey; a
     ...state,
     events: [
       ...state.events,
-      { profileId: DEFAULT_PROFILE_ID, type: "next_pack_request", dateKey: input.dateKey, at: input.at, payload: input.payload },
+      { profileId: state.activeProfileId, type: "next_pack_request", dateKey: input.dateKey, at: input.at, payload: input.payload },
     ],
   };
 }
@@ -148,7 +166,7 @@ export function recordParentView(state: State, input: { dateKey: DateKey; at: st
     ...state,
     events: [
       ...state.events,
-      { profileId: DEFAULT_PROFILE_ID, type: "parent_view", dateKey: input.dateKey, at: input.at, payload: input.payload },
+      { profileId: state.activeProfileId, type: "parent_view", dateKey: input.dateKey, at: input.at, payload: input.payload },
     ],
   };
 }
@@ -157,10 +175,15 @@ export type StampCell = { dateKey: DateKey; label: string; stamped: boolean; isT
 
 const DAY_LABELS = ["월", "화", "수", "목", "금", "토", "일"];
 
-/** 이번 주 도장 7칸 (월~일). 그 팩에서 그날 완료한 장(복습장 포함)이 하나라도 있으면 도장. */
-export function weekStamps(state: State, dateKey: DateKey, packId: string): StampCell[] {
+/**
+ * 이번 주 도장 7칸 (월~일). 그날 완료한 장(복습장 포함)이 하나라도 있으면 도장.
+ * packId 를 주면 그 팩만, 생략하면 이 프로필의 모든 팩을 합친다 (도장은 "오늘 공부했다" 는 표시라 팩이 달라도 하나).
+ */
+export function weekStamps(state: State, dateKey: DateKey, packId?: string): StampCell[] {
   const done = new Set(
-    state.attempts.filter((a) => a.completed && a.packId === packId && a.profileId === DEFAULT_PROFILE_ID).map((a) => a.dateKey),
+    state.attempts
+      .filter((a) => a.completed && a.profileId === state.activeProfileId && (packId === undefined || a.packId === packId))
+      .map((a) => a.dateKey),
   );
   return weekRange(dateKey).map((d, i) => ({
     dateKey: d,
@@ -184,7 +207,7 @@ export function homeCta(decision: TodayDecision, content: Content): HomeCta {
   switch (decision.kind) {
     case "lesson": {
       const lesson = content.lessons.find((l) => l.id === decision.lessonId);
-      return { label: "오늘 한 장 시작", sub: lesson ? `${lesson.dayNo}장 · ${lesson.title}` : undefined, enabled: true };
+      return { label: "오늘 한 장 시작", sub: lesson ? `${lesson.order}장 · ${lesson.title}` : undefined, enabled: true };
     }
     case "review":
       return { label: "오늘은 복습장", enabled: true };
@@ -193,6 +216,6 @@ export function homeCta(decision: TodayDecision, content: Content): HomeCta {
     case "dailyLimit":
       return { label: "내일 또 만나요", enabled: false };
     case "packComplete":
-      return { label: `${content.pack.unitLabel} 팩 완료!`, enabled: true };
+      return { label: `${unitLabelOf(content.pack)} 팩 완료!`, enabled: true };
   }
 }

@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 2,
+  "account": {
+    "pinHash": "pbkdf2$sample$hash"
+  },
+  "profiles": [
+    {
+      "id": "child",
+      "type": "child",
+      "grade": 3
+    }
+  ],
+  "tracks": [
+    {
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "status": "active"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "a7",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-21",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-01",
+      "itemIds": [
+        "g-grape",
+        "g-green",
+        "g-grass",
+        "g-grow",
+        "g-ground",
+        "g-group",
+        "g-grandma",
+        "g-great"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-grape",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grow",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grape",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grandma",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-green",
+          "correct": false
+        }
+      ],
+      "score": 4,
+      "startedAt": "2026-09-21T00:00:00.000Z",
+      "finishedAt": "2026-09-21T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a8",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-22",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-02",
+      "itemIds": [
+        "g-go",
+        "g-get",
+        "g-give",
+        "g-good",
+        "g-girl",
+        "g-gift",
+        "g-game",
+        "g-gold"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-gift",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-give",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-girl",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-game",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-go",
+          "correct": true
+        }
+      ],
+      "score": 5,
+      "startedAt": "2026-09-22T00:00:00.000Z",
+      "finishedAt": "2026-09-22T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a9",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-23",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-03",
+      "itemIds": [
+        "g-garden",
+        "g-gate",
+        "g-goat",
+        "g-goose",
+        "g-gorilla",
+        "g-guitar",
+        "g-gum",
+        "g-goal"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-goat",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-gate",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-guitar",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-gorilla",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-garden",
+          "correct": true
+        }
+      ],
+      "score": 5,
+      "startedAt": "2026-09-23T00:00:00.000Z",
+      "finishedAt": "2026-09-23T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a10",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-24",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-04",
+      "itemIds": [
+        "g-glass",
+        "g-glasses",
+        "g-glad",
+        "g-glue",
+        "g-glove",
+        "g-globe",
+        "g-glow",
+        "g-glitter"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-glass",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-glow",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-glad",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-glasses",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-glove",
+          "correct": false
+        }
+      ],
+      "score": 4,
+      "startedAt": "2026-09-24T00:00:00.000Z",
+      "finishedAt": "2026-09-24T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a11",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-25",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-05",
+      "itemIds": [
+        "g-grandpa",
+        "g-gray",
+        "g-grab",
+        "g-greet",
+        "g-grill",
+        "g-grin",
+        "g-grade",
+        "g-grasshopper"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-grasshopper",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grab",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grin",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-greet",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-grandpa",
+          "correct": true
+        }
+      ],
+      "score": 5,
+      "startedAt": "2026-09-25T00:00:00.000Z",
+      "finishedAt": "2026-09-25T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a12",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-28",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-06",
+      "itemIds": [
+        "g-bag",
+        "g-big",
+        "g-dog",
+        "g-egg",
+        "g-leg",
+        "g-pig",
+        "g-frog",
+        "g-flag"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-frog",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-leg",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-dog",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-pig",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-egg",
+          "correct": true
+        }
+      ],
+      "score": 5,
+      "startedAt": "2026-09-28T00:00:00.000Z",
+      "finishedAt": "2026-09-28T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a13",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-29",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-07",
+      "itemIds": [
+        "g-goat",
+        "g-coat",
+        "g-gold",
+        "g-cold",
+        "g-glass",
+        "g-class",
+        "g-bag",
+        "g-back"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-coat",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-cold",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-back",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-goat",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-class",
+          "correct": false
+        }
+      ],
+      "score": 4,
+      "startedAt": "2026-09-29T00:00:00.000Z",
+      "finishedAt": "2026-09-29T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a14",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-30",
+      "kind": "lesson",
+      "lessonId": "en-kid-giyeok-08",
+      "itemIds": [
+        "g-grow",
+        "g-glass",
+        "g-gift",
+        "g-goose",
+        "g-glove",
+        "g-frog",
+        "g-gold",
+        "g-grandpa"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-glove",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-gift",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-goose",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-glass",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-frog",
+          "correct": true
+        }
+      ],
+      "score": 5,
+      "startedAt": "2026-09-30T00:00:00.000Z",
+      "finishedAt": "2026-09-30T00:08:00.000Z",
+      "completed": true
+    },
+    {
+      "id": "a15",
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "dateKey": "2026-09-26",
+      "kind": "review",
+      "itemIds": [
+        "g-green",
+        "g-glove"
+      ],
+      "answers": [
+        {
+          "targetItemId": "g-green",
+          "correct": true
+        },
+        {
+          "targetItemId": "g-glove",
+          "correct": true
+        }
+      ],
+      "score": 2,
+      "startedAt": "2026-09-26T00:00:00.000Z",
+      "finishedAt": "2026-09-26T00:08:00.000Z",
+      "completed": true
+    }
+  ],
+  "wrongQueue": [
+    {
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "itemId": "g-green",
+      "wrongCount": 1,
+      "firstWrongDate": "2026-09-21",
+      "lastWrongDate": "2026-09-21",
+      "nextReviewDate": "2026-09-22",
+      "active": false
+    },
+    {
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "itemId": "g-glove",
+      "wrongCount": 1,
+      "firstWrongDate": "2026-09-24",
+      "lastWrongDate": "2026-09-24",
+      "nextReviewDate": "2026-09-25",
+      "active": false
+    },
+    {
+      "profileId": "child",
+      "packId": "en-kid-giyeok",
+      "itemId": "g-class",
+      "wrongCount": 1,
+      "firstWrongDate": "2026-09-29",
+      "lastWrongDate": "2026-09-29",
+      "nextReviewDate": "2026-09-30",
+      "active": true
+    }
+  ],
+  "events": []
+}

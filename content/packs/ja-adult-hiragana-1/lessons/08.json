@@ -1,0 +1,59 @@
+{
+  "order": 8,
+  "title": "ひらがな 8",
+  "type": "phonics",
+  "items": [
+    {
+      "id": "u3084",
+      "kind": "kana",
+      "text": "や",
+      "reading": "ya",
+      "imageable": false,
+      "tags": [
+        "や행"
+      ]
+    },
+    {
+      "id": "u3086",
+      "kind": "kana",
+      "text": "ゆ",
+      "reading": "yu",
+      "imageable": false,
+      "tags": [
+        "や행"
+      ]
+    },
+    {
+      "id": "u3088",
+      "kind": "kana",
+      "text": "よ",
+      "reading": "yo",
+      "imageable": false,
+      "tags": [
+        "や행"
+      ]
+    },
+    {
+      "id": "u3089",
+      "kind": "kana",
+      "text": "ら",
+      "reading": "ra",
+      "imageable": false,
+      "tags": [
+        "ら행"
+      ]
+    },
+    {
+      "id": "u308a",
+      "kind": "kana",
+      "text": "り",
+      "reading": "ri",
+      "imageable": false,
+      "tags": [
+        "ら행"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

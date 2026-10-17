@@ -1,0 +1,90 @@
+{
+  "id": "en-kid-giyeok-03",
+  "packId": "en-kid-giyeok",
+  "order": 3,
+  "title": "g 소리: 장소·동물·물건",
+  "type": "phonics",
+  "intro": {
+    "title": "g",
+    "content": "g로 시작하는 것들\n첫소리를 '그'로 짧게 내요."
+  },
+  "itemIds": [
+    "g-garden",
+    "g-gate",
+    "g-goat",
+    "g-goose",
+    "g-gorilla",
+    "g-guitar",
+    "g-gum",
+    "g-goal"
+  ],
+  "sentences": [
+    {
+      "text": "A goat is in the garden.",
+      "meaningKo": "정원에 염소가 있어요.",
+      "itemIds": [
+        "g-goat",
+        "g-garden"
+      ]
+    },
+    {
+      "text": "The gorilla plays the guitar.",
+      "meaningKo": "고릴라가 기타를 쳐요.",
+      "itemIds": [
+        "g-gorilla",
+        "g-guitar"
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "type": "picture_choice",
+      "options": [
+        "goat",
+        "coat",
+        "goal"
+      ],
+      "answer": "goat",
+      "targetItemId": "g-goat"
+    },
+    {
+      "type": "meaning_choice",
+      "prompt": "\"대문\"은?",
+      "options": [
+        "gate",
+        "game",
+        "goal"
+      ],
+      "answer": "gate",
+      "targetItemId": "g-gate"
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "The gorilla plays the ____.",
+      "options": [
+        "guitar",
+        "gate",
+        "goat"
+      ],
+      "answer": "guitar",
+      "targetItemId": "g-guitar"
+    },
+    {
+      "type": "listen_choice",
+      "options": [
+        "gorilla",
+        "guitar",
+        "garden"
+      ],
+      "answer": "gorilla",
+      "targetItemId": "g-gorilla"
+    },
+    {
+      "type": "ox",
+      "statement": "garden = 정원",
+      "answer": true,
+      "targetItemId": "g-garden"
+    }
+  ],
+  "reviewed": true
+}

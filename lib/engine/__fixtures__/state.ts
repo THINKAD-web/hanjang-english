@@ -1,8 +1,9 @@
-import { DEFAULT_PACK_ID, loadContent } from "@/lib/content/load";
+import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
+import { loadContent } from "@/lib/content/node";
 import { createInitialState, DEFAULT_PROFILE_ID, type Attempt, type State } from "@/lib/store/types";
 import { applyAttempt } from "../queue";
 
-export const content = loadContent();
+export const content = loadContent(DEFAULT_PACK_ID);
 export const packId = content.pack.id;
 
 /** 2026-09-21 이 월요일인 주를 기준으로 쓴다. */

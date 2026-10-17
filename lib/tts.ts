@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * 영어 음성 재생. 단어에 audio(mp3) 가 있으면 mp3, 없으면 Web Speech API (en-US, 0.8배속).
+ * 음성 재생. 단어에 audio(mp3) 가 있으면 mp3, 없으면 Web Speech API (팩의 ttsLang, 기본 en-US, 0.8배속).
  *
  * iOS Safari 는 사용자가 탭한 핸들러 안에서 처음 재생해야 이후 재생이 허용된다.
  * 그래서 "시작" 탭 핸들러에서 첫 단어를 바로 speak() 하고, 이후 단어는 화면 전환 시 자동 재생한다.
@@ -19,28 +19,29 @@ const START_TIMEOUT_MS = 2500;
 const MAX_UTTERANCE_MS = 8000;
 
 export function ttsSupported(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    Boolean(window.speechSynthesis) &&
-    typeof window.SpeechSynthesisUtterance === "function"
-  );
+  return typeof window !== "undefined" && Boolean(window.speechSynthesis) && typeof window.SpeechSynthesisUtterance === "function";
 }
 
-let cachedVoice: SpeechSynthesisVoice | null | undefined;
+export const DEFAULT_TTS_LANG = "en-US";
 
-function englishVoice(): SpeechSynthesisVoice | null {
-  if (cachedVoice !== undefined && cachedVoice !== null) return cachedVoice;
+const voiceCache = new Map<string, SpeechSynthesisVoice | null>();
+
+function voiceFor(lang: string): SpeechSynthesisVoice | null {
+  const cached = voiceCache.get(lang);
+  if (cached) return cached;
   const voices = window.speechSynthesis.getVoices();
   if (voices.length === 0) return null; // 아직 로드 전 — lang 만 지정해서 재생
-  cachedVoice =
-    voices.find((v) => v.lang === "en-US" && v.localService) ??
-    voices.find((v) => v.lang === "en-US") ??
-    voices.find((v) => v.lang.startsWith("en")) ??
+  const base = lang.split("-")[0];
+  const found =
+    voices.find((v) => v.lang === lang && v.localService) ??
+    voices.find((v) => v.lang === lang) ??
+    voices.find((v) => v.lang.startsWith(base)) ??
     null;
-  return cachedVoice;
+  voiceCache.set(lang, found);
+  return found;
 }
 
-function speakWithSynthesis(text: string): Promise<boolean> {
+function speakWithSynthesis(text: string, lang: string): Promise<boolean> {
   return new Promise((resolve) => {
     const synth = window.speechSynthesis;
     let started = false;
@@ -54,9 +55,9 @@ function speakWithSynthesis(text: string): Promise<boolean> {
     };
 
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "en-US";
+    u.lang = lang;
     u.rate = TTS_RATE;
-    const voice = englishVoice();
+    const voice = voiceFor(lang);
     if (voice) u.voice = voice;
     u.onstart = () => {
       started = true;
@@ -103,13 +104,13 @@ function playAudio(src: string): Promise<boolean> {
   });
 }
 
-/** 영어 텍스트(또는 mp3)를 재생하고 끝나면 resolve. 실패해도 reject 하지 않고 false. */
-export async function speak(text: string, audioSrc?: string): Promise<boolean> {
+/** 텍스트(또는 mp3)를 재생하고 끝나면 resolve. 실패해도 reject 하지 않고 false. */
+export async function speak(text: string, audioSrc?: string, lang: string = DEFAULT_TTS_LANG): Promise<boolean> {
   if (typeof window === "undefined") return false;
   try {
     if (audioSrc && (await playAudio(audioSrc))) return true;
     if (!ttsSupported()) return false;
-    return await speakWithSynthesis(text);
+    return await speakWithSynthesis(text, lang);
   } catch {
     return false;
   }
@@ -126,6 +127,11 @@ export function warmUpVoices(): void {
   if (!ttsSupported()) return;
   window.speechSynthesis.getVoices();
   window.speechSynthesis.addEventListener?.("voiceschanged", () => {
-    cachedVoice = undefined;
+    voiceCache.clear();
   });
+}
+
+/** 아이템 하나를 읽는다: mp3 가 있으면 mp3, 없으면 `audioText ?? text` 를 합성 음성으로. */
+export function speakItem(item: { text: string; audioText?: string; audio?: string }, lang?: string): Promise<boolean> {
+  return speak(item.audioText ?? item.text, item.audio, lang);
 }

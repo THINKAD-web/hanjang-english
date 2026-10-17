@@ -1,0 +1,89 @@
+{
+  "order": 7,
+  "title": "도움 요청",
+  "type": "vocab",
+  "items": [
+    {
+      "id": "help-01",
+      "kind": "phrase",
+      "text": "Could you help me, please?",
+      "meaningKo": "도와주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    },
+    {
+      "id": "help-02",
+      "kind": "phrase",
+      "text": "I lost my wallet.",
+      "meaningKo": "지갑을 잃어버렸어요.",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    },
+    {
+      "id": "help-03",
+      "kind": "phrase",
+      "text": "Please call the police.",
+      "meaningKo": "경찰을 불러 주세요.",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    },
+    {
+      "id": "help-04",
+      "kind": "phrase",
+      "text": "I need a doctor.",
+      "meaningKo": "의사가 필요해요.",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    },
+    {
+      "id": "help-05",
+      "kind": "phrase",
+      "text": "Where is the nearest pharmacy?",
+      "meaningKo": "가장 가까운 약국이 어디예요?",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    },
+    {
+      "id": "help-06",
+      "kind": "phrase",
+      "text": "I don't feel well.",
+      "meaningKo": "몸이 안 좋아요.",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    },
+    {
+      "id": "help-07",
+      "kind": "phrase",
+      "text": "Can you speak more slowly?",
+      "meaningKo": "좀 더 천천히 말씀해 주시겠어요?",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    },
+    {
+      "id": "help-08",
+      "kind": "phrase",
+      "text": "I don't understand.",
+      "meaningKo": "이해하지 못했어요.",
+      "imageable": false,
+      "tags": [
+        "help"
+      ]
+    }
+  ],
+  "reviewed": false,
+  "testOnly": true
+}

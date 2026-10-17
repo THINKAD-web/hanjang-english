@@ -1,4 +1,6 @@
+import { meaningOf } from "./item-text";
 import type { Content, Item, Quiz } from "./schema";
+import { unitLabelOf } from "./pack-text";
 
 /** docs/content-review.md 본문. 사람 검수용 표. */
 
@@ -41,7 +43,7 @@ export function renderReviewMarkdown(content: Content): string {
   const { pack, lessons, itemsById, items } = content;
   const out: string[] = [];
   out.push(
-    `# 콘텐츠 검수표 — ${pack.brandLabel} (${pack.title} · ${pack.unitLabel})`,
+    `# 콘텐츠 검수표 — ${pack.brandLabel} (${pack.title} · ${unitLabelOf(pack)})`,
     "",
     "> `npm run content:check` 가 자동 생성한다. 직접 수정하지 말 것. 콘텐츠는 `content/` 의 JSON 을 고친다.",
     "> 검수가 끝난 장은 JSON 의 `reviewed` 를 `true` 로 바꾼다.",
@@ -51,19 +53,17 @@ export function renderReviewMarkdown(content: Content): string {
     "",
     "| 장 | 제목 | 포커스 | 검수 |",
     "|---|---|---|---|",
-    ...lessons.map((l) => `| L${l.dayNo} | ${cell(l.title)} | ${cell(l.focus.label)} | ${l.reviewed ? "✅ 완료" : "⏳ 대기"} |`),
+    ...lessons.map((l) => `| L${l.order} | ${cell(l.title)} | ${cell(l.intro?.title ?? "—")} | ${l.reviewed ? "✅ 완료" : "⏳ 대기"} |`),
     "",
   );
 
   for (const l of lessons) {
+    out.push(`## L${l.order} — ${l.title} ${l.reviewed ? "✅" : "⏳ 검수 대기"}`, "");
+    if (l.intro) {
+      out.push(`**오늘의 포커스 (${l.intro.title})**`, "", ...l.intro.content.split("\n").map((line, i) => `${i + 1}. ${line}`), "");
+      if (l.intro.tip) out.push(`팁: ${l.intro.tip}`, "");
+    }
     out.push(
-      `## L${l.dayNo} — ${l.title} ${l.reviewed ? "✅" : "⏳ 검수 대기"}`,
-      "",
-      `**오늘의 포커스 (${l.focus.label})**`,
-      "",
-      `1. ${l.focus.lines[0]}`,
-      `2. ${l.focus.lines[1]}`,
-      "",
       "| # | 아이템 | 뜻 | 그림 | 태그 | 그림 문항 |",
       "|---|---|---|---|---|---|",
     );
@@ -71,7 +71,7 @@ export function renderReviewMarkdown(content: Content): string {
       const it = itemsById.get(id);
       out.push(
         it
-          ? `| ${i + 1} | ${it.text} | ${cell(it.meaningKo)} | ${it.emoji ?? "—"} | ${it.tags.join(", ")} | ${it.imageable ? "가능" : "불가"} |`
+          ? `| ${i + 1} | ${it.text} | ${cell(meaningOf(it))} | ${it.emoji ?? "—"} | ${it.tags.join(", ")} | ${it.imageable ? "가능" : "불가"} |`
           : `| ${i + 1} | ⚠️ ${id} | | | | |`,
       );
     });
