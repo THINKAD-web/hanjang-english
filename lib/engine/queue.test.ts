@@ -97,4 +97,14 @@ describe("조회", () => {
     expect(setReviewEnabled(q, PACK, "a", false).find((i) => i.itemId === "a")?.active).toBe(false);
     expect(setReviewEnabled(q, PACK, "c", true).find((i) => i.itemId === "c")?.active).toBe(true);
   });
+
+  it("setReviewEnabled ON + today → nextReviewDate 가 다음 날, OFF 는 날짜를 건드리지 않는다", () => {
+    const on = setReviewEnabled(q, PACK, "c", true, "2026-09-25").find((i) => i.itemId === "c")!;
+    expect(on.active).toBe(true);
+    expect(on.nextReviewDate).toBe("2026-09-26");
+    const before = q.find((i) => i.itemId === "a")!;
+    const off = setReviewEnabled(q, PACK, "a", false, "2026-09-25").find((i) => i.itemId === "a")!;
+    expect(off.active).toBe(false);
+    expect(off.nextReviewDate).toBe(before.nextReviewDate);
+  });
 });

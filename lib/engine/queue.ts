@@ -49,9 +49,22 @@ export function applyAttempt(queue: readonly WrongItem[], attempt: Attempt): Wro
   return next;
 }
 
-/** 부모 "내일 복습에 넣을까요?" 토글. OFF 면 active = false, 다시 ON 이면 active = true. */
-export function setReviewEnabled(queue: readonly WrongItem[], packId: string, itemId: string, on: boolean): WrongItem[] {
-  return queue.map((item) => (item.packId === packId && item.itemId === itemId ? { ...item, active: on } : item));
+/**
+ * 부모 "내일 복습에 넣을까요?" 토글. OFF 면 active = false, 다시 ON 이면 active = true.
+ * ON 으로 되돌릴 때 `today` 를 넘기면 nextReviewDate 를 다음 날로 둔다 (OFF 였던 동안 지나간 날짜가
+ * 남아 있어도 "내일부터 복습" 이 되도록).
+ */
+export function setReviewEnabled(
+  queue: readonly WrongItem[],
+  packId: string,
+  itemId: string,
+  on: boolean,
+  today?: DateKey,
+): WrongItem[] {
+  return queue.map((item) => {
+    if (item.packId !== packId || item.itemId !== itemId) return item;
+    return on && today ? { ...item, active: true, nextReviewDate: addDays(today, 1) } : { ...item, active: on };
+  });
 }
 
 /** 오래된 순: nextReviewDate → firstWrongDate → itemId */

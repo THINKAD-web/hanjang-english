@@ -142,6 +142,17 @@ export function recordNextPackRequest(state: State, input: { dateKey: DateKey; a
   };
 }
 
+/** 부모 요약(/parent)이 열렸다는 신호. 가족 테스트 지표(부모 요약 주 3회 열람)를 재는 데 쓴다. */
+export function recordParentView(state: State, input: { dateKey: DateKey; at: string; payload: Record<string, unknown> }): State {
+  return {
+    ...state,
+    events: [
+      ...state.events,
+      { profileId: DEFAULT_PROFILE_ID, type: "parent_view", dateKey: input.dateKey, at: input.at, payload: input.payload },
+    ],
+  };
+}
+
 export type StampCell = { dateKey: DateKey; label: string; stamped: boolean; isToday: boolean; isFuture: boolean };
 
 const DAY_LABELS = ["월", "화", "수", "목", "금", "토", "일"];

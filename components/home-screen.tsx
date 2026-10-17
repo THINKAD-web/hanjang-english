@@ -8,6 +8,7 @@ import type { PackSummary } from "@/lib/content/schema";
 import { addDays, formatDateLabel, type DateKey } from "@/lib/engine/date";
 import { homeCta, packProgress, recordPackInterest, weekStamps } from "@/lib/engine/progress";
 import { decideToday } from "@/lib/engine/today";
+import { completeLessonsUpTo } from "@/lib/debug-actions";
 import type { State } from "@/lib/store/types";
 import { warmUpVoices } from "@/lib/tts";
 import { useProgress } from "@/lib/use-progress";
@@ -124,7 +125,20 @@ function HomeReady({
         </ul>
       </section>
 
-      {isDebug ? <DebugPanel dateKey={dateKey} onReset={onReset} /> : null}
+      <div className="flex justify-end">
+        <Link href={withDebugDate("/parent", dateParam)} className="px-1 py-1 text-sm text-slate-500">
+          부모
+        </Link>
+      </div>
+
+      {isDebug ? (
+        <DebugPanel
+          dateKey={dateKey}
+          onReset={onReset}
+          lessonCount={content.lessons.length}
+          onCompleteUpTo={(n) => void update((s) => completeLessonsUpTo(s, content, n, dateKey))}
+        />
+      ) : null}
     </Screen>
   );
 }
@@ -138,9 +152,22 @@ function HomeSkeleton() {
   );
 }
 
-/** NEXT_PUBLIC_DEBUG=true 일 때만: 날짜 이동과 기록 초기화 (Preview 수동 검증용) */
-function DebugPanel({ dateKey, onReset }: { dateKey: DateKey; onReset: () => Promise<void> }) {
+/** NEXT_PUBLIC_DEBUG=true 일 때만: 날짜 이동, 기록 초기화, N장까지 완료 처리 (Preview 수동 검증용) */
+function DebugPanel({
+  dateKey,
+  onReset,
+  lessonCount,
+  onCompleteUpTo,
+}: {
+  dateKey: DateKey;
+  onReset: () => Promise<void>;
+  lessonCount: number;
+  onCompleteUpTo: (n: number) => void;
+}) {
   const link = (d: DateKey) => `/?date=${d}`;
+  const [n, setN] = useState(String(lessonCount));
+  const count = Number(n);
+  const validCount = Number.isInteger(count) && count >= 1 && count <= lessonCount;
   return (
     <section aria-label="디버그" className="rounded-2xl border-2 border-dashed border-amber-400 bg-amber-50 p-4 text-base text-slate-800">
       <p className="font-bold">DEBUG · 오늘 = {dateKey}</p>
@@ -164,6 +191,27 @@ function DebugPanel({ dateKey, onReset }: { dateKey: DateKey; onReset: () => Pro
           기록 초기화
         </button>
       </div>
+      <form
+        className="mt-3 flex items-center gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (validCount) onCompleteUpTo(count);
+        }}
+      >
+        <input
+          type="number"
+          inputMode="numeric"
+          min={1}
+          max={lessonCount}
+          value={n}
+          onChange={(e) => setN(e.target.value)}
+          aria-label="완료 처리할 장 수"
+          className="w-20 rounded-lg bg-white px-3 py-2 text-center ring-1 ring-amber-300"
+        />
+        <button type="submit" disabled={!validCount} className="rounded-lg bg-white px-3 py-2 ring-1 ring-amber-300 disabled:opacity-50">
+          장까지 완료 처리
+        </button>
+      </form>
     </section>
   );
 }
