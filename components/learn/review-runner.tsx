@@ -21,6 +21,7 @@ export type ReviewRunnerProps = {
   onComplete?: (answers: AnswerRecord[], timings: StepTimings) => void;
   onAbort?: (step: SheetStep, elapsedMs: number) => void;
   onHome: () => void;
+  banner?: string;
 };
 
 const STEP_KEY: Partial<Record<SheetState["step"]["kind"], SheetStep>> = {
@@ -42,7 +43,7 @@ const ZERO_TIMINGS: StepTimings = {
  * LessonRunner 와 같은 sheetReducer(skipMiddle)·CardStep/QuizStep/DoneStep 을 그대로 재사용한다.
  * "다시 보기"(review-screen.tsx, 지난 장 재실행)와는 다른 화면이다 — 이름 혼동 주의.
  */
-export function ReviewRunner({ content, itemIds, dateKey, onStart, onComplete, onAbort, onHome }: ReviewRunnerProps) {
+export function ReviewRunner({ content, itemIds, dateKey, onStart, onComplete, onAbort, onHome, banner }: ReviewRunnerProps) {
   const items = useMemo(() => itemIds.map((id) => content.itemsById.get(id)).filter((it): it is Item => Boolean(it)), [itemIds, content]);
   const quiz = useMemo(
     () => shuffleSheetOptions(buildReviewQuiz(itemIds, content, dateKey), dateKey, "review"),
@@ -136,6 +137,7 @@ export function ReviewRunner({ content, itemIds, dateKey, onStart, onComplete, o
   return (
     <SpeechLangProvider lang={lang}>
       <Screen>
+        {banner ? <p className="rounded-[var(--radius-card)] bg-amber-100 px-3 py-2 text-center text-base font-semibold text-amber-900">{banner}</p> : null}
         <div className="flex items-center gap-3">
           <div className="flex-1">
             <ProgressBar label={`복습장 · ${done}/${total}`} ratio={ratio} />

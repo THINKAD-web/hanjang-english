@@ -3,6 +3,15 @@
 :root {
   --background: #fffbeb;
   --foreground: #1e293b;
+  --color-accent: #0369a1;
+  --color-accent-soft: #e0f2fe;
+  --color-surface: #ffffff;
+  --color-ring: rgb(253 230 138);
+  --radius-card: 1rem;
+  --radius-panel: 1.5rem;
+  --shadow-soft: 0 4px 14px rgb(15 23 42 / 0.06);
+  --shadow-card: 0 8px 24px rgb(15 23 42 / 0.08);
+  --space-section: 1rem;
 }
 
 @theme inline {
@@ -10,12 +19,26 @@
   --color-foreground: var(--foreground);
 }
 
+/* 아이: 둥글고 밝은 강조 */
+[data-audience="kid"] {
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
+  --shadow-soft: 0 6px 18px rgb(245 158 11 / 0.12);
+}
+
 /*
- * 성인 스킨: 아이용 따뜻한 amber 팔레트를 차분한 slate 로 바꾼다. Tailwind 색은 CSS 변수라서
- * 변수만 다시 매기면 모든 화면이 따라 바뀐다 (컴포넌트는 대상을 몰라도 된다).
+ * 성인: 차분한 slate, 넓은 여백, 낮은 채도
  */
 [data-audience="adult"] {
   --background: #f8fafc;
+  --color-accent: #334155;
+  --color-accent-soft: #e2e8f0;
+  --color-ring: rgb(203 213 225);
+  --radius-card: 0.75rem;
+  --radius-panel: 1rem;
+  --shadow-soft: 0 2px 10px rgb(15 23 42 / 0.05);
+  --shadow-card: 0 4px 16px rgb(15 23 42 / 0.06);
+  --space-section: 0.875rem;
   --color-amber-50: var(--color-slate-50);
   --color-amber-100: var(--color-slate-100);
   --color-amber-200: var(--color-slate-200);
@@ -31,6 +54,11 @@ body {
   font-family:
     system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  line-height: 1.45;
+}
+
+[data-audience="adult"] body {
+  letter-spacing: -0.01em;
 }
 
 /* 완료 화면 도장 */
@@ -48,12 +76,62 @@ body {
   }
 }
 
-.stamp-in {
+.stamp-in,
+.stamp-badge-pop {
   animation: stamp-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1.2) 0.2s both;
 }
 
+@keyframes celebration-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.celebration-pop {
+  animation: celebration-pop 0.35s ease-out both;
+}
+
+@keyframes quiz-correct {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.quiz-correct-pop {
+  animation: quiz-correct 0.4s ease-out;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fbbf24 2px, transparent 2px), radial-gradient(circle, #38bdf8 2px, transparent 2px),
+    radial-gradient(circle, #f472b6 2px, transparent 2px);
+  background-size: 24px 24px, 32px 32px, 28px 28px;
+  background-position: 10% 20%, 70% 30%, 40% 80%;
+  opacity: 0.35;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .stamp-in {
+  .stamp-in,
+  .stamp-badge-pop,
+  .celebration-pop,
+  .quiz-correct-pop {
     animation: none;
+  }
+
+  .confetti {
+    display: none;
   }
 }

@@ -5,13 +5,13 @@ import { ConsonantRow } from "@/components/consonant-row";
 import { LoadFailed, PreReleaseBadge, ProgressBar, Screen } from "@/components/ui";
 import { isPreRelease } from "@/lib/content/visibility";
 import { useManifest, usePackContent } from "@/lib/content/use-content";
-import { packUnavailable } from "@/lib/packs/availability";
+import { PackBlockedScreen } from "@/components/learn/pack-blocked-screen";
+import { packBlockReason } from "@/lib/packs/availability";
 import { isUnlocked } from "@/lib/packs/catalog";
 import { activeItems } from "@/lib/engine/queue";
 import { packProgress, recordPackInterest } from "@/lib/engine/progress";
 import { completedLessonIds } from "@/lib/engine/today";
 import { useProgress } from "@/lib/use-progress";
-import { useRedirect } from "@/lib/use-redirect";
 import { isDebug, useDateParam, useTodayKey, withDebugDate } from "@/lib/use-today-key";
 import { unitLabelOf } from "@/lib/content/pack-text";
 
@@ -27,11 +27,11 @@ export function PackDetailScreen({ packId }: { packId: string }) {
   const manifest = useManifest();
   // 알 수 없는 팩 · 준비 중(soon) 팩 · 레슨이 없는 팩 · 아직 잠긴 팩은 /packs 로 보낸다.
   const locked = pack.status === "ready" && Boolean(state) && manifest.status === "ready" && !isUnlocked(state!, pack.data.pack, manifest.data);
-  const unavailable = packUnavailable(pack, locked);
-  useRedirect(unavailable, withDebugDate("/packs", dateParam));
+  const block = packBlockReason(pack, locked);
 
   if (pack.status === "error" || manifest.status === "error") return <LoadFailed />;
-  if (!state || pack.status !== "ready" || manifest.status !== "ready" || unavailable) {
+  if (block) return <PackBlockedScreen reason={block} packId={packId} />;
+  if (!state || pack.status !== "ready" || manifest.status !== "ready") {
     return (
       <Screen>
         <div className="h-40 animate-pulse rounded-3xl bg-amber-100" aria-hidden />

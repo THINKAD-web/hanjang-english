@@ -1,7 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import type { StepType } from "@/lib/content/schema";
+import { CelebrationOverlay, ReviewModeBadge, StepDots, TodayDateBadge } from "@/components/design-system";
 import { PreReleaseBadge, ProgressBar, Screen } from "@/components/ui";
+import { sfxStamp } from "@/lib/sfx";
 import { isPreRelease } from "@/lib/content/visibility";
 import { isDebug } from "@/lib/use-today-key";
 import type { Content, Item, Lesson } from "@/lib/content/schema";
@@ -93,6 +96,7 @@ export function LessonRunner({
   const [pendingListenSpeech, setPendingListenSpeech] = useState<Promise<boolean> | null>(null);
   const [pendingQuizSpeech, setPendingQuizSpeech] = useState<Promise<boolean> | null>(null);
   const [pendingRevealSpeech, setPendingRevealSpeech] = useState<Promise<boolean> | null>(null);
+  const [celebrate, setCelebrate] = useState(false);
 
   // 단계별 소요 시간(ms) — 화면엔 보여주지 않고 완료 시 이벤트로만 남긴다 (기획안 14장 8분 실측)
   const timingsRef = useRef<StepTimings>({ ...BASE_TIMINGS });
@@ -162,7 +166,13 @@ export function LessonRunner({
   const finishQuiz = useCallback(
     (current: SheetState) => {
       const isLast = current.step.kind === "quiz" && current.step.index === current.quizCount - 1;
-      if (isLast) onComplete?.(current.answers, snapshotTimings());
+      if (isLast) {
+        onComplete?.(current.answers, snapshotTimings());
+        if (onComplete) {
+          setCelebrate(true);
+          sfxStamp();
+        }
+      }
       dispatch({ type: "advanceQuiz" });
     },
     [onComplete, snapshotTimings],
@@ -180,30 +190,41 @@ export function LessonRunner({
 
   const step = sheet.step;
   const stepRatio = sheetProgress(sheet);
+  const macroSteps = lesson.steps.length;
+  const macroIndex = macroStepIndex(lesson.steps, step.kind);
 
   return (
     <SpeechLangProvider lang={lang}>
-      <Screen>
-        {banner ? <p className="rounded-xl bg-amber-100 px-3 py-2 text-center text-base font-semibold text-amber-900">{banner}</p> : null}
-        <div className="flex items-center gap-3">
-          <div className="flex-1">
-            {isDebug && isPreRelease(content.pack, lesson) ? (
-              <div className="mb-1">
-                <PreReleaseBadge />
-              </div>
-            ) : null}
-            <ProgressBar label={`${unitLabelOf(content.pack)} · ${lesson.order}/${content.lessons.length}장`} ratio={stepRatio} />
+      <Screen compact>
+        {banner ? (
+          <div className="flex flex-col items-center gap-2">
+            <ReviewModeBadge />
+            <p className="w-full rounded-[var(--radius-card)] bg-amber-100 px-3 py-2 text-center text-base font-semibold text-amber-900">{banner}</p>
           </div>
-          {onAbort && step.kind !== "done" ? (
-            <button
-              type="button"
-              aria-label="그만하고 홈으로"
-              onClick={handleAbort}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-2xl font-bold text-slate-600 ring-1 ring-slate-200"
-            >
-              ✕
-            </button>
+        ) : null}
+        <div className="rounded-[var(--radius-panel)] bg-[var(--color-surface)] p-3.5 shadow-[var(--shadow-soft)] ring-1 ring-[var(--color-ring)]">
+          <div className="mb-2.5 flex items-center justify-between gap-2">
+            <TodayDateBadge dateKey={dateKey} variant="compact" />
+            {onAbort && step.kind !== "done" ? (
+              <button
+                type="button"
+                aria-label="그만하고 홈으로"
+                onClick={handleAbort}
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-50 text-xl font-bold text-slate-600 shadow-sm ring-1 ring-slate-200"
+              >
+                ✕
+              </button>
+            ) : null}
+          </div>
+          {isDebug && isPreRelease(content.pack, lesson) ? (
+            <div className="mb-2">
+              <PreReleaseBadge />
+            </div>
           ) : null}
+          <ProgressBar label={`${unitLabelOf(content.pack)} · ${lesson.title}`} ratio={stepRatio} />
+          <div className="mt-2.5">
+            <StepDots current={macroIndex} total={macroSteps} />
+          </div>
         </div>
         {step.kind === "intro" && <IntroStep lesson={lesson} onStart={handleStart} />}
         {step.kind === "card" && (
@@ -252,7 +273,8 @@ export function LessonRunner({
             onFinished={onQuizFinished}
           />
         )}
-        {step.kind === "done" && (
+        {celebrate && step.kind === "done" ? <CelebrationOverlay show onDone={() => setCelebrate(false)} /> : null}
+        {step.kind === "done" && !celebrate ? (
           <DoneStep
             score={sheetScore(sheet)}
             total={quiz.length}
@@ -264,8 +286,25 @@ export function LessonRunner({
               onHome();
             }}
           />
-        )}
+        ) : null}
       </Screen>
     </SpeechLangProvider>
   );
+}
+
+function macroStepIndex(steps: readonly StepType[], kind: SheetState["step"]["kind"]): number {
+  if (kind === "done") return Math.max(0, steps.length - 1);
+  const map: Partial<Record<SheetState["step"]["kind"], StepType>> = {
+    intro: "intro",
+    card: "cards",
+    listenAll: "listen",
+    sentences: "sentences",
+    practice: "practice",
+    patterns: "patterns",
+    quiz: "quiz",
+  };
+  const key = map[kind];
+  if (!key) return 0;
+  const idx = steps.indexOf(key);
+  return idx >= 0 ? idx : 0;
 }

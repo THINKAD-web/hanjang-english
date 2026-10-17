@@ -182,7 +182,13 @@ const DAY_LABELS = ["월", "화", "수", "목", "금", "토", "일"];
 export function weekStamps(state: State, dateKey: DateKey, packId?: string): StampCell[] {
   const done = new Set(
     state.attempts
-      .filter((a) => a.completed && a.profileId === state.activeProfileId && (packId === undefined || a.packId === packId))
+      .filter(
+        (a) =>
+          a.completed &&
+          a.kind === "lesson" &&
+          a.profileId === state.activeProfileId &&
+          (packId === undefined || a.packId === packId),
+      )
       .map((a) => a.dateKey),
   );
   return weekRange(dateKey).map((d, i) => ({

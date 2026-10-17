@@ -43,3 +43,11 @@ L1 → L2 확인 예시:
 ## 배포
 
 Vercel (Preview → Production). 환경 변수는 `.env.example` 참고.
+
+## 가족 테스트 시작 (베타 v1)
+
+1. Vercel Preview URL(또는 `NEXT_PUBLIC_DEBUG=true npm run dev`)에 접속한다.
+2. 설정에서 **아이 프로필**을 만든다.
+3. **어린이 수학 · 덧셈 1** 팩에서 오늘 한 장을 끝까지 진행한다.
+4. 부모 PIN으로 `/parent`에서 오늘·이번 주 요약과 오답을 확인한다.
+5. 문제가 있으면 `/account` → **사용 기록 내보내기** JSON을 공유한다.

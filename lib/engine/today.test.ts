@@ -136,10 +136,18 @@ describe("경계 케이스 (설계 요약 4장 승인안)", () => {
     expect(decideToday(s, NEXT_MON, content)).toEqual({ kind: "doneToday", canDoExtra: true });
   });
 
-  it("복습장 완료도 그날의 한 장으로 인정", () => {
+  it("복습장만 완료해도 lesson 한도·doneToday 에는 넣지 않는다", () => {
     let s = doLesson(freshState(), lessonId(1), FRI);
     s = doReview(s, SAT, [{ targetItemId: "g-grass", correct: true }]);
-    expect(decideToday(s, SAT, content)).toEqual({ kind: "doneToday", canDoExtra: false });
+    const d = decideToday(s, SAT, content);
+    expect(d.kind).not.toBe("doneToday");
+    expect(d.kind).not.toBe("dailyLimit");
+  });
+
+  it("review Attempt 는 하루 2장 한도에 포함되지 않는다", () => {
+    let s = doReview(freshState(), MON, [{ targetItemId: "g-grow", correct: true }]);
+    s = doReview(s, MON, [{ targetItemId: "g-grass", correct: true }]);
+    expect(decideToday(s, MON, content).kind).toBe("lesson");
   });
 
   it("오늘 틀린 단어는 같은 날 한 장 더 할 때 삽입하지 않는다 (nextReviewDate 는 내일)", () => {

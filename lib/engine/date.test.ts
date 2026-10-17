@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDateLabel, isDateKey, resolveDateKey, todayKey, weekdayIndex } from "./date";
+import { formatDateLabel, formatDateLong, isDateKey, resolveDateKey, todayKey, weekdayIndex } from "./date";
 
 describe("todayKey", () => {
   it("월요일 00:30 KST 는 월요일로 판정한다 (UTC 로는 일요일 15:30)", () => {
@@ -30,6 +30,7 @@ describe("weekdayIndex / formatDateLabel", () => {
 
   it("한국어 날짜 라벨", () => {
     expect(formatDateLabel("2026-09-26")).toBe("9월 26일 (토)");
+    expect(formatDateLong("2026-09-26")).toBe("9월 26일 토요일");
   });
 });
 

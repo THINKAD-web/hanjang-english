@@ -51,7 +51,7 @@ export class LocalProgressStore implements ProgressStore {
     try {
       this.storage?.setItem(this.key, JSON.stringify(state));
     } catch {
-      // 용량 초과·접근 차단 — 메모리 상태로 계속 진행
+      // 용량 초과·접근 차단 — 메모리 상태로 계속 진행 (새로고침 시 유실될 수 있음)
     }
   }
 

@@ -42,11 +42,23 @@ export function weekdayIndex(key: DateKey): number {
 }
 
 const WEEKDAY_LABELS = ["월", "화", "수", "목", "금", "토", "일"] as const;
+const WEEKDAY_LONG = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"] as const;
 
 /** "9월 26일 (토)" */
 export function formatDateLabel(key: DateKey): string {
   const [, m, d] = key.split("-").map(Number);
   return `${m}월 ${d}일 (${WEEKDAY_LABELS[weekdayIndex(key)]})`;
+}
+
+/** "9월 26일 금요일" — 홈·헤더용 */
+export function formatDateLong(key: DateKey): string {
+  const [, m, d] = key.split("-").map(Number);
+  return `${m}월 ${d}일 ${WEEKDAY_LONG[weekdayIndex(key)]}`;
+}
+
+/** DateKey 의 일(1–31). 주간 캘린더 셀 표시용. */
+export function dayOfMonth(key: DateKey): number {
+  return Number(key.split("-")[2]);
 }
 
 /**

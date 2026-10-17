@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { BadgeChip, StreakPill, TodayDateBadge, WeekCalendar } from "@/components/design-system";
 import { LoadFailed, Screen } from "@/components/ui";
-import { StampRow } from "@/components/stamp-row";
 import { DEFAULT_PACK_ID } from "@/lib/content/defaults";
 import type { Content } from "@/lib/content/schema";
 import { useManifest, usePackContent } from "@/lib/content/use-content";
 import { objectParticle } from "@/lib/content/josa";
 import { continuePackId, isOpenPack } from "@/lib/packs/catalog";
-import { formatDateLabel } from "@/lib/engine/date";
 import { recordParentView } from "@/lib/engine/progress";
+import { BADGE_LABEL, earnedBadges, groupWrongByTag, learningStreak, studyMinutesFromEvents } from "@/lib/engine/stats";
 import { toggleWrongReview } from "@/lib/parent/account";
 import { attemptLabel, currentWrong, listedWrongIds, todaySummary, weekSummary, wrongWordById, type WrongWord } from "@/lib/parent/summary";
 import { shouldRecordParentView } from "@/lib/parent/view";
@@ -32,11 +32,10 @@ function writeLastView(ms: number): void {
   try {
     sessionStorage.setItem(VIEW_KEY, String(ms));
   } catch {
-    // 무시 — 저장이 막히면 열 때마다 기록된다
+    // 무시
   }
 }
 
-/** 열람 이벤트 기록. 같은 탭에서 10분 안 재열람은 건너뛴다. */
 function recordViewOnce(dateKey: string, packId: string, update: ParentApi["update"]): void {
   const now = Date.now();
   if (!shouldRecordParentView(readLastView(), now)) return;
@@ -44,7 +43,6 @@ function recordViewOnce(dateKey: string, packId: string, update: ParentApi["upda
   void update((s) => recordParentView(s, { dateKey, at: new Date(now).toISOString(), payload: { packId, dateKey } }));
 }
 
-/** `/parent` — PIN 통과 후 오늘 요약 · 이번 주 · 현재 오답. 그래프 없이 텍스트와 작은 칸만 (PR5 지시서 3장). */
 export function ParentScreen() {
   return <ParentGate>{(api) => <ParentLoader {...api} />}</ParentGate>;
 }
@@ -52,7 +50,6 @@ export function ParentScreen() {
 function ParentLoader(api: ParentApi) {
   const manifest = useManifest();
   const [picked, setPicked] = useState<string | null>(null);
-  // 고를 수 있는 팩 = 지금 프로필이 시작한 live 팩. 아직 하나도 없으면 이어서 할 팩(기본 팩)을 보여준다.
   const options = useMemo(() => {
     if (manifest.status !== "ready") return [];
     const mine = new Set(api.state.tracks.filter((t) => t.profileId === api.state.activeProfileId).map((t) => t.packId));
@@ -88,10 +85,9 @@ function ParentContent({
   const dateParam = useDateParam();
   const packId = content.pack.id;
   const textLang = content.pack.ttsLang.split("-")[0];
-  // 이 화면에서 끈 오답도 되돌릴 수 있게 목록에 남겨 두는 순서 (화면을 다시 열면 비워진다)
   const [pinned, setPinned] = useState<string[]>([]);
+  const [wrongOpen, setWrongOpen] = useState(true);
 
-  // 통과 후 화면이 열릴 때마다 parent_view. 같은 탭에서 10분 안 재열람(새로고침 포함)은 1회로 센다.
   useEffect(() => {
     if (dateKey) recordViewOnce(dateKey, packId, update);
   }, [dateKey, packId, update]);
@@ -111,6 +107,11 @@ function ParentContent({
   const listedWrong = listedWrongIds(activeIds, pinned)
     .map((id) => wrongWordById(state, content, id))
     .filter((w): w is WrongWord => w !== null);
+  const grouped = groupWrongByTag(listedWrong, content.pack.tagLabel);
+  const minutes = studyMinutesFromEvents(state, dateKey, packId);
+  const streak = learningStreak(state, dateKey);
+  const badges = earnedBadges(state, dateKey, packId);
+
   const onToggle = (itemId: string, on: boolean) => {
     if (!on) setPinned(listedWrongIds(activeIds, pinned));
     void update((s) => toggleWrongReview(s, packId, itemId, on, dateKey));
@@ -118,9 +119,12 @@ function ParentContent({
 
   return (
     <Screen>
-      <header className="flex items-baseline justify-between">
-        <h1 className="text-3xl font-bold text-slate-900">부모 요약</h1>
-        <p className="text-lg font-semibold text-slate-700">{formatDateLabel(dateKey)}</p>
+      <header className="flex flex-col gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">부모 요약</h1>
+          <StreakPill days={streak} />
+        </div>
+        <TodayDateBadge dateKey={dateKey} variant="parent" />
       </header>
 
       {packOptions.length > 1 ? (
@@ -129,7 +133,7 @@ function ParentContent({
           <select
             value={packId}
             onChange={(e) => onPickPack(e.target.value)}
-            className="min-h-14 rounded-2xl bg-white px-4 text-xl font-bold text-slate-900 ring-2 ring-sky-200"
+            className="min-h-14 rounded-[var(--radius-card)] bg-white px-4 text-xl font-bold text-slate-900 ring-2 ring-sky-200"
           >
             {packOptions.map((o) => (
               <option key={o.id} value={o.id}>
@@ -140,7 +144,28 @@ function ParentContent({
         </label>
       ) : null}
 
-      <section aria-label="오늘 요약" className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
+      {badges.length > 0 ? (
+        <div className="flex flex-wrap gap-2">
+          {badges.map((b) => (
+            <BadgeChip key={b} label={BADGE_LABEL[b]} />
+          ))}
+        </div>
+      ) : null}
+
+      <section aria-label="오늘 요약" className="grid grid-cols-2 gap-2.5">
+        <div className="rounded-[var(--radius-panel)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-soft)] ring-1 ring-[var(--color-ring)]">
+          <p className="text-sm font-bold text-slate-600">오늘 완료</p>
+          <p className="text-4xl font-bold text-slate-900">{today.lessonCount}</p>
+          <p className="text-sm text-slate-500">장</p>
+        </div>
+        <div className="rounded-[var(--radius-panel)] bg-[var(--color-surface)] p-4 shadow-[var(--shadow-soft)] ring-1 ring-[var(--color-ring)]">
+          <p className="text-sm font-semibold text-slate-600">학습 시간</p>
+          <p className="text-4xl font-bold text-slate-900">{minutes}</p>
+          <p className="text-sm text-slate-500">분 (추정)</p>
+        </div>
+      </section>
+
+      <section aria-label="오늘 상세" className="flex flex-col gap-3 rounded-[var(--radius-panel)] bg-[var(--color-surface)] p-5 shadow-[var(--shadow-soft)] ring-1 ring-[var(--color-ring)]">
         <h2 className="text-xl font-bold text-slate-900">오늘</h2>
         {today.done ? (
           <>
@@ -151,12 +176,9 @@ function ParentContent({
               </p>
             ))}
             {today.wrong.length > 0 ? (
-              <div className="flex flex-col gap-2">
-                <p className="text-base font-semibold text-slate-700">오늘 틀린 단어</p>
-                <WrongList words={today.wrong} onToggle={onToggle} lang={textLang} />
-              </div>
+              <p className="text-base text-amber-800">오늘 틀린 항목 {today.wrong.length}개</p>
             ) : (
-              <p className="text-lg text-emerald-700">틀린 단어가 없어요 👏</p>
+              <p className="text-lg text-emerald-700">틀린 항목이 없어요 👏</p>
             )}
           </>
         ) : (
@@ -167,27 +189,42 @@ function ParentContent({
         )}
       </section>
 
-      <section aria-label="이번 주 요약" className="flex flex-col gap-3">
-        <StampRow cells={week.stamps} />
-        <p className="text-lg font-semibold text-slate-800">이번 주 {week.doneCount}장 완료</p>
-        {week.trickySounds.length > 0 ? (
-          <p className="text-lg text-slate-800">
-            {week.trickySounds.join(", ")} {content.pack.tagLabel}
-            {objectParticle(content.pack.tagLabel)} 자주 헷갈려요
-          </p>
-        ) : null}
-      </section>
+      <WeekCalendar cells={week.stamps} title="이번 주 도장" />
+      <p className="text-lg font-semibold text-slate-800">이번 주 {week.doneCount}장 완료</p>
+      {week.trickySounds.length > 0 ? (
+        <p className="text-lg text-slate-800">
+          {week.trickySounds.join(", ")} {content.pack.tagLabel}
+          {objectParticle(content.pack.tagLabel)} 자주 헷갈려요
+        </p>
+      ) : null}
 
-      <section aria-label="현재 오답" className="flex flex-col gap-3 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-amber-200">
-        <h2 className="text-xl font-bold text-slate-900">현재 오답</h2>
+      <section aria-label="현재 오답" className="flex flex-col gap-3 rounded-[var(--radius-panel)] bg-[var(--color-surface)] p-5 shadow-[var(--shadow-soft)] ring-1 ring-[var(--color-ring)]">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold text-slate-900">현재 오답 {wrongNow.length}개</h2>
+          <button type="button" className="text-base font-semibold text-sky-800 underline" onClick={() => setWrongOpen((o) => !o)}>
+            {wrongOpen ? "접기" : "펼치기"}
+          </button>
+        </div>
         {wrongNow.length > 0 ? (
-          <p className="text-lg text-slate-800">
-            복습 예정 {wrongNow.length}개: {wrongNow.map((w) => w.text).join(", ")}
-          </p>
+          <Link
+            href={withDebugDate(`/learn/${packId}/wrong`, dateParam)}
+            className="flex min-h-14 items-center justify-center rounded-[var(--radius-card)] bg-sky-700 text-lg font-bold text-white"
+          >
+            오답만 다시 풀기
+          </Link>
         ) : (
           <p className="text-lg text-slate-600">복습 예정인 오답이 없어요</p>
         )}
-        {listedWrong.length > 0 ? <WrongList words={listedWrong} onToggle={onToggle} lang={textLang} /> : null}
+        {wrongOpen && listedWrong.length > 0 ? (
+          <div className="flex flex-col gap-4">
+            {[...grouped.entries()].map(([tag, words]) => (
+              <div key={tag}>
+                <p className="mb-2 text-base font-bold text-slate-700">{tag}</p>
+                <WrongList words={words} onToggle={onToggle} lang={textLang} />
+              </div>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       <nav className="mt-auto flex justify-between text-base">
